@@ -1,6 +1,6 @@
 import * as renderer from 'react-test-renderer';
 import React from 'react';
-import Icon from '../icon';
+import Icon from '../Icon';
 import { mount } from 'enzyme';
 
 // 注意: 运行icon测试用例的时候,先别导入icnfont.js !!!
