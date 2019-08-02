@@ -1,0 +1,42 @@
+@import '../../commonCss//index.scss';
+.r-message {
+  width: 60vw;
+  font-size: 1.5vw;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #EBEEF5;
+  position: fixed;
+  left: 50%;
+  top: 20px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  transition: opacity 0.3s, transform .4s;
+  overflow: hidden;
+  padding: 15px 15px 15px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  &.r-message-success {
+    background-color: #e6f9f4;
+    border-color: #ccf3e9;
+    color: $--color-success;
+  }
+  &.r-message-info {
+    background-color: #ECF1FF;
+    border-color: #97B8FF;
+    color: $--color-primary;
+  }
+  &.r-message-warning {
+    background-color: #fffaf1;
+    border-color: #fff5e3;
+    color: $--color-warning;
+  }
+  &.r-message-error {
+    background-color: #feeef0;
+    border-color: #fddce2;
+    color: $--color-danger;
+  }
+}

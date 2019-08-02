@@ -37,10 +37,10 @@ const Button: React.FC<ButtonProps> = ({
     `${plain?'plain': ''}`,
     `${circle?'circle': ''}`,
     `${disabled?'disabled': ''}`,
-    `${ripple?'ripple': ''}`,
+    `${ripple && !disabled?'ripple': ''}`,
     )
   return (
-    <button className={classList} {...restProps}>
+    <button className={classList} {...restProps} disabled={disabled}>
       {icon === '' || icon === undefined || loading?  null :<Icon className="icon" name={icon} />}
       {loading ?  <Icon className="loading icon" name='loading' color='#fff'/>: null}
       <div className="r-button-content">
