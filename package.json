@@ -69,8 +69,11 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
+    "@types/react-onclickoutside": "^6.7.3",
+    "punycode": "^2.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-onclickoutside": "^6.8.0",
     "react-router-dom": "^5.0.0",
     "tslint": "^5.17.0"
   },

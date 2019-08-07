@@ -1,0 +1,116 @@
+@import '../../commonCss/index.scss';
+.r-menu {
+  display: flex;
+  color: $color;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0px 4px 8px -4px rgba(0, 0, 0, 0.1);
+  &.vertical {
+    flex-direction: column;
+    box-shadow: none;
+  }
+  .r-menu-item {
+    padding: 10px 20px;
+    position: relative;
+    &:not(.vertical) {
+      &.active {
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          border-bottom: 2px solid $blue;
+          width: 100%;
+        }
+      }
+    }
+    &.vertical {
+      &.selected {
+        color: $blue;
+      }
+    }
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .r-sub-menu .r-menu-item:not(.vertical) {
+    &.active {
+      color: $color;
+      background: $grey;
+      &::after {
+        display: none;
+      }
+    }
+  }
+  .r-sub-menu {
+    position: relative;
+    &:not(.vertical) {
+      &.active {
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          border-bottom: 2px solid $blue;
+          width: 100%;
+        }
+      }
+    }
+    &-label { padding: 10px 20px; display: block; }
+    &-icon { display: none; }
+    &-popover {
+      transition: height 250ms;
+      background: white;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 4px;
+      white-space: nowrap;
+      box-shadow: 0 0 3px fade_out(black, 0.8);
+      border-radius: $border-radius;
+      font-size: $font-size;
+      color: $light-color;
+      min-width: 8em;
+      &.vertical {
+        position: static;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        overflow: hidden;
+      }
+    }
+  }
+  .r-sub-menu .r-sub-menu {
+    &.active {
+      &::after {
+        display: none;
+      }
+    }
+    .r-sub-menu-popover {
+      top: 0;
+      left: 100%;
+      margin-left: 8px;
+    }
+    .r-sub-menu-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .r-sub-menu-icon {
+      transition: transform 250ms;
+      display: inline-flex; margin-left: 1em;
+      svg {fill: $light-color;}
+      &.vertical {
+        transform: rotate(90deg);
+        &.open {
+          transform: rotate(270deg);
+        }
+      }
+      &.open {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+}
