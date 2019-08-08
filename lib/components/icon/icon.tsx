@@ -6,11 +6,13 @@ interface IProps extends React.SVGAttributes<SVGElement> {
   color?: string
   width?: string
   height?: string
+  style?: React.CSSProperties
 }
 
 const Icon: React.FC<IProps> = ({
   className,
   name,
+  style,
   width,
   height,
   color,
@@ -19,7 +21,7 @@ const Icon: React.FC<IProps> = ({
   return (
     <svg 
       className={combineClass('r-icon', className)} 
-      style={{width,height }}
+      style={{...style, height, width}}
       {...restProps}
     >
       <use xlinkHref={`#icon-${name}`} fill={color}></use>
@@ -31,4 +33,5 @@ Icon.defaultProps = {
   width: '1.2em',
   height: '1.2em'
 }
+Icon.displayName = 'Icon'
 export default Icon;

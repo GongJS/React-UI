@@ -37,12 +37,11 @@ function createMessage( options: MessageProps) {
     removeMessage()
   }, duration! * 1000)
 }
-interface MessageProps {
+interface MessageProps extends React.HTMLAttributes<HTMLDivElement>{
   content: string | ReactNode
   type?: 'info' | 'success' | 'warning' | 'error'
   duration?: number
   className?: string
-  style?: React.CSSProperties
 }
 
 const Message: React.FC<MessageProps> = ({
@@ -86,5 +85,6 @@ const message = {
     createMessage(options)
   }
 }
+Message.displayName = 'Message'
 export default message
 

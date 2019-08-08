@@ -29,5 +29,5 @@ const MenuItem: React.FC<MenuItemProps> = ({className, children, uniqueKey, sele
     </div>
   )
 }
-
+MenuItem.displayName = 'MenuItem'
 export default MenuItem;

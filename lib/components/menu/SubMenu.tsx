@@ -1,4 +1,5 @@
 import React,{useEffect, useState} from 'react';
+import MenuItem from './MenuItem'
 import Icon from '../icon/Icon'
 import combineClass from '../../helpers/combineClass';
 
@@ -9,6 +10,7 @@ interface SubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   expandKeys?: string[]
   showArrow?: boolean
   mode?: string
+  children: React.ReactElement<MenuItem> | React.ReactElement<MenuItem>[] 
   handleSelectedKey?: (event: React.MouseEvent, key: string) => any
   handleExpandKeys?: (key: string) => any
 }
@@ -108,4 +110,5 @@ const SubMenu: React.FC<SubMenuProps> = ({
       </div>
     )
   }
+  SubMenu.displayName = 'SubMenu'
   export default SubMenu;

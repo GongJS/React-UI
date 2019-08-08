@@ -4,16 +4,22 @@ import combineClass from '../../helpers/combineClass';
 import './button.scss'
 
 interface ButtonProps {
-  className?: string
   type?: string
   htmlType?: 'button' | 'submit' | 'reset'
   plain?: boolean
   circle?: boolean
   disabled?: boolean
   ripple?:boolean
-  icon?:string | undefined
+  icon?:string
   loading?:boolean
   iconPosition?: string
+  onClick?: React.MouseEventHandler
+  onMouseEnter?: React.MouseEventHandler
+  onMouseLeave?: React.MouseEventHandler
+  onFocus?: React.FocusEventHandler
+  onBlur?: React.FocusEventHandler
+  className?: string
+  style?: React.CSSProperties
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -27,6 +33,7 @@ const Button: React.FC<ButtonProps> = ({
   iconPosition,
   children,
   className,
+  htmlType,
   ...restProps
 }) => {
   const classList = combineClass(
@@ -40,7 +47,7 @@ const Button: React.FC<ButtonProps> = ({
     `${ripple && !disabled?'ripple': ''}`,
     )
   return (
-    <button className={classList} {...restProps} disabled={disabled}>
+    <button className={classList} {...restProps} disabled={disabled} type={htmlType}>
       {icon === '' || icon === undefined || loading?  null :<Icon className="icon" name={icon} />}
       {loading ?  <Icon className="loading icon" name='loading' color='#fff'/>: null}
       <div className="r-button-content">
@@ -51,6 +58,7 @@ const Button: React.FC<ButtonProps> = ({
 }
 Button.defaultProps = {
   type: 'default',
+  htmlType: 'button',
   plain: false,
   circle: false,
   disabled: false,
@@ -58,4 +66,5 @@ Button.defaultProps = {
   loading:false,
   iconPosition: 'left'
 }
+Button.displayName = 'Button'
 export default Button;

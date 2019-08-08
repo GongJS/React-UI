@@ -3,18 +3,17 @@ import Button from './Button'
 import combineClass from '../../helpers/combineClass';
 import './button_group.scss'
 
-interface ButtonGroupProps {
+interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement>{
   className?: string
-  style?: React.CSSProperties
   children: React.ReactElement<Button>[]
 }
 
 const ButtonGroup: React.FC<ButtonGroupProps> = ({
-  className, style, children
+  className, children
 }) => {
   
   return (
-    <div className={combineClass('r-button-group', className)} style={style}>
+    <div className={combineClass('r-button-group', className)}>
       {children}
     </div>
   )

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import SubMenu from './SubMenu'
+import MenuItem from './MenuItem'
 import './menu.scss'
 import combineClass from '../../helpers/combineClass';
 
@@ -6,6 +8,7 @@ interface MenuProps extends React.HTMLAttributes<HTMLDivElement>{
   expandKeys?: string[]
   defaultSelectedKey?: string
   mode?: string
+  children: React.ReactElement<SubMenu>[] | React.ReactElement<MenuItem>[] | React.ReactElement<SubMenu> | React.ReactElement<MenuItem>
 }
 interface ChildProps extends MenuProps{
   uniqueKey?: string

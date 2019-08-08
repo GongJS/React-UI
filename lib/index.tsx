@@ -6,4 +6,6 @@ export { default as message } from './components/message/Message'
 export { default as Menu } from './components/menu/Menu'
 export { default as MenuItem } from './components/menu/MenuItem'
 export { default as SubMenu } from './components/menu/SubMenu'
+export { default as Collapse } from './components/collapse/Collapse'
+export { default as CollapseItem } from './components/collapse/CollapseItem'
 export { Layout, Header, Content, Footer, Aside } from './components/layout/layout';
