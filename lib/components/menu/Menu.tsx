@@ -21,6 +21,7 @@ interface ChildProps extends MenuProps{
 }
  let subMenuEle :Element[]
  let isOutClick:boolean = true
+ 
 const Menu: React.FC<MenuProps> = ({className, children, defaultSelectedKey, mode, ...restProps}) => {
   let childIndex: number | undefined = undefined
   const childKeys: string[] = []

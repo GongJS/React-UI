@@ -8,12 +8,13 @@ interface MenuItemProps extends React.HTMLAttributes<HTMLDivElement>{
   selectedKey?: string
   currentTarget?: EventTarget & Element
   expandKeys?: string[]
+  globalArrow?:boolean
   handleSelectedKey?: (event: React.MouseEvent, key: string) => any
   handleExpandKeys?: (key: string) => any
   hideChildSubMenu?: (key: string) => any
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({mode, hideChildSubMenu, className, children, uniqueKey, selectedKey,  currentTarget, handleSelectedKey, handleExpandKeys,  expandKeys, ...restProps}) => {
+const MenuItem: React.FC<MenuItemProps> = ({mode, hideChildSubMenu, globalArrow, className, children, uniqueKey, selectedKey,  currentTarget, handleSelectedKey, handleExpandKeys,  expandKeys, ...restProps}) => {
   const menuItem = React.createRef<HTMLDivElement>()
   const [active, setActive] = useState(false)
   useEffect(() => {

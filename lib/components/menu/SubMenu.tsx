@@ -2,14 +2,13 @@ import React,{useEffect, useState} from 'react';
 import MenuItem from './MenuItem'
 import Icon from '../icon/Icon'
 import combineClass from '../../helpers/combineClass';
-import { access } from 'fs';
 
 interface SubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   uniqueKey?: string
   selectedKey?: string
   currentTarget?: EventTarget & Element
   expandKeys?: string[]
-  globalArrow:boolean
+  globalArrow?:boolean
   mode?: string
   children: React.ReactElement<MenuItem> | React.ReactElement<MenuItem>[] 
   handleSelectedKey?: (event: React.MouseEvent, key: string) => any
@@ -52,7 +51,7 @@ const SubMenu: React.FC<SubMenuProps> = ({
       setActive(false)
       hideChildSubMenu!(uniqueKey!)
     }
-  },[currentTarget, globalArrow])
+  },[currentTarget])
   
   const getUniqueKeyFromChild = (
     child: React.ReactElement<ChildProps>,
@@ -89,7 +88,7 @@ const SubMenu: React.FC<SubMenuProps> = ({
         <span  className={combineClass('r-sub-menu-label', `${active ? 'active' : ''}`,`${ mode === 'vertical' ? 'vertical': ''}`)} onClick={handleClick}>
           {title}
           <span className="r-sub-menu-icon">
-            <Icon name="right" className={ arrow ? 'open' : 'close'}/> 
+            <Icon name="right" className={ arrow && globalArrow? 'open' : 'close'}/>
           </span>
         </span>
         {
