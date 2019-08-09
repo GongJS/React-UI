@@ -30,7 +30,7 @@ export default () => {
       onClick={() => setY(y === 0 ? 1 : 0)}
       style={editorStyle}
     >&lt;&nbsp;&gt;</span>
-    <CodeEditor scaleY={y} value={rawCode} setRawCode={setRawCode} />
+    {/* <CodeEditor scaleY={y} value={rawCode} setRawCode={setRawCode} /> */}
     <ReactMarkdown source={require('!!raw-loader!./icon.md').default} className="md"/>
   </Fragment>
 }

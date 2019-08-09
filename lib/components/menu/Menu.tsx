@@ -16,6 +16,7 @@ interface ChildProps extends MenuProps{
   currentTarget?: EventTarget & Element
   handleSelectedKey?: (event: React.MouseEvent, key: string) => any
   handleExpandKeys?: (key: string) => any
+  hideChildSubMenu?: (key: string) => any
 }
 const Menu: React.FC<MenuProps> = ({className, children, defaultSelectedKey, mode, ...restProps}) => {
   let childIndex: number | undefined = undefined
@@ -41,11 +42,14 @@ const Menu: React.FC<MenuProps> = ({className, children, defaultSelectedKey, mod
     setCurrentTarget(event.currentTarget)
     setSelectedKey(key)
   }
-
+  const hideChildSubMenu = (key: string) => {
+    setExpandKeys(expandKeys => expandKeys.filter(item => item !== key))
+  }
   const handleExpandKeys = (key: string) => {
     if (key) {
       if (childKeys.indexOf(key)> -1 && childKeys.indexOf(key) !== childIndex) {
         setExpandKeys([])
+
         childIndex = childKeys.indexOf(key)
       }
       if (expandKeys.indexOf(key) > -1) {
@@ -72,6 +76,7 @@ const Menu: React.FC<MenuProps> = ({className, children, defaultSelectedKey, mod
           selectedKey,
           handleSelectedKey,
           handleExpandKeys,
+          hideChildSubMenu
         })
       }
     )

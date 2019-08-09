@@ -8,6 +8,7 @@
   &.vertical {
     flex-direction: column;
     box-shadow: none;
+    width:200px;
   }
   .r-menu-item {
     padding: 10px 20px;
@@ -25,7 +26,7 @@
       }
     }
     &.vertical {
-      &.selected {
+      &.active {
         color: $blue;
       }
     }
@@ -47,6 +48,7 @@
     position: relative;
     &:not(.vertical) {
       &.active {
+        color: $blue;
         &::after {
           content: '';
           position: absolute;
@@ -57,8 +59,32 @@
         }
       }
     }
-    &-label { padding: 10px 20px; display: block; }
-    &-icon { display: none; }
+    &-label { 
+      padding: 10px 20px; 
+      display: flex;
+      align-items: center;
+      &.vertical {
+        &.active {
+          color: $blue;
+        }
+      }
+    }
+    &-icon { 
+      .open {
+        outline: none;
+        margin-left: 5px;
+        transition: 0.3s;
+        transition-property: all;
+        transform: rotate(-90deg);
+      }
+      .close {
+        outline: none;
+        margin-left: 5px;
+        transition: 0.3s;
+        transition-property: all;
+        transform: rotate(90deg);
+      }
+    }
     &-popover {
       transition: height 250ms;
       background: white;
@@ -91,11 +117,13 @@
       top: 0;
       left: 100%;
       margin-left: 8px;
+      &.vertical {
+        margin-left:0px;
+      }
     }
     .r-sub-menu-label {
       display: flex;
       align-items: center;
-      justify-content: space-between;
     }
     .r-sub-menu-icon {
       transition: transform 250ms;
@@ -112,5 +140,4 @@
       }
     }
   }
-
 }

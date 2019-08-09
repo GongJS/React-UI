@@ -8,11 +8,11 @@ interface SubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   selectedKey?: string
   currentTarget?: EventTarget & Element
   expandKeys?: string[]
-  showArrow?: boolean
   mode?: string
   children: React.ReactElement<MenuItem> | React.ReactElement<MenuItem>[] 
   handleSelectedKey?: (event: React.MouseEvent, key: string) => any
   handleExpandKeys?: (key: string) => any
+  hideChildSubMenu?: (key: string) => any
 }
 interface ChildProps extends SubMenuProps{}
 
@@ -26,21 +26,21 @@ const SubMenu: React.FC<SubMenuProps> = ({
   selectedKey,
   expandKeys,
   title,
-  showArrow,
   handleSelectedKey,
   handleExpandKeys,
+  hideChildSubMenu,
   className,
   children,
   ...restProps
 }) => {
   const subMenu = React.createRef<HTMLDivElement>()
   const [active, setActive] = useState(false)
-
+  const [arrow, setArrow] = useState(false)
   const handleClick = (event: React.MouseEvent) => {
     event.stopPropagation()
     handleExpandKeys!(uniqueKey!)
+    setArrow(!arrow)
   }
-
   const outDivClickHandler = (e:any) => {
     isOutClick = true
     if(subMenuEle) {
@@ -51,14 +51,17 @@ const SubMenu: React.FC<SubMenuProps> = ({
       })
     }
     if (isOutClick) {
+      setArrow(false)
       handleExpandKeys!('')
     }
   }
 
   useEffect(() => {
-    setActive(false)
     if (subMenu && subMenu.current && subMenu.current.contains(currentTarget!)) {
       setActive(true)
+    } else {
+      setActive(false)
+      hideChildSubMenu!(uniqueKey!)
     }
     subMenuEle = Array.from(document.querySelectorAll('.r-sub-menu'))
     document.addEventListener('click', outDivClickHandler)
@@ -80,11 +83,14 @@ const SubMenu: React.FC<SubMenuProps> = ({
         (child: React.ReactElement<ChildProps>, index: number) => {
           const uniqueKey = getUniqueKeyFromChild(child, index)
           return React.cloneElement(child, {
+            mode,
             uniqueKey,
             currentTarget,
+            selectedKey,
             expandKeys,
             handleSelectedKey,
             handleExpandKeys,
+            hideChildSubMenu
           })
         }
       )
@@ -95,10 +101,10 @@ const SubMenu: React.FC<SubMenuProps> = ({
         className={combineClass('r-sub-menu', `${active ? 'active' : ''}`,`${ mode === 'vertical' ? 'vertical': ''}`, className)} 
         {...restProps}
       >
-        <span className="r-sub-menu-label"  onClick={handleClick}>
+        <span  className={combineClass('r-sub-menu-label', `${active ? 'active' : ''}`,`${ mode === 'vertical' ? 'vertical': ''}`)} onClick={handleClick}>
           {title}
           <span className="r-sub-menu-icon">
-            <Icon name="right" />
+            <Icon name="right" className={ arrow ? 'open' : 'close'}/>
           </span>
         </span>
         {
