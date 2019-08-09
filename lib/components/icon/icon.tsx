@@ -1,7 +1,7 @@
 import React from 'react';
 import combineClass from '../../helpers/combineClass';
 
-interface IProps extends React.SVGAttributes<SVGElement> {
+interface IconProps extends React.SVGAttributes<SVGElement> {
   name: string
   color?: string
   width?: string
@@ -9,7 +9,7 @@ interface IProps extends React.SVGAttributes<SVGElement> {
   style?: React.CSSProperties
 }
 
-const Icon: React.FC<IProps> = ({
+const Icon: React.FC<IconProps> = ({
   className,
   name,
   style,

@@ -8,4 +8,5 @@ export { default as MenuItem } from './components/menu/MenuItem'
 export { default as SubMenu } from './components/menu/SubMenu'
 export { default as Collapse } from './components/collapse/Collapse'
 export { default as CollapseItem } from './components/collapse/CollapseItem'
+export { default as Carousel } from './components/carousel/Carousel'
 export { Layout, Header, Content, Footer, Aside } from './components/layout/layout';

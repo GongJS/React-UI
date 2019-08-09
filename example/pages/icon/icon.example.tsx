@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon,Menu, SubMenu,MenuItem } from '../../../lib';
+import { Icon,Menu, SubMenu,MenuItem , Carousel} from '../../../lib';
 import './icon.example.scss';
 
 export default () => {
@@ -27,6 +27,21 @@ export default () => {
           </SubMenu>
         </SubMenu>
 </Menu>
+  <Carousel>
+  <div>
+          <img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" />
+        </div>
+        <div>
+          <img src="http://cdn.jirengu.com/book.jirengu.com/img/2.jpg" />
+          </div>
+        <div>
+          <img src="http://cdn.jirengu.com/book.jirengu.com/img/3.jpg" />
+          </div>
+          <div>
+          <img src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg" />
+          </div>
+     
+  </Carousel>
     </div>
   )
 }
