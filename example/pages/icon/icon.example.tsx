@@ -27,7 +27,7 @@ export default () => {
           </SubMenu>
         </SubMenu>
 </Menu>
-  <Carousel>
+  <Carousel animation="zoom">
   <div>
           <img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" />
         </div>
