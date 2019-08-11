@@ -3,38 +3,51 @@ import './carousel.scss'
 import combineClass from '../../helpers/combineClass';
 
 interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
-  animation?: 'fade' | 'zoom'
+  type?: 'fade' | 'zoom'
 }
 
 const Carousel: React.FC<CarouselProps> = ({
   className,
   children,
-  animation,
+  type,
   ...restProps
 }) => {
   let dotsEle: NodeListOf<HTMLElement>
   let panelsEle: NodeListOf<HTMLElement>
+  let endFlag: boolean = true
   const handleDotsClick = (event: any) => {
     event.stopPropagation()
     let index = Array.from(dotsEle).indexOf(event.target)
     if (index === -1) {return}
-     setDots(index)
-     showPage(index, getActiveIndex()) 
+    let lastIndex = getActiveIndex()
+     setActiveDot(index)
+     slide(index, lastIndex) 
   }
-  const setDots = (index: number) => {
+  const setActiveDot = (index: number) => {
+    if (!endFlag) {
+      return
+    }
     dotsEle.forEach(dot => dot.classList.remove('active'))
     dotsEle[index].classList.add('active')
   }
   const pre = () => {
-    setDots(getPreIndex())
-    showPage(getPreIndex(), getNextIndex()) 
+    let index = getPreIndex()
+    setActiveDot(index)
+    slide(index, getNextIndex())
   }
   const next = () => {
-    setDots(getNextIndex())
-    showPage(getNextIndex(), getPreIndex()) 
+    let index = getNextIndex()
+    setActiveDot(index)
+    slide(index, getPreIndex()) 
   }
   const getActiveIndex = () => {
-    return Array.from(dotsEle).indexOf(document.querySelector('.r-carousel .dots .active'))
+    let ele: HTMLElement | null = document.querySelector('.r-carousel .dots .active') 
+    if (ele) {
+      return Array.from(dotsEle).indexOf(ele)
+    } else {
+      throw Error('没有找到<span class="active"></span>')
+    }
+     
   }
   const getPreIndex = () => {
     return (getActiveIndex() -1 + dotsEle.length) % dotsEle.length
@@ -42,27 +55,31 @@ const Carousel: React.FC<CarouselProps> = ({
   const getNextIndex = () => {
     return (getActiveIndex() + 1 ) % dotsEle.length
   }
-  const showPage = (toIndex: number, fromIndex:number) => {
-     xxx(panelsEle[toIndex], panelsEle[fromIndex], () => {
+  const slide = (toIndex: number, fromIndex:number) => {
+     animation(panelsEle[toIndex], panelsEle[fromIndex], () => {
       panelsEle.forEach(panel => panel.style.zIndex = '0')
-      panelsEle[toIndex].style.zIndex = '10'            
+      panelsEle[toIndex].style.zIndex = '10'   
+      endFlag = true         
     })
   }
-  // Todo
-  const xxx= (to: HTMLElement, from: HTMLElement, onFinish:() => any) => {
-    const css = (node:HTMLElement, styles:{}) => Object.entries(styles)
+  const animation= (to: HTMLElement, from: HTMLElement, onFinish:() => any) => {
+    if (!endFlag) {
+      return
+    }
+    endFlag = false
+    const css = (node:HTMLElement, styles:{ [key: string]: string | number }) => Object.entries(styles)
     .forEach(([key, value]) => {
-        node.style[key] = value
+       node.style[key] = value
     })
     const reset = (node:HTMLElement )=> {
-      node.style.opacity = null
-      node.style.zIndex = null
+      node.style.opacity = ''
+      node.style.zIndex = ''
       node.style.transition = ''
-      node.style.scale = null
-      node.style.transform = null
+      node.style.scale = ''
+      node.style.transform = ''
     }  
-    if (animation === 'fade') {
-      const during = 200
+    if (type === 'fade') {
+      const during = 300
       css(from, {
         opacity: 1,
         transition: `all ${during/1000}s`,
@@ -75,21 +92,13 @@ const Carousel: React.FC<CarouselProps> = ({
       })
 
       setTimeout(() => {
-        css(from, {
-          opacity: 0,
-        })
-        css(to, {
-          opacity: 1,
-        })              
-      }, 100)
-
-      setTimeout(() => {
         reset(from)
         reset(to)
+        
         onFinish && onFinish()
       }, during)
     }
-    if (animation=== 'zoom') {
+    if (type=== 'zoom') {
       const scale = 5
       const during = 1000
       css(from, {
@@ -142,6 +151,6 @@ const Carousel: React.FC<CarouselProps> = ({
 
 Carousel.displayName = 'Carousel'
 Carousel.defaultProps = {
-  animation: 'fade'
+  type: 'fade'
 }
 export default Carousel;
