@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import IconExample from './icon.example';
+import ButtonExample from './button.example';
 import CodeEditor from '../../CodeEditor';
 import ReactMarkdown from 'react-markdown';
 
@@ -19,9 +19,9 @@ const editorStyle = {
 
 export default () => {
   const [y, setY] = useState(1);
-  const [rawCode, setRawCode] = useState(require('!!raw-loader!./icon.example.tsx').default);
+  const [rawCode, setRawCode] = useState(require('!!raw-loader!./button.example.tsx').default);
   return <Fragment>
-    <IconExample />
+    <ButtonExample />
     {/* <Button
       onClick={() => setY(y === 0 ? 1 : 0)}
       style={{ marginTop: 20 }}
@@ -31,6 +31,6 @@ export default () => {
       style={editorStyle}
     >&lt;&nbsp;&gt;</span>
     <CodeEditor scaleY={y} value={rawCode} setRawCode={setRawCode} />
-    <ReactMarkdown source={require('!!raw-loader!./icon.md').default} className="md"/>
+    <ReactMarkdown source={require('!!raw-loader!./button.md').default} className="md"/>
   </Fragment>
 }

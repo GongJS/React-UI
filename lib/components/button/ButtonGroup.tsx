@@ -9,11 +9,11 @@ interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement>{
 }
 
 const ButtonGroup: React.FC<ButtonGroupProps> = ({
-  className, children
+  className, children, ...restProps
 }) => {
   
   return (
-    <div className={combineClass('r-button-group', className)}>
+    <div className={combineClass('r-button-group', className)} {...restProps}>
       {children}
     </div>
   )

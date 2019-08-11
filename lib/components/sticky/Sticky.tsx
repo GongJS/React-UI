@@ -17,26 +17,26 @@ const Sticky: React.FC<StickyProps> = ({
   const container = React.createRef<HTMLDivElement>()
   const [top, setTop] = useState()
   const handleScroll = () => {
-    let ele: HTMLDivElement | null= stickyWrapper.current
-    if (ele) {
+    let stickyCurrent: HTMLDivElement | null= stickyWrapper.current
+    if (stickyCurrent) {
       if (window.scrollY > top - distance!) {
-        const {top,bottom,left,right} = ele.getBoundingClientRect()
-        ele.style.width = right - left + 'px'
-        ele.style.height = bottom - top + 'px'
-        container && container.current && (container.current.style.height = ele.style.height)
-        ele.style.left = left + 'px'
-        ele.style.top = distance + 'px'
-        ele.style.position = 'fixed'
+        const {top,bottom,left,right} = stickyCurrent.getBoundingClientRect()
+        stickyCurrent.style.width = right - left + 'px'
+        stickyCurrent.style.height = bottom - top + 'px'
+        container && container.current && (container.current.style.height = stickyCurrent.style.height)
+        stickyCurrent.style.left = left + 'px'
+        stickyCurrent.style.top = distance + 'px'
+        stickyCurrent.style.position = 'fixed'
       } else {
-        ele.style.position = 'static'
+        stickyCurrent.style.position = 'static'
       }  
     }
   }
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
-    const ele = stickyWrapper.current
-    if (ele) {
-      setTop(ele.getBoundingClientRect().top)
+    const stickyCurrent = stickyWrapper.current
+    if (stickyCurrent) {
+      setTop(stickyCurrent.getBoundingClientRect().top)
       handleScroll()
     }
     return () => window.removeEventListener('scroll', handleScroll)

@@ -7,6 +7,10 @@ export const menuList: Array<any> = [
         title: 'Icon 图标',
         key: '/components/icon'
       },
+      {
+        title: 'Button 按键',
+        key: '/components/button'
+      },
     ]
   }
 ]

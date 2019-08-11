@@ -42,7 +42,7 @@ const Button: React.FC<ButtonProps> = ({
     `r-button--${type}`, 
     `icon-${iconPosition}`,
     `${plain?'plain': ''}`,
-    `${circle?'circle': ''}`,
+    `${circle?'circle clearMargin': ''}`,
     `${disabled?'disabled': ''}`,
     `${ripple && !disabled?'ripple': ''}`,
     )
@@ -62,7 +62,7 @@ Button.defaultProps = {
   plain: false,
   circle: false,
   disabled: false,
-  ripple:false,
+  ripple:true,
   loading:false,
   iconPosition: 'left'
 }
