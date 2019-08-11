@@ -1,10 +1,35 @@
 import React from 'react';
-import { Icon,Menu, SubMenu,MenuItem , Carousel} from '../../../lib';
+import { Icon,Menu, SubMenu,MenuItem , Carousel, Sticky} from '../../../lib';
 import './icon.example.scss';
 
 export default () => {
   return (
     <div>
+      <Sticky distance={30}>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+            <div>dddd</div>
+
+      </Sticky>
       <Icon name='round_like_fill' className="r-icon-example"/>
       <Icon name="round_down_light" color="#ccc" className="r-icon-example"/>
       <Icon name="wang_light" className="r-icon-example"/>
@@ -27,7 +52,7 @@ export default () => {
           </SubMenu>
         </SubMenu>
 </Menu>
-  <Carousel type="zoom">
+  {/* <Carousel type="zoom">
   <div>
           <img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" />
         </div>
@@ -41,7 +66,7 @@ export default () => {
           <img src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg" />
           </div>
      
-  </Carousel>
+  </Carousel> */}
     </div>
   )
 }
