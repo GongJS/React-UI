@@ -69,7 +69,7 @@ export default () => {
       <div style={{ marginBottom: "20px" }}>
         <ButtonGroup>
           <Button type="primary" icon="back">上一页</Button>
-          <Button type="primary" icon="right" icon-position="right">下一页</Button>
+          <Button type="primary" icon="right" iconPosition="right">下一页</Button>
         </ButtonGroup>
         <ButtonGroup style={{ marginLeft: "20px" }}>
           <Button type="primary" icon="evaluate"></Button>

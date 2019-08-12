@@ -11,6 +11,10 @@ export const menuList: Array<any> = [
         title: 'Button 按键',
         key: '/components/button'
       },
+      {
+        title: 'Message ',
+        key: '/components/message'
+      },
     ]
   }
 ]
