@@ -1,6 +1,5 @@
 import React from 'react';
 import { message, Button } from '../../../lib';
-import './message.example.scss';
 
 export default () => {
 
@@ -31,10 +30,17 @@ export default () => {
     message.info({
       content: '这条消息10秒钟后自动关闭',
       duration: 10,
+     
+    })
+  }
+  
+  const handleTop = () => {
+    message.info({
+      content: '这条消息距离顶部300px距离',
       top:300
     })
   }
-
+  
   const handleCallback = () => {
     message.info({
       content: '执行关闭后的回调函数，通过控制台查看',
@@ -56,7 +62,8 @@ export default () => {
       <div style={{ marginBottom: "20px" }}>
         <Button type="primary" onClick={handleClose}>显示关闭按钮</Button>
         <Button type="success" onClick={handleTime}>10秒钟后关闭</Button>
-        <Button type="success" onClick={handleCallback}>执行关闭后的回掉函数</Button>
+        <Button type="reverse" onClick={handleTop}>距离顶部300px</Button>
+        <Button type="danger" onClick={handleCallback}>执行关闭后的回掉函数</Button>
       </div>
     </div>
   )

@@ -83,7 +83,10 @@ const Message: React.FC<MessageProps> = ({
     clearTimeout(timer)
   }
   useEffect(() => {
-    return () => onClose && onClose()
+    return () => {
+      onClose && onClose()
+      clearTimeout(timer)
+    }
   })
   return (
     <div ref={wrapperRef} className="r-message" >

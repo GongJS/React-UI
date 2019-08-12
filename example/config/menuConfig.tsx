@@ -12,7 +12,11 @@ export const menuList: Array<any> = [
         key: '/components/button'
       },
       {
-        title: 'Message ',
+        title: 'Carousel 轮播',
+        key: '/components/carousel'
+      },
+      {
+        title: 'Message 全局提示',
         key: '/components/message'
       },
     ]

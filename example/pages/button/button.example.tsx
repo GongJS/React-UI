@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, ButtonGroup } from '../../../lib';
-import './button.example.scss';
 
 export default () => {
   const [loading, setLoading] = useState(false)
