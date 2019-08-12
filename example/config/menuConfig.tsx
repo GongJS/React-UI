@@ -19,6 +19,10 @@ export const menuList: Array<any> = [
         title: 'Message 全局提示',
         key: '/components/message'
       },
+      {
+        title: 'sticky 图钉',
+        key: '/components/sticky'
+      },
     ]
   }
 ]
