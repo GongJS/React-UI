@@ -8,6 +8,7 @@ interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
   content: string | ReactNode
   type?: 'info' | 'success' | 'warning' | 'error'
   duration?: number
+  top?: number
   showClose?: boolean
   onClose?: () => any
   className?: string
@@ -16,6 +17,7 @@ interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
 let timer: number
 let cacheContainer: HTMLDivElement | null = null
 const messageRef = React.createRef<HTMLDivElement>()
+const wrapperRef = React.createRef<HTMLDivElement>()
 
 function removeMessage(flag?: string) {
   const obj = cacheContainer as HTMLDivElement
@@ -38,7 +40,7 @@ function removeMessage(flag?: string) {
 }
 
 function createMessage(options: MessageProps) {
-  const { content, type, duration, showClose,onClose } = options
+  const { content, type, duration, showClose, onClose, top } = options
   if (cacheContainer) {
     removeMessage('closeNow')
   }
@@ -54,6 +56,10 @@ function createMessage(options: MessageProps) {
     }
   )
   ReactDOM.render(messageInstance, container)
+  const ref = wrapperRef
+  if (ref && ref.current) {
+    ref.current.style.top = `${top}px`
+  }
   cacheContainer = container
   if (timer) {
     clearTimeout(timer)
@@ -80,7 +86,7 @@ const Message: React.FC<MessageProps> = ({
     return () => onClose && onClose()
   })
   return (
-    <div className="r-message" >
+    <div ref={wrapperRef} className="r-message" >
       <div ref={messageRef} className={combineClass('r-message-container', `r-message-${type}`, className)} {...restProps}>
         {
           type === 'info' ? <Icon color="#3963bc" name="infofill" />
@@ -105,7 +111,6 @@ const setAttributes = (options: MessageProps | string, type: 'info' | 'success' 
   if (options instanceof Object) {
     options.type = type
     options.duration ? null : options.duration = 3
-    options.showClose ? false : options.showClose = true
     createMessage(options)
   } else {
     strOptions.content = options
