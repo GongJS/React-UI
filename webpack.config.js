@@ -9,7 +9,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist/lib'),
-    library: 'fiona',
+    library: 'R-UI',
     libraryTarget: 'umd'
   },
   resolve: {

@@ -9,7 +9,7 @@ export default () => {
   return (
     <div>
       <Collapse style={{marginBottom:'20px'}} onChange={(expandKeys) => handleChange(expandKeys)}>
-        <CollapseItem title="Header1" key="1">
+        <CollapseItem title="Header1" key="1" disabled>
           <div>Content of CollapseItem 1</div>
         </CollapseItem>
         <CollapseItem title="Header2" key="2">
@@ -33,7 +33,7 @@ export default () => {
       </Collapse>
 
       <Collapse style={{marginBottom:'20px'}} defaultSelectedKeys={['2']}>
-        <CollapseItem title="Header1" key="1" disabled>
+        <CollapseItem title="Header1" key="1" >
           <div>Content of CollapseItem 1</div>
         </CollapseItem>
         <CollapseItem title="Header2" key="2">

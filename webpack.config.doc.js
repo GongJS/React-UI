@@ -14,7 +14,7 @@ module.exports = Object.assign({}, baseConfig, {
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',
-      title: 'fiona-ui',
+      title: 'R-UI',
       filename: 'example.html'
     })
   ]

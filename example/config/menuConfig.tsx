@@ -24,6 +24,10 @@ export const menuList: Array<any> = [
         key: '/components/message'
       },
       {
+        title: 'Menu 导航菜单',
+        key: '/components/menu'
+      },
+      {
         title: 'sticky 图钉',
         key: '/components/sticky'
       },
