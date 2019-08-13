@@ -16,7 +16,7 @@ interface ChildProps extends MenuProps{
   currentTarget?: EventTarget & Element
   globalArrow?:boolean
   handleSelectedKey?: (event: React.MouseEvent, key: string) => any
-  handleExpandKeys?: (key: string) => any
+  handleExpandKeys?: (key: string, type?:string) => any
   hideChildSubMenu?: (key: string) => any
 }
  let subMenuEle :Element[]
@@ -27,10 +27,11 @@ const Menu: React.FC<MenuProps> = ({className, children, defaultSelectedKey, mod
   const childKeys: string[] = []
   const [expandKeys, setExpandKeys] = useState<string[]>([])
   const [currentTarget, setCurrentTarget] = useState()
+  const [clickSubMenuKey, setClickSubMenuKey] = useState('')
   const [selectedKey, setSelectedKey] = useState()
   const [globalArrow, setGlobalArrow] = useState(true)
   
-  // 处理点击subMenu区域的click事件
+  // 处理点击subMenu区域以外的click事件
   const outDivClickHandler = (e:any) => {
     isOutClick = true
     if(subMenuEle) {
@@ -64,18 +65,33 @@ const Menu: React.FC<MenuProps> = ({className, children, defaultSelectedKey, mod
   }
 
   const handleSelectedKey = (event: React.MouseEvent, key: string) => {
+    if (childKeys.indexOf(key) > -1) {
+      setExpandKeys([])
+    }
     setCurrentTarget(event.currentTarget)
     setSelectedKey(key)
   }
   const hideChildSubMenu = (key: string) => {
-    setExpandKeys(expandKeys => expandKeys.filter(item => item !== key))
+    let shouldHide = false
+    let filterClickSubMenuKey = expandKeys.filter(item => item !== clickSubMenuKey)
+    for (let i =0; i<filterClickSubMenuKey.length;i++) {
+      for(let j = 0; j < childKeys.length;j++ ) {
+        if (filterClickSubMenuKey[i] === childKeys[j]) {
+          shouldHide= true
+        }
+      }
+    }
+    if (shouldHide) {
+      setExpandKeys(expandKeys => expandKeys.filter(item => item !== key))
+    } 
+   
   }
   const handleExpandKeys = (key: string) => {
+    setClickSubMenuKey(key)
     setGlobalArrow(true)
     if (key) {
       if (childKeys.indexOf(key)> -1 && childKeys.indexOf(key) !== childIndex) {
-        setExpandKeys([])
-
+        setExpandKeys(expandKeys => expandKeys.filter(item => childKeys.indexOf(item) === -1))
         childIndex = childKeys.indexOf(key)
       }
       if (expandKeys.indexOf(key) > -1) {
@@ -84,7 +100,7 @@ const Menu: React.FC<MenuProps> = ({className, children, defaultSelectedKey, mod
         setExpandKeys(expandKeys => expandKeys.concat(key))
       }
     } else {
-      setExpandKeys([])
+      setExpandKeys(expandKeys => expandKeys.filter(item => childKeys.indexOf(item) === -1))
     }
   }
 

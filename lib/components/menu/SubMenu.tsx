@@ -35,6 +35,7 @@ const SubMenu: React.FC<SubMenuProps> = ({
   const subMenu = React.createRef<HTMLDivElement>()
   const [active, setActive] = useState(false)
   const [arrow, setArrow] = useState(false)
+  const childKeys: string[] = []
   const handleClick = (event: React.MouseEvent) => {
     event.stopPropagation()
     handleExpandKeys!(uniqueKey!)
@@ -45,7 +46,7 @@ const SubMenu: React.FC<SubMenuProps> = ({
     if (!globalArrow) {
       setArrow(false)
     }
-    if (subMenu && subMenu.current && subMenu.current.contains(currentTarget!)) {
+    if (subMenu && subMenu.current && subMenu.current.contains(currentTarget!) ||  childKeys.indexOf(selectedKey!) > -1) {
       setActive(true)
     } else {
       setActive(false)
@@ -65,6 +66,7 @@ const SubMenu: React.FC<SubMenuProps> = ({
         children,
         (child: React.ReactElement<ChildProps>, index: number) => {
           const uniqueKey = getUniqueKeyFromChild(child, index)
+          childKeys.push(uniqueKey)
           return React.cloneElement(child, {
             mode,
             globalArrow,
