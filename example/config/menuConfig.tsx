@@ -12,6 +12,10 @@ export const menuList: Array<any> = [
         key: '/components/button'
       },
       {
+        title: 'Collapse 折叠面板',
+        key: '/components/collapse'
+      },
+      {
         title: 'Carousel 轮播',
         key: '/components/carousel'
       },

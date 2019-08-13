@@ -1,13 +1,18 @@
 $grey: #ddd;
 $border-radius: 4px;
+
 .r-collapse {
-  box-shadow:0 2px 12px 0 rgba(0,0,0,.1);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  &:last-child {
+    border-bottom: none;
+  }
   .r-collapseItem {
     border-bottom: 1px solid #ebeef5;
-    > .title { 
-      padding: 16px 20px;
+    > .title {
+      padding: 10px 20px;
       box-sizing: border-box;
       display: flex;
+      cursor: pointer;
       .open {
         outline: none;
         transition: 0.3s;
@@ -22,11 +27,24 @@ $border-radius: 4px;
       }
     }
     &:first-child {
-      > .title { border-top-left-radius: $border-radius; border-top-right-radius: $border-radius; }
+      > .title {
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+      }
     }
     &:last-child {
-      > .title:last-child { border-bottom-left-radius: $border-radius; border-bottom-right-radius: $border-radius; }
+      > .title:last-child {
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      }
     }
-    > .content { padding: 0px 20px 10px 50px; font-size: 14px; color: rgba(0,0,0,0.65);}
+     &.disable {
+      background: #eee;
+    }
+    > .content {
+      padding: 0px 20px 10px 50px;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.65);
+    }
   }
 }
