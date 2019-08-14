@@ -9,6 +9,7 @@
     flex-direction: column;
     box-shadow: none;
     width:200px;
+    border-right: 1px solid #e6e6e6;
   }
   .r-menu-item {
     padding: 10px 20px;
@@ -103,7 +104,6 @@
         border-radius: 0;
         border: none;
         box-shadow: none;
-        overflow: hidden;
       }
     }
   }

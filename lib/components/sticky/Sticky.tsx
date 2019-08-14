@@ -33,13 +33,20 @@ const Sticky: React.FC<StickyProps> = ({
       }
     }
   }
+  const init = () => {
+    const stickyCurrent = stickyWrapper.current
+    if(stickyCurrent) {
+      if (window.scrollY === 0) {
+        setTop(stickyCurrent.getBoundingClientRect().top)
+      } else {
+        window.scrollTo(window.scrollX, 0)
+        setTop(stickyCurrent.getBoundingClientRect().top)
+      }
+    }
+  }
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
-    const stickyCurrent = stickyWrapper.current
-    if (stickyCurrent) {
-      setTop(stickyCurrent.getBoundingClientRect().top)
-      handleScroll()
-    }
+    init()
     return () => window.removeEventListener('scroll', handleScroll)
   })
   return (
