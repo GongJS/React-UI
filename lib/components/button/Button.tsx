@@ -4,7 +4,7 @@ import combineClass from '../../helpers/combineClass';
 import './button.scss'
 
 interface ButtonProps {
-  type?: string
+  type?: 'primary' | 'success' | 'reverse' | 'danger' | 'default' | 'plain' |undefined
   htmlType?: 'button' | 'submit' | 'reset'
   plain?: boolean
   circle?: boolean

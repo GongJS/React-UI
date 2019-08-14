@@ -24,6 +24,10 @@ export const menuList: Array<any> = [
         key: '/components/message'
       },
       {
+        title: 'Modal 对话框',
+        key: '/components/modal'
+      },
+      {
         title: 'Menu 导航菜单',
         key: '/components/menu'
       },
