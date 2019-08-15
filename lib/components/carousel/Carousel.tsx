@@ -80,8 +80,6 @@ const Carousel: React.FC<CarouselProps> = ({
   }
   const getActiveIndex = () => {
     let ele: HTMLElement | null = document.querySelector(`.r-carousel-${id} .dots .active`)
-    console.log(id)
-    console.log(document.querySelector(`.r-carousel-${id} .dots .active`))
     if (ele) {
       return Array.from(dotsEle).indexOf(ele)
     } else {

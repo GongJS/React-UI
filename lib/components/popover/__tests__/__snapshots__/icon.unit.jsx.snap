@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Icon /> renders icon component 1`] = `
+<svg
+  className="r-icon"
+  style={
+    Object {
+      "height": "20px",
+      "width": "1.2em",
+    }
+  }
+>
+  <use
+    fill="#3963bc"
+    xlinkHref="#icon-alipay"
+  />
+</svg>
+`;

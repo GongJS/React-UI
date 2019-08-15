@@ -32,6 +32,10 @@ export const menuList: Array<any> = [
         key: '/components/menu'
       },
       {
+        title: 'Popover 气泡卡片',
+        key: '/components/popover'
+      },
+      {
         title: 'sticky 图钉',
         key: '/components/sticky'
       },
