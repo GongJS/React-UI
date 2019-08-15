@@ -63,6 +63,7 @@ const Modal: React.FC<ModalProps> = ({
     <Fragment>
       <div className={pre('mask')} style={maskStyle} onClick={maskClosable ? handleOnCancel : () => { }} />
       <div className={combineClass(pre(), className)} style={style} >
+        <div className={pre('container')}>
         <header className={pre('header')}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             {
@@ -95,6 +96,7 @@ const Modal: React.FC<ModalProps> = ({
             )
           }
         </footer>
+        </div>
       </div>
     </Fragment> : null;
   return (
