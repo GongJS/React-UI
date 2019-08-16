@@ -1,7 +1,7 @@
 $border-color: #333;
 $border-radius: 4px;
 .r-popover-hover-top {
-  padding-top:10px;
+  padding-top:20px;
   margin-top: -10px;
   display: inline-flex;
 }
@@ -30,12 +30,12 @@ $border-radius: 4px;
 }
 .content-wrapper {
   position: absolute;
-  border: 1px solid $border-color;
   border-radius: $border-radius;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.07);
+  filter: drop-shadow(3px 0px 7px rgba(0, 0, 0, 0.17));
   background: white;
   padding: .5em 1em;
-  max-width: 20em;
+  max-width: 250px;
   word-break: break-all;
   &::before, &::after {
     content: '';
@@ -49,10 +49,9 @@ $border-radius: 4px;
     transform: translateY(-100%);
     margin-top: -10px;
     &::before, &::after {
-      left: 10px;
+      left: calc(50% - 10px);
     }
     &::before {
-      border-top-color: black;
       border-bottom: none;
       top: 100%;
     }
@@ -65,11 +64,10 @@ $border-radius: 4px;
   &.position-bottom {
     margin-top: 10px;
     &::before, &::after {
-      left: 10px;
+      left: 50%;
     }
     &::before {
       border-top: none;
-      border-bottom-color: black;
       bottom: 100%;
     }
     &::after {
@@ -86,7 +84,6 @@ $border-radius: 4px;
       top: 50%;
     }
     &::before {
-      border-left-color: black;
       border-right: none;
       left: 100%;
     }
@@ -103,7 +100,6 @@ $border-radius: 4px;
       top: 50%;
     }
     &::before {
-      border-right-color: black;
       border-left: none;
       right: 100%;
     }

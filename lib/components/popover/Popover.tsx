@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom'
 import './popover.scss';
 import combineClass from '../../helpers/combineClass';
@@ -61,18 +61,18 @@ const Popover: React.FC<PopoverProps> = ({
     let triRef = triggerRef.current
     let conRef = contentRef.current
     if (triRef && conRef) {
-      const { width, height, top, left } = triRef.getBoundingClientRect()
-      const { height: height2 } = conRef.getBoundingClientRect()
+      const { height: triHeight, width: triWidth, top: triTop, left: triLeft } = triRef.getBoundingClientRect()
+      const { height: conHeight, width: conWidth } = conRef.getBoundingClientRect()
       let positions = {
-        top: { top: top + window.scrollY, left: left + window.scrollX, },
-        bottom: { top: top + height + window.scrollY, left: left + window.scrollX },
+        top: { top: triTop + window.scrollY, left: triLeft + window.scrollX-0.5*conWidth+30 },
+        bottom: { top: triTop + triHeight + window.scrollY, left: triLeft + window.scrollX-0.5*conWidth+30},
         left: {
-          top: top + window.scrollY + (height - height2) / 2,
-          left: left + window.scrollX
+          top: triTop + window.scrollY + (triHeight - conHeight) / 2,
+          left: triLeft + window.scrollX
         },
         right: {
-          top: top + window.scrollY + (height - height2) / 2,
-          left: left + window.scrollX + width
+          top: triTop + window.scrollY + (triHeight - conHeight) / 2,
+          left: triLeft + window.scrollX + triWidth
         },
       }
       conRef.style.left = positions[position!].left + 'px'
@@ -102,7 +102,11 @@ const Popover: React.FC<PopoverProps> = ({
       }
     }
   }
+  useLayoutEffect(() => {
+    setPosition()
+  })
   useEffect(() => {
+    visible ? document.addEventListener('click', onClickDocument) : document.addEventListener('click', onClickDocument)
     if (trigger === 'hover') {
       const conRef: HTMLDivElement | null = contentRef.current
       if (conRef) {
@@ -111,8 +115,6 @@ const Popover: React.FC<PopoverProps> = ({
       }
     }
     onVisibleChange && onVisibleChange(visible)
-    setPosition()
-    visible ? document.addEventListener('click', onClickDocument) : document.addEventListener('click', onClickDocument)
     addPopoverListeners()
     return () => {
       removePopoverListeners()
