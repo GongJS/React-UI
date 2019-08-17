@@ -11,5 +11,7 @@ export { default as SubMenu } from './components/menu/SubMenu'
 export { default as Collapse } from './components/collapse/Collapse'
 export { default as CollapseItem } from './components/collapse/CollapseItem'
 export { default as Carousel } from './components/carousel/Carousel'
+export { default as Cascader } from './components/cascader/Cascader'
+export { default as CascaderItem } from './components/cascader/CascaderItem'
 export { default as Sticky } from './components/sticky/Sticky'
 export { Layout, Header, Content, Footer, Aside } from './components/layout/layout';

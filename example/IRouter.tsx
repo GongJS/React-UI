@@ -5,6 +5,7 @@ import Icon from './pages/icon/icon.demo';
 import Button from './pages/button/button.demo';
 import Collapse from './pages/collapse/collapse.demo'
 import Carousel from './pages/carousel/carousel.demo'
+import Cascader from './pages/cascader/cascader.demo'
 import Menu from './pages/menu/menu.demo'
 import Message from './pages/message/message.demo';
 import Modal from './pages/modal/modal.demo';
@@ -25,6 +26,7 @@ export default class IRouter extends Component {
                 <Route path={`${match.url}/button`} component={Button} />
                 <Route path={`${match.url}/collapse`} component={Collapse} />
                 <Route path={`${match.url}/carousel`} component={Carousel} />
+                <Route path={`${match.url}/cascader`} component={Cascader} />
                 <Route path={`${match.url}/menu`} component={Menu} />
                 <Route path={`${match.url}/message`} component={Message} />
                 <Route path={`${match.url}/modal`} component={Modal} />

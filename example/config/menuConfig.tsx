@@ -20,6 +20,10 @@ export const menuList: Array<any> = [
         key: '/components/carousel'
       },
       {
+        title: 'Cascader 级联选择',
+        key: '/components/cascader'
+      },
+      {
         title: 'Message 全局提示',
         key: '/components/message'
       },

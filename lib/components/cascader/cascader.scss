@@ -1,0 +1,101 @@
+$border-color-hover: #666;
+$border-color: #999;
+$border-color-light: lighten($border-color, 30%);
+$border-radius: 4px;
+$box-shadow-color: rgba(0, 0, 0, 0.5);
+$button-active-bg: #eee;
+$button-bg: white;
+$button-height: 32px;
+$color: #333;
+$font-size: 14px;
+$input-height: 32px;
+$red: #f1453d;
+.box-shadow {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+.r-cascader {
+  position: relative;
+  display: inline-flex;
+  .trigger {
+    position: relative;
+    height: $input-height;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1em;
+    min-width: 10em;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 14px;
+    cursor: pointer;
+    &.active {
+      border-color: #40a9ff;
+    }
+    span {
+      margin-right: 10px;
+    }
+    .icon {
+      position: absolute;
+      right: 5px;
+      top: 28%;
+      &.open {
+        outline: none;
+        transition: 0.3s;
+        transition-property: all;
+        transform: rotate(-90deg) ;
+      }
+      &.close {
+        outline: none;
+        transition: 0.3s;
+        transition-property: all;
+        transform: rotate(90deg) ;
+      }
+    }
+  }
+  .popover-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    display: flex;
+    margin-top: 8px;
+    @extend .box-shadow;
+  }
+  .r-cascader-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100px;
+    .left {
+      height: 100%;
+      padding: 0;
+    }
+    .right {
+      height: 100%;
+      border-left: 1px solid $border-color-light;
+    }
+    .label {
+      white-space: nowrap;
+      padding: 0.3em 1em;
+      display: flex;
+      align-items: center;
+      color: #314659;
+      &.disabled {
+        color: rgba(0, 0, 0, 0.25);
+        cursor: not-allowed;
+      }
+      &:hover:not(.disabled) {
+        background-color: #e6f7ff;
+      }
+      .open {
+        font-weight: 600;
+        background:#fafafa;
+        transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      }
+      .close {
+        font-weight: 400;
+        transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      }
+    }
+  }
+}
