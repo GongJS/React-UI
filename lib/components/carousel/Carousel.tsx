@@ -61,6 +61,7 @@ const Carousel: React.FC<CarouselProps> = ({
     dotsEle[index].classList.add('active')
   }
   const pre = () => {
+    console.log(2222)
     let index = getPreIndex()
     setActiveDot(index)
     play(index, getNextIndex())
@@ -98,24 +99,23 @@ const Carousel: React.FC<CarouselProps> = ({
     }, interval)
   }
   const play = (toIndex: number, fromIndex: number) => {
-    if (endFlag) {
-      const onFinsh = () => {
-        () => {
-          panelsEle.forEach(panel => panel.style.zIndex = '0')
-          panelsEle[toIndex].style.zIndex = '10'
-          endFlag = true
-        }
-      }
-      if (type === 'fade') {
-        fade(panelsEle[fromIndex], panelsEle[toIndex], onFinsh)
-      }
-      if (type === 'slide') {
-        slide(panelsEle[fromIndex], panelsEle[toIndex], onFinsh)
-      }
+    const onFinsh = () => {
+      panelsEle.forEach(panel => panel.style.zIndex = '0')
+      panelsEle[toIndex].style.zIndex = '10'
+      endFlag = true
+    }
+    if (type === 'fade') {
+      fade(panelsEle[fromIndex], panelsEle[toIndex], onFinsh)
+    }
+    if (type === 'slide') {
+      slide(panelsEle[fromIndex], panelsEle[toIndex], onFinsh)
     }
   }
   // slide动画
   const slide = (fromNode: HTMLElement, toNode: HTMLElement, onFinsh: () => any) => {
+    if (!endFlag) {
+      return
+    }
     endFlag = false
     let width = parseInt(getComputedStyle(fromNode).width!)
     let offsetX = width
@@ -148,6 +148,9 @@ const Carousel: React.FC<CarouselProps> = ({
   }
   // fade动画
   const fade = (fromNode: HTMLElement, toNode: HTMLElement, onFinsh: () => any) => {
+    if (!endFlag) {
+      return
+    }
     endFlag = false
     let opacityOffset1 = 1
     let opacityOffset2 = 0

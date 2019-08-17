@@ -6,16 +6,16 @@ export default () => {
     <div>
       <Carousel height='400px' style={{maxWidth:'800px', marginBottom:'20px'}}>
         <div>
-          <img src="../../assets/images/one.jpg" />
+          <img src="./assets/images/one.jpg" />
         </div>
         <div>
-          <img src="../../assets/images/two.jpg" />
+          <img src="./assets/images/two.jpg" />
         </div>
         <div>
-          <img src="../../assets/images/three.jpg" />
+          <img src="./assets/images/three.jpg" />
         </div>
         <div>
-          <img src="../../assets/images/four.jpg" />
+          <img src="./assets/images/four.jpg" />
         </div>
       </Carousel>
 
