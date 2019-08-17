@@ -61,7 +61,6 @@ const Carousel: React.FC<CarouselProps> = ({
     dotsEle[index].classList.add('active')
   }
   const pre = () => {
-    console.log(2222)
     let index = getPreIndex()
     setActiveDot(index)
     play(index, getNextIndex())
