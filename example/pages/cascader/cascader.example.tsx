@@ -38,7 +38,7 @@ export default () => {
     },
   ];
   return (
-    <div style={{ zIndex: 100 }}>
+    <div style={{ marginBottom: '100px' }}>
       <Cascader options={options} />
     </div>
   )
