@@ -4,7 +4,7 @@ import { Carousel } from '../../../lib';
 export default () => {
   return (
     <div>
-      <Carousel autoplay={false} height='400px' style={{maxWidth:'800px', marginBottom:'20px'}}>
+      <Carousel height='400px' style={{maxWidth:'800px', marginBottom:'20px'}}>
         <div>
           <img src="../../assets/images/one.jpg" />
         </div>
@@ -19,7 +19,7 @@ export default () => {
         </div>
       </Carousel>
 
-      <Carousel type="zoom" autoplay={false} style={{maxWidth:'800px', marginBottom:'20px'}}>
+      <Carousel type="slide" autoplay={false} style={{maxWidth:'800px', marginBottom:'20px'}}>
         <div>
           <img src="../../assets/images/one.jpg" />
         </div>

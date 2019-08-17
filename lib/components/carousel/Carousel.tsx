@@ -23,7 +23,7 @@ function getLetter(n: number) {
 }
 
 interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
-  type?: 'fade' | 'zoom'
+  type?: 'fade' | 'slide'
   autoplay?: boolean
   interval?: number
   height?: string
@@ -51,7 +51,7 @@ const Carousel: React.FC<CarouselProps> = ({
     if (index === -1) { return }
     let lastIndex = getActiveIndex()
     setActiveDot(index)
-    slide(index, lastIndex)
+    play(index, lastIndex)
   }
   const setActiveDot = (index: number) => {
     if (!endFlag) {
@@ -63,7 +63,7 @@ const Carousel: React.FC<CarouselProps> = ({
   const pre = () => {
     let index = getPreIndex()
     setActiveDot(index)
-    slide(index, getNextIndex())
+    play(index, getNextIndex())
     if (autoplay) {
       clearInterval(timer)
       startAutoPlay()
@@ -72,7 +72,7 @@ const Carousel: React.FC<CarouselProps> = ({
   const next = () => {
     let index = getNextIndex()
     setActiveDot(index)
-    slide(index, getPreIndex())
+    play(index, getPreIndex())
     if (autoplay) {
       clearInterval(timer)
       startAutoPlay()
@@ -97,85 +97,84 @@ const Carousel: React.FC<CarouselProps> = ({
       next()
     }, interval)
   }
-  const slide = (toIndex: number, fromIndex: number) => {
-    animation(panelsEle[toIndex], panelsEle[fromIndex], () => {
-      panelsEle.forEach(panel => panel.style.zIndex = '0')
-      panelsEle[toIndex].style.zIndex = '10'
-      endFlag = true
-    })
+  const play = (toIndex: number, fromIndex: number) => {
+    if (endFlag) {
+      const onFinsh = () => {
+        () => {
+          panelsEle.forEach(panel => panel.style.zIndex = '0')
+          panelsEle[toIndex].style.zIndex = '10'
+          endFlag = true
+        }
+      }
+      if (type === 'fade') {
+        fade(panelsEle[fromIndex], panelsEle[toIndex], onFinsh)
+      }
+      if (type === 'slide') {
+        slide(panelsEle[fromIndex], panelsEle[toIndex], onFinsh)
+      }
+    }
   }
-  const animation = (to: HTMLElement, from: HTMLElement, onFinish: () => any) => {
-    if (!endFlag) {
-      return
-    }
+  // slide动画
+  const slide = (fromNode: HTMLElement, toNode: HTMLElement, onFinsh: () => any) => {
     endFlag = false
-    const css = (node: HTMLElement, styles: { [key: string]: string | number }) => Object.entries(styles)
-      .forEach(([key, value]) => {
-        node.style[key] = value
-      })
-    const reset = (node: HTMLElement) => {
-      node.style.opacity = ''
-      node.style.zIndex = ''
-      node.style.transition = ''
-      node.style.scale = ''
-      node.style.transform = ''
+    let width = parseInt(getComputedStyle(fromNode).width!)
+    let offsetX = width
+    let offset1 = 0
+    let offset2 = 0
+    let step = 25
+    fromNode.style.zIndex = '10'
+    toNode.style.zIndex = '10'
+    toNode.style.left = width + 'px'
+    function fromNodeAnimation() {
+      if (offset1 < offsetX) {
+        fromNode.style.left = parseInt(getComputedStyle(fromNode).left!) - step + 'px'
+        offset1 += step
+        requestAnimationFrame(fromNodeAnimation)
+      }
     }
-
-    // fade动画效果
-    if (type === 'fade') {
-      const during = 500
-      css(from, {
-        opacity: 1,
-        transition: `all ${during / 1000}s`,
-        zIndex: 10
-      })
-      css(to, {
-        opacity: 0,
-        transition: `all ${during / 1000}s`,
-        zIndex: 9
-      })
-      setTimeout(() => {
-        css(from, {
-          opacity: 0,
-          transition: `all ${during/1000}s`,
-        })
-        css(to, {
-          opacity: 1,
-          transition: `all ${during/1000}s`,
-        })              
-      }, 100)
-      setTimeout(() => {
-        reset(from)
-        reset(to)
-        onFinish && onFinish()
-      }, during)
+    function toNodeAnimation() {
+      if (offset2 < offsetX) {
+        toNode.style.left = parseInt(getComputedStyle(toNode).left!) - step + 'px'
+        offset2 += step
+        requestAnimationFrame(toNodeAnimation)
+      } else {
+        onFinsh()
+        fromNode.style.left = '0'
+        toNode.style.left = '0'
+      }
     }
-
-    // zoom动画效果
-    if (type === 'zoom') {
-      const scale = 5
-      const during = 1000
-      css(from, {
-        opacity: 1,
-        transform: `scale(1)`,
-        transition: `all ${during / 1000}s`,
-        zIndex: 10
-      })
-      css(to, {
-        zIndex: 9
-      })
-      setTimeout(() => {
-        css(from, {
-          opacity: 0,
-          transform: `scale(${scale})`
-        })
-      }, 100)
-      setTimeout(() => {
-        reset(from)
-        reset(to)
-        onFinish && onFinish()
-      }, during)
+    fromNodeAnimation()
+    toNodeAnimation()
+  }
+  // fade动画
+  const fade = (fromNode: HTMLElement, toNode: HTMLElement, onFinsh: () => any) => {
+    endFlag = false
+    let opacityOffset1 = 1
+    let opacityOffset2 = 0
+    let step = 0.04
+    fromNode.style.zIndex = '10'
+    toNode.style.zIndex = '9'
+    function fromNodeAnimation() {
+      if (opacityOffset1 > 0) {
+        opacityOffset1 -= step
+        fromNode.style.opacity = opacityOffset1.toString()
+        requestAnimationFrame(fromNodeAnimation)
+      } else {
+        fromNode.style.opacity = '0'
+      }
     }
+    function toNodeAnimation() {
+      if (opacityOffset2 < 1) {
+        opacityOffset2 += step
+        toNode.style.opacity = opacityOffset2.toString()
+        requestAnimationFrame(toNodeAnimation)
+      } else {
+        toNode.style.opacity = '1'
+        onFinsh()
+      }
+    }
+    fromNodeAnimation()
+    toNodeAnimation()
   }
 
   useEffect(() => {
