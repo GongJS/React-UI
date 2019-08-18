@@ -72,7 +72,7 @@ const CollapseItem: React.FC<CollapseItemProps> = ({
         }}
         onExiting={(el: HTMLDivElement) => {
           el.style.height = '0'
-          el.style.padding = '0'
+          el.style.paddingBottom = '0'
           el.style.opacity = '0'
           el.style.transition = 'all 0.3s ease'
         }}

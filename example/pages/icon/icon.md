@@ -1,8 +1,7 @@
-# API
+# Icon 图标
+`Icon` 集成了 `手机淘宝图标库` 图标,更多的图标请查看[官方图标库。](https://www.iconfont.cn/collections/detail?spm=a313x.7781069.1998910419.d9df05512&cid=33)
 
-|    属性    |   说明   |    类型    |  默认值  | 是否必须 |
-| --------- | ------- | --------- | ------- | -------  |
-| name    | 名称 |  string   | -         | 是 |
-| width   | 宽度 |  string   | '1.2em'   | 否 |
-| height  | 高度 |  string   | '1.2em'   | 否 |
-| color   | 颜色 |  string   | - | 否 |
+# 何时使用
+需要图标来展示内容
+
+# 代码示例

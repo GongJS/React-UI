@@ -1,36 +1,81 @@
-import React, { Fragment, useState } from 'react';
-import CarouselExample from './carousel.example';
-import CodeEditor from '../../CodeEditor';
+import React, { Fragment } from 'react';
+import CodeCard from '../../CodeCard'
+import Carousel from '../../../lib/components/carousel/Carousel'
 import ReactMarkdown from 'react-markdown';
 
-const editorStyle = {
-  marginTop: 20,
-  width: 40,
-  height: 40,
-  display: 'flex',
-  borderRadius: '50%',
-  justifyContent: 'center',
-  alignItems: 'center',
-  opacity: 0.3,
-  cursor: 'pointer',
-  backgroundColor: '#ccc',
-  fontSize: 12
-};
-
 export default () => {
-  const [y, setY] = useState(1);
-  const [rawCode, setRawCode] = useState(require('!!raw-loader!./carousel.example.tsx').default);
   return <Fragment>
-    <CarouselExample />
-    {/* <Button
-      onClick={() => setY(y === 0 ? 1 : 0)}
-      style={{ marginTop: 20 }}
-    >代码展示</Button> */}
-    <span
-      onClick={() => setY(y === 0 ? 1 : 0)}
-      style={editorStyle}
-    >&lt;&nbsp;&gt;</span>
-    <CodeEditor scaleY={y} value={rawCode} setRawCode={setRawCode} />
-    <ReactMarkdown source={require('!!raw-loader!./carousel.md').default} className="md"/>
+    <ReactMarkdown source={require('!!raw-loader!./carousel.md').default} className="md" />
+    <CodeCard
+      title="基础用法"
+      summary="最基本的用法。"
+      code={`
+      <Carousel height='400px' style={{ maxWidth: '800px', marginBottom: '20px' }}>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/ST7WLjAg3Ew2VUh.jpg" />
+        </div>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/enKRFq4c2itrWxA.jpg" />
+        </div>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/7pSJyjAlPqkZWCY.jpg" />
+        </div>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/YUnfpzXlSrc1Nb3.jpg" />
+        </div>
+      </Carousel>`
+      }
+    >
+      <Carousel height='400px' style={{ maxWidth: '800px', marginBottom: '20px' }}>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/ST7WLjAg3Ew2VUh.jpg" />
+        </div>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/enKRFq4c2itrWxA.jpg" />
+        </div>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/7pSJyjAlPqkZWCY.jpg" />
+        </div>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/YUnfpzXlSrc1Nb3.jpg" />
+        </div>
+      </Carousel>
+    </CodeCard>
+    <CodeCard
+      title="自动播放"
+      summary="可关闭自动播放，切换不同的动画"
+      code={`   
+      <Carousel type="slide" autoplay={false} style={{ maxWidth: '800px', marginBottom: '20px' }}>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/ST7WLjAg3Ew2VUh.jpg" />
+        </div>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/enKRFq4c2itrWxA.jpg" />
+        </div>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/7pSJyjAlPqkZWCY.jpg" />
+        </div>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/YUnfpzXlSrc1Nb3.jpg" />
+        </div>
+      </Carousel>`
+      }
+    >
+      <Carousel type="slide" autoplay={false} style={{ maxWidth: '800px', marginBottom: '20px' }}>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/ST7WLjAg3Ew2VUh.jpg" />
+        </div>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/enKRFq4c2itrWxA.jpg" />
+        </div>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/7pSJyjAlPqkZWCY.jpg" />
+        </div>
+        <div>
+          <img src="https://i.loli.net/2019/08/17/YUnfpzXlSrc1Nb3.jpg" />
+        </div>
+      </Carousel>
+    </CodeCard>
+    <ReactMarkdown source={require('!!raw-loader!./api.md').default} className="md" />
   </Fragment>
 }

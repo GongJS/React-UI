@@ -4,8 +4,7 @@ import combineClass from '../../helpers/combineClass';
 interface IconProps extends React.SVGAttributes<SVGElement> {
   name: string
   color?: string
-  width?: string
-  height?: string
+  size?: string
   style?: React.CSSProperties
 }
 
@@ -13,15 +12,14 @@ const Icon: React.FC<IconProps> = ({
   className,
   name,
   style,
-  width,
-  height,
+  size,
   color,
   ...restProps
 }) => {
   return (
     <svg 
       className={combineClass('r-icon', className)} 
-      style={{...style, height, width}}
+      style={{...style, height: size, width:size}}
       {...restProps}
     >
       <use xlinkHref={`#icon-${name}`} fill={color}></use>
@@ -29,8 +27,7 @@ const Icon: React.FC<IconProps> = ({
   )
 }
 Icon.defaultProps = {
-  width: '1.2em',
-  height: '1.2em'
+  size: '1.2em',
 }
 Icon.displayName = 'Icon'
 export default Icon;
