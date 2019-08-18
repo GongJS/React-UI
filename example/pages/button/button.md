@@ -1,12 +1,7 @@
-# API
+# Button 按钮
+点击以开始即时操作。
 
-|    属性    |   说明   |    类型    |  默认值  | 是否必须 |
-| --------- | ------- | --------- | ------- | -------  |
-| type    | 按键类型 |  primary / success / reverse / danger | - | 否 |
-| plain   | 是否朴素按钮  |  boolean   | false   | 否 |
-| circle  | 是否圆形按钮  |  boolean   | false   | 否 |
-| loading | 是否加载中状态 |  boolean   | false   | 否 |
-| disabled | 是否禁用状态 |  boolean   | false   | 否 |
-| ripple | 是否开启水波动画 |  boolean   | true   | 否 |
-| icon | 图标类名 |  string   | -   | 否 |
-| iconPosition | 图标位置 |  left / right   | left   | 否 |
+# 何时使用
+响应用户点击行为，触发相应业务逻辑。
+
+# 代码示例

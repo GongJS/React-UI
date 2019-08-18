@@ -1,36 +1,105 @@
-import React, { Fragment, useState } from 'react';
-import CollapseExample from './collapse.example';
-import CodeEditor from '../../CodeEditor';
+import React, { Fragment } from 'react';
+import CodeCard from '../../CodeCard'
+import Collapse from '../../../lib/components/collapse/Collapse'
+import CollapseItem from '../../../lib/components/collapse/CollapseItem'
 import ReactMarkdown from 'react-markdown';
 
-const editorStyle = {
-  marginTop: 20,
-  width: 40,
-  height: 40,
-  display: 'flex',
-  borderRadius: '50%',
-  justifyContent: 'center',
-  alignItems: 'center',
-  opacity: 0.3,
-  cursor: 'pointer',
-  backgroundColor: '#ccc',
-  fontSize: 12
-};
-
 export default () => {
-  const [y, setY] = useState(1);
-  const [rawCode, setRawCode] = useState(require('!!raw-loader!./collapse.example.tsx').default);
+  const handleChange = (expandKeys: string[]) => {
+    console.log(expandKeys)
+  }
   return <Fragment>
-    <CollapseExample />
-    {/* <Button
-      onClick={() => setY(y === 0 ? 1 : 0)}
-      style={{ marginTop: 20 }}
-    >代码展示</Button> */}
-    <span
-      onClick={() => setY(y === 0 ? 1 : 0)}
-      style={editorStyle}
-    >&lt;&nbsp;&gt;</span>
-    <CodeEditor scaleY={y} value={rawCode} setRawCode={setRawCode} />
-    <ReactMarkdown source={require('!!raw-loader!./collapse.md').default} className="md"/>
+    <ReactMarkdown source={require('!!raw-loader!./collapse.md').default} className="md" />
+    <CodeCard
+      title="折叠面板"
+      summary="可同时展开多个面板。"
+      code={`
+      <Collapse style={{marginBottom:'20px'}} onChange={(expandKeys) => handleChange(expandKeys)}>
+        <CollapseItem title="Header1" key="1" disabled>
+          <div>Content of CollapseItem 1</div>
+        </CollapseItem>
+        <CollapseItem title="Header2" key="2">
+          <div>Content of CollapseItem 2</div>
+        </CollapseItem>
+        <CollapseItem title="Header3" key="3">
+          <div>Content of CollapseItem 3</div>
+        </CollapseItem>
+      </Collapse>`
+      }
+    >
+      <Collapse style={{ marginBottom: '20px' }} onChange={(expandKeys) => handleChange(expandKeys)}>
+        <CollapseItem title="Header1" key="1" disabled>
+          <div>Content of CollapseItem 1</div>
+        </CollapseItem>
+        <CollapseItem title="Header2" key="2">
+          <div>Content of CollapseItem 2</div>
+        </CollapseItem>
+        <CollapseItem title="Header3" key="3">
+          <div>Content of CollapseItem 3</div>
+        </CollapseItem>
+      </Collapse>
+    </CodeCard>
+
+    <CodeCard
+      title="手风琴模式"
+      summary="只能同时展开一个面板。"
+      code={`
+      <Collapse style={{marginBottom:'20px'}} accordion >
+      <CollapseItem title="Header1" key="1" >
+        <div>Content of CollapseItem 1</div>
+      </CollapseItem>
+      <CollapseItem title="Header2" key="2">
+        <div>Content of CollapseItem 2</div>
+      </CollapseItem>
+      <CollapseItem title="Header3" key="3">
+        <div>Content of CollapseItem 3</div>
+      </CollapseItem>
+    </Collapse>`
+      }
+    >
+      <Collapse style={{ marginBottom: '20px' }} accordion >
+        <CollapseItem title="Header1" key="1" >
+          <div>Content of CollapseItem 1</div>
+        </CollapseItem>
+        <CollapseItem title="Header2" key="2">
+          <div>Content of CollapseItem 2</div>
+        </CollapseItem>
+        <CollapseItem title="Header3" key="3">
+          <div>Content of CollapseItem 3</div>
+        </CollapseItem>
+      </Collapse>
+    </CodeCard>
+
+    <CodeCard
+      title="默认打开面板"
+      summary="默认打开某些面板"
+      code={`
+      <Collapse style={{marginBottom:'20px'}} defaultSelectedKeys={['2']}>
+        <CollapseItem title="Header1" key="1" >
+          <div>Content of CollapseItem 1</div>
+        </CollapseItem>
+        <CollapseItem title="Header2" key="2">
+          <div>Content of CollapseItem 2</div>
+        </CollapseItem>
+        <CollapseItem title="Header3" key="3">
+          <div>Content of CollapseItem 3</div>
+        </CollapseItem>
+      </Collapse>`
+      }
+    >
+      <Collapse style={{ marginBottom: '20px' }} defaultSelectedKeys={['2']}>
+        <CollapseItem title="Header1" key="1" >
+          <div>Content of CollapseItem 1</div>
+        </CollapseItem>
+        <CollapseItem title="Header2" key="2">
+          <div>Content of CollapseItem 2</div>
+        </CollapseItem>
+        <CollapseItem title="Header3" key="3">
+          <div>Content of CollapseItem 3</div>
+        </CollapseItem>
+      </Collapse>
+    </CodeCard>
+
+    <ReactMarkdown source={require('!!raw-loader!./api.md').default} className="md" />
   </Fragment>
 }

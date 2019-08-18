@@ -1,36 +1,88 @@
-import React, { Fragment, useState } from 'react';
-import PopoverExample from './popover.example';
-import CodeEditor from '../../CodeEditor';
+import React, { Fragment } from 'react';
+import CodeCard from '../../CodeCard'
+import Popover from '../../../lib/components/popover/Popover'
+import Button from '../../../lib/components/button/Button'
 import ReactMarkdown from 'react-markdown';
 
-const editorStyle = {
-  marginTop: 20,
-  width: 40,
-  height: 40,
-  display: 'flex',
-  borderRadius: '50%',
-  justifyContent: 'center',
-  alignItems: 'center',
-  opacity: 0.3,
-  cursor: 'pointer',
-  backgroundColor: '#ccc',
-  fontSize: 12
-};
-
 export default () => {
-  const [y, setY] = useState(1);
-  const [rawCode, setRawCode] = useState(require('!!raw-loader!./popover.example.tsx').default);
+  const content = (
+    <div>
+      <p>you can say something...</p>
+    </div>
+  );
+
   return <Fragment>
-    <PopoverExample />
-    {/* <Button
-      onClick={() => setY(y === 0 ? 1 : 0)}
-      style={{ marginTop: 20 }}
-    >代码展示</Button> */}
-    <span
-      onClick={() => setY(y === 0 ? 1 : 0)}
-      style={editorStyle}
-    >&lt;&nbsp;&gt;</span>
-    <CodeEditor scaleY={y} value={rawCode} setRawCode={setRawCode} />
-    <ReactMarkdown source={require('!!raw-loader!./popover.md').default} className="md"/>
+    <ReactMarkdown source={require('!!raw-loader!./popover.md').default} className="md" />
+    <CodeCard
+      title="hover触发"
+      summary="支持四个方向。"
+      code={` 
+      <div style={{ marginBottom: '50px' }}>
+        <Popover content={content} position="left" wrapperStyle={{ marginRight: '20px' }}>
+          <Button type="primary">Left</Button>
+        </Popover>
+        <Popover content={content} wrapperStyle={{ marginRight: '20px' }}>
+          <Button type="success">Top</Button>
+        </Popover>
+        <Popover content={content} position="bottom" wrapperStyle={{ marginRight: '20px' }}>
+          <Button type="reverse">Bottom</Button>
+        </Popover>
+        <Popover content={content} position="right">
+          <Button type="danger">Right</Button>
+        </Popover>
+      </div>`
+      }
+    >
+      <div style={{ marginBottom: '50px' }}>
+        <Popover content={content} position="left" wrapperStyle={{ marginRight: '20px' }}>
+          <Button type="primary">Left</Button>
+        </Popover>
+        <Popover content={content} wrapperStyle={{ marginRight: '20px' }}>
+          <Button type="success">Top</Button>
+        </Popover>
+        <Popover content={content} position="bottom" wrapperStyle={{ marginRight: '20px' }}>
+          <Button type="reverse">Bottom</Button>
+        </Popover>
+        <Popover content={content} position="right">
+          <Button type="danger">Right</Button>
+        </Popover>
+      </div>
+    </CodeCard>
+    <CodeCard
+      title="click触发"
+      summary="支持四个方向。"
+      code={` 
+      <div style={{ marginBottom: '50px' }}>
+      <Popover content={content} position="left" wrapperStyle={{ marginRight: '20px' }} trigger="click">
+        <Button type="primary">Left</Button>
+      </Popover>
+      <Popover content={content} wrapperStyle={{ marginRight: '20px' }} trigger="click">
+        <Button type="success">Top</Button>
+      </Popover>
+      <Popover content={content} position="bottom" wrapperStyle={{ marginRight: '20px' }} trigger="click">
+        <Button type="reverse">Bottom</Button>
+      </Popover>
+      <Popover content={content} position="right"  trigger="click">
+        <Button type="danger">Right</Button>
+      </Popover>
+    </div>`
+      }
+    >
+      <div style={{ marginBottom: '50px' }}>
+        <Popover content={content} position="left" wrapperStyle={{ marginRight: '20px' }} trigger="click">
+          <Button type="primary">Left</Button>
+        </Popover>
+        <Popover content={content} wrapperStyle={{ marginRight: '20px' }} trigger="click">
+          <Button type="success">Top</Button>
+        </Popover>
+        <Popover content={content} position="bottom" wrapperStyle={{ marginRight: '20px' }} trigger="click">
+          <Button type="reverse">Bottom</Button>
+        </Popover>
+        <Popover content={content} position="right" trigger="click">
+          <Button type="danger">Right</Button>
+        </Popover>
+      </div>
+    </CodeCard>
+    <ReactMarkdown source={require('!!raw-loader!./api.md').default} className="md" />
   </Fragment>
 }

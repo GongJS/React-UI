@@ -1,36 +1,56 @@
-import React, { Fragment, useState } from 'react';
-import IconExample from './icon.example';
-import CodeEditor from '../../CodeEditor';
+import React, { Fragment} from 'react';
+import CodeCard from '../../CodeCard'
+import Icon from '../../../lib/components/icon/Icon'
 import ReactMarkdown from 'react-markdown';
 
-const editorStyle = {
-  marginTop: 20,
-  width: 40,
-  height: 40,
-  display: 'flex',
-  borderRadius: '50%',
-  justifyContent: 'center',
-  alignItems: 'center',
-  opacity: 0.3,
-  cursor: 'pointer',
-  backgroundColor: '#ccc',
-  fontSize: 12
-};
-
 export default () => {
-  const [y, setY] = useState(1);
-  const [rawCode, setRawCode] = useState(require('!!raw-loader!./icon.example.tsx').default);
   return <Fragment>
-    <IconExample />
-    {/* <Button
-      onClick={() => setY(y === 0 ? 1 : 0)}
-      style={{ marginTop: 20 }}
-    >代码展示</Button> */}
-    <span
-      onClick={() => setY(y === 0 ? 1 : 0)}
-      style={editorStyle}
-    >&lt;&nbsp;&gt;</span>
-    <CodeEditor scaleY={y} value={rawCode} setRawCode={setRawCode} />
-    <ReactMarkdown source={require('!!raw-loader!./icon.md').default} className="md"/>
+    <ReactMarkdown source={require('!!raw-loader!./icon.md').default} className="md" />
+    <CodeCard
+      title="基础用法"
+      summary="通过 name、 color 、size 来设置 icon 的形状、颜色、大小。"
+      code={` 
+        <Icon name='Aa' color="#F4516C" size="30px" />
+        <Icon name="sousuo" color="#F4516C" size="30px" />
+        <Icon name="icon-checkin" color="#F4516C" size="30px" />
+        <Icon name="appreciate" color="#F4516C" size="30px" />
+        <Icon name="close" color="#F4516C" size="30px" />
+        <Icon name="check" color="#F4516C" size="30px" />`
+      }
+    >
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', }}>
+        <Icon name='Aa' color="#F4516C" size="30px" />
+        <Icon name="sousuo" color="#F4516C" size="30px" />
+        <Icon name="icon-checkin" color="#F4516C" size="30px" />
+        <Icon name="appreciate" color="#F4516C" size="30px" />
+        <Icon name="close" color="#F4516C" size="30px" />
+        <Icon name="check" color="#F4516C" size="30px" />
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', }}>
+        <Icon name='emoji' color="#36b3d6" size="30px" />
+        <Icon name="favor" color="#36b3d6" size="30px" />
+        <Icon name="loading1" color="#36b3d6" size="30px" />
+        <Icon name="location" color="#36b3d6" size="30px" />
+        <Icon name="roundcheck" color="#36b3d6" size="30px" />
+        <Icon name="roundclose" color="#36b3d6" size="30px" />
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', }}>
+        <Icon name='roundright' color="#34BFA3" size="30px" />
+        <Icon name="search" color="#34BFA3" size="30px" />
+        <Icon name="time" color="#34BFA3" size="30px" />
+        <Icon name="unfold" color="#34BFA3" size="30px" />
+        <Icon name="warn" color="#34BFA3" size="30px" />
+        <Icon name="camera" color="#34BFA3" size="30px" />
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', }}>
+        <Icon name='favorfill' color="#8C98AE" size="30px" />
+        <Icon name="roundclosefill" color="#8C98AE" size="30px" />
+        <Icon name="roundcheckfill" color="#8C98AE" size="30px" />
+        <Icon name="roundrightfill" color="#8C98AE" size="30px" />
+        <Icon name="timefill" color="#8C98AE" size="30px" />
+        <Icon name="likefill" color="#8C98AE" size="30px" />
+      </div>
+    </CodeCard>
+    <ReactMarkdown source={require('!!raw-loader!./api.md').default} className="md" />
   </Fragment>
 }

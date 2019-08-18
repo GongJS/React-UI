@@ -11,7 +11,6 @@ import Message from './pages/message/message.demo';
 import Modal from './pages/modal/modal.demo';
 import Popover from './pages/popover/popover.demo';
 import Sticky from './pages/sticky/sticky.demo';
-import Layout from './pages/layout/layout.demo';
 import App from './App';
 
 export default class IRouter extends Component {
@@ -32,10 +31,9 @@ export default class IRouter extends Component {
                 <Route path={`${match.url}/modal`} component={Modal} />
                 <Route path={`${match.url}/popover`} component={Popover} />
                 <Route path={`${match.url}/sticky`} component={Sticky} />
-                <Route path={`${match.url}/layout`} component={Layout} />
               </Switch>
             )} />
-            <Redirect to="/components/layout" />
+            <Redirect to="/components/icon" />
           </Switch>
         </App>
       </HashRouter>

@@ -1,36 +1,59 @@
-import React, { Fragment, useState } from 'react';
-import CascaderExample from './cascader.example';
-import CodeEditor from '../../CodeEditor';
+import React, { Fragment } from 'react';
+import CodeCard from '../../CodeCard'
+import Cascader from '../../../lib/components/cascader/Cascader'
 import ReactMarkdown from 'react-markdown';
 
-const editorStyle = {
-  marginTop: 20,
-  width: 40,
-  height: 40,
-  display: 'flex',
-  borderRadius: '50%',
-  justifyContent: 'center',
-  alignItems: 'center',
-  opacity: 0.3,
-  cursor: 'pointer',
-  backgroundColor: '#ccc',
-  fontSize: 12
-};
-
 export default () => {
-  const [y, setY] = useState(1);
-  const [rawCode, setRawCode] = useState(require('!!raw-loader!./cascader.example.tsx').default);
+  const options = [
+    {
+      value: 'zhejiang',
+      label: 'Zhejiang',
+      children: [
+        {
+          value: 'hangzhou',
+          label: 'Hangzhou',
+          children: [
+            {
+              value: 'xihu',
+              label: 'West Lake',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      value: 'jiangsu',
+      label: 'Jiangsu',
+      children: [
+        {
+          value: 'nanjing',
+          label: 'Nanjing',
+          disabled: true,
+          children: [
+            {
+              value: 'zhonghuamen',
+              label: 'Zhong Hua Men',
+            },
+          ],
+        },
+      ],
+    },
+  ];
   return <Fragment>
-    <CascaderExample/>
-    {/* <Button
-      onClick={() => setY(y === 0 ? 1 : 0)}
-      style={{ marginTop: 20 }}
-    >代码展示</Button> */}
-    <span
-      onClick={() => setY(y === 0 ? 1 : 0)}
-      style={editorStyle}
-    >&lt;&nbsp;&gt;</span>
-    <CodeEditor scaleY={y} value={rawCode} setRawCode={setRawCode} />
-    <ReactMarkdown source={require('!!raw-loader!./cascader.md').default} className="md"/>
+    <ReactMarkdown source={require('!!raw-loader!./cascader.md').default} className="md" />
+    <CodeCard
+      title="基础用法"
+      summary="最基本的用法。"
+      code={`
+      <div style={{ marginBottom: '100px' }}>
+        <Cascader options={options} />
+      </div>`
+      }
+    >
+      <div style={{ marginBottom: '100px' }}>
+        <Cascader options={options} />
+      </div>
+    </CodeCard>
+    <ReactMarkdown source={require('!!raw-loader!./api.md').default} className="md" />
   </Fragment>
 }
