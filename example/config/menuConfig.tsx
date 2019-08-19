@@ -15,7 +15,7 @@ export const menuList: Array<any> = [
   },
   {
     title: '布局',
-    key: '/components/common',
+    key: '/components/layout',
     children: [
       {
         title: 'Grid 栅格',
@@ -25,7 +25,7 @@ export const menuList: Array<any> = [
   },
   {
     title: '导航',
-    key: '/components/common',
+    key: '/components/nav',
     children: [
       {
         title: 'Menu 导航菜单',
@@ -39,7 +39,7 @@ export const menuList: Array<any> = [
   },
   {
     title: '数据录入',
-    key: '/components/common',
+    key: '/components/enter',
     children: [
       {
         title: 'Cascader 级联选择',
@@ -49,7 +49,7 @@ export const menuList: Array<any> = [
   },
   {
     title: '数据展示',
-    key: '/components/common',
+    key: '/components/display',
     children: [
       {
         title: 'Collapse 折叠面板',
@@ -67,7 +67,7 @@ export const menuList: Array<any> = [
   },
   {
     title: '信息反馈',
-    key: '/components/common',
+    key: '/components/callback',
     children: [
       {
         title: 'Message 全局提示',
