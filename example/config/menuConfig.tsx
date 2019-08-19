@@ -10,23 +10,65 @@ export const menuList: Array<any> = [
       {
         title: 'Button 按键',
         key: '/components/button'
+      }
+    ]
+  },
+  {
+    title: '布局',
+    key: '/components/common',
+    children: [
+      {
+        title: 'Grid 栅格',
+        key: '/components/grid'
       },
+    ]
+  },
+  {
+    title: '导航',
+    key: '/components/common',
+    children: [
+      {
+        title: 'Menu 导航菜单',
+        key: '/components/menu'
+      },
+      {
+        title: 'sticky 图钉',
+        key: '/components/sticky'
+      },
+    ]
+  },
+  {
+    title: '数据录入',
+    key: '/components/common',
+    children: [
+      {
+        title: 'Cascader 级联选择',
+        key: '/components/cascader'
+      },
+    ]
+  },
+  {
+    title: '数据展示',
+    key: '/components/common',
+    children: [
       {
         title: 'Collapse 折叠面板',
         key: '/components/collapse'
       },
       {
+        title: 'Popover 气泡卡片',
+        key: '/components/popover'
+      },
+      {
         title: 'Carousel 轮播',
         key: '/components/carousel'
-      },
-      {
-        title: 'Cascader 级联选择',
-        key: '/components/cascader'
-      },
-      {
-        title: 'Grid 栅格',
-        key: '/components/grid'
-      },
+      }
+    ]
+  },
+  {
+    title: '信息反馈',
+    key: '/components/common',
+    children: [
       {
         title: 'Message 全局提示',
         key: '/components/message'
@@ -34,19 +76,7 @@ export const menuList: Array<any> = [
       {
         title: 'Modal 对话框',
         key: '/components/modal'
-      },
-      {
-        title: 'Menu 导航菜单',
-        key: '/components/menu'
-      },
-      {
-        title: 'Popover 气泡卡片',
-        key: '/components/popover'
-      },
-      {
-        title: 'sticky 图钉',
-        key: '/components/sticky'
-      },
+      }
     ]
   }
 ]
