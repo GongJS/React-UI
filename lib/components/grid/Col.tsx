@@ -11,10 +11,10 @@ interface ColProps {
   gutter?: number
   span?: number
   offset?: number
-  sm?: Option
-  md?: Option
-  lg?: Option
-  xl?: Option
+  sm?: Option | number
+  md?: Option | number
+  lg?: Option | number
+  xl?: Option | number
   className?: string
   style?: React.CSSProperties
 }
@@ -22,25 +22,24 @@ interface ColProps {
 const Col: React.FC<ColProps> = ({
   gutter,
   span,
-  offset = 0,
+  offset = 0, 
   children,
   className,
   style,
   ...restOptions
 }) => {
   const getColClassNames = () => {
-    const classNamesArr = [`col-span-${span}`, `col-offset-${offset}`]
-    Object.keys(restOptions).forEach(key => {
-      if ((restOptions as any)[key]) {
-        const { span: optionSpan, offset: optionOffset = 0 } = (restOptions as any)[key]
-        classNamesArr.push(`${key}-col-span-${optionSpan}`)
-        classNamesArr.push(`${key}-col-offset-${optionOffset}`)
-      }
+    const classNamesArr = []
+    span && classNamesArr.push(`col-span-${span}`)
+    offset && classNamesArr.push(`col-offset-${offset}`)
+    Object.entries(restOptions).filter(v => v[1]).forEach(v => {
+      typeof v[1] === 'number' ? classNamesArr.push(`${v[0]}-col-span-${v[1]}`) : classNamesArr.push(`${v[0]}-col-span-${v[1].span}`)
+      v[1].offset && classNamesArr.push(`${v[0]}-col-offset-${v[1].offset}`)
     })
     return classNamesArr.join(' ')
   }
   return (
-    <div className={combineClass('r-col', className, `${getColClassNames()}`)} {...restOptions}
+    <div className={combineClass('r-col', className, `${getColClassNames()}`)}
       style={{
         paddingLeft: `${gutter! / 2}px`,
         paddingRight: `${gutter! / 2}px`,

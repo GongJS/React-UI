@@ -1,15 +1,11 @@
 import React, { Fragment } from 'react';
 import ReactMarkdown from 'react-markdown';
 import CodeCard from '../../CodeCard'
-import Icon from '../../../lib/components/icon/Icon'
 import Row from '../../../lib/components/grid/Row'
 import Col from '../../../lib/components/grid/Col'
 import './grid.scss'
 
 export default () => {
-  const sm = {
-    span: 4
-  }
   return <Fragment>
     <ReactMarkdown source={require('!!raw-loader!./grid.md').default} className="md" />
     <CodeCard
@@ -81,34 +77,61 @@ export default () => {
       }
     >
       <Row gutter={10}>
-        <Col span={6}><div className="example">Col-6</div></Col>
-        <Col span={6}><div className="example">Col-6</div></Col>
-        <Col span={6}><div className="example">Col-6</div></Col>
-        <Col span={6}><div className="example">Col-6</div></Col>
+        <Col span={6}><div className="gutter">Col-6</div></Col>
+        <Col span={6}><div className="gutter">Col-6</div></Col>
+        <Col span={6}><div className="gutter">Col-6</div></Col>
+        <Col span={6}><div className="gutter">Col-6</div></Col>
       </Row>
     </CodeCard>
     <CodeCard
       title="响应式布局"
       summary="span 和 offset 默认所有宽度下生效，具体设置见 Options，设置 sm、md、lg、xl 属性覆盖以实现响应式布局。"
       code={` 
-      <Row  gutter={10}>
-        <Col  span={6}>Col-6</Col>
-        <Col  span={6}>Col-6</Col>
-        <Col  span={6}>Col-6</Col>
-        <Col  span={6}>Col-6</Col>
+      <Row className="demo">
+        <Col xl={6} lg={8}>
+          Col
+        </Col>
+        <Col xl={12} lg={8}>
+          Col
+        </Col>
+        <Col xl={6} lg={8}>
+          Col
+        </Col>
+      </Row>
+      <Row>
+        <Col  xl={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+          Col
+        </Col>
+        <Col xl={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+          Col
+        </Col>
+        <Col  xl={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+          Col
+        </Col>
       </Row>`
       }
     >
       <Row className="demo">
-        <Col xl={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+        <Col xl={6} lg={8}>
           Col
-    </Col>
-        <Col xl={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+         </Col>
+        <Col xl={12} lg={8}>
           Col
-    </Col>
-        <Col xl={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+        </Col>
+        <Col xl={6} lg={8}>
           Col
-    </Col>
+        </Col>
+      </Row>
+      <Row className="example">
+        <Col className="item" xl={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+          Col
+        </Col>
+        <Col className="item" xl={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+          Col
+         </Col>
+        <Col className="item" xl={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+          Col
+        </Col>
       </Row>
     </CodeCard>
     <ReactMarkdown source={require('!!raw-loader!./api.md').default} className="md" />
