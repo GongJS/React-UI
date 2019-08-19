@@ -1,6 +1,6 @@
 {
-  "name": "R-UI",
-  "version": "1.0.12",
+  "name": "redell-ui",
+  "version": "0.0.1",
   "description": "a react ui framework",
   "main": "dist/lib/index",
   "types": "dist/lib/index",
@@ -77,6 +77,7 @@
     "react-onclickoutside": "^6.8.0",
     "react-router-dom": "^5.0.0",
     "react-transition-group": "^4.2.2",
+    "redell-ui": "^0.0.1",
     "tslint": "^5.17.0"
   },
   "config": {

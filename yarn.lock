@@ -7082,6 +7082,22 @@ realpath-native@^1.1.0:
   dependencies:
     util.promisify "^1.0.0"
 
+redell-ui@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/redell-ui/-/redell-ui-0.0.1.tgz#cc052649a4b7b4c7db1a78adb363ad75839e5822"
+  integrity sha512-ra+vKwhmo5V8vy+hP69bbyYv2IIN22lPpg4M+FrgC9cDd8mHYo1Z+pgLr4Pl07zR5d+DrSIrSXkIXYu8grikOg==
+  dependencies:
+    "@types/react-onclickoutside" "^6.7.3"
+    "@types/react-transition-group" "^4.2.2"
+    punycode "^2.1.1"
+    react "^16.8.6"
+    react-dom "^16.8.6"
+    react-markdown "^4.1.0"
+    react-onclickoutside "^6.8.0"
+    react-router-dom "^5.0.0"
+    react-transition-group "^4.2.2"
+    tslint "^5.17.0"
+
 redent@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/redent/-/redent-1.0.0.tgz#cf916ab1fd5f1f16dfb20822dd6ec7f730c2afde"
