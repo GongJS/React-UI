@@ -1,0 +1,28 @@
+.demo {
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: 20px;
+  background: #fff;
+  div {
+    &:nth-child(odd) {
+      background: #f4516c;
+    }
+    &:nth-child(even) {
+      background: #8C98AE;
+    }
+  }
+}
+.example {
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: 20px;
+  background: #f4516c;
+}

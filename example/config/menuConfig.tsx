@@ -24,6 +24,10 @@ export const menuList: Array<any> = [
         key: '/components/cascader'
       },
       {
+        title: 'Grid 栅格',
+        key: '/components/grid'
+      },
+      {
         title: 'Message 全局提示',
         key: '/components/message'
       },
