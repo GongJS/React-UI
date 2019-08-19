@@ -18,4 +18,6 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
     </div>
   )
 }
+
+ButtonGroup.displayName= 'ButtonGroup'
 export default ButtonGroup;

@@ -14,4 +14,6 @@ export { default as Carousel } from './components/carousel/Carousel'
 export { default as Cascader } from './components/cascader/Cascader'
 export { default as CascaderItem } from './components/cascader/CascaderItem'
 export { default as Sticky } from './components/sticky/Sticky'
+export { default as Row } from './components/grid/Row'
+export { default as Col } from './components/grid/Col'
 export { Layout, Header, Content, Footer, Aside } from './components/layout/layout';

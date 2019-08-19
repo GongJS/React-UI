@@ -12,13 +12,14 @@ a {
 
   &-right {
     padding: 40px;
+    padding-left: 100px;
   }
 }
 
 .c-navleft {
   min-width: 280px;
   box-sizing: border-box;
-  border-right: 1px solid #ccc;
+  border-right: 1px solid #eaecef;
   min-height: calc(100vh - 64px);
 }
 
