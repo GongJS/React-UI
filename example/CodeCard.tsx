@@ -36,7 +36,7 @@ const CodeCard :React.FC<IProps> = ({
           <span>{title}</span>
         </div>
         <div className="sub-title">
-            {summary} <Icon className={combineClass('icon', `${scaleMultiple === 1 ? 'open': 'close'}`)} name="right"  onClick={handleClick}/>
+            {summary} <Icon color="#596c8e" className={combineClass('icon', `${scaleMultiple === 1 ? 'open': 'close'}`)} name="right"  onClick={handleClick}/>
         </div>
        
         <CodeEditor scaleMultiple={scaleMultiple} value={code} ></CodeEditor>
