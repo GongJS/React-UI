@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import Icon from '../icon/Icon'
-import combineClass from '../../helpers/combineClass';
-import './collapse.scss'
 import { CSSTransition } from 'react-transition-group'
+import Icon from '../icon/Icon'
+import {combineClass} from '../../helpers/utils';
+import './collapse.scss'
 
 interface CollapseItemProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string
@@ -82,5 +82,5 @@ const CollapseItem: React.FC<CollapseItemProps> = ({
     </div>
   )
 }
-
+CollapseItem.displayName = 'CollapseItem'
 export default CollapseItem;

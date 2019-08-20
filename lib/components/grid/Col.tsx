@@ -1,5 +1,5 @@
 import React from 'react';
-import combineClass from '../../helpers/combineClass';
+import { combineClass } from '../../helpers/utils';
 import './grid.scss'
 
 interface Option {
@@ -7,7 +7,7 @@ interface Option {
   offset?: number
 }
 
-interface ColProps {
+interface ColProps extends React.HTMLAttributes<HTMLDivElement>{
   gutter?: number
   span?: number
   offset?: number
@@ -54,4 +54,5 @@ Col.displayName = 'Col'
 Col.defaultProps = {
   gutter: 0
 }
+Col.displayName='Col'
 export default Col;

@@ -1,5 +1,5 @@
 import React from 'react';
-import combineClass from '../../helpers/combineClass';
+import { combineClass } from '../../helpers/utils';
 
 interface IconProps extends React.SVGAttributes<SVGElement> {
   name: string

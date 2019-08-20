@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Icon from '../lib/components/icon/Icon'
-import combineClass from '../lib/helpers/combineClass';
+import {combineClass} from '../lib/helpers/utils';
 import CodeEditor from './CodeEditor';
 import './CodeCard.scss'
 interface IProps {

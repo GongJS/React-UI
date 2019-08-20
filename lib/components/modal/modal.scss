@@ -20,7 +20,7 @@ $mian-color: #3963bc;
     border-radius: 4px;
     min-width: 30vw;
     animation: slide-up 0.5s;
-    .r-modal-header {
+    >.r-modal-header {
       font-size: 22px;
       padding: 32px;
       color: $mian-color;
@@ -31,12 +31,12 @@ $mian-color: #3963bc;
         cursor: pointer;
       }
     }
-    .r-modal-main {
+    >.r-modal-main {
       padding-left: 70px;
       padding-right: 32px;
       min-height: 5vh;
     }
-    .r-modal-footer {
+    >.r-modal-footer {
       padding: 32px;
       display: flex;
       justify-content: flex-end;

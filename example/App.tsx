@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CHeader from './components/CHeader/CHeader.example';
 import CNavLeft from './components/CNavLeft/CNavLeft.example';
 import './style/index.scss';
-import { Layout, Aside, Header, Content } from '../lib/components/layout/layout';
+import { Layout, Aside, Header, Content } from '../lib/components/layout/Layout';
 
 export default class App extends Component {
   render() {

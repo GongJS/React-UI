@@ -29,16 +29,16 @@ export default () => {
       </Row>`
       }
     >
-      <Row className="demo">
+      <Row className="r-grid-demo1">
         <Col span={12}>Col-12</Col>
         <Col span={12}>Col-12</Col>
       </Row>
-      <Row className="demo">
+      <Row className="r-grid-demo1">
         <Col span={8}>Col-8</Col>
         <Col span={8}>Col-8</Col>
         <Col span={8}>Col-8</Col>
       </Row>
-      <Row className="demo">
+      <Row className="r-grid-demo1">
         <Col span={6}>Col-6</Col>
         <Col span={6}>Col-6</Col>
         <Col span={6}>Col-6</Col>
@@ -57,7 +57,7 @@ export default () => {
       </Row>`
       }
     >
-      <Row className="demo">
+      <Row className="r-grid-demo2">
         <Col span={4}>Col-4</Col>
         <Col span={4} offset={1}>Col-4</Col>
         <Col span={4} offset={3}>Col-4</Col>
@@ -111,7 +111,7 @@ export default () => {
       </Row>`
       }
     >
-      <Row className="demo">
+      <Row className="r-grid-demo3">
         <Col xl={6} lg={8}>
           Col
          </Col>
@@ -122,7 +122,7 @@ export default () => {
           Col
         </Col>
       </Row>
-      <Row className="example">
+      <Row className="r-grid-demo4">
         <Col className="item" xl={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
           Col
         </Col>

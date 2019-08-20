@@ -1,26 +1,7 @@
 import React, { useEffect, useLayoutEffect } from 'react';
-import './carousel.scss'
-import combineClass from '../../helpers/combineClass';
+import {combineClass, uniqueId} from '../../helpers/utils';;
 import Icon from '../icon/Icon'
-
-// 唯一ID
-let A_Z = "";
-for (let i = 65; i < 91; i++) {
-  A_Z += String.fromCharCode(i) + ",";
-}
-let A_Z_Arr = A_Z.split(',')
-function getLetter(n: number) {
-  let letterArr = []
-  for (let i = 0; i < n; i++) {
-    let val = Math.floor(Math.random() * 26);
-    if (letterArr.includes(val.toString()) === false) {
-      letterArr.push(A_Z_Arr[val])
-    } else {
-      i--;
-    }
-  }
-  return letterArr.join('')
-}
+import './carousel.scss'
 
 interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
   type?: 'fade' | 'slide'
@@ -43,7 +24,7 @@ const Carousel: React.FC<CarouselProps> = ({
   let panelsEle: NodeListOf<HTMLElement>
   let endFlag: boolean = true
   let timer: number
-  const id = getLetter(4)
+  const id = uniqueId(4)
   const panelsRef = React.createRef<HTMLDivElement>()
   const handleDotsClick = (event: any) => {
     event.stopPropagation()

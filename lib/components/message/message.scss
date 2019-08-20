@@ -24,7 +24,7 @@
   left: 50%;
   top: 30px;
   transform: translateX(-50%);
-  .r-message-container {
+  >.r-message-container {
     width: 60vw;
     font-size: 1.5vw;
     box-sizing: border-box;
@@ -37,7 +37,7 @@
     display: flex;
     align-items: center;
     animation: slide-up 0.3s forwards;
-    .content {
+    >.content {
       margin-left: 20px;
       width: 100%;
       display: flex;

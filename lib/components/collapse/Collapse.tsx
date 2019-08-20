@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import combineClass from '../../helpers/combineClass';
+import { combineClass } from '../../helpers/utils';
 import './collapse.scss'
 
 interface CollapseProps {
@@ -16,21 +16,22 @@ interface ChildProps {
   selectedKey?: string
   expandKeys?: string[]
   defaultSelectedKeys?: string[]
-  handleSelectedKey?: (key: string, event?:React.MouseEvent<HTMLElement>) => any
+  handleSelectedKey?: (key: string, event?: React.MouseEvent<HTMLElement>) => any
 }
 const Collapse: React.FC<CollapseProps> = ({
-  className, 
+  className,
   children,
   defaultSelectedKeys,
   icon,
   accordion,
   onChange,
-  ...restProps}) => {
+  ...restProps
+}) => {
   const [expandKeys, setExpandKeys] = useState<string[]>([])
   const [selectedKey, setSelectedKey] = useState<string>()
-  let event:React.MouseEvent<HTMLElement>
+  let event: React.MouseEvent<HTMLElement>
 
-  const handleSelectedKey =  (key:string, event:React.MouseEvent<HTMLElement>) => {
+  const handleSelectedKey = (key: string, event: React.MouseEvent<HTMLElement>) => {
     if (key) {
       setSelectedKey(key)
     }
@@ -45,7 +46,7 @@ const Collapse: React.FC<CollapseProps> = ({
     event = event
   }
 
-  const renderChildren = (): Array<React.ReactElement<ChildProps>>=> {
+  const renderChildren = (): Array<React.ReactElement<ChildProps>> => {
     return React.Children.map(
       children,
       (child: React.ReactElement<ChildProps>, index: number) => {
@@ -70,11 +71,11 @@ const Collapse: React.FC<CollapseProps> = ({
   }
 
   useEffect(() => {
-    onChange && onChange(expandKeys,event)
-  },[expandKeys,setExpandKeys])
-  
+    onChange && onChange(expandKeys, event)
+  }, [expandKeys, setExpandKeys])
+
   return (
-    <div className={combineClass('r-collapse',className)} {...restProps}>
+    <div className={combineClass('r-collapse', className)} {...restProps}>
       {renderChildren()}
     </div>
   )
@@ -82,7 +83,7 @@ const Collapse: React.FC<CollapseProps> = ({
 Collapse.defaultProps = {
   defaultSelectedKeys: [],
   icon: 'right',
-  accordion:false
+  accordion: false
 }
 Collapse.displayName = 'Collapse'
 export default Collapse;

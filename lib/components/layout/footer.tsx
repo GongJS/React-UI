@@ -1,18 +1,15 @@
 import React from 'react';
-import PRC from '../../helpers/prefixClass';
-import combineClass from '../../helpers/combineClass';
+import { combineClass, prefixClass } from '../../helpers/utils';
 
-interface IProps extends React.HTMLAttributes<HTMLElement> {}
+interface FooterProps extends React.HTMLAttributes<HTMLElement> {}
 
-const prefix = PRC('r-layout');
-
-const Footer: React.FunctionComponent<IProps> = ({
+const Footer: React.FunctionComponent<FooterProps> = ({
   className,
   children,
   ...restProps
 }) => {
   return (
-    <div className={combineClass(prefix('footer'), className)} {...restProps}>
+    <div className={combineClass(prefixClass('r-layout')('footer'), className)} {...restProps}>
       {children}
     </div>
   )

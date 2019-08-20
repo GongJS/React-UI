@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import MenuItem from './MenuItem'
+import { combineClass } from '../../helpers/utils';
 import Icon from '../icon/Icon'
-import combineClass from '../../helpers/combineClass';
 
 interface SubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   uniqueKey?: string

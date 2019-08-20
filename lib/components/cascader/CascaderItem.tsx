@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Icon from '../icon/Icon'
-import combineClass from '../../helpers/combineClass';
+import {combineClass} from '../../helpers/utils';
 import './cascader.scss'
 
 interface Option {
@@ -85,4 +85,5 @@ const CascaderItem: React.FC<CascaderItemProps> = ({
     </div>
   )
 }
+CascaderItem.displayName = 'CascaderItem'
 export default CascaderItem;

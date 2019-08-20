@@ -1,11 +1,11 @@
 .r-carousel {
   width: 100%;
   margin: 30px auto;
-  .panels {
+  >.panels {
     position: relative;
     height: 300px;
     overflow: hidden;
-    div {
+    >div {
       position: absolute;
       left: 0;
       z-index: 0;

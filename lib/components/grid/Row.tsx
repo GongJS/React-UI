@@ -1,8 +1,8 @@
 import React from 'react';
-import combineClass from '../../helpers/combineClass';
+import { combineClass } from '../../helpers/utils';
 import './grid.scss'
 
-interface RowProps{
+interface RowProps extends React.HTMLAttributes<HTMLDivElement>{
   gutter?: number
   className?: string
   style?: React.CSSProperties

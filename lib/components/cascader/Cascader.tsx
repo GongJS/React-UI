@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '../icon/Icon'
-import combineClass from '../../helpers/combineClass';
+import {combineClass} from '../../helpers/utils';
 import CascaderItem from './CascaderItem'
 import './cascader.scss'
 
@@ -58,7 +58,7 @@ const Cascader: React.FC<CascaderProps> = ({
     }
   })
   return (
-    <div className="r-cascader" onClick={outDivClickHandler} ref={cascaderRef}>
+    <div className="r-cascader" onClick={outDivClickHandler} ref={cascaderRef} {...restProps}>
       <div className={combineClass('trigger', `${selectedItems.length > 0 ? 'active' : ''}`, className)} onClick={() => setPopoverVisible(popoverVisible => !popoverVisible)}>
         <span>{selectedValue} </span>  <Icon className={combineClass('icon', `${popoverVisible ? 'open' : 'close'}`)} name="right" width="12px" style={{ marginLeft: '5px' }} color='#00000073' />
       </div>

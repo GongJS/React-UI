@@ -16,4 +16,4 @@ export { default as CascaderItem } from './components/cascader/CascaderItem'
 export { default as Sticky } from './components/sticky/Sticky'
 export { default as Row } from './components/grid/Row'
 export { default as Col } from './components/grid/Col'
-export { Layout, Header, Content, Footer, Aside } from './components/layout/layout';
+export { default as Layout, Header, Content, Footer, Aside } from './components/layout/Layout'

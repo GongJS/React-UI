@@ -1,9 +1,9 @@
 import React from 'react';
 import Icon from '../icon/Icon'
-import combineClass from '../../helpers/combineClass';
+import {combineClass} from '../../helpers/utils';
 import './button.scss'
 
-interface ButtonProps {
+interface ButtonProps  extends React.HTMLAttributes<HTMLElement> {
   type?: 'primary' | 'success' | 'reverse' | 'danger' | 'default' | 'plain' |undefined
   htmlType?: 'button' | 'submit' | 'reset'
   plain?: boolean
@@ -13,13 +13,6 @@ interface ButtonProps {
   icon?:string
   loading?:boolean
   iconPosition?: string
-  onClick?: React.MouseEventHandler
-  onMouseEnter?: React.MouseEventHandler
-  onMouseLeave?: React.MouseEventHandler
-  onFocus?: React.FocusEventHandler
-  onBlur?: React.FocusEventHandler
-  className?: string
-  style?: React.CSSProperties
 }
 
 const Button: React.FC<ButtonProps> = ({
