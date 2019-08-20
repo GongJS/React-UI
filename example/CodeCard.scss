@@ -21,14 +21,18 @@
       background: #fff;
       padding-left: 10px;
       padding-right: 10px;
+      color: #45526B;
+      font-weight: bold;
     }
   }
   .sub-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: #596c8e;
     .icon {
       cursor: pointer;
+      margin-left: 10px;
       &.open {
         outline: none;
         transition: 0.3s;
