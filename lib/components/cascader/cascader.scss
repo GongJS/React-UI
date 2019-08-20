@@ -16,7 +16,7 @@ $red: #f1453d;
 .r-cascader {
   position: relative;
   display: inline-flex;
-  .trigger {
+  >.trigger {
     position: relative;
     height: $input-height;
     display: inline-flex;
@@ -52,7 +52,7 @@ $red: #f1453d;
       }
     }
   }
-  .popover-wrapper {
+  >.popover-wrapper {
     position: absolute;
     top: 100%;
     left: 0;

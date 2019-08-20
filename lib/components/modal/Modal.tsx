@@ -2,8 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import ReactDom from 'react-dom';
 import Button from '../button/Button'
 import Icon from '../icon/Icon'
-import combineClass from '../../helpers/combineClass';
-import prefixClass from '../../helpers/prefixClass';
+import { combineClass, prefixClass } from '../../helpers/utils';
 import './modal.scss'
 
 interface ModalProps {
@@ -176,5 +175,5 @@ Modal.defaultProps = {
   maskClosable: true
 }
 Modal.displayName = 'Modal'
-export { modalConfirm, modalInfo, modalSuccess, modalWarning, modalError }
+export { Modal, modalConfirm, modalInfo, modalSuccess, modalWarning, modalError }
 export default Modal;

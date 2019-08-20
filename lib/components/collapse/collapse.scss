@@ -6,7 +6,7 @@ $border-radius: 4px;
   &:last-child {
     border-bottom: none;
   }
-  .r-collapseItem {
+  >.r-collapseItem {
     border-bottom: 1px solid #ebeef5;
     > .title {
       padding: 10px 20px;
@@ -41,7 +41,7 @@ $border-radius: 4px;
      &.disable {
       background: #eee;
     }
-    > .content {
+    >.content {
       padding: 0px 20px 10px 45px;
       font-size: 14px;
       color: rgba(0, 0, 0, 0.65);

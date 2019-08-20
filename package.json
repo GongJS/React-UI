@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xuzpeng/fiona.git"
+    "url": "git+https://github.com/gongjs/r-ui.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/xuzpeng/fiona/issues"
+    "url": "https://github.com/gongjs/r-ui/issues"
   },
-  "homepage": "https://github.com/xuzpeng/fiona#readme",
+  "homepage": "https://github.com/gongjs/r-ui#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
@@ -70,6 +70,7 @@
   "dependencies": {
     "@types/react-onclickoutside": "^6.7.3",
     "@types/react-transition-group": "^4.2.2",
+    "module-alias": "^2.2.1",
     "punycode": "^2.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

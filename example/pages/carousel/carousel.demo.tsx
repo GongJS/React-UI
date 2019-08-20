@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
-import CodeCard from '../../CodeCard'
-import Carousel from '../../../lib/components/carousel/Carousel'
 import ReactMarkdown from 'react-markdown';
+import CodeCard from '../../CodeCard';
+import Carousel from '../../../lib/components/carousel/Carousel';
+
 
 export default () => {
   return <Fragment>

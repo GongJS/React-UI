@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from './Button'
-import combineClass from '../../helpers/combineClass';
+import {combineClass} from '../../helpers/utils';
 import './button_group.scss'
 
 interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement>{

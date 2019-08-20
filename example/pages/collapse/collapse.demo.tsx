@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
+import ReactMarkdown from 'react-markdown';
 import CodeCard from '../../CodeCard'
 import Collapse from '../../../lib/components/collapse/Collapse'
 import CollapseItem from '../../../lib/components/collapse/CollapseItem'
-import ReactMarkdown from 'react-markdown';
+
 
 export default () => {
   const handleChange = (expandKeys: string[]) => {

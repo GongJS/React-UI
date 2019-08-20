@@ -21,6 +21,10 @@ export const menuList: Array<any> = [
         title: 'Grid 栅格',
         key: '/components/grid'
       },
+      {
+        title: 'Layout 布局',
+        key: '/components/layout'
+      },
     ]
   },
   {

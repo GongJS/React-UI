@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import combineClass from '../../helpers/combineClass';
+import { combineClass } from '../../helpers/utils';
 
 interface MenuItemProps extends React.HTMLAttributes<HTMLDivElement>{
   mode?:string

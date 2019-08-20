@@ -1,7 +1,8 @@
 import React, { Fragment} from 'react';
+import ReactMarkdown from 'react-markdown'
 import CodeCard from '../../CodeCard'
 import Icon from '../../../lib/components/icon/Icon'
-import ReactMarkdown from 'react-markdown';
+;
 
 export default () => {
   return <Fragment>

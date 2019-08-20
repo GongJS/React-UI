@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import SubMenu from './SubMenu'
 import MenuItem from './MenuItem'
+import { combineClass } from '../../helpers/utils';
 import './menu.scss'
-import combineClass from '../../helpers/combineClass';
 
 interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
 

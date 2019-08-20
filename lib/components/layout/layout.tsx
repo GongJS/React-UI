@@ -1,33 +1,31 @@
 import React, { ReactElement } from 'react';
-import PRC from '../../helpers/prefixClass';
-import combineClass from '../../helpers/combineClass';
-import Aside from './aside';
-import './layout.scss';
 import { ReactNodeArray } from 'prop-types';
+import { combineClass, prefixClass } from '../../helpers/utils';
+import Aside from './Aside';
+import Header from './Header';
+import Content from './Content';
+import Footer from './Footer';
+import './layout.scss'
 
-interface IProps extends React.HTMLAttributes<HTMLElement> {}
+interface LayoutProps extends React.HTMLAttributes<HTMLElement> {}
 
-const prefix = PRC('r-layout');
-
-const Layout: React.FunctionComponent<IProps> = ({
+const Layout: React.FunctionComponent<LayoutProps> = ({
   className,
   children,
   ...restProps
 }) => {
-  const hasAside = (children as ReactNodeArray).some(currentEle => {
-    return (currentEle as ReactElement).type === Aside;
+  const hasAside = (children as ReactNodeArray).some(ele => {
+    return (ele as ReactElement).type === Aside;
   });
-  const hasAsideClass = hasAside ? prefix('has-aside') : '';
   return (
-    <div className={combineClass(prefix(), className, hasAsideClass)} {...restProps}>
+    <div className={combineClass('r-layout', className, `${hasAside ? prefixClass('r-layout')('has-aside') : ''}`)} {...restProps}>
       {children}
     </div>
   )
 }
 
+Layout.displayName = 'Layout'
+
+export { Layout,Header, Content, Footer, Aside }
 export default Layout;
-export { Layout };
-export { default as Header } from './header';
-export { default as Content } from './content';
-export { default as Footer } from './footer';
-export { default as Aside } from './aside';
+

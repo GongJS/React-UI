@@ -1,9 +1,8 @@
 import React, { Fragment, useState } from 'react';
-import CodeCard from '../../CodeCard'
-import Modal from '../../../lib/components/modal/Modal'
-import { modalConfirm, modalInfo, modalSuccess, modalWarning, modalError } from '../../../lib/components/modal/Modal'
-import Button from '../../../lib/components/button/Button'
 import ReactMarkdown from 'react-markdown';
+import CodeCard from '../../CodeCard'
+import { Modal, modalConfirm, modalInfo, modalSuccess, modalWarning, modalError } from '../../../lib/components/modal/Modal'
+import Button from '../../../lib/components/button/Button'
 
 export default () => {
   const [visible, setVisible] = useState(false)
@@ -25,7 +24,7 @@ export default () => {
   }
   const showInfo = () => {
     modalInfo({
-      title: 'This is a notification message',
+      title: 'notification message',
       content: (
         <div>
           <p>some messages...some messages...</p>
@@ -39,7 +38,7 @@ export default () => {
   }
   const showError = () => {
     modalError({
-      title: 'This is a notification message',
+      title: 'notification message',
       content: (
         <div>
           <p>some messages...some messages...</p>
@@ -53,7 +52,7 @@ export default () => {
   }
   const showWarning = () => {
     modalWarning({
-      title: 'This is a notification message',
+      title: 'notification message',
       content: (
         <div>
           <p>some messages...some messages...</p>
@@ -67,7 +66,7 @@ export default () => {
   }
   const showSuccess = () => {
     modalSuccess({
-      title: 'This is a notification message',
+      title: 'notification message',
       content: (
         <div>
           <p>some messages...some messages...</p>

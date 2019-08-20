@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom'
+import { combineClass } from '../../helpers/utils';
 import './popover.scss';
-import combineClass from '../../helpers/combineClass';
 
 interface PopoverProps {
   content: string | React.ReactNode
@@ -24,9 +24,9 @@ const Popover: React.FC<PopoverProps> = ({
   onVisibleChange,
   children,
   className,
-  style,
   wrapperClassName,
-  wrapperStyle
+  wrapperStyle,
+  ...restProps
 }) => {
   const borderRef = React.createRef<HTMLDivElement>()
   const popoverRef = React.createRef<HTMLDivElement>()
@@ -120,7 +120,7 @@ const Popover: React.FC<PopoverProps> = ({
       removePopoverListeners()
     }
   }, [visible])
-  const popoverContent = <div ref={contentRef} className={combineClass("content-wrapper", `position-${position}`, className)} style={style}>
+  const popoverContent = <div ref={contentRef} className={combineClass("r-popover-content-wrapper", `position-${position}`, className)} {...restProps}>
     {content}
   </div>
   return (

@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import combineClass from '../../helpers/combineClass';
+import { combineClass } from '../../helpers/utils';
 import './sticky.scss'
 
 interface StickyProps extends React.HTMLAttributes<HTMLDivElement> {
   distance?: number
-
 }
 
 const Sticky: React.FC<StickyProps> = ({
   className,
-  style,
   distance,
   children,
-  ...restProp
+  ...restProps
 }) => {
   const stickyWrapper = React.createRef<HTMLDivElement>()
   const container = React.createRef<HTMLDivElement>()
@@ -51,7 +49,7 @@ const Sticky: React.FC<StickyProps> = ({
   })
   return (
     <div className="r-sticky" ref={container} >
-      <div className={combineClass('r-sticky-wrapper', className)} style={style} ref={stickyWrapper} {...restProp}>
+      <div className={combineClass('r-sticky-wrapper', className)} ref={stickyWrapper} {...restProps}>
         {children}
       </div>
     </div>

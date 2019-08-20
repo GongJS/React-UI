@@ -13,7 +13,7 @@ a react ui framework
 
 > 该`ui`库基于`react hooks` 和 `typescript` 开发; 色彩、样式的设计参考了[林间有风](https://github.com/TaleLin)团队的设计风格。
 
-文档地址: https://gongjs.github.io/r-ui/doc/example.html。
+文档地址: https://gongjs.github.io/React-UI/doc/example.html
 
 ## 已完成的组件
 - Icon 图标

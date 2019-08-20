@@ -1,8 +1,8 @@
 import React, { ReactNode, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Icon from '../icon/Icon'
+import { combineClass } from '../../helpers/utils';
 import './message.scss'
-import combineClass from '../../helpers/combineClass';
 
 interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
   content: string | ReactNode
