@@ -46,6 +46,10 @@ export const menuList: Array<any> = [
     key: '/components/enter',
     children: [
       {
+        title: 'Input 输入框',
+        key: '/components/input'
+      },
+      {
         title: 'Cascader 级联选择',
         key: '/components/cascader'
       },

@@ -7,7 +7,7 @@ import ButtonGroup from '../../../lib/components/button/ButtonGroup'
 export default () => {
   const [loading, setLoading] = useState(false)
   const handleClick = () => {
-    setLoading(true)
+    setLoading(!loading)
   }
   return <Fragment>
      <ReactMarkdown source={require('!!raw-loader!./button.md').default} className="md" />

@@ -7,7 +7,7 @@ import Content from './Content';
 import Footer from './Footer';
 import './layout.scss'
 
-interface LayoutProps extends React.HTMLAttributes<HTMLElement> {}
+interface LayoutProps extends React.HTMLAttributes<HTMLElement> { }
 
 const Layout: React.FunctionComponent<LayoutProps> = ({
   className,
@@ -26,6 +26,6 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
 
 Layout.displayName = 'Layout'
 
-export { Layout,Header, Content, Footer, Aside }
+export { Layout, Header, Content, Footer, Aside }
 export default Layout;
 
