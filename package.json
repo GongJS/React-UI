@@ -70,16 +70,12 @@
   "dependencies": {
     "@types/react-onclickoutside": "^6.7.3",
     "@types/react-transition-group": "^4.2.2",
-    "module-alias": "^2.2.1",
     "punycode": "^2.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-markdown": "^4.1.0",
-    "react-onclickoutside": "^6.8.0",
     "react-router-dom": "^5.0.0",
-    "react-transition-group": "^4.2.2",
-    "redell-ui": "^0.0.1",
-    "tslint": "^5.17.0"
+    "react-transition-group": "^4.2.2"
   },
   "config": {
     "commitizen": {

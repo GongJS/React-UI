@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '../icon/Icon'
-import {combineClass} from '../../helpers/utils';
+import { combineClass } from '../../helpers/utils';
 import CascaderItem from './CascaderItem'
 import './cascader.scss'
 
@@ -40,7 +40,12 @@ const Cascader: React.FC<CascaderProps> = ({
     setSelectedValue(selectedItems.map((item) => item.label).join('/'))
     onSelect && onSelect(selectedItems)
   }
-
+  const clearSelectValue: React.MouseEventHandler = (e) => {
+    e.stopPropagation()
+    setSelectedValue('')
+    setSelectedItems([])
+    setPopoverVisible(false)
+  }
   // 处理点击subMenu区域以外的click事件
   const outDivClickHandler = (e: any) => {
     const ref: HTMLDivElement | null = cascaderRef.current
@@ -59,8 +64,12 @@ const Cascader: React.FC<CascaderProps> = ({
   })
   return (
     <div className="r-cascader" onClick={outDivClickHandler} ref={cascaderRef} {...restProps}>
-      <div className={combineClass('trigger', `${selectedItems.length > 0 ? 'active' : ''}`, className)} onClick={() => setPopoverVisible(popoverVisible => !popoverVisible)}>
-        <span>{selectedValue} </span>  <Icon className={combineClass('icon', `${popoverVisible ? 'open' : 'close'}`)} name="right" width="12px" style={{ marginLeft: '5px' }} color='#00000073' />
+      <div className={combineClass('trigger', `${selectedItems.length > 0 && popoverVisible ? 'active' : ''}`, className)} onClick={() => setPopoverVisible(popoverVisible => !popoverVisible)}>
+        <span>{selectedValue} </span>
+        <Icon className={combineClass('icon', `${popoverVisible ? 'open' : 'close'}`)} name="right" width="12px" style={{ marginLeft: '5px' }} color='#dcdfe6' />
+        {
+          selectedValue ? <button onClick={clearSelectValue} className="clear"><Icon name="close" width="12px" color='#fff' /></button> : null
+        }
       </div>
       {
         popoverVisible ?

@@ -43,8 +43,8 @@ export default () => {
       </Carousel>
     </CodeCard>
     <CodeCard
-      title="自动播放"
-      summary="可关闭自动播放，切换不同的动画"
+      title="动画"
+      summary="切换不同的动画"
       code={`   
       <Carousel type="slide" autoplay={false} style={{ maxWidth: '800px', marginBottom: '20px' }}>
         <div>
@@ -62,7 +62,7 @@ export default () => {
       </Carousel>`
       }
     >
-      <Carousel type="slide" autoplay={false} style={{ maxWidth: '800px', marginBottom: '20px' }}>
+      <Carousel type="slide" height="400px" autoplay={false} style={{ maxWidth: '800px', marginBottom: '20px' }}>
         <div>
           <img src="https://i.loli.net/2019/08/17/ST7WLjAg3Ew2VUh.jpg" />
         </div>

@@ -15,7 +15,7 @@ module.exports = Object.assign({}, baseConfig, {
     new HtmlWebpackPlugin({
       template: './index.html',
       title: 'R-UI',
-      filename: 'example.html'
+      filename: 'index.html'
     })
   ]
 });

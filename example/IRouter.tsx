@@ -9,6 +9,7 @@ import Cascader from './pages/cascader/cascader.demo'
 import Menu from './pages/menu/menu.demo'
 import Message from './pages/message/message.demo';
 import Modal from './pages/modal/modal.demo';
+import Input from './pages/input/input.demo';
 import Layout from './pages/layout/layout.demo';
 import Popover from './pages/popover/popover.demo';
 import Sticky from './pages/sticky/sticky.demo';
@@ -35,6 +36,7 @@ export default class IRouter extends Component {
                 <Route path={`${match.url}/sticky`} component={Sticky} />
                 <Route path={`${match.url}/grid`} component={Grid} />
                 <Route path={`${match.url}/layout`} component={Layout} />
+                <Route path={`${match.url}/input`} component={Input} />
               </Switch>
             )} />
             <Redirect to="/components/icon" />
