@@ -14,7 +14,16 @@ export default () => {
       <Input />`
       }
     >
-      <Input style={{ width: '300px' }} placeholder="请输入内容" />
+      <Input wrapperStyle={{ width: '300px' }} placeholder="请输入内容" />
+    </CodeCard>
+    <CodeCard
+      title="可清空"
+      summary="使用clearable属性即可得到一个可清空的输入框。"
+      code={` 
+      <Input clearable />`
+      }
+    >
+      <Input clearable wrapperStyle={{ width: '300px' }} placeholder="请输入内容" />
     </CodeCard>
     <CodeCard
       title="禁用 只读"
@@ -27,7 +36,7 @@ export default () => {
       <div style={{ width: '300px', marginBottom: '20px' }}>
         <Input disabled placeholder="禁止输入" />
       </div>
-      <Input readonly style={{ width: '300px' }} placeholder="只读内容" />
+      <Input readonly value="只读内容" style={{ width: '300px' }} />
     </CodeCard>
     <CodeCard
       title="前缀 / 后缀Icon"

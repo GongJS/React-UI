@@ -16,8 +16,8 @@ interface InputProps extends HTMLAttributes {
   preIcon?: string
   sufIcon?: string
   disabled?: boolean
-  error?: boolean
   readonly?: boolean
+  clearable?: boolean
   wrapperClassName?: string,
   wrapperStyle?: React.CSSProperties
 }
@@ -30,8 +30,8 @@ const Input: React.FC<InputProps> = ({
   addonBefore,
   addonAfter,
   disabled,
-  error,
   readonly,
+  clearable,
   placeholder,
   onFocus,
   onBlur,
@@ -60,7 +60,6 @@ const Input: React.FC<InputProps> = ({
   }
   const handleFocus: React.FocusEventHandler = (e) => {
     setOffFocus(true)
-
     onFocus && onFocus(e)
   }
   const handleBlur: React.FocusEventHandler = (e) => {
@@ -89,6 +88,7 @@ const Input: React.FC<InputProps> = ({
       setDerivedValue(defaultValue)
       setDefaultValueVisible(false)
     }
+    value && setDerivedValue(value)
   })
   return (
     <div className={wrapperClassList} style={wrapperStyle}>
@@ -109,13 +109,22 @@ const Input: React.FC<InputProps> = ({
         {...restProps}
       />
       {
-        addonAfter ? <div className="r-input-group__append">{addonAfter} </div> : null
+        addonAfter ? <div className="r-input-group__append">
+          {addonAfter}
+          {clearVisible && clearable && !readonly ? <button onMouseDown={handleClear} className="r-input__clear"><Icon color="#fff" size="14px" name='close' /></button> : null}
+        </div>
+          : null
       }
       {preIcon ? <span className="r-input__pre"><Icon color="#bac7de" name={preIcon} /></span> : null}
       {sufIcon ? <span className="r-input__suf"><Icon color="#bac7de" name={sufIcon} /></span> : null}
-      {clearVisible && !readonly ? <button onMouseDown={handleClear} className="r-input__clear"><Icon color="#fff" size="14px" name='close' /></button> : null}
+      {clearVisible && clearable && !addonAfter && !readonly ? <button onMouseDown={handleClear} className="r-input__clear"><Icon color="#fff" size="14px" name='close' /></button> : null}
     </div>
   )
+}
+Input.defaultProps= {
+  disabled:false,
+  readOnly: false,
+  clearable: false
 }
 Input.displayName = 'Input'
 export default Input;

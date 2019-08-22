@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect } from 'react';
 import {combineClass, uniqueId} from '../../helpers/utils';;
 import Icon from '../icon/Icon'
+import {slide,fade} from './animation'
 import './carousel.scss'
 
 interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -19,11 +20,11 @@ const Carousel: React.FC<CarouselProps> = ({
   interval,
   ...restProps
 }) => {
-
   let dotsEle: NodeListOf<HTMLElement>
   let panelsEle: NodeListOf<HTMLElement>
   let endFlag: boolean = true
   let timer: number
+  let direction: string
   const id = uniqueId(4)
   const panelsRef = React.createRef<HTMLDivElement>()
   const handleDotsClick = (event: any) => {
@@ -42,8 +43,8 @@ const Carousel: React.FC<CarouselProps> = ({
     dotsEle[index].classList.add('active')
   }
   const pre = () => {
-    console.log(2222)
-    let index = getPreIndex()
+    const index = getPreIndex()
+    direction = 'left'
     setActiveDot(index)
     play(index, getNextIndex())
     if (autoplay) {
@@ -52,7 +53,8 @@ const Carousel: React.FC<CarouselProps> = ({
     }
   }
   const next = () => {
-    let index = getNextIndex()
+    const index = getNextIndex()
+    direction = 'right'
     setActiveDot(index)
     play(index, getPreIndex())
     if (autoplay) {
@@ -80,87 +82,23 @@ const Carousel: React.FC<CarouselProps> = ({
     }, interval)
   }
   const play = (toIndex: number, fromIndex: number) => {
+    if (!endFlag) {
+      return
+    }
+    endFlag = false
     const onFinsh = () => {
       panelsEle.forEach(panel => panel.style.zIndex = '0')
       panelsEle[toIndex].style.zIndex = '10'
       endFlag = true
     }
+    if (type === 'slide') {
+      slide(panelsEle[fromIndex], panelsEle[toIndex], onFinsh, direction)
+    }
     if (type === 'fade') {
       fade(panelsEle[fromIndex], panelsEle[toIndex], onFinsh)
     }
-    if (type === 'slide') {
-      slide(panelsEle[fromIndex], panelsEle[toIndex], onFinsh)
-    }
   }
-  // slide动画
-  const slide = (fromNode: HTMLElement, toNode: HTMLElement, onFinsh: () => any) => {
-    if (!endFlag) {
-      return
-    }
-    endFlag = false
-    let width = parseInt(getComputedStyle(fromNode).width!)
-    let offsetX = width
-    let offset1 = 0
-    let offset2 = 0
-    let step = 25
-    fromNode.style.zIndex = '10'
-    toNode.style.zIndex = '10'
-    toNode.style.left = width + 'px'
-    function fromNodeAnimation() {
-      if (offset1 < offsetX) {
-        fromNode.style.left = parseInt(getComputedStyle(fromNode).left!) - step + 'px'
-        offset1 += step
-        requestAnimationFrame(fromNodeAnimation)
-      }
-    }
-    function toNodeAnimation() {
-      if (offset2 < offsetX) {
-        toNode.style.left = parseInt(getComputedStyle(toNode).left!) - step + 'px'
-        offset2 += step
-        requestAnimationFrame(toNodeAnimation)
-      } else {
-        onFinsh()
-        fromNode.style.left = '0'
-        toNode.style.left = '0'
-      }
-    }
-    fromNodeAnimation()
-    toNodeAnimation()
-  }
-  // fade动画
-  const fade = (fromNode: HTMLElement, toNode: HTMLElement, onFinsh: () => any) => {
-    if (!endFlag) {
-      return
-    }
-    endFlag = false
-    let opacityOffset1 = 1
-    let opacityOffset2 = 0
-    let step = 0.04
-    fromNode.style.zIndex = '10'
-    toNode.style.zIndex = '9'
-    function fromNodeAnimation() {
-      if (opacityOffset1 > 0) {
-        opacityOffset1 -= step
-        fromNode.style.opacity = opacityOffset1.toString()
-        requestAnimationFrame(fromNodeAnimation)
-      } else {
-        fromNode.style.opacity = '0'
-      }
-    }
-    function toNodeAnimation() {
-      if (opacityOffset2 < 1) {
-        opacityOffset2 += step
-        toNode.style.opacity = opacityOffset2.toString()
-        requestAnimationFrame(toNodeAnimation)
-      } else {
-        toNode.style.opacity = '1'
-        onFinsh()
-      }
-    }
-    fromNodeAnimation()
-    toNodeAnimation()
-  }
-
+  
   useEffect(() => {
     dotsEle = document.querySelectorAll(`.r-carousel-${id} .dots span`)
     panelsEle = document.querySelectorAll(`.r-carousel-${id} .panels div`)

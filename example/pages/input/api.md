@@ -4,6 +4,7 @@
 | --------- | ------- | --------- | ------- | -------  |
 | value    | 输入框当前值 |  string   | -     | 否 |
 | defaultValue   | 输入框默认值 |  string   | -   | 否 |
+| clearable   | 是否可清空 |  boolean   | false   | 否 |
 | placeholder   | 原生属性 |  string   | - | 否 |
 | addonBefore    | 前置标签 |  string \| ReactNode   | -  | 否 |
 | addonAfter    | 后置标签 |  string \| ReactNode   | -  | 否 |
