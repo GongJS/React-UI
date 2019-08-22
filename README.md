@@ -13,11 +13,12 @@ a react ui framework
 
 > 该`ui`库基于`react hooks` 和 `typescript` 开发; 色彩、样式的设计参考了[林间有风](https://github.com/TaleLin)团队的设计风格。
 
-文档地址: https://gongjs.github.io/React-UI/doc/example.html
+文档地址: https://gongjs.github.io/React-UI/doc/
 
 ## 已完成的组件
 - Icon 图标
 - Button 按钮
+- Input 输入框
 - Menu 菜单导航
 - message 全局提示
 - Modal 对话框
@@ -25,16 +26,14 @@ a react ui framework
 - cascader 级联选择器
 - carousel 轮播图
 - grid 栅格
+- layout 布局组件
 - collapse 折叠面板
 - popover 气泡卡片
 
 ## 安装
 
 ```shell
-npm install redell-ui
-```
-```shell
-yarn add redell-ui
+npm install redell-ui or yarn add redell-ui
 ```
 
 ## PR [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
