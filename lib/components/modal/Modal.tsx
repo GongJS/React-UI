@@ -13,7 +13,8 @@ interface ModalProps {
   okText?: string
   onOk?: React.MouseEventHandler
   onCancel?: React.MouseEventHandler
-  footer?: React.ReactNode
+  footer?: React.ReactNode | null
+  header?: React.ReactNode | null
   content?: React.ReactNode
   type?: 'info' | 'success' | 'error' | 'warning'
   afterClose?: () => any
@@ -36,6 +37,7 @@ const Modal: React.FC<ModalProps> = ({
   cancelText,
   okText,
   footer,
+  header,
   type,
   afterClose,
   onClose,
@@ -63,24 +65,24 @@ const Modal: React.FC<ModalProps> = ({
       <div className={pre('mask')} style={maskStyle} onClick={maskClosable ? handleOnCancel : () => { }} />
       <div className={combineClass(pre(), className)} style={style} >
         <div className={pre('container')}>
-        <header className={pre('header')}>
+        <header className={pre('header')} style={{padding: header===null? '8px' : '32px'}}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             {
-              type === 'info' ? <Icon color="#3963bc" name="infofill" />
-                : type === 'success' ? <Icon color="#00c292" name="roundcheckfill" />
-                  : type === 'warning' ? <Icon color="#ffcb71" name="warnfill" />
-                    : type === 'error' ? <Icon color="#f4516c" name="roundclosefill" />
+              type === 'info' && header !== null? <Icon color="#3963bc" name="infofill" />
+                : type === 'success' && header !== null? <Icon color="#00c292" name="roundcheckfill" />
+                  : type === 'warning' && header !== null? <Icon color="#ffcb71" name="warnfill" />
+                    : type === 'error' && header !== null ? <Icon color="#f4516c" name="roundclosefill" />
                       : null
-            } <span style={{ marginLeft: '10px' }}>{title}</span>
+            } { header !== null? <span style={{ marginLeft: '10px' }}>{title}</span> : null}
           </div>
           <span className="close" onClick={handleOnCancel}>x</span>
         </header>
-        <main className={pre('main')}>
+        <main className={pre('main')} style={{padding: header === null ? '16px' : '0px 32px 9px 70px'}}>
           {children}
         </main>
-        <footer className={pre('footer')}>
+        <footer className={pre('footer')} style={{padding: header===null? '8px' : '32px'}}>
           {
-            footer || (
+            footer !== null?  (
               <Fragment>
                 <Button
                   onClick={handleOnCancel}
@@ -92,7 +94,7 @@ const Modal: React.FC<ModalProps> = ({
                   {okText}
                 </Button>
               </Fragment>
-            )
+            ) : null
           }
         </footer>
         </div>

@@ -53,6 +53,10 @@ export const menuList: Array<any> = [
         title: 'Cascader 级联选择',
         key: '/components/cascader'
       },
+      {
+        title: 'Upload  文件上传',
+        key: '/components/upload'
+      },
     ]
   },
   {

@@ -103,4 +103,13 @@ a {
     margin-bottom: 50px;
     color: #45526B;
   }
+  pre {
+    margin-bottom: 30px;
+    background: #f2f4f5;
+    line-height: 30px;
+  }
+  pre code {
+    color: #314659;
+    background: transparent;
+  }
 }

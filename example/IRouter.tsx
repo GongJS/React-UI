@@ -14,6 +14,7 @@ import Layout from './pages/layout/layout.demo';
 import Popover from './pages/popover/popover.demo';
 import Sticky from './pages/sticky/sticky.demo';
 import Grid from './pages/grid/grid.demo';
+import Upload from './pages/upload/upload.demo';
 import App from './App';
 
 export default class IRouter extends Component {
@@ -37,6 +38,7 @@ export default class IRouter extends Component {
                 <Route path={`${match.url}/grid`} component={Grid} />
                 <Route path={`${match.url}/layout`} component={Layout} />
                 <Route path={`${match.url}/input`} component={Input} />
+                <Route path={`${match.url}/upload`} component={Upload} />
               </Switch>
             )} />
             <Redirect to="/components/icon" />

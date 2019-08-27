@@ -12,6 +12,7 @@
 | onOk   |    点击确认回调 |  () => any   | - | 否 |
 | afterClose   |  Modal 完全关闭后的回调 |  () => any   | - | 否 |
 | footer  | 底部内容，当不需要默认底部按钮时，可以设为 footer={null} |  string\|ReactNode   | 确定取消按钮 | 否 |
+| header  | 底部内容，当不需要默认底部按钮时，可以设为 footer={null} |  string\|ReactNode   | 提示 | 否 |
 
 # options
 |    属性    |   说明   |    类型    |  默认值  | 是否必须 |

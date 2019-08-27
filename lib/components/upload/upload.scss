@@ -1,0 +1,61 @@
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@mixin spin {
+  animation: spin 2s infinite linear;
+}
+.r-upload {
+  display: flex;
+  flex-wrap: wrap;
+  &-item {
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    margin: 0 8px 8px 0;
+    padding: 4px;
+    border: 1px solid #d9d9d9;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .loading {
+      animation: spin 2s infinite linear;
+    }
+    .action {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      cursor: pointer;
+    }
+    img {
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(100%);
+      &.mask {
+        filter: brightness(50%);
+        transition: filter 0.3s;
+      }
+    }
+  }
+  .r-upload-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    vertical-align: top;
+    background-color: #fafafa;
+    border: 1px dashed #d9d9d9;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    &:hover {
+      border-color: #1890ff;
+    }
+  }
+}
