@@ -28,7 +28,7 @@ export default () => {
       `
       }
     >
-     <Upload action={'http://127.0.0.1:7001/api/upload'} fileList={fileList} onFileChange={onFileChange}>
+     <Upload action={'https://koa-img.herokuapp.com/upload/'} fileList={fileList} onFileChange={onFileChange}>
        <Icon name="add_light" />
      </Upload>
     </CodeCard>
