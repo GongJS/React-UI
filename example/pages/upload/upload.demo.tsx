@@ -22,7 +22,7 @@ export default () => {
       title="照片墙"
       summary="用户可以上传图片并在列表中显示缩略图。"
       code={`
-      <Upload action={'http://127.0.0.1:7001/api/upload'} fileList={fileList} onFileChange={onFileChange}>
+      <Upload action={'https://koa-img.herokuapp.com/upload'} fileList={fileList} onFileChange={onFileChange}>
         <Icon name="add_light" />
       </Upload>
       `
