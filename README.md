@@ -29,6 +29,7 @@ a react ui framework
 - layout 布局组件
 - collapse 折叠面板
 - popover 气泡卡片
+- upload 文件上传
 
 ## 安装
 
