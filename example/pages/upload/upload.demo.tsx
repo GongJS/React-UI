@@ -32,6 +32,20 @@ export default () => {
        <Icon name="add_light" />
      </Upload>
     </CodeCard>
+    <CodeCard
+      title="图片上传失败"
+      summary="图片上传失败后在列表中显示缩略图。"
+      code={`
+      <Upload action={''} fileList={fileList} onFileChange={onFileChange}>
+        <Icon name="add_light" />
+      </Upload>
+      `
+      }
+    >
+     <Upload action={''} fileList={fileList} onFileChange={onFileChange}>
+       <Icon name="add_light" />
+     </Upload>
+    </CodeCard>
     <ReactMarkdown source={require('!!raw-loader!./api.md').default} className="md" />
   </Fragment>
 }

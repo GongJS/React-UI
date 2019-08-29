@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import ReactMarkdown from 'react-markdown'
 import CodeCard from '../../CodeCard'
 import Input from '../../../lib/components/input/Input'
+import Textarea from '../../../lib/components/input/textarea'
 
 
 export default () => {
@@ -62,6 +63,26 @@ export default () => {
     >
       <Input wrapperStyle={{ width: '300px', marginBottom: '20px' }} addonBefore="htttp://" />
       <Input wrapperStyle={{ width: '300px' }} addonAfter=".com" />
+    </CodeCard>
+
+    <CodeCard
+      title="文本输入框"
+      summary="默认的文本输入框。"
+      code={` 
+      <Textarea />`
+      }
+    >
+      <Textarea />
+    </CodeCard>
+
+    <CodeCard
+      title="自适应"
+      summary="自适应高度的文本输入框。"
+      code={` 
+      <Textarea autosize={true}/>`
+      }
+    >
+      <Textarea autosize={true}/>
     </CodeCard>
     <ReactMarkdown source={require('!!raw-loader!./api.md').default} className="md" />
   </Fragment>
