@@ -43,6 +43,7 @@ const Upload : React.FC < UploadProps > = ({
         xhr.open(method || 'post', action)
         xhr.onload = function () {
           handleUploadResult(xhr, uid, 'success')
+
         }
         xhr.onerror = function () {
           handleUploadResult(xhr, uid, 'error')
@@ -50,6 +51,7 @@ const Upload : React.FC < UploadProps > = ({
         xhr.ontimeout = function (e) {
           handleUploadResult(xhr, uid, 'error')
         }
+        console.log(333, formData)
         xhr.send(formData)
     }
     const handleUploadResult = (xhr : XMLHttpRequest, uid : string, status: 'success' | 'error') => {
@@ -61,6 +63,11 @@ const Upload : React.FC < UploadProps > = ({
         } else {
           file.status = 'error'
           file.url = 'https://i.loli.net/2019/08/27/2gBTWlfkt5EDVbi.jpg'
+            var img = new Image();
+            img.src = file.url;
+            img.onload = function(){
+            console.log(img.width)
+};
         }
         let fileListCopy = [...fileListRef.current !]
         fileListCopy.splice(index, 1, file)
@@ -75,7 +82,7 @@ const Upload : React.FC < UploadProps > = ({
     }
     const handleInputChangeCallback= (e:any) => {
         let srcFiles : any = []
-        input !.files ? srcFiles = input !.files: null
+        input!.files ? srcFiles = input!.files: null
         const copyFileList = JSON.parse(JSON.stringify(fileList))
         for (let i = 0; i < srcFiles.length; i++) {
             const name = srcFiles[i].name
@@ -86,8 +93,8 @@ const Upload : React.FC < UploadProps > = ({
         }
         onFileChange(copyFileList)
         srcFiles.length > 0 && uploadFiles(srcFiles)
-        input !.removeEventListener('change', handleInputChangeCallback)
-        input !.value = ''
+        input!.removeEventListener('change', handleInputChangeCallback)
+        input!.value = ''
     }
     const handleClickUpload = () => {
         input = document.querySelector(`#${id}`)

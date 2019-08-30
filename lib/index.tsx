@@ -20,3 +20,4 @@ export { default as Layout, Header, Content, Footer, Aside } from './components/
 export { default as Input } from './components/input/Input'
 export { default as Textarea } from './components/input/textarea'
 export { default as Upload } from './components/upload/Upload'
+export { default as Slide } from './components/slide/Slide'

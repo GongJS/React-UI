@@ -74,6 +74,10 @@ export const menuList: Array<any> = [
       {
         title: 'Carousel 轮播',
         key: '/components/carousel'
+      },
+      {
+        title: 'Slide 图片预览',
+        key: '/components/slide'
       }
     ]
   },
