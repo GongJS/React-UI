@@ -25,5 +25,17 @@ const prefixClass = (prefix: string) => {
     return [`${prefix}`, ...args].filter(Boolean).join('-');
   }
 };
-export {uniqueId, combineClass, prefixClass}
+const checkClient = () => {
+  const userAgentInfo = navigator.userAgent;
+  const Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+  let isPc = true;
+  for (let v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+          isPc = false;
+          break;
+      }
+  }
+  return isPc;
+}
+export {uniqueId, combineClass, prefixClass, checkClient}
 

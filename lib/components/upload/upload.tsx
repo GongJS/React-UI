@@ -1,7 +1,6 @@
 import React, {useRef, useState} from 'react';
 import Icon from '../icon/Icon'
-import Modal from '../modal/Modal'
-import {combineClass, uniqueId} from '../../helpers/utils';
+import {combineClass, uniqueId, checkClient} from '../../helpers/utils';
 import './upload.scss'
 interface FileListProps {
     uid?: string
@@ -16,6 +15,7 @@ interface UploadProps extends React.HTMLAttributes < HTMLDivElement > {
     method?: string 
     fileList: FileListProps[]
     onFileChange: (fileList : FileListProps[]) => any
+    handleImgClick?:(uid:string,index:string) => any
 }
 
 const Upload : React.FC < UploadProps > = ({
@@ -24,6 +24,7 @@ const Upload : React.FC < UploadProps > = ({
     method,
     action,
     fileList,
+    handleImgClick,
     onFileChange,
     className,
     children,
@@ -34,16 +35,18 @@ const Upload : React.FC < UploadProps > = ({
     const fileListRef = useRef < FileListProps[] > ()
     fileListRef.current = fileList
     const [visibleAction, setvisibleAction] = useState(false)
-    const [visibleModal, setVisibleModal] = useState(false)
-    const [previewImgSrc, setPreviewImgSrc] = useState('')
+    const [selectIndex,setSelectIndex] = useState()
 
     const startUploadFiles = (formData : FormData, uid : string) => {
         const xhr = new XMLHttpRequest()
         xhr.timeout = 5000
         xhr.open(method || 'post', action)
         xhr.onload = function () {
-          handleUploadResult(xhr, uid, 'success')
-
+          if (xhr.status === 200) {
+            handleUploadResult(xhr, uid, 'success')
+          } else {
+            handleUploadResult(xhr, uid, 'error')
+          }
         }
         xhr.onerror = function () {
           handleUploadResult(xhr, uid, 'error')
@@ -51,25 +54,19 @@ const Upload : React.FC < UploadProps > = ({
         xhr.ontimeout = function (e) {
           handleUploadResult(xhr, uid, 'error')
         }
-        console.log(333, formData)
         xhr.send(formData)
     }
     const handleUploadResult = (xhr : XMLHttpRequest, uid : string, status: 'success' | 'error') => {
-      let file = fileListRef.current !.filter(f => f.uid === uid)[0]
-        let index = fileListRef.current !.indexOf(file)
+      let file = fileListRef.current!.filter(f => f.uid === uid)[0]
+        let index = fileListRef.current!.indexOf(file)
         if (status === 'success') {
           file.status = 'success'
           file.url = JSON.parse(xhr.response).url
         } else {
           file.status = 'error'
           file.url = 'https://i.loli.net/2019/08/27/2gBTWlfkt5EDVbi.jpg'
-            var img = new Image();
-            img.src = file.url;
-            img.onload = function(){
-            console.log(img.width)
-};
         }
-        let fileListCopy = [...fileListRef.current !]
+        let fileListCopy = [...fileListRef.current!]
         fileListCopy.splice(index, 1, file)
         onFileChange(fileListCopy)
     }
@@ -104,12 +101,19 @@ const Upload : React.FC < UploadProps > = ({
         }
     }
     const handleDelImage = (uid : any) => {
-        const del = fileList.filter(f => f.uid !== uid)
+        const del = fileList.filter(f => f.uid!== uid)
         onFileChange(del)
     }
-    const handlePreviewImg = (imgSrc : string) => {
-        setVisibleModal(true)
-        setPreviewImgSrc(imgSrc)
+    const handlePreviewImg = (imgSrc : string, index:number) => {
+        handleImgClick && handleImgClick(imgSrc,index.toString())
+    }
+    const handleMouseEnter = (index:number) => {
+        setvisibleAction(true)
+        setSelectIndex(index)
+    }
+    const handleMouseLeave = () => {
+        setvisibleAction(false)
+        setSelectIndex(null)
     }
     return (
         <div className={combineClass('r-upload', className)} {...restProps}>
@@ -120,22 +124,22 @@ const Upload : React.FC < UploadProps > = ({
                         <div
                             key={index}
                             className='r-upload-item'
-                            onMouseEnter={() => setvisibleAction(true)}
-                            onMouseLeave={() => setvisibleAction(false)}>
-                            {file.status !== 'uploading'
+                            onMouseEnter={() => handleMouseEnter(index)}
+                            onMouseLeave={handleMouseLeave}>
+                            {file.status!== 'uploading'
                                 ? <img
-                                        className={`${visibleAction
+                                        className={`${visibleAction && checkClient() && index === selectIndex
                                         ? 'mask'
                                         : ''}`}
-                                        src={file.url}/>
+                                        src={file.url} onClick={() => !checkClient() && handlePreviewImg(file.url!,index)}/>
                                 : <Icon name='loading1' size="3em" color="#8C98AE" className="loading"/>
 }
-                            {visibleAction
-                                ? <div className="action">
+                            {visibleAction && checkClient() && index === selectIndex
+                                ? <div className="pc-action">
                                         <Icon
                                             name='attention_light'
                                             color="#fff"
-                                            onClick={() => handlePreviewImg(file.url !)}
+                                            onClick={() => handlePreviewImg(file.url!,index)}
                                             style={{
                                             marginRight: '5px'
                                         }}/>
@@ -145,7 +149,13 @@ const Upload : React.FC < UploadProps > = ({
                                             onClick={() => handleDelImage(file.uid)}/>
                                     </div>
                                 : null
-}
+} 
+                            {
+                                !checkClient() ? <div className="mobile-action"> <Icon
+                                name='round_close_fill_light'
+                                color="#f4516c"
+                                onClick={() => handleDelImage(file.uid)}/></div> : null
+                            }
                         </div>
                     )
                 })
@@ -165,13 +175,6 @@ const Upload : React.FC < UploadProps > = ({
                 style={{
                 display: 'none'
             }}/>
-            <Modal
-                visible={visibleModal}
-                footer={null}
-                header={null}
-                onCancel={() => setVisibleModal(false)}>
-                <img src={previewImgSrc}/>
-            </Modal>
         </div>
     )
 }

@@ -30,6 +30,7 @@ a react ui framework
 - collapse 折叠面板
 - popover 气泡卡片
 - upload 文件上传
+- slide 图片预览
 
 ## 安装
 

@@ -1,21 +1,23 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { combineClass } from '../../helpers/utils';
+import { combineClass, checkClient } from '../../helpers/utils';
 import Icon from '../icon/Icon';
 import './slide.scss'
 
 interface img {
-    src?: string
+    url?: string
     width: number,
     height: number
 }
 interface SlideProps {
     list?: img[]
     visible?: boolean
+    defaultIndex?: string
     onClose?: () => any
+
 }
 
 const Slide: React.FC<SlideProps> = ({
-    list, visible, onClose
+    list, visible, onClose, defaultIndex
 }) => {
     const wrapRef = React.createRef<HTMLDivElement>()
     const outerRef = React.createRef<HTMLUListElement>()
@@ -37,6 +39,7 @@ const Slide: React.FC<SlideProps> = ({
     const scaleMax = 2 // 最大放大比例
     const [idx, setIdx] = useState(0)
     const [radio, setRadio] = useState() // 屏幕宽高比
+    const [hasSetDefaultIndex, setHasSetDefaultIndex] = useState(false)
 
 
     // 根据勾股定理得到缩放比例
@@ -241,22 +244,20 @@ const Slide: React.FC<SlideProps> = ({
         }
     }
     const preventGesturestart = (e: any) => { e.preventDefault() }
-    const checkClient = () => {
-        const userAgentInfo = navigator.userAgent;
-        const Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
-        let isPc = true;
-        for (let v = 0; v < Agents.length; v++) {
-            if (userAgentInfo.indexOf(Agents[v]) > 0) {
-                isPc = false;
-                break;
-            }
+    const handleClose = () => {
+        if (onClose) {
+            setHasSetDefaultIndex(false)
+            setIdx(0)
+            onClose()
         }
-        return isPc;
     }
     useLayoutEffect(() => {
         setRadio(window.innerHeight / window.innerWidth)
         scaleW = window.innerWidth + 10
-        goIndex('0') // 默认展示第一张
+        if (!hasSetDefaultIndex && visible) {
+            goIndex(defaultIndex || '0') // 默认展示第一张
+            setHasSetDefaultIndex(true)
+        }
     })
     useEffect(() => {
         if (wrapRef.current && outerRef.current) {
@@ -275,6 +276,7 @@ const Slide: React.FC<SlideProps> = ({
                 outerRef.current.removeEventListener('touchmove', moveHandler)
                 outerRef.current.removeEventListener('touchend', endHandler)
                 outerRef.current.removeEventListener('click', clkHandler)
+                setHasSetDefaultIndex(false)
             }
         }
     })
@@ -285,16 +287,15 @@ const Slide: React.FC<SlideProps> = ({
                     {
                         list!.map((item, index) => {
                             return (
-
                                 <li key={index} style={{ width: `${window.innerWidth}px`, transform: `translate3d(${(index - idx) * scaleW}px,0,0)` }}>
-                                    <img src={item.src} style={{ height: item.height / item.width > radio ? `${window.innerHeight}px` : '', width: item.height / item.width <= radio ? `${window.innerWidth}px` : '' }} />
+                                    <img src={item.url} style={{ height: item.height / item.width > radio ? `${window.innerHeight}px` : '', width: item.height / item.width <= radio ? `${window.innerWidth}px` : '' }} />
                                 </li>
                             )
                         })
                     }
                     {
                         checkClient() ? <>
-                            <Icon name="close_light" onClick={tapCloseHandler} color="#fff" className="close" />
+                            <Icon name="close_light" onClick={handleClose} color="#fff" className="close" />
                             <button className="arrow pre" onClick={() => goIndex('-1')}><Icon name="back" color="#fff" /></button>
                             <button className="arrow next" onClick={() => goIndex('+1')}><Icon name="right" color="#fff" /></button>
                         </> : null
@@ -313,9 +314,6 @@ const Slide: React.FC<SlideProps> = ({
                 </ul>
             </div> : null
     )
-}
-Slide.defaultProps = {
-    visible: false
 }
 Slide.displayName = 'Slide'
 export default Slide;

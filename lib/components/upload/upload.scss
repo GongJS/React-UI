@@ -23,11 +23,17 @@
     .loading {
       animation: spin 2s infinite linear;
     }
-    .action {
+    .pc-action {
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%,-50%);
+      cursor: pointer;
+    }
+    .mobile-action {
+      position: absolute;
+      right: -2px;
+      top: -2px;
       cursor: pointer;
     }
     img {
