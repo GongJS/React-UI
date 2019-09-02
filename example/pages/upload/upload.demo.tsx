@@ -36,6 +36,7 @@ export default () => {
     setSlideList(slideListCopy)
   }
   const onClose = () => {
+    setIndex('0')
     setVisible(false)
   }
   const onFailClose = () => {
@@ -84,7 +85,7 @@ export default () => {
       }`
       }
     >
-     <Upload action={'http://127.0.0.1:7001/api/upload'} fileList={fileList} onFileChange={onFileChange} handleImgClick={handleImgClick}>
+     <Upload action={'http://127.0.0.1:7001/api/upload'} name="post" fileList={fileList} onFileChange={onFileChange} handleImgClick={handleImgClick}>
        <Icon name="add_light" />
      </Upload>
      <Slide list={slideList} visible={visible} onClose={onClose} defaultIndex={index}/>

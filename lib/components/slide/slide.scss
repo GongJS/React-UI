@@ -1,7 +1,6 @@
 .r-slide {
   transform: translate3d(0px, 0px, 3px);
   transition: opacity 200ms ease 0s;
-  opacity: 1;
   position: fixed;
   top: 0px;
   left: 0px;
@@ -15,7 +14,7 @@
     overflow: hidden;
     > li {
       position: absolute;
-      display: flex;
+      display: none;
       align-items: center;
       overflow: hidden;
       height: 100%;

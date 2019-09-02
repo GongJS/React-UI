@@ -5,7 +5,7 @@ import './slide.scss'
 
 interface img {
     url?: string
-    width: number,
+    width: number
     height: number
 }
 interface SlideProps {
@@ -62,13 +62,16 @@ const Slide: React.FC<SlideProps> = ({
             } else if (cidx < 0) {
                 cidx = 0
             }
+            for (let i = 0; i < len; i++) {
+                lis[cidx].style.display = 'none'
+            }
             // 保留当前索引值
             setIdx(cidx)
-
             // 改变过渡的方式，从无动画变为有动画
             lis[cidx].style.webkitTransition = '-webkit-transform 0.2s ease-out'
-            lis[cidx - 1] && (lis[cidx - 1].style.webkitTransition = '-webkit-transform 0.2s ease-out')
-            lis[cidx + 1] && (lis[cidx + 1].style.webkitTransition = '-webkit-transform 0.2s ease-out')
+            lis[cidx].style.display = 'flex'
+            lis[cidx - 1] && (lis[cidx - 1].style.webkitTransition = '-webkit-transform 0.2s ease-out') && (lis[cidx - 1].style.display = 'flex')
+            lis[cidx + 1] && (lis[cidx + 1].style.webkitTransition = '-webkit-transform 0.2s ease-out') && (lis[cidx + 1].style.display = 'flex')
 
             // 改变动画后所应该的位移值
             lis[cidx].style.webkitTransform = 'translate3d(0, 0, 0)'
@@ -214,12 +217,22 @@ const Slide: React.FC<SlideProps> = ({
             }
         }
     }
-
+    const handlePcClose = () => {
+        if (onClose) {
+            setHasSetDefaultIndex(false)
+            setIdx(0)
+            onClose()
+        }
+    }
     /*
    * 单击图片，关闭图片查看器事件
    */
     const tapCloseHandler = (e: any) => {
-        onClose && onClose()
+        if (onClose) {
+            setHasSetDefaultIndex(false)
+            setIdx(0)
+            onClose()
+        }
     }
 
     // 采用两次点击时间差来判断单击还是双击
@@ -244,17 +257,12 @@ const Slide: React.FC<SlideProps> = ({
         }
     }
     const preventGesturestart = (e: any) => { e.preventDefault() }
-    const handleClose = () => {
-        if (onClose) {
-            setHasSetDefaultIndex(false)
-            setIdx(0)
-            onClose()
-        }
-    }
+   
     useLayoutEffect(() => {
         setRadio(window.innerHeight / window.innerWidth)
         scaleW = window.innerWidth + 10
         if (!hasSetDefaultIndex && visible) {
+            console.log(9999934,defaultIndex)
             goIndex(defaultIndex || '0') // 默认展示第一张
             setHasSetDefaultIndex(true)
         }
@@ -295,7 +303,7 @@ const Slide: React.FC<SlideProps> = ({
                     }
                     {
                         checkClient() ? <>
-                            <Icon name="close_light" onClick={handleClose} color="#fff" className="close" />
+                            <Icon name="close_light" onClick={handlePcClose} color="#fff" className="close" />
                             <button className="arrow pre" onClick={() => goIndex('-1')}><Icon name="back" color="#fff" /></button>
                             <button className="arrow next" onClick={() => goIndex('+1')}><Icon name="right" color="#fff" /></button>
                         </> : null

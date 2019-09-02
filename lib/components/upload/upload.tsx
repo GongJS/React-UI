@@ -7,12 +7,14 @@ interface FileListProps {
     name?: string
     status?: string
     url?: string
+    width?: number
+    height?: number
 }
 interface UploadProps extends React.HTMLAttributes < HTMLDivElement > {
     name?: string
     multiple?: boolean 
     action: string 
-    method?: string 
+    method?: string
     fileList: FileListProps[]
     onFileChange: (fileList : FileListProps[]) => any
     handleImgClick?:(uid:string,index:string) => any
@@ -41,6 +43,11 @@ const Upload : React.FC < UploadProps > = ({
         const xhr = new XMLHttpRequest()
         xhr.timeout = 5000
         xhr.open(method || 'post', action)
+        // 携带token
+        const token = localStorage.getItem('token')
+        if (token) {
+           xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        }
         xhr.onload = function () {
           if (xhr.status === 200) {
             handleUploadResult(xhr, uid, 'success')
@@ -62,6 +69,8 @@ const Upload : React.FC < UploadProps > = ({
         if (status === 'success') {
           file.status = 'success'
           file.url = JSON.parse(xhr.response).url
+          file.width = JSON.parse(xhr.response).width
+          file.height = JSON.parse(xhr.response).height
         } else {
           file.status = 'error'
           file.url = 'https://i.loli.net/2019/08/27/2gBTWlfkt5EDVbi.jpg'
@@ -85,7 +94,7 @@ const Upload : React.FC < UploadProps > = ({
             const name = srcFiles[i].name
             const uid = uniqueId(4)
             srcFiles[i].uid = uid
-            const newFlie = {name,uid,status: 'uploading',url: ''}
+            const newFlie = {name,uid,status: 'uploading',url: '', width: 0, height: 0}
             copyFileList.push(newFlie)
         }
         onFileChange(copyFileList)
