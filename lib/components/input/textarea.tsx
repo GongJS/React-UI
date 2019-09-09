@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import { combineClass, uniqueId } from '../../helpers/utils';;
 
 interface Size {
@@ -10,7 +10,7 @@ interface TextareaProps {
   autosize?: boolean
   value?: string
   defaultValue?: string | undefined
-  onChange?: (value: string) => any
+  onChange?: React.ChangeEventHandler
   className?: string
   style?: React.CSSProperties
   id?: string
@@ -31,11 +31,10 @@ const Textarea: React.FunctionComponent<TextareaProps> = ({
 }) => {
   const id = uniqueId(4)
   const textareaRef = React.createRef<HTMLTextAreaElement>()
-  const [derivedValue, setDerivedValue] = useState()
-  let hasSetDefaultValue = false
-  const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-    onChange && onChange(e.target.value)
-    setDerivedValue(e.target.value)
+  const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (onChange) {
+      onChange(e);
+    }
     if (autosize) {
       const { top, bottom } = textareaRef.current!.getBoundingClientRect()
       const scrollHeight = textareaRef.current!.scrollHeight
@@ -45,16 +44,21 @@ const Textarea: React.FunctionComponent<TextareaProps> = ({
       }
     }
   }
-  useEffect(() => {
-    if (defaultValue && !hasSetDefaultValue) {
-      setDerivedValue(defaultValue)
-      hasSetDefaultValue = true
+  const changeValue = (value?: string) => {
+    if (value !== undefined) {
+      return value;
     }
-  })
+    if (defaultValue !== undefined) {
+      return defaultValue;
+    }
+    return ''
+  }
+
+  const derivedName = useMemo(() => changeValue(value), [value])
   return (
     <textarea
       id={id}
-      value={derivedValue}
+      value={derivedName}
       onChange={handleChange}
       className={combineClass('r-textarea', className, `${autosize ? 'autosize' : ''}`)}
       style={style}

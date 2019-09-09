@@ -21,11 +21,11 @@
 | wrapperClassName   | 外层wrapper类名 |  string   | - | 否 |
 | wrapperStyle    | 外层wrapper样式 |  React.CSSProperties | -  | 是 |
 
-## Search
+## Textarea
 | value    | 输入框当前值 |  string   | -     | 否 |
 | defaultValue   | 输入框默认值 |  string   | -   | 否 |
 | placeholder   | 原生属性 |  string   | - | 否 |
 | autosize    | 自适应高度 |  boolean   | false  | 否 |
-| onChange   | 值改变时的回调 |  (value) => any  | -   | 否 |
+| onChange   | 值改变时的回调 |  React.ChangeEventHandler  | -   | 否 |
 | className   | textarea类名 |  string   | - | 否 |
 | style    | textarea样式 |  React.CSSProperties | -  | 是 |

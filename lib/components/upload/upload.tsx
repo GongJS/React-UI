@@ -170,7 +170,6 @@ const Upload : React.FC < UploadProps > = ({
                 })
 }
             <div
-                className="r-upload-action"
                 onClick={handleClickUpload}
                 onMouseEnter={() => setvisibleAction(true)}
                 onMouseLeave={() => setvisibleAction(false)}>

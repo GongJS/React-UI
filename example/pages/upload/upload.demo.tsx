@@ -1,4 +1,4 @@
-import React, { Fragment, useState} from 'react';
+import React, { Fragment, useState } from 'react';
 import ReactMarkdown from 'react-markdown'
 import CodeCard from '../../CodeCard'
 import Icon from '../../../lib/components/icon/Icon'
@@ -12,24 +12,24 @@ interface FileListProps {
   url?: string
 }
 interface img {
-  url:string
-  height?:number
-  width?:number
+  url: string
+  height?: number
+  width?: number
 }
 export default () => {
   const [fileList, setFileList] = useState<FileListProps[]>([])
   const [failFileList, setFailFileList] = useState<FileListProps[]>([])
   const [slideList, setSlideList] = useState()
   const [slideFailList, setSlideFailList] = useState()
-  const [visible,setVisible] = useState(false)
-  const [failVisible,setFailVisible] = useState(false)
+  const [visible, setVisible] = useState(false)
+  const [failVisible, setFailVisible] = useState(false)
   const [index, setIndex] = useState('0')
   const [failIndex, setFailIndex] = useState('0')
-  const onFileChange = (newFileList:FileListProps[]) => {
+  const onFileChange = (newFileList: FileListProps[]) => {
     setFileList(newFileList)
     const slideListCopy: img[] = []
     newFileList.map(item => {
-      const v = {url:''}
+      const v = { url: '' }
       v.url = item.url!
       slideListCopy.push(v)
     })
@@ -42,19 +42,19 @@ export default () => {
   const onFailClose = () => {
     setFailVisible(false)
   }
-  const handleImgClick = (imgSrc: string,index:string) => {
+  const handleImgClick = (imgSrc: string, index: string) => {
     setIndex(index)
     setVisible(true)
   }
-  const handleFailImgClick = (imgSrc: string,index:string) => {
+  const handleFailImgClick = (imgSrc: string, index: string) => {
     setFailIndex(index)
     setFailVisible(true)
   }
-  const onFailFileChange = (newFileList:FileListProps[]) => {
+  const onFailFileChange = (newFileList: FileListProps[]) => {
     setFailFileList(newFileList)
     const slideListCopy: img[] = []
     newFileList.map(item => {
-      const v = {url:''}
+      const v = { url: '' }
       v.url = item.url!
       slideListCopy.push(v)
     })
@@ -85,10 +85,12 @@ export default () => {
       }`
       }
     >
-     <Upload action={'http://127.0.0.1:7001/api/upload'} name="post" fileList={fileList} onFileChange={onFileChange} handleImgClick={handleImgClick}>
-       <Icon name="add_light" />
-     </Upload>
-     <Slide list={slideList} visible={visible} onClose={onClose} defaultIndex={index}/>
+      <Upload action={'http://127.0.0.1:7001/api/upload'} name="post" fileList={fileList} onFileChange={onFileChange} handleImgClick={handleImgClick}>
+        <div className="r-upload-action">
+          <Icon name="add_light" />
+        </div>
+      </Upload>
+      <Slide list={slideList} visible={visible} onClose={onClose} defaultIndex={index} />
     </CodeCard>
     <CodeCard
       title="图片上传失败"
@@ -101,10 +103,12 @@ export default () => {
       `
       }
     >
-     <Upload action={'/'} fileList={failFileList} onFileChange={onFailFileChange} handleImgClick={handleFailImgClick}>
-       <Icon name="add_light" />
-     </Upload>
-     <Slide list={slideFailList} visible={failVisible} onClose={onFailClose} defaultIndex={failIndex}/>
+      <Upload action={'/'} fileList={failFileList} onFileChange={onFailFileChange} handleImgClick={handleFailImgClick}>
+        <div className="r-upload-action">
+          <Icon name="add_light" />
+        </div>
+      </Upload>
+      <Slide list={slideFailList} visible={failVisible} onClose={onFailClose} defaultIndex={failIndex} />
     </CodeCard>
     <ReactMarkdown source={require('!!raw-loader!./api.md').default} className="md" />
   </Fragment>

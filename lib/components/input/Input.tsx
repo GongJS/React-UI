@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { HTMLAttributes } from 'enzyme';
 import Icon from '../icon/Icon'
 import { combineClass } from '../../helpers/utils';
@@ -43,16 +43,20 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const [clearVisible, setClearVisible] = useState(false)
   const [offFocus, setOffFocus] = useState(false)
-  const [derivedValue, setDerivedValue] = useState('')
-  const [defaultValueVisible, setDefaultValueVisible] = useState(false)
+  const [event, setEvent] = useState<React.ChangeEvent<HTMLInputElement>>()
   const inputRef = React.createRef<HTMLInputElement>()
   const handleChange: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDerivedValue(e.currentTarget.value)
-    onChange && onChange(e)
+    if (onChange) {
+      setEvent(e)
+      e.persist()
+      onChange(e);
+    }
   }
   const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!event) { return }
     e.stopPropagation()
-    setDerivedValue('')
+    event!.target.value = ''
+    handleChange(event!)
     const ref = inputRef.current
     setTimeout(() => {
       ref && ref.focus()
@@ -81,22 +85,29 @@ const Input: React.FC<InputProps> = ({
     `${disabled ? 'disabled' : ''}`,
     `${readonly ? 'readonly' : ''}`,
   )
-  useEffect(() => {
-    derivedValue && offFocus && setClearVisible(true)
-    !derivedValue && setClearVisible(false)
-    if (defaultValue && defaultValueVisible) {
-      setDerivedValue(defaultValue)
-      setDefaultValueVisible(false)
+  const changeValue = (value?: string) => {
+    if (value !== undefined) {
+      return value;
     }
-    value && setDerivedValue(value)
+    if (defaultValue !== undefined) {
+      return defaultValue;
+    }
+    return ''
+  }
+
+  const derivedName = useMemo(() => changeValue(value), [value])
+  useEffect(() => {
+    value && offFocus && setClearVisible(true)
+    !value && setClearVisible(false)
   })
   return (
     <div className={wrapperClassList} style={wrapperStyle}>
       {
         addonBefore ? <div className="r-input-group__prepend">{addonBefore} </div> : null
       }
+      {changeValue()}
       <input
-        value={derivedValue}
+        value={derivedName}
         type="text"
         className={inputClassList}
         placeholder={placeholder || ''}
@@ -121,8 +132,8 @@ const Input: React.FC<InputProps> = ({
     </div>
   )
 }
-Input.defaultProps= {
-  disabled:false,
+Input.defaultProps = {
+  disabled: false,
   readOnly: false,
   clearable: false
 }

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import ReactMarkdown from 'react-markdown'
 import CodeCard from '../../CodeCard'
 import Input from '../../../lib/components/input/Input'
@@ -6,6 +6,14 @@ import Textarea from '../../../lib/components/input/textarea'
 
 
 export default () => {
+  const [value1, setValue1] = useState()
+  const onChange1 = (e:React.ChangeEvent<HTMLInputElement>) => {
+      setValue1(e.currentTarget.value)
+  }
+  const [value2, setValue2] = useState()
+  const onChange2 = (e:React.ChangeEvent<HTMLInputElement>) => {
+      setValue2(e.currentTarget.value)
+  }
   return <Fragment>
     <ReactMarkdown source={require('!!raw-loader!./input.md').default} className="md" />
     <CodeCard
@@ -15,7 +23,7 @@ export default () => {
       <Input />`
       }
     >
-      <Input wrapperStyle={{ width: '300px' }} placeholder="请输入内容" />
+      <Input wrapperStyle={{ width: '300px' }} value={value1} onChange={onChange1} placeholder="请输入内容" />
     </CodeCard>
     <CodeCard
       title="可清空"
@@ -72,7 +80,7 @@ export default () => {
       <Textarea />`
       }
     >
-      <Textarea />
+      <Textarea onChange={onChange2} value={value2}/>
     </CodeCard>
 
     <CodeCard
