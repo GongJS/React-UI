@@ -85,7 +85,7 @@ export default () => {
       }`
       }
     >
-      <Upload action={'http://127.0.0.1:7001/api/upload'} name="post" fileList={fileList} onFileChange={onFileChange} handleImgClick={handleImgClick}>
+      <Upload action={'http://127.0.0.1:3000/upload'} name="post" fileList={fileList} onFileChange={onFileChange} handleImgClick={handleImgClick}>
         <div className="r-upload-action">
           <Icon name="add_light" />
         </div>

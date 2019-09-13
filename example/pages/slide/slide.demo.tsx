@@ -6,8 +6,8 @@ import Button from '../../../lib/components/button/Button'
 
 export default () => {
   const list = [
-    {src: 'https://i.loli.net/2019/08/17/ST7WLjAg3Ew2VUh.jpg', width:533,height:300},
-    {src: 'https://i.loli.net/2019/08/17/enKRFq4c2itrWxA.jpg',width:533,height:300}
+    {url: 'https://i.loli.net/2019/08/17/ST7WLjAg3Ew2VUh.jpg', width:533,height:300},
+    {url: 'https://i.loli.net/2019/08/17/enKRFq4c2itrWxA.jpg',width:533,height:300}
   ]
   const [visible,setVisible] = useState(false)
   const onClose = () => {

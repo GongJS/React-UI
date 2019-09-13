@@ -37,11 +37,28 @@ const Slide: React.FC<SlideProps> = ({
     let pinchScale: number // 缩放比例
     let scaleW: number // 屏幕宽度 + 图片间距
     const scaleMax = 2 // 最大放大比例
-    const [idx, setIdx] = useState(0)
     const [radio, setRadio] = useState() // 屏幕宽高比
-    const [hasSetDefaultIndex, setHasSetDefaultIndex] = useState(false)
+    const [idx, setIdx] = useState(() => {
+        if (defaultIndex) {
+            return parseInt(defaultIndex);
+        } else {
+            return 0
+        }
+    });
 
+    // 初始化 
+    const init = () => {
+        if (outerRef.current) {
+            const lis = outerRef.current.getElementsByTagName('li')
+            const len = lis.length
+            let cidx:number = (idx as number)
+            for (let i = 0; i < len; i++) {
+                lis[i].style.width = window.innerWidth + 'px'
+                lis[i].style.webkitTransform = 'translate3d(' + (i - cidx) * scaleW + 'px, 0, 0)'
+            }
+        }
 
+    }
     // 根据勾股定理得到缩放比例
     const getDistance = (p1: Touch, p2: Touch): any => {
         var x = p2.pageX - p1.pageX,
@@ -54,7 +71,7 @@ const Slide: React.FC<SlideProps> = ({
             const lis = outerRef.current.getElementsByTagName('li')
             const len = lis.length
             let cidx
-            cidx = idx + parseInt(n) * 1
+            cidx = (idx as number) + parseInt(n) * 1
             // 当索引右超出
             if (cidx > len - 1) {
                 cidx = len - 1
@@ -62,16 +79,12 @@ const Slide: React.FC<SlideProps> = ({
             } else if (cidx < 0) {
                 cidx = 0
             }
-            for (let i = 0; i < len; i++) {
-                lis[cidx].style.display = 'none'
-            }
             // 保留当前索引值
             setIdx(cidx)
             // 改变过渡的方式，从无动画变为有动画
             lis[cidx].style.webkitTransition = '-webkit-transform 0.2s ease-out'
-            lis[cidx].style.display = 'flex'
-            lis[cidx - 1] && (lis[cidx - 1].style.webkitTransition = '-webkit-transform 0.2s ease-out') && (lis[cidx - 1].style.display = 'flex')
-            lis[cidx + 1] && (lis[cidx + 1].style.webkitTransition = '-webkit-transform 0.2s ease-out') && (lis[cidx + 1].style.display = 'flex')
+            lis[cidx - 1] && (lis[cidx - 1].style.webkitTransition = '-webkit-transform 0.2s ease-out')
+            lis[cidx + 1] && (lis[cidx + 1].style.webkitTransition = '-webkit-transform 0.2s ease-out')
 
             // 改变动画后所应该的位移值
             lis[cidx].style.webkitTransform = 'translate3d(0, 0, 0)'
@@ -102,7 +115,6 @@ const Slide: React.FC<SlideProps> = ({
             // 处理双指放大
             if (joinPinchScale && e.touches.length >= 2) {
                 const now = e.touches;  //得到第二组两个点
-
                 //得到缩放比例，getDistance是勾股定理的一个方法
                 pinchScale = pinchScaleEnd * (getDistance(now[0], now[1]) / getDistance(pinchStart[0], pinchStart[1]));
                 // 首先将动画暂停
@@ -137,7 +149,7 @@ const Slide: React.FC<SlideProps> = ({
             let m = i + 3
             // 最小化改变DOM属性
             for (i; i < m; i++) {
-                lis[i] && (lis[i].style.webkitTransition = 'transform 0s ease-out')
+                lis[i] && (lis[i].style.webkitTransition = 'transform 0.2s ease-out')
                 lis[i] && (lis[i].style.webkitTransform = 'translate3d(' + ((i - idx) * scaleW + offsetX) + 'px, 0, 0)')
             }
         }
@@ -219,7 +231,6 @@ const Slide: React.FC<SlideProps> = ({
     }
     const handlePcClose = () => {
         if (onClose) {
-            setHasSetDefaultIndex(false)
             setIdx(0)
             onClose()
         }
@@ -229,7 +240,6 @@ const Slide: React.FC<SlideProps> = ({
    */
     const tapCloseHandler = (e: any) => {
         if (onClose) {
-            setHasSetDefaultIndex(false)
             setIdx(0)
             onClose()
         }
@@ -257,15 +267,11 @@ const Slide: React.FC<SlideProps> = ({
         }
     }
     const preventGesturestart = (e: any) => { e.preventDefault() }
-   
+
     useLayoutEffect(() => {
         setRadio(window.innerHeight / window.innerWidth)
         scaleW = window.innerWidth + 10
-        if (!hasSetDefaultIndex && visible) {
-            console.log(9999934,defaultIndex)
-            goIndex(defaultIndex || '0') // 默认展示第一张
-            setHasSetDefaultIndex(true)
-        }
+        init()
     })
     useEffect(() => {
         if (wrapRef.current && outerRef.current) {
@@ -284,7 +290,6 @@ const Slide: React.FC<SlideProps> = ({
                 outerRef.current.removeEventListener('touchmove', moveHandler)
                 outerRef.current.removeEventListener('touchend', endHandler)
                 outerRef.current.removeEventListener('click', clkHandler)
-                setHasSetDefaultIndex(false)
             }
         }
     })
