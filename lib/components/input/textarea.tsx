@@ -10,7 +10,7 @@ interface TextareaProps {
   autosize?: boolean
   value?: string
   defaultValue?: string | undefined
-  onChange?: React.ChangeEventHandler
+  onValueChange?: (value:string | number) => any
   className?: string
   style?: React.CSSProperties
   id?: string
@@ -22,7 +22,7 @@ const Textarea: React.FunctionComponent<TextareaProps> = ({
   autosize,
   value,
   defaultValue,
-  onChange,
+  onValueChange,
   style,
   placeholder,
   className,
@@ -32,9 +32,7 @@ const Textarea: React.FunctionComponent<TextareaProps> = ({
   const id = uniqueId(4)
   const textareaRef = React.createRef<HTMLTextAreaElement>()
   const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (onChange) {
-      onChange(e);
-    }
+    onValueChange && onValueChange(e.currentTarget.value)
     if (autosize) {
       const { top, bottom } = textareaRef.current!.getBoundingClientRect()
       const scrollHeight = textareaRef.current!.scrollHeight

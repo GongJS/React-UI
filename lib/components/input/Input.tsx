@@ -8,7 +8,9 @@ interface InputProps extends HTMLAttributes {
   value?: string
   defaultValue?: string
   placeholder?: string
-  onChange?: React.ChangeEventHandler
+  onValueChange?: (value:string | number) => any
+  extraClick?: () => any
+  clearClick?: () => any
   onFocus?: React.FocusEventHandler
   onBlur?: React.FocusEventHandler
   addonBefore?: string | React.ReactNode
@@ -35,7 +37,9 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   onFocus,
   onBlur,
-  onChange,
+  onValueChange,
+  extraClick,
+  clearClick,
   className,
   wrapperClassName,
   wrapperStyle,
@@ -43,20 +47,13 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const [clearVisible, setClearVisible] = useState(false)
   const [offFocus, setOffFocus] = useState(false)
-  const [event, setEvent] = useState<React.ChangeEvent<HTMLInputElement>>()
   const inputRef = React.createRef<HTMLInputElement>()
   const handleChange: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (onChange) {
-      setEvent(e)
-      e.persist()
-      onChange(e);
-    }
+     onValueChange && onValueChange(e.currentTarget.value);
   }
   const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!event) { return }
-    e.stopPropagation()
-    event!.target.value = ''
-    handleChange(event!)
+    onValueChange && onValueChange('')
+    clearClick && clearClick()
     const ref = inputRef.current
     setTimeout(() => {
       ref && ref.focus()
@@ -103,9 +100,8 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className={wrapperClassList} style={wrapperStyle}>
       {
-        addonBefore ? <div className="r-input-group__prepend">{addonBefore} </div> : null
+        addonBefore ? <div className="r-input-group__prepend" onClick={extraClick}>{addonBefore} </div> : null
       }
-      {changeValue()}
       <input
         value={derivedName}
         type="text"
@@ -120,7 +116,7 @@ const Input: React.FC<InputProps> = ({
         {...restProps}
       />
       {
-        addonAfter ? <div className="r-input-group__append">
+        addonAfter ? <div className="r-input-group__append" onClick={extraClick}>
           {addonAfter}
           {clearVisible && clearable && !readonly ? <button onMouseDown={handleClear} className="r-input__clear"><Icon color="#fff" size="14px" name='close' /></button> : null}
         </div>

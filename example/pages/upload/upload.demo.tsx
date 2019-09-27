@@ -25,6 +25,7 @@ export default () => {
   const [failVisible, setFailVisible] = useState(false)
   const [index, setIndex] = useState('0')
   const [failIndex, setFailIndex] = useState('0')
+  const uploadRef = React.useRef<any>(null)
   const onFileChange = (newFileList: FileListProps[]) => {
     setFileList(newFileList)
     const slideListCopy: img[] = []
@@ -51,6 +52,7 @@ export default () => {
     setFailVisible(true)
   }
   const onFailFileChange = (newFileList: FileListProps[]) => {
+   
     setFailFileList(newFileList)
     const slideListCopy: img[] = []
     newFileList.map(item => {
@@ -85,7 +87,7 @@ export default () => {
       }`
       }
     >
-      <Upload action={'http://127.0.0.1:3000/upload'} name="post" fileList={fileList} onFileChange={onFileChange} handleImgClick={handleImgClick}>
+      <Upload ref={uploadRef} action={'http://101.132.117.183:7001/api/upload'} name="post" fileList={fileList} onFileChange={onFileChange} handleImgClick={handleImgClick}>
         <div className="r-upload-action">
           <Icon name="add_light" />
         </div>

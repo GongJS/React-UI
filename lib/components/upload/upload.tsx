@@ -2,6 +2,10 @@ import React, { useRef, useState, useImperativeHandle } from 'react';
 import Icon from '../icon/Icon'
 import { combineClass, uniqueId, checkClient } from '../../helpers/utils';
 import './upload.scss'
+
+export interface UploadHandles {
+    upload(): void;
+}
 interface FileListProps {
     uid?: string
     name?: string
@@ -20,7 +24,7 @@ interface UploadProps extends React.HTMLAttributes<HTMLDivElement> {
     handleImgClick?: (uid: string, index: string) => any
 }
 
-const Upload: React.FC<UploadProps> = ({
+const Upload: React.RefForwardingComponent<UploadHandles, UploadProps> = ({
     name,
     multiple,
     method,
@@ -38,27 +42,40 @@ const Upload: React.FC<UploadProps> = ({
     fileListRef.current = fileList
     const [visibleAction, setvisibleAction] = useState(false)
     const [selectIndex, setSelectIndex] = useState()
+    // let originFile: FormData
+    // let originUid: string
+    // let reTryTime = 2
 
     const startUploadFiles = (formData: FormData, uid: string) => {
+        // originFile = formData
+        // originUid = uid
         const xhr = new XMLHttpRequest()
         xhr.timeout = 5000
         xhr.open(method || 'post', action)
         // 携带token
-        const token = localStorage.getItem('token')
-        if (token) {
-            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        }
+        // const token = localStorage.getItem('token')
+        // if (token) {
+        //     xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        // }
         xhr.onload = function () {
             if (xhr.status === 200) {
                 handleUploadResult(xhr, uid, 'success')
-            } else {
-                handleUploadResult(xhr, uid, 'error')
+                return
             }
+            // if (xhr.status === 401) {
+            //     if (reTryTime > 0) {
+            //         reTryTime--
+            //         localStorage.setItem('token', JSON.parse(xhr.response).token)
+            //         startUploadFiles(originFile, originUid)
+            //     }
+            //     return
+            // } 
+            handleUploadResult(xhr, uid, 'error')   
         }
-        xhr.onerror = function () {
+        xhr.onerror = function (err) {
             handleUploadResult(xhr, uid, 'error')
         }
-        xhr.ontimeout = function (e) {
+        xhr.ontimeout = function () {
             handleUploadResult(xhr, uid, 'error')
         }
         xhr.send(formData)
@@ -71,6 +88,7 @@ const Upload: React.FC<UploadProps> = ({
             file.url = JSON.parse(xhr.response).url
             file.width = JSON.parse(xhr.response).width
             file.height = JSON.parse(xhr.response).height
+            // reTryTime = 2
         } else {
             file.status = 'error'
             file.url = 'https://i.loli.net/2019/08/27/2gBTWlfkt5EDVbi.jpg'
@@ -182,19 +200,15 @@ const Upload: React.FC<UploadProps> = ({
             </div>
             <input
                 id={id}
-                multiple={multiple}
-                type="file"
-                name="file"
+                multiple={multiple || false}
+                type='file'
+                name={name || 'file'}
                 style={{
                     display: 'none'
                 }} />
         </div>
     )
 }
-Upload.defaultProps = {
-    name: 'file',
-    method: 'post',
-    multiple: false
-}
+
 Upload.displayName = 'Upload'
 export default React.forwardRef(Upload)

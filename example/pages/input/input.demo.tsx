@@ -7,12 +7,12 @@ import Textarea from '../../../lib/components/input/textarea'
 
 export default () => {
   const [value1, setValue1] = useState()
-  const onChange1 = (e:React.ChangeEvent<HTMLInputElement>) => {
-      setValue1(e.currentTarget.value)
+  const onChange1 = (value:string | number) => {
+      setValue1(value)
   }
   const [value2, setValue2] = useState()
-  const onChange2 = (e:React.ChangeEvent<HTMLInputElement>) => {
-      setValue2(e.currentTarget.value)
+  const onChange2 = (value:string | number) => {
+      setValue2(value)
   }
   return <Fragment>
     <ReactMarkdown source={require('!!raw-loader!./input.md').default} className="md" />
@@ -23,7 +23,7 @@ export default () => {
       <Input />`
       }
     >
-      <Input wrapperStyle={{ width: '300px' }} value={value1} onChange={onChange1} placeholder="请输入内容" />
+      <Input wrapperStyle={{ width: '300px' }} value={value1} onValueChange={onChange1} placeholder="请输入内容" />
     </CodeCard>
     <CodeCard
       title="可清空"
@@ -32,7 +32,7 @@ export default () => {
       <Input clearable />`
       }
     >
-      <Input clearable wrapperStyle={{ width: '300px' }} placeholder="请输入内容" />
+      <Input clearable wrapperStyle={{ width: '300px' }} placeholder="请输入内容" value={value2} onValueChange={onChange2}/>
     </CodeCard>
     <CodeCard
       title="禁用 只读"
@@ -80,7 +80,7 @@ export default () => {
       <Textarea />`
       }
     >
-      <Textarea onChange={onChange2} value={value2}/>
+      <Textarea onValueChange={onChange2} value={value2}/>
     </CodeCard>
 
     <CodeCard
