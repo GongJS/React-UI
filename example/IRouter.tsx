@@ -16,6 +16,7 @@ import Sticky from './pages/sticky/sticky.demo';
 import Grid from './pages/grid/grid.demo';
 import Upload from './pages/upload/upload.demo';
 import Slide from './pages/slide/slide.demo'
+import Loading from './pages/loading/loading.demo'
 import App from './App';
 
 export default class IRouter extends Component {
@@ -41,6 +42,7 @@ export default class IRouter extends Component {
                 <Route path={`${match.url}/input`} component={Input} />
                 <Route path={`${match.url}/upload`} component={Upload} />
                 <Route path={`${match.url}/slide`} component={Slide} />
+                <Route path={`${match.url}/loading`} component={Loading} />
               </Switch>
             )} />
             <Redirect to="/components/icon" />
