@@ -8,7 +8,7 @@ interface InputProps extends HTMLAttributes {
   value?: string
   defaultValue?: string
   placeholder?: string
-  onValueChange?: (value:string | number) => any
+  onValueChange?: (value:string) => any
   extraClick?: () => any
   clearClick?: () => any
   onFocus?: React.FocusEventHandler
@@ -103,7 +103,7 @@ const Input: React.FC<InputProps> = ({
     value && offFocus && setClearVisible(true)
     !value && setClearVisible(false)
   })
-  
+
   return (
     <div className={wrapperClassList} style={wrapperStyle}>
       {
