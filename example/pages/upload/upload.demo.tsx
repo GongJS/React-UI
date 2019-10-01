@@ -87,7 +87,7 @@ export default () => {
       }`
       }
     >
-      <Upload ref={uploadRef} action={'http://101.132.117.183:7001/api/upload'} name="post" fileList={fileList} onFileChange={onFileChange} handleImgClick={handleImgClick}>
+      <Upload ref={uploadRef} action={'https://koa-img.herokuapp.com/upload'} name="post" fileList={fileList} onFileChange={onFileChange} handleImgClick={handleImgClick}>
         <div className="r-upload-action">
           <Icon name="add_light" />
         </div>

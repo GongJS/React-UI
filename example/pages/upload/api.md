@@ -8,6 +8,8 @@
 | fileList   | 已经上传的文件列表 |  Object[]   | [] | 否 |
 | onFileChange   | 文件上传完的状态 |  (fileList) => void   | - | 否 |
 | handleImgClick | 单击预览图片的回调函数；移动端单击图片，PC端单击Icon |  (url, index) => void   | - | 否 |
+| upload | 暴露给父组件调用的方法，触发上传 |  uploadRef.current.upload()   | - | 否 |
+
 
 `file` file 当前操作的文件对象。
 

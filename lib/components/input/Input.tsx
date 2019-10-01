@@ -48,9 +48,11 @@ const Input: React.FC<InputProps> = ({
   const [clearVisible, setClearVisible] = useState(false)
   const [offFocus, setOffFocus] = useState(false)
   const inputRef = React.createRef<HTMLInputElement>()
+
   const handleChange: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
      onValueChange && onValueChange(e.currentTarget.value);
   }
+
   const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
     onValueChange && onValueChange('')
     clearClick && clearClick()
@@ -59,15 +61,18 @@ const Input: React.FC<InputProps> = ({
       ref && ref.focus()
     })
   }
+
   const handleFocus: React.FocusEventHandler = (e) => {
     setOffFocus(true)
     onFocus && onFocus(e)
   }
+
   const handleBlur: React.FocusEventHandler = (e) => {
     setClearVisible(false)
     setOffFocus(false)
     onBlur && onBlur(e)
   }
+
   const wrapperClassList = combineClass(
     'r-input-wrapper',
     wrapperClassName,
@@ -92,18 +97,20 @@ const Input: React.FC<InputProps> = ({
     return ''
   }
 
-  const derivedName = useMemo(() => changeValue(value), [value])
+  const derivedValue = useMemo(() => changeValue(value), [value])
+
   useEffect(() => {
     value && offFocus && setClearVisible(true)
     !value && setClearVisible(false)
   })
+  
   return (
     <div className={wrapperClassList} style={wrapperStyle}>
       {
         addonBefore ? <div className="r-input-group__prepend" onClick={extraClick}>{addonBefore} </div> : null
       }
       <input
-        value={derivedName}
+        value={derivedValue}
         type="text"
         className={inputClassList}
         placeholder={placeholder || ''}

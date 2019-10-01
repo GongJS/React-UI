@@ -3,7 +3,7 @@
 
 |    属性    |   说明   |    类型    |  默认值  | 是否必须 |
 | --------- | ------- | --------- | ------- | -------  |
-| value    | 输入框当前值 |  string   | -     | 否 |
+| value    | 输入框当前值 |  string  | -     | 否 |
 | defaultValue   | 输入框默认值 |  string   | -   | 否 |
 | clearable   | 是否可清空 |  boolean   | false   | 否 |
 | placeholder   | 原生属性 |  string   | - | 否 |
@@ -13,7 +13,9 @@
 | sufIcon  | 后缀Icon |  string   | -   | 否 |
 | readOnly   | 只读状态 |  boolean   | false | 否 |
 | disabled    | 禁用状态 |  boolean   | false  | 否 |
-| onChange   | 值改变时的回调 |  React.ChangeEventHandler   | -   | 否 |
+| onValueChange   | 值改变时的回调 |  (value: string) => any | -   | 否 |
+| clearClick   | 点击清除后的回调 | () => any | -   | 否 |
+| extraClick   | 点击前置标签/后置标签的回调 | () => any | -   | 否 |
 | onFocus   | 获取焦点的回调 |  React.FocusEventHandler   | -   | 否 |
 | onBlur   | 失去焦点时的回调 |  React.FocusEventHandler   | -   | 否 |
 | className   | input类名 |  string   | - | 否 |
@@ -22,10 +24,13 @@
 | wrapperStyle    | 外层wrapper样式 |  React.CSSProperties | -  | 是 |
 
 ## Textarea
+
+|    属性    |   说明   |    类型    |  默认值  | 是否必须 |
+| --------- | ------- | --------- | ------- | -------  |
 | value    | 输入框当前值 |  string   | -     | 否 |
 | defaultValue   | 输入框默认值 |  string   | -   | 否 |
 | placeholder   | 原生属性 |  string   | - | 否 |
 | autosize    | 自适应高度 |  boolean   | false  | 否 |
-| onChange   | 值改变时的回调 |  React.ChangeEventHandler  | -   | 否 |
+| onValueChange   | 值改变时的回调 |  (value: string) => any | -   | 否 |
 | className   | textarea类名 |  string   | - | 否 |
 | style    | textarea样式 |  React.CSSProperties | -  | 是 |

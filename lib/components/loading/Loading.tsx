@@ -3,27 +3,19 @@ import Icon from '../icon/Icon'
 import { combineClass } from '../../helpers/utils';
 import './loading.scss';
 interface LoadProps extends React.HTMLAttributes<HTMLDivElement> {
-  name: string;
+  name?: string;
   size?: string;
   message?: string;
   loading?: boolean;
+  wrapperClass?:string
 }
 
-const Loading: React.FC<LoadProps> = ({name, size, message,loading,className,children, ...restProps}) => {
+const Loading: React.FC<LoadProps> = ({name, size, message,loading,wrapperClass,className,children, ...restProps}) => {
   return (
-    <div className="r-loading-container">
+    <div className={combineClass('r-loading-container', `${wrapperClass}`)}>
       {
         loading && <div className={combineClass('r-loading', className, `${children? 'r-nested-loading': ''}`)} {...restProps}>
-         
-            {
-              name === 'spin' ? 
-                <div className={combineClass( 'r-loading-spin-rotate ',`r-loading-spin`, `r-loading-${size}`)}>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                </div> : <Icon name={name} color="#1890ff"  className={combineClass( 'r-loading-spin-rotate ',`r-loading-${size}`)}/>
-            }
+           <Icon name={name || 'loading1'} color="#1890ff"  className={combineClass( 'r-loading-rotate ',`r-loading-${size}`)}/>
           {
             message && <div className="r-loading-text">{message}</div>
           }
@@ -37,6 +29,7 @@ const Loading: React.FC<LoadProps> = ({name, size, message,loading,className,chi
 }
 
 Loading.defaultProps = {
+  name: 'loading1',
   size: 'medium',
   message: '',
   loading: true

@@ -42,34 +42,34 @@ const Upload: React.RefForwardingComponent<UploadHandles, UploadProps> = ({
     fileListRef.current = fileList
     const [visibleAction, setvisibleAction] = useState(false)
     const [selectIndex, setSelectIndex] = useState()
-    // let originFile: FormData
-    // let originUid: string
-    // let reTryTime = 2
-
+    
+     // 触发上传事件
+     const handleClickUpload = () => {
+        input = document.querySelector(`#${id}`)
+        if (input) {
+            input.addEventListener('change', handleInputChangeCallback)
+            input.click()
+        }
+    }
+    
+    // 准备上传文件
+    const uploadFiles = (srcFiles: any) => {
+        for (let i = 0; i < srcFiles.length; i++) {
+            const formData = new FormData()
+            formData.append(name || 'file', srcFiles[i])
+            startUploadFiles(formData, srcFiles[i].uid)
+        }
+    }
+    // 开始上传
     const startUploadFiles = (formData: FormData, uid: string) => {
-        // originFile = formData
-        // originUid = uid
         const xhr = new XMLHttpRequest()
         xhr.timeout = 5000
         xhr.open(method || 'post', action)
-        // 携带token
-        // const token = localStorage.getItem('token')
-        // if (token) {
-        //     xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        // }
         xhr.onload = function () {
             if (xhr.status === 200) {
                 handleUploadResult(xhr, uid, 'success')
                 return
             }
-            // if (xhr.status === 401) {
-            //     if (reTryTime > 0) {
-            //         reTryTime--
-            //         localStorage.setItem('token', JSON.parse(xhr.response).token)
-            //         startUploadFiles(originFile, originUid)
-            //     }
-            //     return
-            // } 
             handleUploadResult(xhr, uid, 'error')   
         }
         xhr.onerror = function (err) {
@@ -80,6 +80,8 @@ const Upload: React.RefForwardingComponent<UploadHandles, UploadProps> = ({
         }
         xhr.send(formData)
     }
+
+    // 处理上传结果
     const handleUploadResult = (xhr: XMLHttpRequest, uid: string, status: 'success' | 'error') => {
         let file = fileListRef.current!.filter(f => f.uid === uid)[0]
         let index = fileListRef.current!.indexOf(file)
@@ -88,22 +90,19 @@ const Upload: React.RefForwardingComponent<UploadHandles, UploadProps> = ({
             file.url = JSON.parse(xhr.response).url
             file.width = JSON.parse(xhr.response).width
             file.height = JSON.parse(xhr.response).height
-            // reTryTime = 2
         } else {
             file.status = 'error'
+            // 设置默认图片样式
             file.url = 'https://i.loli.net/2019/08/27/2gBTWlfkt5EDVbi.jpg'
+            file.width = 500
+            file.height = 500
         }
         let fileListCopy = [...fileListRef.current!]
         fileListCopy.splice(index, 1, file)
         onFileChange(fileListCopy)
     }
-    const uploadFiles = (srcFiles: any) => {
-        for (let i = 0; i < srcFiles.length; i++) {
-            const formData = new FormData()
-            formData.append(name || 'file', srcFiles[i])
-            startUploadFiles(formData, srcFiles[i].uid)
-        }
-    }
+
+    // 选中图片回调
     const handleInputChangeCallback = (e: any) => {
         let srcFiles: any = []
         input!.files ? srcFiles = input!.files : null
@@ -120,28 +119,29 @@ const Upload: React.RefForwardingComponent<UploadHandles, UploadProps> = ({
         input!.removeEventListener('change', handleInputChangeCallback)
         input!.value = ''
     }
-    const handleClickUpload = () => {
-        input = document.querySelector(`#${id}`)
-        if (input) {
-            input.addEventListener('change', handleInputChangeCallback)
-            input.click()
-        }
-    }
+
+    // 删除图片
     const handleDelImage = (uid: any) => {
         const del = fileList.filter(f => f.uid !== uid)
         onFileChange(del)
     }
+
+    // 预览图片
     const handlePreviewImg = (imgSrc: string, index: number) => {
         handleImgClick && handleImgClick(imgSrc, index.toString())
     }
+
     const handleMouseEnter = (index: number) => {
         setvisibleAction(true)
         setSelectIndex(index)
     }
+
     const handleMouseLeave = () => {
         setvisibleAction(false)
         setSelectIndex(null)
     }
+
+    // 父组件直接调用
     useImperativeHandle(ref, () => ({
         upload: () => {
             handleClickUpload()
