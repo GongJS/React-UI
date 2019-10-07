@@ -20,7 +20,11 @@ const Icon: React.FC<IconProps> = ({
 
   // 引入icon图标库
   useEffect(() => {
-    const script = document.createElement('script');
+    let script:HTMLScriptElement | null= document.querySelector('#r-icon-script');
+    if (script) {
+      return
+    }
+    script = document.createElement('script');
     script.type = 'text/javascript';
     script.id = 'r-icon-script';
     script.src = '//at.alicdn.com/t/font_732431_yq4l3hoi1wi.js';

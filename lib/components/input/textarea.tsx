@@ -10,7 +10,7 @@ interface TextareaProps {
   autosize?: boolean
   value?: string
   defaultValue?: string | undefined
-  onValueChange?: (value:string | number) => any
+  onValueChange?: (value:string) => any
   className?: string
   style?: React.CSSProperties
   id?: string
