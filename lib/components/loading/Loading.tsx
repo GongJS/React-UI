@@ -7,24 +7,27 @@ interface LoadProps extends React.HTMLAttributes<HTMLDivElement> {
   size?: string;
   message?: string;
   loading?: boolean;
-  wrapperClass?:string
+  wrapperClass?: string
 }
 
-const Loading: React.FC<LoadProps> = ({name, size, message,loading,wrapperClass,className,children, ...restProps}) => {
+const Loading: React.FC<LoadProps> = ({ name, size, message, loading, wrapperClass, className, children, ...restProps }) => {
   return (
-    <div className={combineClass('r-loading-container', `${wrapperClass}`)}>
+    <>
       {
-        loading && <div className={combineClass('r-loading', className, `${children? 'r-nested-loading': ''}`)} {...restProps}>
-           <Icon name={name || 'loading1'} color="#1890ff"  className={combineClass( 'r-loading-rotate ',`r-loading-${size}`)}/>
-          {
-            message && <div className="r-loading-text">{message}</div>
-          }
-        </div>
+        loading ?
+          <div className={combineClass('r-loading-container', `${wrapperClass}`)}>
+            <div className={combineClass('r-loading', className, `${children ? 'r-nested-loading' : ''}`)} {...restProps}>
+              <Icon name={name || 'loading1'} color="#1890ff" className={combineClass('r-loading-rotate ', `r-loading-${size}`)} />
+              {
+                message && <div className="r-loading-text">{message}</div>
+              }
+            </div>
+            <div className="r-loading-children">
+              {children}
+            </div>
+          </div> : null
       }
-      <div className="r-loading-children">
-        {children}
-      </div>
-    </div>
+    </>
   )
 }
 
