@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect, useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Icon from '../icon/Icon'
 import { combineClass } from '../../helpers/utils';
@@ -9,103 +9,70 @@ interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
   type?: 'info' | 'success' | 'warning' | 'error'
   duration?: number
   top?: number
-  showClose?: boolean
   onClose?: () => any
   className?: string
 }
 
-let timer: number
-let cacheContainer: HTMLDivElement | null = null
-const messageRef = React.createRef<HTMLDivElement>()
-const wrapperRef = React.createRef<HTMLDivElement>()
-
-function removeMessage(flag?: string) {
-  const obj = cacheContainer as HTMLDivElement
-  const animationDurationTime = 0.2
-  if (flag === 'closeNow') {
-    ReactDOM.unmountComponentAtNode(obj)
-    obj.remove()
-    cacheContainer = null
-  } else {
-    const ref = messageRef
-    if (ref && ref.current) {
-      ref.current.style.animation = `slide-down ${animationDurationTime}s`
-    }
-    setTimeout(() => {
-      ReactDOM.unmountComponentAtNode(obj)
-      obj.remove()
-      cacheContainer = null
-    }, animationDurationTime * 1000);
-  }
+function removeMessage(messageInstance: JSX.Element, div: HTMLDivElement) {
+  ReactDOM.render(React.cloneElement(messageInstance), div);
+  ReactDOM.unmountComponentAtNode(div);
+  div.remove()
 }
-
+function creatWrapper() {
+  let wrapper
+  wrapper = document.querySelector('.r-message')
+  if (wrapper) { return wrapper }
+  wrapper = document.createElement('div');
+  wrapper.className = "r-message";
+  document.body.append(wrapper);
+  ReactDOM.createPortal(wrapper, document.body);
+  return wrapper
+};
 function createMessage(options: MessageProps) {
-  const { content, type, duration, showClose, onClose, top } = options
-  if (cacheContainer) {
-    removeMessage('closeNow')
-  }
-  const container = document.createElement('div')
-  document.body.append(container)
-  const messageInstance = React.createElement(
-    Message,
-    {
-      content,
-      type,
-      showClose,
-      onClose
-    }
-  )
-  ReactDOM.render(messageInstance, container)
-  const ref = wrapperRef
-  if (ref && ref.current) {
-    ref.current.style.top = `${top}px`
-  }
-  cacheContainer = container
-  if (timer) {
-    clearTimeout(timer)
-  }
-  timer = window.setTimeout(() => {
-    removeMessage()
+  const { content, type, duration, onClose, top } = options
+  const wrapper = creatWrapper()
+  const messageInstance = (
+    <Message content={content} onClose={onClose} type={type} top={top} />
+  );
+  const div = document.createElement("div");
+  wrapper.append(div);
+  ReactDOM.render(messageInstance, div);
+  setTimeout(() => {
+    removeMessage(messageInstance, div)
   }, duration! * 1000)
 }
 
 const Message: React.FC<MessageProps> = ({
   content,
-  type,
-  showClose,
+  top,
+  type = 'info',
   className,
   onClose,
   ...restProps
 }) => {
-
-  const handleClick = () => {
-    removeMessage('closeNow')
-    clearTimeout(timer)
+  const wrapper: HTMLDivElement | null = document.querySelector('.r-message')
+  const IconMap = {
+    info: { color: '#3963bc', icon: 'infofill' },
+    success: { color: '#00c292', icon: 'roundcheckfill' },
+    warning: { color: '#ffcb71', icon: 'warnfill' },
+    error: { color: '#f4516c', icon: 'roundclosefill' },
   }
+  useLayoutEffect(() => {
+    wrapper && (wrapper.style.top = `${top}px`)
+  })
   useEffect(() => {
     return () => {
       onClose && onClose()
-      clearTimeout(timer)
+      wrapper && (wrapper.style.top = '30px')
     }
   })
   return (
-    <div ref={wrapperRef} className="r-message" >
-      <div ref={messageRef} className={combineClass('r-message-container', `r-message-${type}`, className)} {...restProps}>
-        {
-          type === 'info' ? <Icon color="#3963bc" name="infofill" />
-            : type === 'success' ? <Icon color="#00c292" name="roundcheckfill" />
-              : type === 'warning' ? <Icon color="#ffcb71" name="warnfill" />
-                : <Icon color="#f4516c" name="roundclosefill" />
-        }
-        <div className="content">
-          {content}
-          {
-            showClose ? <div className="close" onClick={handleClick}> x</div> : null
-          }
-        </div>
+    <div className={combineClass('r-message-container', `r-message-${type}`, className)} {...restProps}>
+      <Icon color={IconMap[type].color} name={IconMap[type].icon} />
+      <div className="content">
+        {content}
       </div>
     </div>
-
   )
 }
 
@@ -134,11 +101,8 @@ const message = {
   },
   error: (options: MessageProps | string) => {
     setAttributes(options, 'error')
-  }
+  },
 }
 Message.displayName = 'Message'
-Message.defaultProps = {
-  showClose: false
-}
 export default message
 
