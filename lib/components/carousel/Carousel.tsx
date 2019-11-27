@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect } from 'react';
-import {combineClass, uniqueId} from '../../helpers/utils';;
+import { combineClass, uniqueId } from '../../helpers/utils';;
 import Icon from '../icon/Icon'
-import {slide,fade} from './animation'
+import { slide, fade } from './animation'
 import './carousel.scss'
 
 interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -27,6 +27,8 @@ const Carousel: React.FC<CarouselProps> = ({
   let direction: string
   const id = uniqueId(4)
   const panelsRef = React.createRef<HTMLDivElement>()
+
+  // 点击小点点切换
   const handleDotsClick = (event: any) => {
     event.stopPropagation()
     let index = Array.from(dotsEle).indexOf(event.target)
@@ -35,13 +37,16 @@ const Carousel: React.FC<CarouselProps> = ({
     setActiveDot(index)
     play(index, lastIndex)
   }
+
+  // 激活选中的小点点样式
   const setActiveDot = (index: number) => {
-    if (!endFlag) {
-      return
+    if (endFlag) {
+      dotsEle.forEach(dot => dot.classList.remove('active'))
+      dotsEle[index].classList.add('active')
     }
-    dotsEle.forEach(dot => dot.classList.remove('active'))
-    dotsEle[index].classList.add('active')
   }
+
+  // 上一页
   const pre = () => {
     const index = getPreIndex()
     direction = 'left'
@@ -52,6 +57,8 @@ const Carousel: React.FC<CarouselProps> = ({
       startAutoPlay()
     }
   }
+
+  // 下一页
   const next = () => {
     const index = getNextIndex()
     direction = 'right'
@@ -62,6 +69,8 @@ const Carousel: React.FC<CarouselProps> = ({
       startAutoPlay()
     }
   }
+
+  // 获取当前轮播页索引
   const getActiveIndex = () => {
     let ele: HTMLElement | null = document.querySelector(`.r-carousel-${id} .dots .active`)
     if (ele) {
@@ -70,17 +79,25 @@ const Carousel: React.FC<CarouselProps> = ({
       throw Error('没有找到<span class="active"></span>')
     }
   }
+
+  // 上一页轮播页索引
   const getPreIndex = () => {
     return (getActiveIndex() - 1 + dotsEle.length) % dotsEle.length
   }
+
+  // 下一页轮播页索引
   const getNextIndex = () => {
     return (getActiveIndex() + 1) % dotsEle.length
   }
+
+  // 开启自动轮播
   const startAutoPlay = () => {
     timer = setInterval(() => {
       next()
     }, interval)
   }
+  
+  // 轮播
   const play = (toIndex: number, fromIndex: number) => {
     if (!endFlag) {
       return
@@ -98,7 +115,7 @@ const Carousel: React.FC<CarouselProps> = ({
       fade(panelsEle[fromIndex], panelsEle[toIndex], onFinsh)
     }
   }
-  
+
   useEffect(() => {
     dotsEle = document.querySelectorAll(`.r-carousel-${id} .dots span`)
     panelsEle = document.querySelectorAll(`.r-carousel-${id} .panels div`)

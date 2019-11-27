@@ -29,10 +29,12 @@ const Cascader: React.FC<CascaderProps> = ({
   itemStyle,
   ...restProps
 }) => {
-  const [popoverVisible, setPopoverVisible] = useState(false)
-  const [selectedItems, setSelectedItems] = useState<Option[]>([])
-  const [selectedValue, setSelectedValue] = useState()
+  const [popoverVisible, setPopoverVisible] = useState(false) // 弹窗
+  const [selectedItems, setSelectedItems] = useState<Option[]>([]) // 选中项
+  const [selectedValue, setSelectedValue] = useState() // 选中项的值
   const cascaderRef = React.createRef<HTMLDivElement>()
+  
+  // 处理选中项
   const handleChangeValue = (option: Option, level: number) => {
     selectedItems[level] = option
     selectedItems.splice(level + 1)
@@ -40,13 +42,16 @@ const Cascader: React.FC<CascaderProps> = ({
     setSelectedValue(selectedItems.map((item) => item.label).join('/'))
     onSelect && onSelect(selectedItems)
   }
+
+  // 清除选中项
   const clearSelectValue: React.MouseEventHandler = (e) => {
     e.stopPropagation()
     setSelectedValue('')
     setSelectedItems([])
     setPopoverVisible(false)
   }
-  // 处理点击subMenu区域以外的click事件
+  
+  // 处理点击cascader区域以外的click事件
   const outDivClickHandler = (e: any) => {
     const ref: HTMLDivElement | null = cascaderRef.current
     if (ref) {

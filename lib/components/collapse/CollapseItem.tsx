@@ -26,6 +26,7 @@ const CollapseItem: React.FC<CollapseItemProps> = ({
   defaultSelectedKeys,
   handleSelectedKey,
   ...restProps }) => {
+    
   const handleClick = (event:React.MouseEvent<HTMLElement>) => {
     if (disabled) {
       return
@@ -34,11 +35,9 @@ const CollapseItem: React.FC<CollapseItemProps> = ({
   }
   const childRef = React.createRef<HTMLDivElement>()
   let height: string
+
   useEffect(() => {
-    if (disabled) {
-      return
-    }
-    if ( defaultSelectedKeys!.indexOf(uniqueKey!) > -1) {
+    if ( !disabled && defaultSelectedKeys!.indexOf(uniqueKey!) > -1) {
       handleSelectedKey!(uniqueKey!)
     }
   },[])

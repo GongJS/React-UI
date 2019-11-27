@@ -1,21 +1,56 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import ReactMarkdown from 'react-markdown'
 import CodeCard from '../../CodeCard'
 import Input from '../../../lib/components/input/Input'
-import Textarea from '../../../lib/components/input/textarea'
-
+import Textarea from '../../../lib/components/input/Textarea'
 
 export default () => {
+  const [value1, setValue1] = useState()
+  const onChange1 = (value:string) => {
+      setValue1(value)
+  }
+  const [value2, setValue2] = useState()
+  const onChange2 = (value:string) => {
+      setValue2(value)
+  }
+  const [value3, setValue3] = useState()
+  const onChange3 = (value:string) => {
+      setValue3(value)
+  }
+  const [value4, setValue4] = useState()
+  const onChange4 = (value:string) => {
+      setValue4(value)
+  }
+  const [value5, setValue5] = useState()
+  const onChange5 = (value:string) => {
+      setValue5(value)
+  }
+  const [value6, setValue6] = useState()
+  const onChange6 = (value:string) => {
+      setValue6(value)
+  }
+  const [value7, setValue7] = useState()
+  const onChange7 = (value:string) => {
+      setValue7(value)
+  }
+  const [value8, setValue8] = useState()
+  const onChange8 = (value:string) => {
+      setValue8(value)
+  }
   return <Fragment>
     <ReactMarkdown source={require('!!raw-loader!./input.md').default} className="md" />
     <CodeCard
       title="基础用法"
       summary="最基本的用法。"
       code={` 
-      <Input />`
+      const [value1, setValue1] = useState()
+      const onChange1 = (value:string) => {
+          setValue1(value)
+      }
+      <Input value={value1} onValueChange={onChange1} />`
       }
     >
-      <Input wrapperStyle={{ width: '300px' }} placeholder="请输入内容" />
+      <Input wrapperStyle={{ width: '300px' }} value={value1} onValueChange={onChange1} placeholder="请输入内容" />
     </CodeCard>
     <CodeCard
       title="可清空"
@@ -24,7 +59,7 @@ export default () => {
       <Input clearable />`
       }
     >
-      <Input clearable wrapperStyle={{ width: '300px' }} placeholder="请输入内容" />
+      <Input clearable wrapperStyle={{ width: '300px' }} placeholder="请输入内容" value={value2} onValueChange={onChange2}/>
     </CodeCard>
     <CodeCard
       title="禁用 只读"
@@ -48,9 +83,9 @@ export default () => {
       }
     >
       <div style={{ width: '300px', marginBottom: '20px' }}>
-        <Input preIcon="sousuo" wrapperStyle={{ width: '300px' }} />
+        <Input preIcon="sousuo" wrapperStyle={{ width: '300px' }}  value={value3} onValueChange={onChange3}/>
       </div>
-      <Input sufIcon="sousuo" wrapperStyle={{ width: '300px', marginBottom: '20px' }} />
+      <Input sufIcon="sousuo" wrapperStyle={{ width: '300px', marginBottom: '20px' }} value={value4} onValueChange={onChange4}/>
     </CodeCard>
 
     <CodeCard
@@ -61,8 +96,8 @@ export default () => {
       <Input addonAfter=".com" />`
       }
     >
-      <Input wrapperStyle={{ width: '300px', marginBottom: '20px' }} addonBefore="htttp://" />
-      <Input wrapperStyle={{ width: '300px' }} addonAfter=".com" />
+      <Input wrapperStyle={{ width: '300px', marginBottom: '20px' }} addonBefore="htttp://" value={value5} onValueChange={onChange5}/>
+      <Input wrapperStyle={{ width: '300px' }} addonAfter=".com" value={value6} onValueChange={onChange6}/>
     </CodeCard>
 
     <CodeCard
@@ -72,7 +107,7 @@ export default () => {
       <Textarea />`
       }
     >
-      <Textarea />
+      <Textarea value={value7} onValueChange={onChange7}/>
     </CodeCard>
 
     <CodeCard
@@ -82,7 +117,7 @@ export default () => {
       <Textarea autosize={true}/>`
       }
     >
-      <Textarea autosize={true}/>
+      <Textarea autosize={true} value={value8} onValueChange={onChange8}/>
     </CodeCard>
     <ReactMarkdown source={require('!!raw-loader!./api.md').default} className="md" />
   </Fragment>

@@ -31,6 +31,7 @@ a react ui framework
 - popover 气泡卡片
 - upload 文件上传
 - slide 图片预览
+- loading 加载
 
 ## 安装
 

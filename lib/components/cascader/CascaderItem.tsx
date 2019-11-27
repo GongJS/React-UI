@@ -29,6 +29,7 @@ const CascaderItem: React.FC<CascaderItemProps> = ({
   ...restProps
 }) => {
   const [currentOption, setCurrentOption] = useState<Option>()
+
   const handleItemClick = (option: Option) => {
     if (option.disabled) {
       return
@@ -37,8 +38,9 @@ const CascaderItem: React.FC<CascaderItemProps> = ({
       setCurrentOption(option)
       handleChangeValue(option, level)
     }
-
   }
+
+  // 子选项
   const rightItems = () => {
     let currentSelected = selectedItems[level]
     if (currentSelected && currentSelected.children) {
@@ -47,6 +49,8 @@ const CascaderItem: React.FC<CascaderItemProps> = ({
       return null
     }
   }
+
+  // 激活选中项样式
   const setItemActive = (value: string) => {
     let flag = false
     selectedItems.forEach(element => {

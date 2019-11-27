@@ -92,6 +92,10 @@ export const menuList: Array<any> = [
       {
         title: 'Modal 对话框',
         key: '/components/modal'
+      },
+      {
+        title: 'Loading 加载中',
+        key: '/components/loading'
       }
     ]
   }
