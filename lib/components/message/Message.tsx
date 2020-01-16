@@ -13,19 +13,16 @@ interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string
 }
 
-function removeMessage(messageInstance: JSX.Element, div: HTMLDivElement) {
+function removeMessage(messageInstance: JSX.Element, div: Element) {
   ReactDOM.render(React.cloneElement(messageInstance), div);
   ReactDOM.unmountComponentAtNode(div);
   div.remove()
 }
 function creatWrapper() {
   let wrapper
-  wrapper = document.querySelector('.r-message')
-  if (wrapper) { return wrapper }
   wrapper = document.createElement('div');
   wrapper.className = "r-message";
-  document.body.append(wrapper);
-  ReactDOM.createPortal(wrapper, document.body);
+  document.body.appendChild(wrapper);
   return wrapper
 };
 function createMessage(options: MessageProps) {
@@ -35,10 +32,10 @@ function createMessage(options: MessageProps) {
     <Message content={content} onClose={onClose} type={type} top={top} />
   );
   const div = document.createElement("div");
-  wrapper.append(div);
+  wrapper.appendChild(div);
   ReactDOM.render(messageInstance, div);
   setTimeout(() => {
-    removeMessage(messageInstance, div)
+    removeMessage(messageInstance, wrapper)
   }, duration! * 1000)
 }
 

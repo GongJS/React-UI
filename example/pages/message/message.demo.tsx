@@ -25,7 +25,7 @@ export default () => {
   const handleTime = () => {
     message.info({
       content: '这条消息10秒钟后自动关闭',
-      duration: 10,
+      duration: 100,
      
     })
   }

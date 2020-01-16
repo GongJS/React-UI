@@ -59,7 +59,12 @@ const Modal: React.FC<ModalProps> = ({
       afterClose && afterClose()
     }
   })
-
+  const typeIcon = {
+    info: <Icon color="#3963bc" name="infofill" />,
+    success: <Icon color="#00c292" name="roundcheckfill" />,
+    warning: <Icon color="#ffcb71" name="warnfill" />,
+    error: <Icon color="#f4516c" name="roundclosefill" />
+  }
   const container = visible ?
     <Fragment>
       <div className={pre('mask')} style={maskStyle} onClick={maskClosable ? handleOnCancel : () => { }} />
@@ -68,11 +73,7 @@ const Modal: React.FC<ModalProps> = ({
         <header className={pre('header')} style={{padding: header===null? '8px' : '32px'}}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             {
-              type === 'info' && header !== null? <Icon color="#3963bc" name="infofill" />
-                : type === 'success' && header !== null? <Icon color="#00c292" name="roundcheckfill" />
-                  : type === 'warning' && header !== null? <Icon color="#ffcb71" name="warnfill" />
-                    : type === 'error' && header !== null ? <Icon color="#f4516c" name="roundclosefill" />
-                      : null
+              header !== null ? typeIcon[type ? type : 'info'] : null
             } { header !== null? <span style={{ marginLeft: '10px' }}>{title}</span> : null}
           </div>
           <span className="close" onClick={handleOnCancel}>x</span>
@@ -134,7 +135,7 @@ const setAttributes = (options: options, type: 'info' | 'success' | 'error' | 'w
     {content}
   </Modal>
   const div = document.createElement('div')
-  document.body.appendChild(div)
+  document.body.append(div)
   ReactDom.render(component, div)
 }
 const modalConfirm = (options: options) => {
@@ -152,7 +153,7 @@ const modalConfirm = (options: options) => {
     {content}
   </Modal>
   const div = document.createElement('div')
-  document.body.appendChild(div)
+  document.body.append(div)
   ReactDom.render(component, div)
 }
 
@@ -174,6 +175,7 @@ Modal.defaultProps = {
   title: '提示',
   cancelText: '取消',
   okText: '确定',
+  type: 'info',
   maskClosable: true
 }
 Modal.displayName = 'Modal'

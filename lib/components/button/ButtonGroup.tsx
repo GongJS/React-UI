@@ -5,13 +5,17 @@ import './button_group.scss'
 
 interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement>{
   className?: string
-  children: React.ReactElement<Button>[]
+  children: React.ReactElement[]
 }
 
 const ButtonGroup: React.FC<ButtonGroupProps> = ({
   className, children, ...restProps
 }) => {
-  
+  children.forEach(item => {
+    if (item.type !== Button) {
+      console.warn('children只接受Button组件')
+    }
+  })
   return (
     <div className={combineClass('r-button-group', className)} {...restProps}>
       {children}
