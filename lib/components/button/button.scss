@@ -1,15 +1,18 @@
 $border-color:#d9d9d9;
 $border-radius: 2px;
 $button-color:rgba(0, 0, 0, 0.65);
-$button-disabled-color: #009d72;
 $button-primary-bg: #3963BC;
 $button-primary-plain-color: #3963BC;
+$button-primary-action-color: #0037ad;
 $button-success-bg: #34BFA3;
 $button-success-plain-color: #34BFA3;
+$button-success-action-color: #009d72;
 $button-danger-bg: #F4516C;
 $button-danger-plain-color: #F4516C;
+$button-danger-action-color: #d62f40;
 $button-reverse-bg: #DEE2E6;
 $button-reverse-plain-color: #8C98AE;
+$button-reverse-action-color: #BFCBD7;
 $button-height: 32px;
 $font-size: 14px;
 
@@ -27,7 +30,7 @@ $font-size: 14px;
   animation: spin 2s infinite linear;
 }
 
-@mixin setColor($button-bg, $button-plain-color, $button-disabled-color) {
+@mixin setColor($button-bg, $button-plain-color, $button-action-color) {
   background: $button-bg;
   color: #fff;
   border: 1px solid $button-bg;
@@ -56,8 +59,8 @@ $font-size: 14px;
   &:hover:not(.disabled),
   &:focus:not(.disabled) {
     color: #fff;
-    background: $button-disabled-color;
-    border: 1px solid $button-disabled-color;
+    background: $button-action-color;
+    border: 1px solid $button-action-color;
 
     svg {
       fill: #fff;
@@ -149,19 +152,19 @@ $font-size: 14px;
 }
 
 .r-button--primary {
-  @include setColor($button-primary-bg, $button-primary-plain-color, $button-disabled-color);
+  @include setColor($button-primary-bg, $button-primary-plain-color, $button-primary-action-color);
 }
 
 .r-button--success {
-  @include setColor($button-success-bg, $button-success-plain-color, $button-disabled-color);
+  @include setColor($button-success-bg, $button-success-plain-color, $button-success-action-color);
 }
 
 .r-button--danger {
-  @include setColor($button-danger-bg, $button-danger-plain-color, $button-disabled-color);
+  @include setColor($button-danger-bg, $button-danger-plain-color, $button-danger-action-color);
 }
 
 .r-button--reverse {
-  @include setColor($button-reverse-bg, $button-reverse-plain-color, $button-disabled-color);
+  @include setColor($button-reverse-bg, $button-reverse-plain-color, $button-reverse-action-color);
 }
 
 .ripple {

@@ -1,22 +1,27 @@
-@import '../../commonCss//index.scss';
+$border-radius: 4px;
+
 .r-button-group {
   display: inline-flex;
   vertical-align: middle;
-  > .r-button--primary,
+
+  >.r-button--primary,
   .r-button--success,
   .r-button--danger,
   .r-button--info {
     border-radius: 0;
     border-right: 1px solid white;
     border-left: 1px solid white;
+
     &:not(:first-child) {
       margin-left: -1px;
     }
+
     &:first-child {
       border-top-left-radius: $border-radius;
       border-bottom-left-radius: $border-radius;
       border-left: none;
     }
+
     &:last-child {
       border-top-right-radius: $border-radius;
       border-bottom-right-radius: $border-radius;
@@ -30,12 +35,14 @@
       border-right: 1px solid white;
       border-left: 1px solid white;
     }
+
     &:hover:first-child,
     &:focus:first {
       position: relative;
       z-index: 1;
       border-right: 1px solid white;
     }
+
     &:hover:last-child,
     &:focus:last-child {
       position: relative;
