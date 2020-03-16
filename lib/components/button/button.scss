@@ -1,6 +1,7 @@
 $border-color:#d9d9d9;
 $border-radius: 2px;
-$button-color:rgba(0,0,0,0.65);
+$button-color:rgba(0, 0, 0, 0.65);
+$button-disabled-color: #009d72;
 $button-primary-bg: #3963BC;
 $button-primary-plain-color: #3963BC;
 $button-success-bg: #34BFA3;
@@ -13,11 +14,55 @@ $button-height: 32px;
 $font-size: 14px;
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
+
 @mixin spin {
   animation: spin 2s infinite linear;
+}
+
+@mixin setColor($button-bg, $button-plain-color, $button-disabled-color) {
+  background: $button-bg;
+  color: #fff;
+  border: 1px solid $button-bg;
+
+  &.plain {
+    color: $button-plain-color;
+    background: #fff;
+    border: 1px solid $button-plain-color;
+
+    svg {
+      fill: $button-plain-color;
+    }
+
+    &:hover:not(.disabled),
+    &:focus:not(.disabled) {
+      background: $button-bg;
+      color: #fff;
+      border: 1px solid $button-bg;
+
+      svg {
+        fill: #fff;
+      }
+    }
+  }
+
+  &:hover:not(.disabled),
+  &:focus:not(.disabled) {
+    color: #fff;
+    background: $button-disabled-color;
+    border: 1px solid $button-disabled-color;
+
+    svg {
+      fill: #fff;
+    }
+  }
 }
 
 .r-button,
@@ -104,159 +149,19 @@ $font-size: 14px;
 }
 
 .r-button--primary {
-  background: $button-primary-bg;
-  color: #fff;
-  border: 1px solid $button-primary-bg;
-
-  &.plain {
-    color: $button-primary-plain-color;
-    background: #fff;
-    border: 1px solid $button-primary-plain-color;
-
-    svg {
-      fill: $button-primary-plain-color;
-    }
-
-    &:hover:not(.disabled),
-    &:focus:not(.disabled) {
-      background: $button-primary-bg;
-      color: #fff;
-      border: 1px solid $button-primary-bg;
-
-      svg {
-        fill: #fff;
-      }
-    }
-  }
-
-  &:hover:not(.disabled),
-  &:focus:not(.disabled) {
-    color: #fff;
-    background: #0037ad;
-    border: 1px solid #0037ad;
-
-    svg {
-      fill: #fff;
-    }
-  }
+  @include setColor($button-primary-bg, $button-primary-plain-color, $button-disabled-color);
 }
 
 .r-button--success {
-  background: $button-success-bg;
-  color: #fff;
-  border: 1px solid $button-success-bg;
-
-  &.plain {
-    color: $button-success-plain-color;
-    background: #fff;
-    border: 1px solid $button-success-plain-color;
-
-    svg {
-      fill: $button-success-plain-color;
-    }
-
-    &:hover:not(.disabled),
-    &:focus:not(.disabled) {
-      background: $button-success-bg;
-      color: #fff;
-      border: 1px solid $button-success-bg;
-
-      svg {
-        fill: #fff;
-      }
-    }
-  }
-
-  &:hover:not(.disabled),
-  &:focus:not(.disabled) {
-    color: #fff;
-    background: #009d72;
-    border: 1px solid #009d72;
-
-    svg {
-      fill: #fff;
-    }
-  }
+  @include setColor($button-success-bg, $button-success-plain-color, $button-disabled-color);
 }
 
 .r-button--danger {
-  background: $button-danger-bg;
-  color: #fff;
-  border: 1px solid $button-danger-bg;
-
-  &.plain {
-    color: $button-danger-plain-color;
-    background: #fff;
-    border: 1px solid $button-danger-plain-color;
-
-    svg {
-      fill: $button-danger-plain-color;
-    }
-
-    &:hover:not(.disabled),
-    &:focus:not(.disabled) {
-      background: $button-danger-bg;
-      color: #fff;
-      border: 1px solid $button-danger-bg;
-
-      svg {
-        fill: #fff;
-      }
-    }
-  }
-
-  &:hover:not(.disabled),
-  &:focus:not(.disabled) {
-    color: #fff;
-    background: #d62f40;
-    border: 1px solid #d62f40;
-
-    svg {
-      fill: #fff;
-    }
-  }
+  @include setColor($button-danger-bg, $button-danger-plain-color, $button-disabled-color);
 }
 
 .r-button--reverse {
-  background: $button-reverse-bg;
-  color: #8C98AE;
-  border: 1px solid $button-reverse-bg;
-
-  svg {
-    fill: #8C98AE;
-  }
-
-  &.plain {
-    color: $button-reverse-plain-color;
-    background: #fff;
-    border: 1px solid $button-reverse-plain-color;
-
-    svg {
-      fill: $button-reverse-plain-color;
-    }
-
-    &:hover:not(.disabled),
-    &:focus:not(.disabled) {
-      background: #8C98AE;
-      color: #fff;
-      border: 1px solid #8C98AE;
-
-      svg {
-        fill: #fff;
-      }
-    }
-  }
-
-  &:hover:not(.disabled),
-  &:focus:not(.disabled) {
-    color: #8C98AE;
-    background: #bfcbd7;
-    border: 1px solid #BFCBD7;
-
-    svg {
-      fill: #8C98AE;
-    }
-  }
+  @include setColor($button-reverse-bg, $button-reverse-plain-color, $button-disabled-color);
 }
 
 .ripple {
