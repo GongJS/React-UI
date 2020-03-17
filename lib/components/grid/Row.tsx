@@ -25,13 +25,9 @@ interface ChildProps {
   style?: React.CSSProperties
 }
 
-const Row: React.FC<RowProps> = ({
-  gutter,
-  className,
-  style,
-  children,
-  ...restProps
-}) => {
+const Row: React.FC<RowProps> = props => {
+  const { gutter, className, style, children, ...restProps } = props
+
   const renderChildren = (): Array<React.ReactElement<ChildProps>> => {
     //@ts-ignore
     return React.Children.map(
@@ -43,6 +39,7 @@ const Row: React.FC<RowProps> = ({
       },
     )
   }
+
   return (
     <div
       className={combineClass('r-row', className)}
@@ -57,6 +54,7 @@ const Row: React.FC<RowProps> = ({
     </div>
   )
 }
+
 Row.displayName = 'Row'
 Row.defaultProps = {
   gutter: 0,

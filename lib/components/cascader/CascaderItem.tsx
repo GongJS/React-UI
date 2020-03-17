@@ -19,15 +19,17 @@ interface CascaderItemProps {
   itemStyle?: React.CSSProperties
 }
 
-const CascaderItem: React.FC<CascaderItemProps> = ({
-  options,
-  selectedItems,
-  level,
-  handleChangeValue,
-  itemClassName,
-  itemStyle,
-  ...restProps
-}) => {
+const CascaderItem: React.FC<CascaderItemProps> = props => {
+  const {
+    options,
+    selectedItems,
+    level,
+    handleChangeValue,
+    itemClassName,
+    itemStyle,
+    ...restProps
+  } = props
+
   const [currentOption, setCurrentOption] = useState<Option>()
 
   const handleItemClick = (option: Option) => {
@@ -60,6 +62,7 @@ const CascaderItem: React.FC<CascaderItemProps> = ({
     })
     return flag
   }
+
   return (
     <div
       className={combineClass('r-cascader-item', itemClassName)}
@@ -107,5 +110,6 @@ const CascaderItem: React.FC<CascaderItemProps> = ({
     </div>
   )
 }
+
 CascaderItem.displayName = 'CascaderItem'
 export default CascaderItem

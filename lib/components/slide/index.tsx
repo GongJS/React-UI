@@ -8,6 +8,7 @@ interface img {
   width: number
   height: number
 }
+
 interface SlideProps {
   list?: img[]
   visible?: boolean
@@ -15,12 +16,9 @@ interface SlideProps {
   onClose?: () => any
 }
 
-const Slide: React.FC<SlideProps> = ({
-  list,
-  visible,
-  onClose,
-  defaultIndex,
-}) => {
+const Slide: React.FC<SlideProps> = props => {
+  const { list, visible, onClose, defaultIndex } = props
+
   const wrapRef = React.createRef<HTMLDivElement>()
   const outerRef = React.createRef<HTMLUListElement>()
   let startTime: number
@@ -260,6 +258,7 @@ const Slide: React.FC<SlideProps> = ({
       onClose()
     }
   }
+
   /*
    * 单击图片，关闭图片查看器事件
    */
@@ -291,6 +290,7 @@ const Slide: React.FC<SlideProps> = ({
       }, 230)
     }
   }
+
   const preventGesturestart = (e: any) => {
     e.preventDefault()
   }
@@ -300,6 +300,7 @@ const Slide: React.FC<SlideProps> = ({
     scaleW = window.innerWidth + 10
     init()
   })
+
   useEffect(() => {
     if (wrapRef.current && outerRef.current) {
       wrapRef.current.style.height = `${window.innerHeight}px`
@@ -320,6 +321,7 @@ const Slide: React.FC<SlideProps> = ({
       }
     }
   })
+
   return visible ? (
     <div className="r-slide" ref={wrapRef}>
       <ul className="r-slide-outer" ref={outerRef}>
@@ -385,5 +387,6 @@ const Slide: React.FC<SlideProps> = ({
     </div>
   ) : null
 }
+
 Slide.displayName = 'Slide'
 export default Slide

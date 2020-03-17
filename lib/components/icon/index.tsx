@@ -11,6 +11,7 @@ interface IconProps extends React.SVGAttributes<SVGElement> {
 
 const Icon: React.FC<IconProps> = props => {
   const { className, name, style, size, color, ...restProps } = props
+
   // 引入icon图标库
   useEffect(() => {
     let script: HTMLScriptElement | null = document.querySelector(
@@ -24,6 +25,7 @@ const Icon: React.FC<IconProps> = props => {
       document.querySelector('body')!.appendChild(script)
     }
   }, [])
+
   return (
     <svg
       className={combineClass('r-icon', className)}

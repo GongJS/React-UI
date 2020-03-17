@@ -18,6 +18,7 @@ function removeMessage(messageInstance: JSX.Element, div: Element) {
   ReactDOM.unmountComponentAtNode(div)
   div.remove()
 }
+
 function creatWrapper() {
   let wrapper
   wrapper = document.createElement('div')
@@ -25,6 +26,7 @@ function creatWrapper() {
   document.body.appendChild(wrapper)
   return wrapper
 }
+
 function createMessage(options: MessageProps) {
   const { content, type, duration, onClose, top } = options
   const wrapper = creatWrapper()
@@ -39,14 +41,16 @@ function createMessage(options: MessageProps) {
   }, duration! * 1000)
 }
 
-const Message: React.FC<MessageProps> = ({
-  content,
-  top,
-  type = 'info',
-  className,
-  onClose,
-  ...restProps
-}) => {
+const Message: React.FC<MessageProps> = props => {
+  const {
+    content,
+    top,
+    type = 'info',
+    className,
+    onClose,
+    ...restProps
+  } = props
+
   const wrapper: HTMLDivElement | null = document.querySelector('.r-message')
   const IconMap = {
     info: { color: '#3963bc', icon: 'infofill' },
@@ -54,15 +58,18 @@ const Message: React.FC<MessageProps> = ({
     warning: { color: '#ffcb71', icon: 'warnfill' },
     error: { color: '#f4516c', icon: 'roundclosefill' },
   }
+
   useLayoutEffect(() => {
     wrapper && (wrapper.style.top = `${top}px`)
   })
+
   useEffect(() => {
     return () => {
       onClose && onClose()
       wrapper && (wrapper.style.top = '30px')
     }
   })
+
   return (
     <div
       className={combineClass(
@@ -94,6 +101,7 @@ const setAttributes = (
     createMessage(strOptions)
   }
 }
+
 const message = {
   info: (options: MessageProps | string) => {
     setAttributes(options, 'info')
@@ -108,5 +116,6 @@ const message = {
     setAttributes(options, 'error')
   },
 }
+
 Message.displayName = 'Message'
 export default message

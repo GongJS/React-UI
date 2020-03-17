@@ -20,15 +20,17 @@ interface CascaderProps {
   style?: React.CSSProperties
 }
 
-const Cascader: React.FC<CascaderProps> = ({
-  options,
-  onSelect,
-  children,
-  className,
-  itemClassName,
-  itemStyle,
-  ...restProps
-}) => {
+const Cascader: React.FC<CascaderProps> = props => {
+  const {
+    options,
+    onSelect,
+    children,
+    className,
+    itemClassName,
+    itemStyle,
+    ...restProps
+  } = props
+
   const [popoverVisible, setPopoverVisible] = useState(false) // 弹窗
   const [selectedItems, setSelectedItems] = useState<Option[]>([]) // 选中项
   const [selectedValue, setSelectedValue] = useState<string | undefined>() // 选中项的值
@@ -67,6 +69,7 @@ const Cascader: React.FC<CascaderProps> = ({
       document.removeEventListener('click', outDivClickHandler)
     }
   })
+
   return (
     <div
       className="r-cascader"
@@ -112,6 +115,7 @@ const Cascader: React.FC<CascaderProps> = ({
     </div>
   )
 }
+
 Cascader.defaultProps = {}
 Cascader.displayName = 'Cascader'
 export default Cascader

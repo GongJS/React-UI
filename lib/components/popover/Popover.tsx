@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import ReactDOM from 'react-dom'
-import { combineClass } from '../../helpers/utils';
-import './popover.scss';
+import { combineClass } from '../../helpers/utils'
+import './popover.scss'
 
 interface PopoverProps {
   content: string | React.ReactNode
@@ -12,27 +12,30 @@ interface PopoverProps {
   popClosable?: boolean
   onVisibleChange?: (visible: boolean) => any
   className?: string
-  wrapperClassName?: string,
-  wrapperStyle?: React.CSSProperties,
+  wrapperClassName?: string
+  wrapperStyle?: React.CSSProperties
   style?: React.CSSProperties
 }
 
-const Popover: React.FC<PopoverProps> = ({
-  content,
-  trigger,
-  position,
-  onVisibleChange,
-  children,
-  className,
-  wrapperClassName,
-  wrapperStyle,
-  ...restProps
-}) => {
+const Popover: React.FC<PopoverProps> = props => {
+  const {
+    content,
+    trigger,
+    position,
+    onVisibleChange,
+    children,
+    className,
+    wrapperClassName,
+    wrapperStyle,
+    ...restProps
+  } = props
+
   const borderRef = React.createRef<HTMLDivElement>()
   const popoverRef = React.createRef<HTMLDivElement>()
   const contentRef = React.createRef<HTMLDivElement>()
   const triggerRef = React.createRef<HTMLDivElement>()
   const [visible, setVisible] = useState(false)
+
   const addPopoverListeners = () => {
     let borRef: HTMLDivElement | null = borderRef.current
     let popRef: HTMLDivElement | null = popoverRef.current
@@ -45,6 +48,7 @@ const Popover: React.FC<PopoverProps> = ({
       }
     }
   }
+
   const removePopoverListeners = () => {
     let borRef: HTMLDivElement | null = borderRef.current
     let popRef: HTMLDivElement | null = popoverRef.current
@@ -57,43 +61,66 @@ const Popover: React.FC<PopoverProps> = ({
       }
     }
   }
+
   const setPosition = () => {
     let triRef = triggerRef.current
     let conRef = contentRef.current
     if (triRef && conRef) {
-      const { height: triHeight, width: triWidth, top: triTop, left: triLeft } = triRef.getBoundingClientRect()
-      const { height: conHeight, width: conWidth } = conRef.getBoundingClientRect()
+      const {
+        height: triHeight,
+        width: triWidth,
+        top: triTop,
+        left: triLeft,
+      } = triRef.getBoundingClientRect()
+      const {
+        height: conHeight,
+        width: conWidth,
+      } = conRef.getBoundingClientRect()
       let positions = {
-        top: { top: triTop + window.scrollY, left: triLeft + window.scrollX-0.5*conWidth+30 },
-        bottom: { top: triTop + triHeight + window.scrollY, left: triLeft + window.scrollX-0.5*conWidth+30},
+        top: {
+          top: triTop + window.scrollY,
+          left: triLeft + window.scrollX - 0.5 * conWidth + 30,
+        },
+        bottom: {
+          top: triTop + triHeight + window.scrollY,
+          left: triLeft + window.scrollX - 0.5 * conWidth + 30,
+        },
         left: {
           top: triTop + window.scrollY + (triHeight - conHeight) / 2,
-          left: triLeft + window.scrollX
+          left: triLeft + window.scrollX,
         },
         right: {
           top: triTop + window.scrollY + (triHeight - conHeight) / 2,
-          left: triLeft + window.scrollX + triWidth
+          left: triLeft + window.scrollX + triWidth,
         },
       }
       conRef.style.left = positions[position!].left + 'px'
       conRef.style.top = positions[position!].top + 'px'
     }
   }
+
   const onClickDocument = (e: any) => {
     let poRef = popoverRef.current
     let conRef = contentRef.current
     if (poRef && conRef) {
-      if (poRef === e.target || poRef.contains(e.target)) { return }
-      if (conRef === e.target || conRef.contains(e.target)) { return }
+      if (poRef === e.target || poRef.contains(e.target)) {
+        return
+      }
+      if (conRef === e.target || conRef.contains(e.target)) {
+        return
+      }
       close()
     }
   }
+
   const open = () => {
     setVisible(true)
   }
+
   const close = () => {
     setVisible(false)
   }
+
   const onClick = (e: any) => {
     let ref: HTMLDivElement | null = triggerRef.current
     if (ref) {
@@ -102,11 +129,15 @@ const Popover: React.FC<PopoverProps> = ({
       }
     }
   }
+
   useLayoutEffect(() => {
     setPosition()
   })
+
   useEffect(() => {
-    visible ? document.addEventListener('click', onClickDocument) : document.addEventListener('click', onClickDocument)
+    visible
+      ? document.addEventListener('click', onClickDocument)
+      : document.addEventListener('click', onClickDocument)
     if (trigger === 'hover') {
       const conRef: HTMLDivElement | null = contentRef.current
       if (conRef) {
@@ -120,29 +151,43 @@ const Popover: React.FC<PopoverProps> = ({
       removePopoverListeners()
     }
   }, [visible])
-  const popoverContent = <div ref={contentRef} className={combineClass("r-popover-content-wrapper", `position-${position}`, className)} {...restProps}>
-    {content}
-  </div>
+
+  const popoverContent = (
+    <div
+      ref={contentRef}
+      className={combineClass(
+        'r-popover-content-wrapper',
+        `position-${position}`,
+        className,
+      )}
+      {...restProps}
+    >
+      {content}
+    </div>
+  )
+
   return (
-    <div ref={borderRef} className={combineClass(trigger === 'hover' ? `r-popover-hover-${position}` : `r-popover-click-${position}`, wrapperClassName)} style={wrapperStyle}>
+    <div
+      ref={borderRef}
+      className={combineClass(
+        trigger === 'hover'
+          ? `r-popover-hover-${position}`
+          : `r-popover-click-${position}`,
+        wrapperClassName,
+      )}
+      style={wrapperStyle}
+    >
       <div className="r-popover" ref={popoverRef}>
-        {
-          visible ?
-            ReactDOM.createPortal(
-              popoverContent, document.body
-            )
-            : null
-        }
-        <div ref={triggerRef}>
-          {children}
-        </div>
+        {visible ? ReactDOM.createPortal(popoverContent, document.body) : null}
+        <div ref={triggerRef}>{children}</div>
       </div>
     </div>
   )
 }
+
 Popover.defaultProps = {
   trigger: 'hover',
-  position: 'top'
+  position: 'top',
 }
 Popover.displayName = 'Popover'
-export default Popover;
+export default Popover

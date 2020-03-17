@@ -17,33 +17,37 @@ interface CollapseItemProps extends React.HTMLAttributes<HTMLDivElement> {
     event?: React.MouseEvent<HTMLElement>,
   ) => any
 }
-const CollapseItem: React.FC<CollapseItemProps> = ({
-  className,
-  icon,
-  children,
-  title,
-  uniqueKey,
-  expandKeys,
-  selectedKey,
-  disabled,
-  defaultSelectedKeys,
-  handleSelectedKey,
-  ...restProps
-}) => {
+const CollapseItem: React.FC<CollapseItemProps> = props => {
+  const {
+    className,
+    icon,
+    children,
+    title,
+    uniqueKey,
+    expandKeys,
+    selectedKey,
+    disabled,
+    defaultSelectedKeys,
+    handleSelectedKey,
+    ...restProps
+  } = props
+
+  const childRef = React.createRef<HTMLDivElement>()
+  let height: string
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (disabled) {
       return
     }
     handleSelectedKey!(uniqueKey!, event)
   }
-  const childRef = React.createRef<HTMLDivElement>()
-  let height: string
 
   useEffect(() => {
     if (!disabled && defaultSelectedKeys!.indexOf(uniqueKey!) > -1) {
       handleSelectedKey!(uniqueKey!)
     }
   }, [])
+
   return (
     <div
       className={combineClass(
@@ -98,5 +102,6 @@ const CollapseItem: React.FC<CollapseItemProps> = ({
     </div>
   )
 }
+
 CollapseItem.displayName = 'CollapseItem'
 export default CollapseItem

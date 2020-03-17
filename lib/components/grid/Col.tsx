@@ -1,5 +1,5 @@
-import React from 'react';
-import { combineClass } from '../../helpers/utils';
+import React from 'react'
+import { combineClass } from '../../helpers/utils'
 import './grid.scss'
 
 interface Option {
@@ -7,7 +7,7 @@ interface Option {
   offset?: number
 }
 
-interface ColProps extends React.HTMLAttributes<HTMLDivElement>{
+interface ColProps extends React.HTMLAttributes<HTMLDivElement> {
   gutter?: number
   span?: number
   offset?: number
@@ -19,40 +19,49 @@ interface ColProps extends React.HTMLAttributes<HTMLDivElement>{
   style?: React.CSSProperties
 }
 
-const Col: React.FC<ColProps> = ({
-  gutter,
-  span,
-  offset = 0, 
-  children,
-  className,
-  style,
-  ...restOptions
-}) => {
+const Col: React.FC<ColProps> = props => {
+  const {
+    gutter,
+    span,
+    offset = 0,
+    children,
+    className,
+    style,
+    ...restOptions
+  } = props
+
   const getColClassNames = () => {
     const classNamesArr = []
     span && classNamesArr.push(`col-span-${span}`)
     offset && classNamesArr.push(`col-offset-${offset}`)
-    Object.entries(restOptions).filter(v => v[1]).forEach(v => {
-      typeof v[1] === 'number' ? classNamesArr.push(`${v[0]}-col-span-${v[1]}`) : classNamesArr.push(`${v[0]}-col-span-${v[1].span}`)
-      v[1].offset && classNamesArr.push(`${v[0]}-col-offset-${v[1].offset}`)
-    })
+    Object.entries(restOptions)
+      .filter(v => v[1])
+      .forEach(v => {
+        typeof v[1] === 'number'
+          ? classNamesArr.push(`${v[0]}-col-span-${v[1]}`)
+          : classNamesArr.push(`${v[0]}-col-span-${v[1].span}`)
+        v[1].offset && classNamesArr.push(`${v[0]}-col-offset-${v[1].offset}`)
+      })
     return classNamesArr.join(' ')
   }
+
   return (
-    <div className={combineClass('r-col', className, `${getColClassNames()}`)}
+    <div
+      className={combineClass('r-col', className, `${getColClassNames()}`)}
       style={{
         paddingLeft: `${gutter! / 2}px`,
         paddingRight: `${gutter! / 2}px`,
-        ...style
+        ...style,
       }}
     >
       {children}
     </div>
   )
 }
+
 Col.displayName = 'Col'
 Col.defaultProps = {
-  gutter: 0
+  gutter: 0,
 }
-Col.displayName='Col'
-export default Col;
+Col.displayName = 'Col'
+export default Col

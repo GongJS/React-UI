@@ -37,6 +37,7 @@ const Button: React.FC<ButtonProps> = props => {
     htmlType,
     ...restProps
   } = props
+
   const classList = combineClass(
     className,
     'r-button',
@@ -47,6 +48,7 @@ const Button: React.FC<ButtonProps> = props => {
     `${disabled ? 'disabled' : ''}`,
     `${ripple && !disabled ? 'ripple' : ''}`,
   )
+
   return (
     <button
       className={classList}
@@ -64,6 +66,7 @@ const Button: React.FC<ButtonProps> = props => {
     </button>
   )
 }
+
 Button.defaultProps = {
   type: 'default',
   htmlType: 'button',

@@ -11,15 +11,17 @@ interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
   height?: string
 }
 
-const Carousel: React.FC<CarouselProps> = ({
-  className,
-  children,
-  type,
-  height,
-  autoplay,
-  interval,
-  ...restProps
-}) => {
+const Carousel: React.FC<CarouselProps> = props => {
+  const {
+    className,
+    children,
+    type,
+    height,
+    autoplay,
+    interval,
+    ...restProps
+  } = props
+
   let dotsEle: NodeListOf<HTMLElement>
   let panelsEle: NodeListOf<HTMLElement>
   let endFlag: boolean = true
@@ -128,12 +130,14 @@ const Carousel: React.FC<CarouselProps> = ({
     }
     return () => clearInterval(timer)
   })
+
   useLayoutEffect(() => {
     const ref = panelsRef
     if (ref && ref.current && height) {
       ref.current.style.height = height
     }
   })
+
   return (
     <div
       className={combineClass('r-carousel', `r-carousel-${id}`, className)}

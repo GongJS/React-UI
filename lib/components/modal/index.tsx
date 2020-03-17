@@ -28,43 +28,49 @@ interface options extends ModalProps {
 }
 
 const pre = prefixClass('r-modal')
-const Modal: React.FC<ModalProps> = ({
-  visible,
-  title,
-  maskClosable,
-  onCancel,
-  onOk,
-  cancelText,
-  okText,
-  footer,
-  header,
-  type,
-  afterClose,
-  onClose,
-  className,
-  style,
-  maskStyle,
-  children,
-}) => {
+const Modal: React.FC<ModalProps> = props => {
+  const {
+    visible,
+    title,
+    maskClosable,
+    onCancel,
+    onOk,
+    cancelText,
+    okText,
+    footer,
+    header,
+    type,
+    afterClose,
+    onClose,
+    className,
+    style,
+    maskStyle,
+    children,
+  } = props
+
   const handleOnOk = (e: React.MouseEvent) => {
     onClose && onClose()
     onOk && onOk(e)
   }
+
   const handleOnCancel = (e: React.MouseEvent) => {
     onClose && onClose()
     onCancel && onCancel(e)
   }
+
   useEffect(() => {
     return () => {
       afterClose && afterClose()
     }
   })
+
   const typeIcon = {
     info: <Icon color="#3963bc" name="infofill" />,
     success: <Icon color="#00c292" name="roundcheckfill" />,
     warning: <Icon color="#ffcb71" name="warnfill" />,
     error: <Icon color="#f4516c" name="roundclosefill" />,
   }
+
   const container = visible ? (
     <Fragment>
       <div
@@ -131,20 +137,24 @@ const setAttributes = (
     maskStyle,
     maskClosable,
   } = options
+
   const handleOnOk = (e: React.MouseEvent) => {
     onClose && onClose()
     onOk && onOk(e)
   }
+
   const footer = (
     <Button type="primary" onClick={handleOnOk}>
       {okText || '知道了'}
     </Button>
   )
+
   const onClose = () => {
     ReactDom.render(React.cloneElement(component, { visible: false }), div)
     ReactDom.unmountComponentAtNode(div)
     div.remove()
   }
+
   const component = (
     <Modal
       title={title}
@@ -163,10 +173,12 @@ const setAttributes = (
       {content}
     </Modal>
   )
+
   const div = document.createElement('div')
   document.body.append(div)
   ReactDom.render(component, div)
 }
+
 const modalConfirm = (options: options) => {
   const { onCancel, onOk, content } = options
   const onClose = () => {
@@ -187,12 +199,15 @@ const modalConfirm = (options: options) => {
 const modalInfo = (options: options) => {
   setAttributes(options, 'info')
 }
+
 const modalSuccess = (options: options) => {
   setAttributes(options, 'success')
 }
+
 const modalWarning = (options: options) => {
   setAttributes(options, 'warning')
 }
+
 const modalError = (options: options) => {
   setAttributes(options, 'error')
 }

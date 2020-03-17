@@ -24,27 +24,29 @@ interface InputProps extends HTMLAttributes {
   wrapperStyle?: React.CSSProperties
 }
 
-const Input: React.FC<InputProps> = ({
-  value,
-  defaultValue,
-  preIcon,
-  sufIcon,
-  addonBefore,
-  addonAfter,
-  disabled,
-  readonly,
-  clearable,
-  placeholder,
-  onFocus,
-  onBlur,
-  onValueChange,
-  extraClick,
-  clearClick,
-  className,
-  wrapperClassName,
-  wrapperStyle,
-  ...restProps
-}) => {
+const Input: React.FC<InputProps> = props => {
+  const {
+    value,
+    defaultValue,
+    preIcon,
+    sufIcon,
+    addonBefore,
+    addonAfter,
+    disabled,
+    readonly,
+    clearable,
+    placeholder,
+    onFocus,
+    onBlur,
+    onValueChange,
+    extraClick,
+    clearClick,
+    className,
+    wrapperClassName,
+    wrapperStyle,
+    ...restProps
+  } = props
+
   const [clearVisible, setClearVisible] = useState(false)
   const [offFocus, setOffFocus] = useState(false)
   const inputRef = React.createRef<HTMLInputElement>()
@@ -83,12 +85,14 @@ const Input: React.FC<InputProps> = ({
     `${preIcon ? 'r-input--pre' : ''}`,
     `${sufIcon ? 'r-input--suf' : ''}`,
   )
+
   const inputClassList = combineClass(
     className,
     'r-input',
     `${disabled ? 'disabled' : ''}`,
     `${readonly ? 'readonly' : ''}`,
   )
+
   const changeValue = (value?: string) => {
     if (value !== undefined) {
       return value
@@ -154,6 +158,7 @@ const Input: React.FC<InputProps> = ({
     </div>
   )
 }
+
 Input.defaultProps = {
   disabled: false,
   readOnly: false,

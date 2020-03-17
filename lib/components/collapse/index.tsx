@@ -21,15 +21,17 @@ interface ChildProps {
     event?: React.MouseEvent<HTMLElement>,
   ) => any
 }
-const Collapse: React.FC<CollapseProps> = ({
-  className,
-  children,
-  defaultSelectedKeys,
-  icon,
-  accordion,
-  onChange,
-  ...restProps
-}) => {
+const Collapse: React.FC<CollapseProps> = props => {
+  const {
+    className,
+    children,
+    defaultSelectedKeys,
+    icon,
+    accordion,
+    onChange,
+    ...restProps
+  } = props
+
   const [expandKeys, setExpandKeys] = useState<string[]>([])
   const [selectedKey, setSelectedKey] = useState<string>()
   let event: React.MouseEvent<HTMLElement>
@@ -87,6 +89,7 @@ const Collapse: React.FC<CollapseProps> = ({
     </div>
   )
 }
+
 Collapse.defaultProps = {
   defaultSelectedKeys: [],
   icon: 'right',
