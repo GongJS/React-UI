@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { combineClass, checkClient } from '../../helpers/utils'
-import Icon from '../icon/Icon'
+import Icon from '../icon'
 import './slide.scss'
 
 interface img {

@@ -1,8 +1,8 @@
-import React, { Fragment, useEffect } from 'react';
-import ReactDom from 'react-dom';
-import Button from '../button/Button'
-import Icon from '../icon/Icon'
-import { combineClass, prefixClass } from '../../helpers/utils';
+import React, { Fragment, useEffect } from 'react'
+import ReactDom from 'react-dom'
+import Button from '../button'
+import Icon from '../icon'
+import { combineClass, prefixClass } from '../../helpers/utils'
 import './modal.scss'
 
 interface ModalProps {
@@ -63,77 +63,106 @@ const Modal: React.FC<ModalProps> = ({
     info: <Icon color="#3963bc" name="infofill" />,
     success: <Icon color="#00c292" name="roundcheckfill" />,
     warning: <Icon color="#ffcb71" name="warnfill" />,
-    error: <Icon color="#f4516c" name="roundclosefill" />
+    error: <Icon color="#f4516c" name="roundclosefill" />,
   }
-  const container = visible ?
+  const container = visible ? (
     <Fragment>
-      <div className={pre('mask')} style={maskStyle} onClick={maskClosable ? handleOnCancel : () => { }} />
-      <div className={combineClass(pre(), className)} style={style} >
+      <div
+        className={pre('mask')}
+        style={maskStyle}
+        onClick={maskClosable ? handleOnCancel : () => {}}
+      />
+      <div className={combineClass(pre(), className)} style={style}>
         <div className={pre('container')}>
-        <header className={pre('header')} style={{padding: header===null? '8px' : '32px'}}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            {
-              header !== null ? typeIcon[type ? type : 'info'] : null
-            } { header !== null? <span style={{ marginLeft: '10px' }}>{title}</span> : null}
-          </div>
-          <span className="close" onClick={handleOnCancel}>x</span>
-        </header>
-        <main className={pre('main')} style={{padding: header === null ? '16px' : '0px 32px 9px 70px'}}>
-          {children}
-        </main>
-        <footer className={pre('footer')} style={{padding: header===null? '8px' : '32px'}}>
-          {
-            footer !== null?  (
+          <header
+            className={pre('header')}
+            style={{ padding: header === null ? '8px' : '32px' }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              {header !== null ? typeIcon[type ? type : 'info'] : null}{' '}
+              {header !== null ? (
+                <span style={{ marginLeft: '10px' }}>{title}</span>
+              ) : null}
+            </div>
+            <span className="close" onClick={handleOnCancel}>
+              x
+            </span>
+          </header>
+          <main
+            className={pre('main')}
+            style={{ padding: header === null ? '16px' : '0px 32px 9px 70px' }}
+          >
+            {children}
+          </main>
+          <footer
+            className={pre('footer')}
+            style={{ padding: header === null ? '8px' : '32px' }}
+          >
+            {footer !== null ? (
               <Fragment>
-                <Button
-                  onClick={handleOnCancel}
-                  type="plain"
-                >
+                <Button onClick={handleOnCancel} type="plain">
                   {cancelText}
                 </Button>
                 <Button type="primary" onClick={handleOnOk}>
                   {okText}
                 </Button>
               </Fragment>
-            ) : null
-          }
-        </footer>
+            ) : null}
+          </footer>
         </div>
       </div>
-    </Fragment> : null;
-  return (
-    ReactDom.createPortal(container, document.body)
-  )
+    </Fragment>
+  ) : null
+  return ReactDom.createPortal(container, document.body)
 }
 
-const setAttributes = (options: options, type: 'info' | 'success' | 'error' | 'warning') => {
-  const { onOk, content, okText, cancelText, title, afterClose, style, maskStyle, maskClosable } = options
+const setAttributes = (
+  options: options,
+  type: 'info' | 'success' | 'error' | 'warning',
+) => {
+  const {
+    onOk,
+    content,
+    okText,
+    cancelText,
+    title,
+    afterClose,
+    style,
+    maskStyle,
+    maskClosable,
+  } = options
   const handleOnOk = (e: React.MouseEvent) => {
     onClose && onClose()
     onOk && onOk(e)
   }
-  const footer = <Button type="primary" onClick={handleOnOk}>{okText || '知道了'}</Button>
+  const footer = (
+    <Button type="primary" onClick={handleOnOk}>
+      {okText || '知道了'}
+    </Button>
+  )
   const onClose = () => {
     ReactDom.render(React.cloneElement(component, { visible: false }), div)
     ReactDom.unmountComponentAtNode(div)
     div.remove()
   }
-  const component = <Modal
-    title={title}
-    visible={true}
-    type={type}
-    footer={footer}
-    onClose={onClose}
-    onOk={onOk}
-    okText={okText}
-    cancelText={cancelText}
-    afterClose={afterClose}
-    style={style}
-    maskStyle={maskStyle}
-    maskClosable={maskClosable}
-  >
-    {content}
-  </Modal>
+  const component = (
+    <Modal
+      title={title}
+      visible={true}
+      type={type}
+      footer={footer}
+      onClose={onClose}
+      onOk={onOk}
+      okText={okText}
+      cancelText={cancelText}
+      afterClose={afterClose}
+      style={style}
+      maskStyle={maskStyle}
+      maskClosable={maskClosable}
+    >
+      {content}
+    </Modal>
+  )
   const div = document.createElement('div')
   document.body.append(div)
   ReactDom.render(component, div)
@@ -145,13 +174,11 @@ const modalConfirm = (options: options) => {
     ReactDom.unmountComponentAtNode(div)
     div.remove()
   }
-  const component = <Modal visible={true}
-    onClose={onClose}
-    onCancel={onCancel}
-    onOk={onOk}
-  >
-    {content}
-  </Modal>
+  const component = (
+    <Modal visible={true} onClose={onClose} onCancel={onCancel} onOk={onOk}>
+      {content}
+    </Modal>
+  )
   const div = document.createElement('div')
   document.body.append(div)
   ReactDom.render(component, div)
@@ -176,8 +203,15 @@ Modal.defaultProps = {
   cancelText: '取消',
   okText: '确定',
   type: 'info',
-  maskClosable: true
+  maskClosable: true,
 }
 Modal.displayName = 'Modal'
-export { Modal, modalConfirm, modalInfo, modalSuccess, modalWarning, modalError }
-export default Modal;
+export {
+  Modal,
+  modalConfirm,
+  modalInfo,
+  modalSuccess,
+  modalWarning,
+  modalError,
+}
+export default Modal

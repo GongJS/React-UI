@@ -1,15 +1,17 @@
-import React from 'react';
-import Button from './Button'
-import {combineClass} from '../../helpers/utils';
+import React from 'react'
+import Button from './'
+import { combineClass } from '../../helpers/utils'
 import './button_group.scss'
 
-interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement>{
+interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string
   children: React.ReactElement[]
 }
 
 const ButtonGroup: React.FC<ButtonGroupProps> = ({
-  className, children, ...restProps
+  className,
+  children,
+  ...restProps
 }) => {
   children.forEach(item => {
     if (item.type !== Button) {
@@ -23,5 +25,5 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
   )
 }
 
-ButtonGroup.displayName= 'ButtonGroup'
-export default ButtonGroup;
+ButtonGroup.displayName = 'ButtonGroup'
+export default ButtonGroup

@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import CodeCard from '../../CodeCard'
 import Slide from '../../../lib/components/slide'
-import Button from '../../../lib/components/button/Button'
+import Button from '../../../lib/components/button'
 
 export default () => {
   const list = [

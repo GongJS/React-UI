@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import { combineClass } from '../../helpers/utils'
-import Icon from '../icon/Icon'
+import Icon from '../icon'
 
 interface SubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   uniqueKey?: string

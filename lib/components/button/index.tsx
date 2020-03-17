@@ -1,5 +1,5 @@
 import React from 'react'
-import Icon from '../icon/Icon'
+import Icon from '../icon'
 import { combineClass } from '../../helpers/utils'
 import './button.scss'
 

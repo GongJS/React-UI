@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { HTMLAttributes } from 'enzyme';
-import Icon from '../icon/Icon'
-import { combineClass } from '../../helpers/utils';
+import React, { useEffect, useState, useMemo } from 'react'
+import { HTMLAttributes } from 'enzyme'
+import Icon from '../icon'
+import { combineClass } from '../../helpers/utils'
 import './input.scss'
 
 interface InputProps extends HTMLAttributes {
   value?: string
   defaultValue?: string
   placeholder?: string
-  onValueChange?: (value:string) => any
+  onValueChange?: (value: string) => any
   extraClick?: () => any
   clearClick?: () => any
   onFocus?: React.FocusEventHandler
@@ -20,7 +20,7 @@ interface InputProps extends HTMLAttributes {
   disabled?: boolean
   readonly?: boolean
   clearable?: boolean
-  wrapperClassName?: string,
+  wrapperClassName?: string
   wrapperStyle?: React.CSSProperties
 }
 
@@ -49,8 +49,10 @@ const Input: React.FC<InputProps> = ({
   const [offFocus, setOffFocus] = useState(false)
   const inputRef = React.createRef<HTMLInputElement>()
 
-  const handleChange: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-     onValueChange && onValueChange(e.currentTarget.value);
+  const handleChange: React.ChangeEventHandler = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    onValueChange && onValueChange(e.currentTarget.value)
   }
 
   const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -62,12 +64,12 @@ const Input: React.FC<InputProps> = ({
     })
   }
 
-  const handleFocus: React.FocusEventHandler = (e) => {
+  const handleFocus: React.FocusEventHandler = e => {
     setOffFocus(true)
     onFocus && onFocus(e)
   }
 
-  const handleBlur: React.FocusEventHandler = (e) => {
+  const handleBlur: React.FocusEventHandler = e => {
     setClearVisible(false)
     setOffFocus(false)
     onBlur && onBlur(e)
@@ -89,10 +91,10 @@ const Input: React.FC<InputProps> = ({
   )
   const changeValue = (value?: string) => {
     if (value !== undefined) {
-      return value;
+      return value
     }
     if (defaultValue !== undefined) {
-      return defaultValue;
+      return defaultValue
     }
     return ''
   }
@@ -106,9 +108,11 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <div className={wrapperClassList} style={wrapperStyle}>
-      {
-        addonBefore ? <div className="r-input-group__prepend" onClick={extraClick}>{addonBefore} </div> : null
-      }
+      {addonBefore ? (
+        <div className="r-input-group__prepend" onClick={extraClick}>
+          {addonBefore}{' '}
+        </div>
+      ) : null}
       <input
         value={derivedValue}
         type="text"
@@ -122,23 +126,38 @@ const Input: React.FC<InputProps> = ({
         ref={inputRef}
         {...restProps}
       />
-      {
-        addonAfter ? <div className="r-input-group__append" onClick={extraClick}>
+      {addonAfter ? (
+        <div className="r-input-group__append" onClick={extraClick}>
           {addonAfter}
-          {clearVisible && clearable && !readonly ? <button onMouseDown={handleClear} className="r-input__clear"><Icon color="#fff" size="14px" name='close' /></button> : null}
+          {clearVisible && clearable && !readonly ? (
+            <button onMouseDown={handleClear} className="r-input__clear">
+              <Icon color="#fff" size="14px" name="close" />
+            </button>
+          ) : null}
         </div>
-          : null
-      }
-      {preIcon ? <span className="r-input__pre"><Icon color="#bac7de" name={preIcon} /></span> : null}
-      {sufIcon ? <span className="r-input__suf"><Icon color="#bac7de" name={sufIcon} /></span> : null}
-      {clearVisible && clearable && !addonAfter && !readonly ? <button onMouseDown={handleClear} className="r-input__clear"><Icon color="#fff" size="14px" name='close' /></button> : null}
+      ) : null}
+      {preIcon ? (
+        <span className="r-input__pre">
+          <Icon color="#bac7de" name={preIcon} />
+        </span>
+      ) : null}
+      {sufIcon ? (
+        <span className="r-input__suf">
+          <Icon color="#bac7de" name={sufIcon} />
+        </span>
+      ) : null}
+      {clearVisible && clearable && !addonAfter && !readonly ? (
+        <button onMouseDown={handleClear} className="r-input__clear">
+          <Icon color="#fff" size="14px" name="close" />
+        </button>
+      ) : null}
     </div>
   )
 }
 Input.defaultProps = {
   disabled: false,
   readOnly: false,
-  clearable: false
+  clearable: false,
 }
 Input.displayName = 'Input'
-export default Input;
+export default Input

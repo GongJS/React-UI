@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
-import Icon from '../icon/Icon'
-import {combineClass} from '../../helpers/utils';
+import Icon from '../icon'
+import { combineClass } from '../../helpers/utils'
 import './collapse.scss'
 
 interface CollapseItemProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -12,7 +12,10 @@ interface CollapseItemProps extends React.HTMLAttributes<HTMLDivElement> {
   selectedKey?: string
   expandKeys?: string[]
   defaultSelectedKeys?: string[]
-  handleSelectedKey?: (key: string, event?:React.MouseEvent<HTMLElement>) => any
+  handleSelectedKey?: (
+    key: string,
+    event?: React.MouseEvent<HTMLElement>,
+  ) => any
 }
 const CollapseItem: React.FC<CollapseItemProps> = ({
   className,
@@ -25,26 +28,38 @@ const CollapseItem: React.FC<CollapseItemProps> = ({
   disabled,
   defaultSelectedKeys,
   handleSelectedKey,
-  ...restProps }) => {
-    
-  const handleClick = (event:React.MouseEvent<HTMLElement>) => {
+  ...restProps
+}) => {
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (disabled) {
       return
     }
-    handleSelectedKey!(uniqueKey!,event)
+    handleSelectedKey!(uniqueKey!, event)
   }
   const childRef = React.createRef<HTMLDivElement>()
   let height: string
 
   useEffect(() => {
-    if ( !disabled && defaultSelectedKeys!.indexOf(uniqueKey!) > -1) {
+    if (!disabled && defaultSelectedKeys!.indexOf(uniqueKey!) > -1) {
       handleSelectedKey!(uniqueKey!)
     }
-  },[])
+  }, [])
   return (
-    <div className={combineClass('r-collapseItem',`${disabled? 'disable': ''}`, className)} {...restProps}>
+    <div
+      className={combineClass(
+        'r-collapseItem',
+        `${disabled ? 'disable' : ''}`,
+        className,
+      )}
+      {...restProps}
+    >
       <div onClick={handleClick} className="title">
-        <Icon name={icon!} color="#2f4e8c" style={{ marginRight: '5px' }} className={expandKeys!.indexOf(uniqueKey!) > -1 ? 'open' : 'close'} />
+        <Icon
+          name={icon!}
+          color="#2f4e8c"
+          style={{ marginRight: '5px' }}
+          className={expandKeys!.indexOf(uniqueKey!) > -1 ? 'open' : 'close'}
+        />
         {title}
       </div>
       <CSSTransition
@@ -76,10 +91,12 @@ const CollapseItem: React.FC<CollapseItemProps> = ({
           el.style.transition = 'all 0.3s ease'
         }}
       >
-        <div ref={childRef} className="content">{children}</div>
+        <div ref={childRef} className="content">
+          {children}
+        </div>
       </CSSTransition>
     </div>
   )
 }
 CollapseItem.displayName = 'CollapseItem'
-export default CollapseItem;
+export default CollapseItem

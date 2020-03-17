@@ -1,5 +1,5 @@
 import React, { useRef, useState, useImperativeHandle } from 'react'
-import Icon from '../icon/Icon'
+import Icon from '../icon'
 import { combineClass, uniqueId, checkClient } from '../../helpers/utils'
 import './upload.scss'
 

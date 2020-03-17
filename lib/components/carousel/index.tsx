@@ -1,6 +1,6 @@
-import React, { useEffect, useLayoutEffect } from 'react';
-import { combineClass, uniqueId } from '../../helpers/utils';;
-import Icon from '../icon/Icon'
+import React, { useEffect, useLayoutEffect } from 'react'
+import { combineClass, uniqueId } from '../../helpers/utils'
+import Icon from '../icon'
 import { slide, fade } from './animation'
 import './carousel.scss'
 
@@ -32,7 +32,9 @@ const Carousel: React.FC<CarouselProps> = ({
   const handleDotsClick = (event: any) => {
     event.stopPropagation()
     let index = Array.from(dotsEle).indexOf(event.target)
-    if (index === -1) { return }
+    if (index === -1) {
+      return
+    }
     let lastIndex = getActiveIndex()
     setActiveDot(index)
     play(index, lastIndex)
@@ -72,7 +74,9 @@ const Carousel: React.FC<CarouselProps> = ({
 
   // 获取当前轮播页索引
   const getActiveIndex = () => {
-    let ele: HTMLElement | null = document.querySelector(`.r-carousel-${id} .dots .active`)
+    let ele: HTMLElement | null = document.querySelector(
+      `.r-carousel-${id} .dots .active`,
+    )
     if (ele) {
       return Array.from(dotsEle).indexOf(ele)
     } else {
@@ -96,7 +100,7 @@ const Carousel: React.FC<CarouselProps> = ({
       next()
     }, interval)
   }
-  
+
   // 轮播
   const play = (toIndex: number, fromIndex: number) => {
     if (!endFlag) {
@@ -104,7 +108,7 @@ const Carousel: React.FC<CarouselProps> = ({
     }
     endFlag = false
     const onFinsh = () => {
-      panelsEle.forEach(panel => panel.style.zIndex = '0')
+      panelsEle.forEach(panel => (panel.style.zIndex = '0'))
       panelsEle[toIndex].style.zIndex = '10'
       endFlag = true
     }
@@ -131,19 +135,26 @@ const Carousel: React.FC<CarouselProps> = ({
     }
   })
   return (
-    <div className={combineClass('r-carousel', `r-carousel-${id}`, className)} {...restProps}>
+    <div
+      className={combineClass('r-carousel', `r-carousel-${id}`, className)}
+      {...restProps}
+    >
       <div ref={panelsRef} className="panels">
         {children}
-        <button className="arrow pre" onClick={pre}><Icon name="back" color="#fff" /></button>
-        <button className="arrow next" onClick={next}><Icon name="right" color="#fff" /></button>
+        <button className="arrow pre" onClick={pre}>
+          <Icon name="back" color="#fff" />
+        </button>
+        <button className="arrow next" onClick={next}>
+          <Icon name="right" color="#fff" />
+        </button>
       </div>
       <div className="action">
-        <div className="dots" onClick={(e) => handleDotsClick(e)}>
-          {
-            React.Children.map(children, (child, index) => (
-              <span className={combineClass(`${index === 0 ? 'active' : ''}`)}></span>
-            ))
-          }
+        <div className="dots" onClick={e => handleDotsClick(e)}>
+          {React.Children.map(children, (child, index) => (
+            <span
+              className={combineClass(`${index === 0 ? 'active' : ''}`)}
+            ></span>
+          ))}
         </div>
       </div>
     </div>
@@ -154,6 +165,6 @@ Carousel.displayName = 'Carousel'
 Carousel.defaultProps = {
   type: 'fade',
   autoplay: true,
-  interval: 3000
+  interval: 3000,
 }
-export default Carousel;
+export default Carousel

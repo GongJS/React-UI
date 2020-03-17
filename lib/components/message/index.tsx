@@ -1,7 +1,7 @@
-import React, { ReactNode, useEffect, useLayoutEffect } from 'react';
-import ReactDOM from 'react-dom';
-import Icon from '../icon/Icon'
-import { combineClass } from '../../helpers/utils';
+import React, { ReactNode, useEffect, useLayoutEffect } from 'react'
+import ReactDOM from 'react-dom'
+import Icon from '../icon'
+import { combineClass } from '../../helpers/utils'
 import './message.scss'
 
 interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -14,26 +14,26 @@ interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function removeMessage(messageInstance: JSX.Element, div: Element) {
-  ReactDOM.render(React.cloneElement(messageInstance), div);
-  ReactDOM.unmountComponentAtNode(div);
+  ReactDOM.render(React.cloneElement(messageInstance), div)
+  ReactDOM.unmountComponentAtNode(div)
   div.remove()
 }
 function creatWrapper() {
   let wrapper
-  wrapper = document.createElement('div');
-  wrapper.className = "r-message";
-  document.body.appendChild(wrapper);
+  wrapper = document.createElement('div')
+  wrapper.className = 'r-message'
+  document.body.appendChild(wrapper)
   return wrapper
-};
+}
 function createMessage(options: MessageProps) {
   const { content, type, duration, onClose, top } = options
   const wrapper = creatWrapper()
   const messageInstance = (
     <Message content={content} onClose={onClose} type={type} top={top} />
-  );
-  const div = document.createElement("div");
-  wrapper.appendChild(div);
-  ReactDOM.render(messageInstance, div);
+  )
+  const div = document.createElement('div')
+  wrapper.appendChild(div)
+  ReactDOM.render(messageInstance, div)
   setTimeout(() => {
     removeMessage(messageInstance, wrapper)
   }, duration! * 1000)
@@ -64,20 +64,28 @@ const Message: React.FC<MessageProps> = ({
     }
   })
   return (
-    <div className={combineClass('r-message-container', `r-message-${type}`, className)} {...restProps}>
+    <div
+      className={combineClass(
+        'r-message-container',
+        `r-message-${type}`,
+        className,
+      )}
+      {...restProps}
+    >
       <Icon color={IconMap[type].color} name={IconMap[type].icon} />
-      <div className="content">
-        {content}
-      </div>
+      <div className="content">{content}</div>
     </div>
   )
 }
 
-const setAttributes = (options: MessageProps | string, type: 'info' | 'success' | 'warning' | 'error') => {
+const setAttributes = (
+  options: MessageProps | string,
+  type: 'info' | 'success' | 'warning' | 'error',
+) => {
   let strOptions = {} as MessageProps
   if (options instanceof Object) {
     options.type = type
-    options.duration ? null : options.duration = 3
+    options.duration ? null : (options.duration = 3)
     createMessage(options)
   } else {
     strOptions.content = options
@@ -102,4 +110,3 @@ const message = {
 }
 Message.displayName = 'Message'
 export default message
-

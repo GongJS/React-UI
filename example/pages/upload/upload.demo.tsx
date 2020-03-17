@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import CodeCard from '../../CodeCard'
-import Icon from '../../../lib/components/icon/Icon'
+import Icon from '../../../lib/components/icon'
 import Upload from '../../../lib/components/upload'
 import Slide from '../../../lib/components/slide'
 

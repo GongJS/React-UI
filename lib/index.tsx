@@ -1,8 +1,8 @@
 import './commonCss/index.scss'
-export { default as Icon } from './components/icon/Icon'
-export { default as Button } from './components/button/Button'
+export { default as Icon } from './components/icon'
+export { default as Button } from './components/button'
 export { default as ButtonGroup } from './components/button/ButtonGroup'
-export { default as message } from './components/message/Message'
+export { default as message } from './components/message'
 export {
   default as Modal,
   modalInfo,
@@ -10,17 +10,17 @@ export {
   modalSuccess,
   modalWarning,
   modalError,
-} from './components/modal/Modal'
-export { default as Menu } from './components/menu/Menu'
+} from './components/modal'
+export { default as Menu } from './components/menu'
 export { default as MenuItem } from './components/menu/MenuItem'
 export { default as Popover } from './components/popover/Popover'
 export { default as SubMenu } from './components/menu/SubMenu'
 export { default as Collapse } from './components/collapse'
 export { default as CollapseItem } from './components/collapse/CollapseItem'
-export { default as Carousel } from './components/carousel/Carousel'
+export { default as Carousel } from './components/carousel'
 export { default as Cascader } from './components/cascader'
 export { default as CascaderItem } from './components/cascader/CascaderItem'
-export { default as Sticky } from './components/sticky/Sticky'
+export { default as Sticky } from './components/sticky'
 export { default as Row } from './components/grid/Row'
 export { default as Col } from './components/grid/Col'
 export {
