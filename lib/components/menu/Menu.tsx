@@ -1,17 +1,18 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import SubMenu from './SubMenu'
-import MenuItem from './MenuItem'
-import { combineClass } from '../../helpers/utils';
+import React, { useState, useEffect, useLayoutEffect } from 'react'
+import { combineClass } from '../../helpers/utils'
 import './menu.scss'
 
 interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
-
   defaultSelectedKey?: string
   defaultExpandKeys?: string[]
   mode?: 'horizontal' | 'vertical'
-  onSelectedChange?: (selectedKey: string) => any
+  onSelectedChange?: (selectedKey: string | undefined) => any
   onExpandChange?: (expandKeys: string[]) => any
-  children: React.ReactElement<SubMenu>[] | React.ReactElement<MenuItem>[] | React.ReactElement<SubMenu> | React.ReactElement<MenuItem>
+  children:
+    | React.ReactElement[]
+    | React.ReactElement[]
+    | React.ReactElement
+    | React.ReactElement
 }
 interface ChildProps extends MenuProps {
   uniqueKey: string
@@ -33,20 +34,21 @@ const Menu: React.FC<MenuProps> = ({
   onSelectedChange,
   onExpandChange,
   mode,
-  ...restProps }) => {
+  ...restProps
+}) => {
   let childIndex: number | undefined = undefined
   const childKeys: string[] = []
   const [expandKeys, setExpandKeys] = useState<string[]>([])
-  const [selectedKey, setSelectedKey] = useState()
-  const [currentTarget, setCurrentTarget] = useState()
-  const [clickSubMenuKey, setClickSubMenuKey] = useState()
+  const [selectedKey, setSelectedKey] = useState<string | undefined>()
+  const [currentTarget, setCurrentTarget] = useState<any>()
+  const [clickSubMenuKey, setClickSubMenuKey] = useState<string | undefined>()
 
   // 处理点击subMenu区域以外的click事件
   const outDivClickHandler = (e: any) => {
     isOutClick = true
     if (subMenuEle) {
       subMenuEle.forEach(item => {
-        if (item && item.contains(e.target) || item == e.target) {
+        if ((item && item.contains(e.target)) || item == e.target) {
           isOutClick = false
         }
       })
@@ -61,7 +63,7 @@ const Menu: React.FC<MenuProps> = ({
     onSelectedChange && onSelectedChange(selectedKey)
     onExpandChange && onExpandChange(expandKeys)
     return () => {
-      document.removeEventListener('click', outDivClickHandler);
+      document.removeEventListener('click', outDivClickHandler)
     }
   })
   useLayoutEffect(() => {
@@ -74,7 +76,7 @@ const Menu: React.FC<MenuProps> = ({
   }, [])
   const getUniqueKeyFromChild = (
     child: React.ReactElement<ChildProps>,
-    index: number
+    index: number,
   ): string => {
     return (child.key as string) || `${index}`
   }
@@ -88,7 +90,9 @@ const Menu: React.FC<MenuProps> = ({
   }
   const hideChildSubMenu = (key: string) => {
     let shouldHide = false
-    let filterClickSubMenuKey = expandKeys.filter(item => item !== clickSubMenuKey)
+    let filterClickSubMenuKey = expandKeys.filter(
+      item => item !== clickSubMenuKey,
+    )
     for (let i = 0; i < filterClickSubMenuKey.length; i++) {
       for (let j = 0; j < childKeys.length; j++) {
         if (filterClickSubMenuKey[i] === childKeys[j]) {
@@ -103,8 +107,13 @@ const Menu: React.FC<MenuProps> = ({
   const handleExpandKeys = (key: string) => {
     setClickSubMenuKey(key)
     if (key) {
-      if (childKeys.indexOf(key) > -1 && childKeys.indexOf(key) !== childIndex) {
-        setExpandKeys(expandKeys => expandKeys.filter(item => childKeys.indexOf(item) === -1))
+      if (
+        childKeys.indexOf(key) > -1 &&
+        childKeys.indexOf(key) !== childIndex
+      ) {
+        setExpandKeys(expandKeys =>
+          expandKeys.filter(item => childKeys.indexOf(item) === -1),
+        )
         childIndex = childKeys.indexOf(key)
       }
       if (expandKeys.indexOf(key) > -1) {
@@ -113,7 +122,9 @@ const Menu: React.FC<MenuProps> = ({
         setExpandKeys(expandKeys => expandKeys.concat(key))
       }
     } else {
-      setExpandKeys(expandKeys => expandKeys.filter(item => childKeys.indexOf(item) === -1))
+      setExpandKeys(expandKeys =>
+        expandKeys.filter(item => childKeys.indexOf(item) === -1),
+      )
     }
   }
 
@@ -131,19 +142,26 @@ const Menu: React.FC<MenuProps> = ({
           selectedKey,
           handleSelectedKey,
           handleExpandKeys,
-          hideChildSubMenu
+          hideChildSubMenu,
         })
-      }
+      },
     )
   }
   return (
-    <div className={combineClass('r-menu', className, `${mode === 'vertical' ? 'vertical' : ''}`)} {...restProps}>
+    <div
+      className={combineClass(
+        'r-menu',
+        className,
+        `${mode === 'vertical' ? 'vertical' : ''}`,
+      )}
+      {...restProps}
+    >
       {renderChildren()}
     </div>
   )
 }
-Menu.displayName = "Menu"
+Menu.displayName = 'Menu'
 Menu.defaultProps = {
-  mode: 'horizontal'
+  mode: 'horizontal',
 }
-export default Menu;
+export default Menu

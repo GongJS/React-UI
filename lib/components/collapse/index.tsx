@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { combineClass } from '../../helpers/utils';
+import React, { useState, useEffect } from 'react'
+import { combineClass } from '../../helpers/utils'
 import './collapse.scss'
 
 interface CollapseProps {
@@ -16,7 +16,10 @@ interface ChildProps {
   selectedKey?: string
   expandKeys?: string[]
   defaultSelectedKeys?: string[]
-  handleSelectedKey?: (key: string, event?: React.MouseEvent<HTMLElement>) => any
+  handleSelectedKey?: (
+    key: string,
+    event?: React.MouseEvent<HTMLElement>,
+  ) => any
 }
 const Collapse: React.FC<CollapseProps> = ({
   className,
@@ -31,7 +34,10 @@ const Collapse: React.FC<CollapseProps> = ({
   const [selectedKey, setSelectedKey] = useState<string>()
   let event: React.MouseEvent<HTMLElement>
 
-  const handleSelectedKey = (key: string, event: React.MouseEvent<HTMLElement>) => {
+  const handleSelectedKey = (
+    key: string,
+    event: React.MouseEvent<HTMLElement>,
+  ) => {
     if (key) {
       setSelectedKey(key)
     }
@@ -47,6 +53,7 @@ const Collapse: React.FC<CollapseProps> = ({
   }
 
   const renderChildren = (): Array<React.ReactElement<ChildProps>> => {
+    //@ts-ignore
     return React.Children.map(
       children,
       (child: React.ReactElement<ChildProps>, index: number) => {
@@ -57,15 +64,15 @@ const Collapse: React.FC<CollapseProps> = ({
           selectedKey,
           expandKeys,
           defaultSelectedKeys,
-          handleSelectedKey
+          handleSelectedKey,
         })
-      }
+      },
     )
   }
 
   const getUniqueKeyFromChild = (
     child: React.ReactElement<ChildProps>,
-    index: number
+    index: number,
   ): string => {
     return (child.key as string) || `${index}`
   }
@@ -83,7 +90,7 @@ const Collapse: React.FC<CollapseProps> = ({
 Collapse.defaultProps = {
   defaultSelectedKeys: [],
   icon: 'right',
-  accordion: false
+  accordion: false,
 }
 Collapse.displayName = 'Collapse'
-export default Collapse;
+export default Collapse

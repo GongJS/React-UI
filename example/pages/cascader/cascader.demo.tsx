@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
-import ReactMarkdown from 'react-markdown';
+import React, { Fragment } from 'react'
+import ReactMarkdown from 'react-markdown'
 import CodeCard from '../../CodeCard'
-import Cascader from '../../../lib/components/cascader/Cascader'
+import Cascader from '../../../lib/components/cascader'
 
 export default () => {
   const options1 = [
@@ -37,7 +37,7 @@ export default () => {
         },
       ],
     },
-  ];
+  ]
   const options2 = [
     {
       value: 'zhejiang',
@@ -72,13 +72,17 @@ export default () => {
         },
       ],
     },
-  ];
-  return <Fragment>
-    <ReactMarkdown source={require('!!raw-loader!./cascader.md').default} className="md" />
-    <CodeCard
-      title="基础用法"
-      summary="最基本的用法。"
-      code={`
+  ]
+  return (
+    <Fragment>
+      <ReactMarkdown
+        source={require('!!raw-loader!./cascader.md').default}
+        className="md"
+      />
+      <CodeCard
+        title="基础用法"
+        summary="最基本的用法。"
+        code={`
       const options2 = [
         {
           value: 'zhejiang',
@@ -116,26 +120,28 @@ export default () => {
       ];
       <div style={{ marginBottom: '100px' }}>
         <Cascader options={options} />
-      </div>`
-      }
-    >
-      <div style={{ marginBottom: '100px' }}>
-        <Cascader options={options1} />
-      </div>
-    </CodeCard>
-    <CodeCard
-      title="禁止选择"
-      summary="禁用某个选项的选择。"
-      code={`
+      </div>`}
+      >
+        <div style={{ marginBottom: '100px' }}>
+          <Cascader options={options1} />
+        </div>
+      </CodeCard>
+      <CodeCard
+        title="禁止选择"
+        summary="禁用某个选项的选择。"
+        code={`
       <div style={{ marginBottom: '100px' }}>
         <Cascader options={options} />
-      </div>`
-      }
-    >
-      <div style={{ marginBottom: '100px' }}>
-        <Cascader options={options2} />
-      </div>
-    </CodeCard>
-    <ReactMarkdown source={require('!!raw-loader!./api.md').default} className="md" />
-  </Fragment>
+      </div>`}
+      >
+        <div style={{ marginBottom: '100px' }}>
+          <Cascader options={options2} />
+        </div>
+      </CodeCard>
+      <ReactMarkdown
+        source={require('!!raw-loader!./api.md').default}
+        className="md"
+      />
+    </Fragment>
+  )
 }

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import Icon from '../icon/Icon'
-import { combineClass } from '../../helpers/utils';
+import { combineClass } from '../../helpers/utils'
 import CascaderItem from './CascaderItem'
 import './cascader.scss'
 
@@ -31,26 +31,26 @@ const Cascader: React.FC<CascaderProps> = ({
 }) => {
   const [popoverVisible, setPopoverVisible] = useState(false) // 弹窗
   const [selectedItems, setSelectedItems] = useState<Option[]>([]) // 选中项
-  const [selectedValue, setSelectedValue] = useState() // 选中项的值
+  const [selectedValue, setSelectedValue] = useState<string | undefined>() // 选中项的值
   const cascaderRef = React.createRef<HTMLDivElement>()
-  
+
   // 处理选中项
   const handleChangeValue = (option: Option, level: number) => {
     selectedItems[level] = option
     selectedItems.splice(level + 1)
     setSelectedItems(selectedItems)
-    setSelectedValue(selectedItems.map((item) => item.label).join('/'))
+    setSelectedValue(selectedItems.map(item => item.label).join('/'))
     onSelect && onSelect(selectedItems)
   }
 
   // 清除选中项
-  const clearSelectValue: React.MouseEventHandler = (e) => {
+  const clearSelectValue: React.MouseEventHandler = e => {
     e.stopPropagation()
     setSelectedValue('')
     setSelectedItems([])
     setPopoverVisible(false)
   }
-  
+
   // 处理点击cascader区域以外的click事件
   const outDivClickHandler = (e: any) => {
     const ref: HTMLDivElement | null = cascaderRef.current
@@ -64,35 +64,54 @@ const Cascader: React.FC<CascaderProps> = ({
   useEffect(() => {
     document.addEventListener('click', outDivClickHandler)
     return () => {
-      document.removeEventListener('click', outDivClickHandler);
+      document.removeEventListener('click', outDivClickHandler)
     }
   })
   return (
-    <div className="r-cascader" onClick={outDivClickHandler} ref={cascaderRef} {...restProps}>
-      <div className={combineClass('trigger', `${selectedItems.length > 0 && popoverVisible ? 'active' : ''}`, className)} onClick={() => setPopoverVisible(popoverVisible => !popoverVisible)}>
+    <div
+      className="r-cascader"
+      onClick={outDivClickHandler}
+      ref={cascaderRef}
+      {...restProps}
+    >
+      <div
+        className={combineClass(
+          'trigger',
+          `${selectedItems.length > 0 && popoverVisible ? 'active' : ''}`,
+          className,
+        )}
+        onClick={() => setPopoverVisible(popoverVisible => !popoverVisible)}
+      >
         <span>{selectedValue} </span>
-        <Icon className={combineClass('icon', `${popoverVisible ? 'open' : 'close'}`)} name="right" width="12px" style={{ marginLeft: '5px' }} color='#dcdfe6' />
-        {
-          selectedValue ? <button onClick={clearSelectValue} className="clear"><Icon name="close" width="12px" color='#fff' /></button> : null
-        }
+        <Icon
+          className={combineClass(
+            'icon',
+            `${popoverVisible ? 'open' : 'close'}`,
+          )}
+          name="right"
+          width="12px"
+          style={{ marginLeft: '5px' }}
+          color="#dcdfe6"
+        />
+        {selectedValue ? (
+          <button onClick={clearSelectValue} className="clear">
+            <Icon name="close" width="12px" color="#fff" />
+          </button>
+        ) : null}
       </div>
-      {
-        popoverVisible ?
-          <div className="popover-wrapper">
-            <CascaderItem
-              options={options}
-              level={0}
-              selectedItems={selectedItems}
-              handleChangeValue={handleChangeValue}
-            />
-          </div> : null
-      }
-
+      {popoverVisible ? (
+        <div className="popover-wrapper">
+          <CascaderItem
+            options={options}
+            level={0}
+            selectedItems={selectedItems}
+            handleChangeValue={handleChangeValue}
+          />
+        </div>
+      ) : null}
     </div>
   )
 }
-Cascader.defaultProps = {
-
-}
+Cascader.defaultProps = {}
 Cascader.displayName = 'Cascader'
-export default Cascader;
+export default Cascader

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { CSSTransition } from 'react-transition-group';
-import MenuItem from './MenuItem'
-import { combineClass } from '../../helpers/utils';
+import React, { useEffect, useState } from 'react'
+import { CSSTransition } from 'react-transition-group'
+import { combineClass } from '../../helpers/utils'
 import Icon from '../icon/Icon'
 
 interface SubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -10,12 +9,12 @@ interface SubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   currentTarget?: EventTarget & Element
   expandKeys?: string[]
   mode?: string
-  children: React.ReactElement<MenuItem> | React.ReactElement<MenuItem>[]
+  children: React.ReactElement | React.ReactElement[]
   handleSelectedKey?: (event: React.MouseEvent, key: string) => any
   handleExpandKeys?: (key: string) => any
   hideChildSubMenu?: (key: string) => any
 }
-interface ChildProps extends SubMenuProps { }
+interface ChildProps extends SubMenuProps {}
 
 const SubMenu: React.FC<SubMenuProps> = ({
   mode,
@@ -42,7 +41,12 @@ const SubMenu: React.FC<SubMenuProps> = ({
   }
 
   useEffect(() => {
-    if (subMenu && subMenu.current && subMenu.current.contains(currentTarget!) || childKeys.indexOf(selectedKey!) > -1) {
+    if (
+      (subMenu &&
+        subMenu.current &&
+        subMenu.current.contains(currentTarget!)) ||
+      childKeys.indexOf(selectedKey!) > -1
+    ) {
       setActive(true)
     } else {
       setActive(false)
@@ -52,7 +56,7 @@ const SubMenu: React.FC<SubMenuProps> = ({
 
   const getUniqueKeyFromChild = (
     child: React.ReactElement<ChildProps>,
-    index: number
+    index: number,
   ): string => {
     return (child.key as string) || `${index}`
   }
@@ -71,21 +75,36 @@ const SubMenu: React.FC<SubMenuProps> = ({
           expandKeys,
           handleSelectedKey,
           handleExpandKeys,
-          hideChildSubMenu
+          hideChildSubMenu,
         })
-      }
+      },
     )
   }
   return (
     <div
       ref={subMenu}
-      className={combineClass('r-sub-menu', `${active ? 'active' : ''}`, `${mode === 'vertical' ? 'vertical' : ''}`, className)}
+      className={combineClass(
+        'r-sub-menu',
+        `${active ? 'active' : ''}`,
+        `${mode === 'vertical' ? 'vertical' : ''}`,
+        className,
+      )}
       {...restProps}
     >
-      <span className={combineClass('r-sub-menu-label', `${active ? 'active' : ''}`, `${mode === 'vertical' ? 'vertical' : ''}`)} onClick={handleClick}>
+      <span
+        className={combineClass(
+          'r-sub-menu-label',
+          `${active ? 'active' : ''}`,
+          `${mode === 'vertical' ? 'vertical' : ''}`,
+        )}
+        onClick={handleClick}
+      >
         {title}
         <span className="r-sub-menu-icon">
-          <Icon name="right" className={expandKeys!.indexOf(uniqueKey!) > -1 ? 'open' : 'close'} />
+          <Icon
+            name="right"
+            className={expandKeys!.indexOf(uniqueKey!) > -1 ? 'open' : 'close'}
+          />
         </span>
       </span>
       <CSSTransition
@@ -116,12 +135,18 @@ const SubMenu: React.FC<SubMenuProps> = ({
           el.style.transition = 'all 0.3s ease'
         }}
       >
-        <div ref={childRef} className={combineClass('r-sub-menu-popover', `${mode === 'vertical' ? 'vertical' : ''}`)}>
+        <div
+          ref={childRef}
+          className={combineClass(
+            'r-sub-menu-popover',
+            `${mode === 'vertical' ? 'vertical' : ''}`,
+          )}
+        >
           {renderChildren()}
         </div>
-      </CSSTransition >
+      </CSSTransition>
     </div>
   )
 }
 SubMenu.displayName = 'SubMenu'
-export default SubMenu;
+export default SubMenu
