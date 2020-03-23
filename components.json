@@ -1,0 +1,12 @@
+  {
+    "button": "./lib/components/button/index.tsx",
+    "button-group": "./lib/components/button/ButtonGroup.tsx",
+    "icon": "./lib/components/icon/index.tsx",
+    "aside": "./lib/components/layout/Aside.tsx",
+    "content": "./lib/components/layout/Content.tsx",
+    "footer": "./lib/components/layout/Footer.tsx",
+    "header": "./lib/components/layout/Header.tsx",
+    "layout": "./lib/components/layout/index.tsx",
+    "col": "./lib/components/grid/Col.tsx",
+    "row": "./lib/components/grid/Row.tsx"
+  }

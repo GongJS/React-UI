@@ -1,22 +1,35 @@
-const baseConfig = require('./webpack.config');
-const TerserJSPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const common = require('./webpack.config')
+const merge = require('webpack-merge')
+const components = require('./components')
+const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-module.exports = Object.assign({}, baseConfig, {
+module.exports = merge(common, {
   mode: 'production',
-  optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
-    splitChunks: {
-      cacheGroups: {
-        styles: {
-          name: 'styles',
-          test: /\.css$/,
-          chunks: 'all',
-          enforce: true,
-        },
-      }
-    },
+  entry: components,
+  output: {
+    path: path.join(__dirname, '/dist/lib'),
+    library: 'fiora-ui-react',
+    filename: '[name].js',
+    libraryTarget: 'umd',
   },
+  module: {
+    rules: [{
+      test: /\.(sa|sc|c)ss/,
+      use: [{
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            hmr: process.env.NODE_ENV === 'development',
+          },
+        },
+        'css-loader', // 将 CSS 转化成 CommonJS 模块
+        'sass-loader', // 将 Sass 编译成 CSS，默认使用 Node Sass
+      ],
+    }, ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin(),
+  ],
   externals: {
     react: {
       commonjs: 'react',
@@ -29,6 +42,6 @@ module.exports = Object.assign({}, baseConfig, {
       commonjs2: 'react-dom',
       amd: 'react-dom',
       root: 'ReactDOM',
-    }
-  }
-});
+    },
+  },
+})

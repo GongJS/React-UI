@@ -1,5 +1,7 @@
 const path = require('path')
-const { CheckerPlugin } = require('awesome-typescript-loader')
+const {
+  CheckerPlugin
+} = require('awesome-typescript-loader')
 
 function resolve(dir) {
   return path.join(__dirname, '', dir)
@@ -20,8 +22,7 @@ module.exports = {
     },
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.tsx?$/,
         use: ['awesome-typescript-loader'],
       },

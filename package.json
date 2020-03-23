@@ -1,11 +1,11 @@
 {
   "name": "redell-ui",
-  "version": "0.3.5",
+  "version": "0.3.7",
   "description": "a react ui framework",
   "main": "dist/lib/index",
   "types": "dist/lib/index",
   "files": [
-    "/dist/lib/**/*"
+    "/lib/**/*"
   ],
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --config=jest.config.js --runInBand",
@@ -66,7 +66,8 @@
     "typescript": "^3.4.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.2.1"
+    "webpack-dev-server": "^3.2.1",
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
     "@types/react-onclickoutside": "^6.7.3",
