@@ -1,31 +1,39 @@
 export const menuList: Array<any> = [
   {
+    title: 'Redell-UI',
+    key: '/components',
+  },
+  {
+    title: '快速上手',
+    key: '/components/start',
+  },
+  {
     title: '通用',
     key: '/components/common',
     children: [
       {
         title: 'Icon 图标',
-        key: '/components/icon'
+        key: '/components/icon',
       },
       {
         title: 'Button 按键',
-        key: '/components/button'
-      }
-    ]
+        key: '/components/button',
+      },
+    ],
   },
   {
     title: '布局',
-    key: '/components/layout',
+    key: '/components/_layout',
     children: [
       {
         title: 'Grid 栅格',
-        key: '/components/grid'
+        key: '/components/grid',
       },
       {
         title: 'Layout 布局',
-        key: '/components/layout'
+        key: '/components/layout',
       },
-    ]
+    ],
   },
   {
     title: '导航',
@@ -33,13 +41,13 @@ export const menuList: Array<any> = [
     children: [
       {
         title: 'Menu 导航菜单',
-        key: '/components/menu'
+        key: '/components/menu',
       },
       {
         title: 'sticky 图钉',
-        key: '/components/sticky'
+        key: '/components/sticky',
       },
-    ]
+    ],
   },
   {
     title: '数据录入',
@@ -47,17 +55,17 @@ export const menuList: Array<any> = [
     children: [
       {
         title: 'Input 输入框',
-        key: '/components/input'
+        key: '/components/input',
       },
       {
         title: 'Cascader 级联选择',
-        key: '/components/cascader'
+        key: '/components/cascader',
       },
       {
         title: 'Upload  文件上传',
-        key: '/components/upload'
+        key: '/components/upload',
       },
-    ]
+    ],
   },
   {
     title: '数据展示',
@@ -65,21 +73,21 @@ export const menuList: Array<any> = [
     children: [
       {
         title: 'Collapse 折叠面板',
-        key: '/components/collapse'
+        key: '/components/collapse',
       },
       {
         title: 'Popover 气泡卡片',
-        key: '/components/popover'
+        key: '/components/popover',
       },
       {
         title: 'Carousel 轮播',
-        key: '/components/carousel'
+        key: '/components/carousel',
       },
       {
         title: 'Slide 图片预览',
-        key: '/components/slide'
-      }
-    ]
+        key: '/components/slide',
+      },
+    ],
   },
   {
     title: '信息反馈',
@@ -87,16 +95,16 @@ export const menuList: Array<any> = [
     children: [
       {
         title: 'Message 全局提示',
-        key: '/components/message'
+        key: '/components/message',
       },
       {
         title: 'Modal 对话框',
-        key: '/components/modal'
+        key: '/components/modal',
       },
       {
         title: 'Loading 加载中',
-        key: '/components/loading'
-      }
-    ]
-  }
+        key: '/components/loading',
+      },
+    ],
+  },
 ]

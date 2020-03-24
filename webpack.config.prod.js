@@ -22,8 +22,8 @@ module.exports = merge(common, {
             hmr: process.env.NODE_ENV === 'development',
           },
         },
-        'css-loader', // 将 CSS 转化成 CommonJS 模块
-        'sass-loader', // 将 Sass 编译成 CSS，默认使用 Node Sass
+        'css-loader',
+        'sass-loader',
       ],
     }, ],
   },

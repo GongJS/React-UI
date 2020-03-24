@@ -1,19 +1,24 @@
 @import '../../commonCss/index.scss';
+
 .r-menu {
   display: flex;
   color: $color;
   cursor: pointer;
   user-select: none;
   box-shadow: 0px 4px 8px -4px rgba(0, 0, 0, 0.1);
+
   &.vertical {
     flex-direction: column;
     box-shadow: none;
-    width:200px;
-    border-right: 1px solid #e6e6e6;
+    min-width: 200px;
+    width: 100%;
   }
+
   .r-menu-item {
-    padding: 10px 20px;
+    padding: 20px 40px;
     position: relative;
+    color: $color;
+
     &:not(.vertical) {
       &.active {
         &::after {
@@ -26,30 +31,39 @@
         }
       }
     }
+
     &.vertical {
       &.active {
         color: $blue;
+        background: #e6f7ff;
+        border-right: 2px solid #3963bc;
+
+        li {
+          color: #4a90e2;
+        }
       }
     }
   }
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
+
   .r-sub-menu .r-menu-item:not(.vertical) {
     &.active {
       color: $color;
       background: $grey;
+
       &::after {
         display: none;
       }
     }
   }
+
   .r-sub-menu {
     position: relative;
+    padding: 10px 20px;
+
     &:not(.vertical) {
       &.active {
         color: $blue;
+
         &::after {
           content: '';
           position: absolute;
@@ -60,17 +74,20 @@
         }
       }
     }
-    &-label { 
-      padding: 10px 20px; 
+
+    &-label {
+      padding: 10px 20px;
       display: flex;
       align-items: center;
+
       &.vertical {
         &.active {
           color: $blue;
         }
       }
     }
-    &-icon { 
+
+    &-icon {
       .open {
         outline: none;
         margin-left: 5px;
@@ -78,6 +95,7 @@
         transition-property: all;
         transform: rotate(-90deg);
       }
+
       .close {
         outline: none;
         margin-left: 5px;
@@ -86,6 +104,7 @@
         transform: rotate(90deg);
       }
     }
+
     &-popover {
       background: white;
       position: absolute;
@@ -98,42 +117,69 @@
       font-size: $font-size;
       color: $light-color;
       min-width: 8em;
+
+      li {
+        color: rgba(69, 82, 107, .7);
+        text-decoration: none;
+      }
+
       &.vertical {
         position: static;
         border-radius: 0;
         border: none;
         box-shadow: none;
+        width: calc(100% + 40px);
+        margin-left: -20px;
       }
     }
   }
+
   .r-sub-menu .r-sub-menu {
     &.active {
       &::after {
         display: none;
       }
+
     }
+
+    .r-sub-menu-label {
+      &.vertical {
+        color: $color
+      }
+    }
+
     .r-sub-menu-popover {
       top: 0;
       left: 100%;
       margin-left: 8px;
+
       &.vertical {
-        margin-left:0px;
+        margin-left: -20px;
+
+        .r-menu-item {
+          padding-left: 60px;
+        }
       }
     }
+
     .r-sub-menu-label {
       display: flex;
       align-items: center;
     }
+
     .r-sub-menu-icon {
       transition: transform 250ms;
-      display: inline-flex; margin-left: 1em;
-      svg {fill: $light-color;}
+      display: inline-flex;
+      margin-left: 1em;
+
       &.vertical {
         transform: rotate(90deg);
+
         &.open {
           transform: rotate(270deg);
         }
       }
+
       &.open {
         transform: rotate(180deg);
       }

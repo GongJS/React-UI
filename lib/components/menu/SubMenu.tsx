@@ -16,25 +16,28 @@ interface SubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 interface ChildProps extends SubMenuProps {}
 
-const SubMenu: React.FC<SubMenuProps> = ({
-  mode,
-  uniqueKey,
-  currentTarget,
-  selectedKey,
-  expandKeys,
-  title,
-  handleSelectedKey,
-  handleExpandKeys,
-  hideChildSubMenu,
-  className,
-  children,
-  ...restProps
-}) => {
+const SubMenu: React.FC<SubMenuProps> = props => {
+  const {
+    mode,
+    uniqueKey,
+    currentTarget,
+    selectedKey,
+    expandKeys,
+    title,
+    handleSelectedKey,
+    handleExpandKeys,
+    hideChildSubMenu,
+    className,
+    children,
+    ...restProps
+  } = props
+
   const subMenu = React.createRef<HTMLDivElement>()
   const [active, setActive] = useState(false)
   const childKeys: string[] = []
   const childRef = React.createRef<HTMLDivElement>()
   let height: string
+
   const handleClick = (event: React.MouseEvent) => {
     event.stopPropagation()
     handleExpandKeys!(uniqueKey!)
@@ -48,10 +51,10 @@ const SubMenu: React.FC<SubMenuProps> = ({
       childKeys.indexOf(selectedKey!) > -1
     ) {
       setActive(true)
-    } else {
-      setActive(false)
-      hideChildSubMenu!(uniqueKey!)
+      return
     }
+    setActive(false)
+    hideChildSubMenu!(uniqueKey!)
   }, [currentTarget])
 
   const getUniqueKeyFromChild = (
@@ -80,6 +83,7 @@ const SubMenu: React.FC<SubMenuProps> = ({
       },
     )
   }
+
   return (
     <div
       ref={subMenu}
@@ -103,6 +107,7 @@ const SubMenu: React.FC<SubMenuProps> = ({
         <span className="r-sub-menu-icon">
           <Icon
             name="right"
+            color={active ? '#4a90e2' : '#45526b'}
             className={expandKeys!.indexOf(uniqueKey!) > -1 ? 'open' : 'close'}
           />
         </span>

@@ -65,7 +65,14 @@ export default () => {
         </SubMenu>
       </Menu>`}
       >
-        <Menu mode="vertical" style={{ marginBottom: '200px' }}>
+        <Menu
+          mode="vertical"
+          style={{
+            height: '600px',
+            width: '300px',
+            borderRight: '1px solid #dedede',
+          }}
+        >
           <MenuItem key="item1">Option 1</MenuItem>
           <MenuItem key="item2">Option 2</MenuItem>
           <MenuItem key="item3">Option 3</MenuItem>

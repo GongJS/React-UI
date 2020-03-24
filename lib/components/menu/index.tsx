@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { combineClass } from '../../helpers/utils'
 import './menu.scss'
 
@@ -26,16 +26,17 @@ interface ChildProps extends MenuProps {
 let subMenuEle: Element[]
 let isOutClick: boolean = true
 
-const Menu: React.FC<MenuProps> = ({
-  className,
-  children,
-  defaultSelectedKey,
-  defaultExpandKeys,
-  onSelectedChange,
-  onExpandChange,
-  mode,
-  ...restProps
-}) => {
+const Menu: React.FC<MenuProps> = props => {
+  const {
+    className,
+    children,
+    defaultSelectedKey,
+    defaultExpandKeys,
+    onSelectedChange,
+    onExpandChange,
+    mode,
+    ...restProps
+  } = props
   let childIndex: number | undefined = undefined
   const childKeys: string[] = []
   const [expandKeys, setExpandKeys] = useState<string[]>([])
@@ -44,29 +45,45 @@ const Menu: React.FC<MenuProps> = ({
   const [clickSubMenuKey, setClickSubMenuKey] = useState<string | undefined>()
 
   // 处理点击subMenu区域以外的click事件
-  const outDivClickHandler = (e: any) => {
+  const outDivClickHandler: (this: Document, ev: MouseEvent) => any = (
+    ev: MouseEvent,
+  ) => {
     isOutClick = true
     if (subMenuEle) {
       subMenuEle.forEach(item => {
-        if ((item && item.contains(e.target)) || item == e.target) {
+        if (
+          (item && item.contains(ev.target as Document)) ||
+          item == ev.target
+        ) {
           isOutClick = false
         }
       })
     }
-    if (isOutClick) {
-      handleExpandKeys!('')
+    if (isOutClick && mode === 'horizontal') {
+      setExpandKeys([])
     }
   }
+
   useEffect(() => {
     subMenuEle = Array.from(document.querySelectorAll('.r-sub-menu'))
-    document.addEventListener('click', outDivClickHandler)
+  }, [])
+
+  // 回调
+  useEffect(() => {
     onSelectedChange && onSelectedChange(selectedKey)
     onExpandChange && onExpandChange(expandKeys)
+  })
+
+  // 绑定监听事件
+  useEffect(() => {
+    document.addEventListener('click', outDivClickHandler)
     return () => {
       document.removeEventListener('click', outDivClickHandler)
     }
   })
-  useLayoutEffect(() => {
+
+  // 判断是否有默认展开的subMenu和选中的menuItem
+  useEffect(() => {
     if (defaultSelectedKey) {
       setSelectedKey(defaultSelectedKey)
     }
@@ -74,6 +91,7 @@ const Menu: React.FC<MenuProps> = ({
       setExpandKeys(defaultExpandKeys)
     }
   }, [])
+
   const getUniqueKeyFromChild = (
     child: React.ReactElement<ChildProps>,
     index: number,
@@ -88,6 +106,7 @@ const Menu: React.FC<MenuProps> = ({
     setCurrentTarget(event.currentTarget)
     setSelectedKey(key)
   }
+
   const hideChildSubMenu = (key: string) => {
     let shouldHide = false
     let filterClickSubMenuKey = expandKeys.filter(
@@ -104,8 +123,9 @@ const Menu: React.FC<MenuProps> = ({
       setExpandKeys(expandKeys => expandKeys.filter(item => item !== key))
     }
   }
+
+  // 处理点击subMenu事件
   const handleExpandKeys = (key: string) => {
-    setClickSubMenuKey(key)
     if (key) {
       if (
         childKeys.indexOf(key) > -1 &&
@@ -118,14 +138,13 @@ const Menu: React.FC<MenuProps> = ({
       }
       if (expandKeys.indexOf(key) > -1) {
         setExpandKeys(expandKeys => expandKeys.filter(item => item !== key))
-      } else {
-        setExpandKeys(expandKeys => expandKeys.concat(key))
+        return
       }
-    } else {
-      setExpandKeys(expandKeys =>
-        expandKeys.filter(item => childKeys.indexOf(item) === -1),
-      )
+      setExpandKeys(expandKeys => expandKeys.concat(key))
+      return
     }
+    setClickSubMenuKey(key)
+    setExpandKeys([])
   }
 
   const renderChildren = (): Array<React.ReactElement<ChildProps>> => {
@@ -147,6 +166,7 @@ const Menu: React.FC<MenuProps> = ({
       },
     )
   }
+
   return (
     <div
       className={combineClass(
@@ -160,6 +180,7 @@ const Menu: React.FC<MenuProps> = ({
     </div>
   )
 }
+
 Menu.displayName = 'Menu'
 Menu.defaultProps = {
   mode: 'horizontal',

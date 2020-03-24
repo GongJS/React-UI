@@ -1,7 +1,9 @@
 .nav-left {
+  padding-top: 120px;
+
   h3 {
     padding: 20px 50px;
-    color: rgba(0,0,0,0.45);
+    color: rgba(0, 0, 0, 0.45);
     font-size: 14px;
     line-height: 1.5;
     -webkit-transition: all .3s;
@@ -9,22 +11,28 @@
     color: #45526B;
     font-weight: 500;
   }
+
   ul {
     font-size: 14px;
+
     li {
       color: #596c8e;
+
       &:hover {
         color: #3963bc;
         font-weight: 500;
         transition: all 0.2s;
       }
     }
+
     .link-class {
-      padding: 15px 0 15px 80px;
       display: block;
+      height: 40px;
+      line-height: 40px;
     }
+
     .active {
-      color: #1890ff;
+      color: #4a90e2;
       background-color: #e6f7ff;
       border-right: 2px solid #3963bc;
       margin-right: -1px;

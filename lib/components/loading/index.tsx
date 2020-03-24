@@ -34,7 +34,7 @@ const Loading: React.FC<LoadProps> = ({
           >
             <Icon
               name={name || 'loading1'}
-              color="#1890ff"
+              color="#4a90e2"
               className={combineClass('r-loading-rotate ', `r-loading-${size}`)}
             />
             {message && <div className="r-loading-text">{message}</div>}

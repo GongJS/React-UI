@@ -2,49 +2,60 @@ $border-color: #dcdfe6;
 $border-color-hover: #bac7de;
 $border-color-focus: #3963bc;
 $box-shadow-color: red;
+
 .r-input-wrapper {
   font-size: 14px;
   position: relative;
   display: inline-flex;
   width: 100%;
+
   &.r-input--suf {
     position: relative;
     display: inline-block;
     width: 100%;
+
     input {
       padding-right: 50px;
     }
+
     .r-input__clear {
       right: 30px;
     }
   }
+
   &.r-input--pre {
     position: relative;
     display: inline-block;
     width: 100%;
+
     input {
       padding-left: 30px;
     }
   }
+
   &.r-input--group {
     display: flex;
+
     input {
       flex: 1;
     }
   }
+
   &.r-input--group--prepend {
     input {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
   }
+
   &.r-input--group--append {
     input {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
   }
-  > input {
+
+  >input {
     height: 36px;
     line-height: 36px;
     -webkit-appearance: none;
@@ -61,45 +72,56 @@ $box-shadow-color: red;
     transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     width: 100%;
     ime-mode: auto;
+
     &::-webkit-input-placeholder {
       color: #596c8e;
     }
+
     &:hover {
       border-color: $border-color-hover;
     }
+
     &:focus {
       border-color: $border-color-focus;
       outline: none;
     }
+
     &[disabled] {
       background-color: #f6f7fa;
       border-color: #e4e7ed;
       color: #bac7de;
       cursor: not-allowed;
     }
+
     &[readonly] {
       border-color: #e4e7ed;
       color: #bac7de;
+
       &:hover {
         border-color: $border-color-hover;
       }
+
       &:focus {
         border-color: $border-color-focus;
         outline: none;
       }
     }
   }
+
   &.error {
-    > input {
+    >input {
       border-color: red;
     }
   }
+
   .icon-error {
     fill: #108ee9;
   }
+
   .errorMessage {
     color: #108ee9;
   }
+
   .r-input__suf,
   .r-input__pre {
     position: absolute;
@@ -113,12 +135,15 @@ $box-shadow-color: red;
     display: inline-flex;
     align-items: center;
   }
+
   .r-input__suf {
     right: 10px;
   }
+
   .r-input__pre {
     left: 10px;
   }
+
   .r-input__clear {
     border: none;
     outline: none;
@@ -141,10 +166,12 @@ $box-shadow-color: red;
     display: flex;
     align-items: center;
     justify-content: center;
+
     &:hover {
       background-color: rgba(31, 45, 61, 0.41);
     }
   }
+
   .r-input-group__prepend,
   .r-input-group__append {
     background: #3963bc;
@@ -154,19 +181,23 @@ $box-shadow-color: red;
     display: flex;
     align-items: center;
   }
+
   .r-input-group__prepend {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
   }
+
   .r-input-group__append {
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
     position: relative;
+
     .r-input__clear {
       left: -25px;
     }
   }
 }
+
 .r-textarea {
   padding: 4px 11px;
   font-size: 14px;
@@ -176,12 +207,14 @@ $box-shadow-color: red;
   border-color: rgba(0, 0, 0, 0.15);
   transition: border-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   border-radius: 4px;
+
   &.autosize {
     resize: none;
     overflow-y: hidden;
   }
+
   &:focus {
     outline: none;
-    border-color: #1890ff;
+    border-color: #4a90e2;
   }
 }

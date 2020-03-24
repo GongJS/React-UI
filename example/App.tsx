@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import CHeader from './components/CHeader/CHeader.example'
-import CNavLeft from './components/CNavLeft/CNavLeft.example'
+import CHeader from './components/header'
+import CAside from './components/aside'
 import { Layout, Aside, Header, Content } from '../lib/components/layout'
 import './style/index.scss'
 
@@ -13,7 +13,7 @@ export default class App extends Component {
         </Header>
         <Layout className="main-content">
           <Aside className="c-navleft">
-            <CNavLeft />
+            <CAside />
           </Aside>
           <Content className="main-content-right">
             {this.props.children}
