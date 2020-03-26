@@ -1,9 +1,14 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useImperativeHandle,
+} from 'react'
 import ReactDOM from 'react-dom'
 import { combineClass } from '../../helpers/utils'
 import './popover.scss'
 
-interface PopoverProps {
+interface PopoverProps extends React.HTMLAttributes<HTMLDivElement> {
   content: string | React.ReactNode
   trigger?: 'click' | 'hover'
   position?: 'top' | 'left' | 'right' | 'bottom'
@@ -17,7 +22,7 @@ interface PopoverProps {
   style?: React.CSSProperties
 }
 
-const Popover: React.FC<PopoverProps> = props => {
+const Popover: React.FC<PopoverProps> = (props, ref) => {
   const {
     content,
     trigger,
@@ -64,6 +69,7 @@ const Popover: React.FC<PopoverProps> = props => {
 
   const setPosition = () => {
     let triRef = triggerRef.current
+    let offsetWidth = triRef && triRef.getBoundingClientRect().width
     let conRef = contentRef.current
     if (triRef && conRef) {
       const {
@@ -79,11 +85,11 @@ const Popover: React.FC<PopoverProps> = props => {
       let positions = {
         top: {
           top: triTop + window.scrollY,
-          left: triLeft + window.scrollX - 0.5 * conWidth + 30,
+          left: triLeft + window.scrollX - 0.5 * conWidth + offsetWidth! / 2,
         },
         bottom: {
           top: triTop + triHeight + window.scrollY,
-          left: triLeft + window.scrollX - 0.5 * conWidth + 30,
+          left: triLeft + window.scrollX - 0.5 * conWidth + offsetWidth! / 2,
         },
         left: {
           top: triTop + window.scrollY + (triHeight - conHeight) / 2,
@@ -94,6 +100,7 @@ const Popover: React.FC<PopoverProps> = props => {
           left: triLeft + window.scrollX + triWidth,
         },
       }
+      console.log(triTop, triHeight, window.scrollY)
       conRef.style.left = positions[position!].left + 'px'
       conRef.style.top = positions[position!].top + 'px'
     }
@@ -129,7 +136,11 @@ const Popover: React.FC<PopoverProps> = props => {
       }
     }
   }
-
+  useImperativeHandle(ref, () => ({
+    close: () => {
+      close()
+    },
+  }))
   useLayoutEffect(() => {
     setPosition()
   })
@@ -190,4 +201,4 @@ Popover.defaultProps = {
   position: 'top',
 }
 Popover.displayName = 'Popover'
-export default Popover
+export default React.forwardRef(Popover)

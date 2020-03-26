@@ -13,7 +13,7 @@ export {
 } from './components/modal'
 export { default as Menu } from './components/menu'
 export { default as MenuItem } from './components/menu/MenuItem'
-export { default as Popover } from './components/popover/Popover'
+export { default as Popover } from './components/popover'
 export { default as SubMenu } from './components/menu/SubMenu'
 export { default as Collapse } from './components/collapse'
 export { default as CollapseItem } from './components/collapse/CollapseItem'
@@ -30,8 +30,8 @@ export {
   Footer,
   Aside,
 } from './components/layout'
-export { default as Input } from './components/input/Input'
-export { default as Textarea } from './components/input/Textarea'
+export { default as Input } from './components/input'
+export { default as Textarea } from './components/input/TextArea'
 export { default as Upload, UploadHandles } from './components/upload'
 export { default as Slide } from './components/slide'
 export { default as Loading } from './components/loading'

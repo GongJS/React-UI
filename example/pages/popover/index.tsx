@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import ReactMarkdown from 'react-markdown'
 import CodeCard from '../../CodeCard'
-import Popover from '../../../lib/components/popover/Popover'
+import Popover from '../../../lib/components/popover'
 import Button from '../../../lib/components/button'
 
 export default () => {

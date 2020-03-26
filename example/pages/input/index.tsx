@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import CodeCard from '../../CodeCard'
-import Input from '../../../lib/components/input/Input'
-import Textarea from '../../../lib/components/input/Textarea'
+import Input from '../../../lib/components/input'
+import Textarea from '../../../lib/components/input/TextArea'
 
 export default () => {
   const [value1, setValue1] = useState('')

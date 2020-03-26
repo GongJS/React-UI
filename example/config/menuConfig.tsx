@@ -62,6 +62,10 @@ export const menuList: Array<any> = [
         key: '/components/cascader',
       },
       {
+        title: 'DatePicker 日期选择器',
+        key: '/components/date-picker',
+      },
+      {
         title: 'Upload  文件上传',
         key: '/components/upload',
       },

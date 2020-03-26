@@ -8,7 +8,7 @@ import Button from './pages/button'
 import Collapse from './pages/collapse'
 import Carousel from './pages/carousel'
 import Cascader from './pages/cascader'
-import Menu from './pages/Menu'
+import Menu from './pages/menu'
 import Message from './pages/message'
 import Modal from './pages/modal'
 import Input from './pages/input'
@@ -19,6 +19,7 @@ import Grid from './pages/grid'
 import Upload from './pages/upload'
 import Slide from './pages/slide'
 import Loading from './pages/loading'
+import DatePicker from './pages/date-picker'
 import App from './App'
 
 export default class IRouter extends Component {
@@ -49,6 +50,10 @@ export default class IRouter extends Component {
                   <Route path={`${match.url}/upload`} component={Upload} />
                   <Route path={`${match.url}/slide`} component={Slide} />
                   <Route path={`${match.url}/loading`} component={Loading} />
+                  <Route
+                    path={`${match.url}/date-picker`}
+                    component={DatePicker}
+                  />
                 </Switch>
               )}
             />

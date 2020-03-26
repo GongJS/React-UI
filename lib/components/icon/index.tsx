@@ -21,7 +21,7 @@ const Icon: React.FC<IconProps> = props => {
       script = document.createElement('script')
       script.type = 'text/javascript'
       script.id = 'r-icon-script'
-      script.src = '//at.alicdn.com/t/font_732431_yq4l3hoi1wi.js'
+      script.src = '//at.alicdn.com/t/font_732431_ogb8s1grg7.js'
       document.querySelector('body')!.appendChild(script)
     }
   }, [])
