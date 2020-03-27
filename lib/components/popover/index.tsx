@@ -11,7 +11,7 @@ import './popover.scss'
 interface PopoverProps extends React.HTMLAttributes<HTMLDivElement> {
   content: string | React.ReactNode
   trigger?: 'click' | 'hover'
-  position?: 'top' | 'left' | 'right' | 'bottom'
+  position: 'top' | 'left' | 'right' | 'bottom'
   defaultVisible?: boolean
   visible?: boolean
   popClosable?: boolean
@@ -100,9 +100,8 @@ const Popover: React.FC<PopoverProps> = (props, ref) => {
           left: triLeft + window.scrollX + triWidth,
         },
       }
-      console.log(triTop, triHeight, window.scrollY)
-      conRef.style.left = positions[position!].left + 'px'
-      conRef.style.top = positions[position!].top + 'px'
+      conRef.style.left = positions[position].left + 'px'
+      conRef.style.top = positions[position].top + 'px'
     }
   }
 
@@ -196,9 +195,5 @@ const Popover: React.FC<PopoverProps> = (props, ref) => {
   )
 }
 
-Popover.defaultProps = {
-  trigger: 'hover',
-  position: 'top',
-}
 Popover.displayName = 'Popover'
 export default React.forwardRef(Popover)

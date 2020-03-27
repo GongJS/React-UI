@@ -60,7 +60,19 @@ const DatePicker: React.FC<DatePickerProps> = props => {
     let [y2, m2, d2] = getYearMonthDate(new Date())
     return y === y2 && m === m2 && d === d2
   }
-
+  const isSelected = (date: Date) => {
+    let [y2, m2, d2] = getYearMonthDate(date)
+    if (value) {
+      let [y, m, d] = getYearMonthDate(value)
+      return y === y2 && m === m2 && d === d2
+    }
+    if (defaultValue) {
+      let [y, m, d] = getYearMonthDate(date)
+      return y === y2 && m === m2 && d === d2
+    }
+    let [y, m, d] = getYearMonthDate(new Date())
+    return y === y2 && m === m2 && d === d2
+  }
   const handleClickPreYear = () => {
     if (type === 'year') {
       setStartYear(startYear - 12)
@@ -239,12 +251,7 @@ const DatePicker: React.FC<DatePickerProps> = props => {
                         ? 'current'
                         : 'not-current',
                       isToday(getVisibleDay(i, j)) ? 'is-today' : '',
-                      getVisibleDay(i, j).getTime() ===
-                        ((value && value.getTime()) ||
-                          (defaultValue && defaultValue.getTime()) ||
-                          new Date().getTime())
-                        ? 'selected'
-                        : '',
+                      isSelected(getVisibleDay(i, j)) ? 'selected' : '',
                     )}
                     onClick={() => handleClickCell(getVisibleDay(i, j))}
                   >

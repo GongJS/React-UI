@@ -12,8 +12,7 @@ a {
 
   &-right {
     padding: 100px;
-    height: 100vh;
-    overflow: scroll;
+    margin-left: 280px;
   }
 }
 
@@ -21,7 +20,9 @@ a {
   min-width: 280px;
   box-sizing: border-box;
   border-right: 1px solid #eaecef;
-  min-height: calc(100vh - 64px);
+  height: 100vh;
+  position: fixed;
+  overflow: scroll;
 }
 
 .prism-code {

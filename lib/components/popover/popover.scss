@@ -83,6 +83,7 @@ $border-radius: 4px;
     &::before,
     &::after {
       left: 50%;
+      transform: translateX(-50%);
     }
 
     &::before {

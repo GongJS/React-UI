@@ -5,11 +5,7 @@ import Popover from '../../../lib/components/popover'
 import Button from '../../../lib/components/button'
 
 export default () => {
-  const content = (
-    <div>
-      <p>you can say something...</p>
-    </div>
-  )
+  const content = <p style={{ padding: '5px' }}>you can say something...</p>
 
   return (
     <Fragment>
@@ -44,7 +40,11 @@ export default () => {
           >
             <Button type="primary">Left</Button>
           </Popover>
-          <Popover content={content} wrapperStyle={{ marginRight: '20px' }}>
+          <Popover
+            content={content}
+            position="top"
+            wrapperStyle={{ marginRight: '20px' }}
+          >
             <Button type="success">Top</Button>
           </Popover>
           <Popover
@@ -89,6 +89,7 @@ export default () => {
           </Popover>
           <Popover
             content={content}
+            position="top"
             wrapperStyle={{ marginRight: '20px' }}
             trigger="click"
           >
