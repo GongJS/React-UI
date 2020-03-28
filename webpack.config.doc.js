@@ -1,21 +1,22 @@
-const baseConfig = require('./webpack.config');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+const baseConfig = require('./webpack.config')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const merge = require('webpack-merge')
+const path = require('path')
 
-module.exports = Object.assign({}, baseConfig, {
+module.exports = merge(baseConfig, {
   mode: 'production',
   entry: {
-    example: './example/example.tsx'
+    example: './example/src/index.tsx',
   },
   output: {
+    filename: 'bundle.[hash].js',
     path: path.resolve(__dirname, 'doc'),
-    publicPath: './',
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html',
+      template: './example/public/index.html',
       title: 'R-UI',
-      filename: 'index.html'
-    })
-  ]
-});
+      filename: 'index.html',
+    }),
+  ],
+})

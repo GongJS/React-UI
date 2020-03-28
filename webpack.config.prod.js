@@ -28,7 +28,9 @@ module.exports = merge(common, {
     }, ],
   },
   plugins: [
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css'
+    }),
   ],
   externals: {
     react: {

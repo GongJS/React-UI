@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = Object.assign({}, baseConfig, {
   mode: 'development',
   entry: {
-    example: './example/example.tsx'
+    example: './example/src/index.tsx'
   },
   // devServer: {
   //   host: '192.168.0.103', //默认localhost，若是不配成0.0.0.0，在虚拟机里，若是采用端口映射，绑定host 域名的方式，访问不到

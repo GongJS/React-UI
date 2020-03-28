@@ -2,6 +2,9 @@ const path = require('path')
 const {
   CheckerPlugin
 } = require('awesome-typescript-loader')
+const {
+  CleanWebpackPlugin
+} = require('clean-webpack-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, '', dir)
@@ -18,7 +21,7 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
-      '@': path.resolve(__dirname, './lib'),
+      '@components': path.resolve(__dirname, './lib/components'),
     },
   },
   module: {
@@ -47,5 +50,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [new CheckerPlugin()],
+  plugins: [new CheckerPlugin(), new CleanWebpackPlugin()],
 }

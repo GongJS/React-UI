@@ -1,0 +1,34 @@
+@import "./reset.scss";
+@import "./mixin.scss";
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+
+  &-right {
+    padding: 100px;
+    margin-left: 280px;
+  }
+}
+
+.c-navleft {
+  min-width: 280px;
+  box-sizing: border-box;
+  border-right: 1px solid #eaecef;
+  height: 100vh;
+  position: fixed;
+  overflow: scroll;
+}
+
+.prism-code {
+  padding: 20px;
+}
+
+.token-line {
+  line-height: 30px;
+}

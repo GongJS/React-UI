@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "./dist",
+    "declarationDir": "./dist/@types/lib",
     "declaration": true,
     "baseUrl": ".",
     "module": "esnext",
@@ -20,12 +21,12 @@
     // https://github.com/Microsoft/TypeScript/issues/28762#issuecomment-443406607
     // "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "noUnusedLocals": false
+    "noUnusedLocals": false,
+    "paths": {
+      "@components/*": ["./lib/components/*"]
+    },
   },
-  "include": [
-    "lib/**/*",
-    "example/**/*"
-  ],
+  "include": ["lib/**/*", "example/**/*"],
   "exclude": [
     "node_modules",
     "build",
@@ -38,29 +39,3 @@
     "*.js"
   ]
 }
-// {
-//   "compilerOptions": {
-//     "outDir": "dist",
-//     "baseUrl": ".",
-//     "jsx": "react",
-//     // "allowSyntheticDefaultImports": true,
-//     "esModuleInterop": true,
-//     "lib": ["es6", "dom"],
-//     "sourceMap": true,
-//     "rootDir": "."
-//   },
-//   "include": [
-//     "lib/**/*"
-//   ],
-//   "exclude": [
-//     "node_modules",
-//     "build",
-//     "dist",
-//     "scripts",
-//     "acceptance-tests",
-//     "webpack",
-//     "jest",
-//     "src/setupTests.ts",
-//     "*.js"
-//   ]
-// }
