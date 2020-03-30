@@ -91,6 +91,10 @@ export const menuList: Array<any> = [
         title: 'Slide 图片预览',
         key: '/components/slide',
       },
+      {
+        title: 'Table 表格',
+        key: '/components/table',
+      },
     ],
   },
   {

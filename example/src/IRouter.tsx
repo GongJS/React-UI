@@ -19,6 +19,7 @@ const Popover = lazy(() => import('./pages/popover'))
 const Slide = lazy(() => import('./pages/slide'))
 const Sticky = lazy(() => import('./pages/sticky'))
 const Upload = lazy(() => import('./pages/upload'))
+const Table = lazy(() => import('./pages/table'))
 
 export default class IRouter extends Component {
   render() {
@@ -47,6 +48,7 @@ export default class IRouter extends Component {
                 <Route path={`${match.url}/upload`} component={Upload} />
                 <Route path={`${match.url}/slide`} component={Slide} />
                 <Route path={`${match.url}/loading`} component={Loading} />
+                <Route path={`${match.url}/table`} component={Table} />
                 <Route
                   path={`${match.url}/date-picker`}
                   component={DatePicker}

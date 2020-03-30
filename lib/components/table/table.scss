@@ -1,0 +1,39 @@
+$borderColor: red;
+
+.r-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-bottom: 1px solid transparent;
+
+  td,
+  th {
+    border-bottom: 1px solid transparent;
+    text-align: left;
+    padding: 8px;
+  }
+
+  thead {
+    background: #e8f0f9;
+
+    tr {
+      color: #45526b;
+      font-weight: bold;
+    }
+  }
+
+  tbody {
+    >tr {
+      &:nth-child(odd) {
+        background: white;
+      }
+
+      &:nth-child(even) {
+        background: #f8f9fa;
+      }
+
+      td {
+        color: #596c8e;
+      }
+    }
+  }
+}
