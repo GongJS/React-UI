@@ -1,9 +1,20 @@
 $borderColor: red;
 
+.r-table-wrapper {
+  position: relative;
+}
+
 .r-table {
   width: 100%;
   border-collapse: collapse;
   border-bottom: 1px solid transparent;
+
+  &-copy {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
 
   &-action {
     display: flex;

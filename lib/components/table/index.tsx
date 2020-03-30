@@ -6,6 +6,7 @@ interface column {
   text: string
   field: string
   sorter?: (a: any, b: any) => any
+  width?: number
 }
 
 interface selectedRow {
@@ -40,6 +41,8 @@ const Table: React.FC<TableProps> = props => {
   const [sortOrder, setSortOrder] = useState<string>(() => {
     return defaultSortOrder ? defaultSortOrder : ''
   })
+  const tableWrapperRef = useRef<HTMLDivElement>(null)
+  const tableRef = useRef<HTMLTableElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const [selectedRowKeys, setSelectedRowKeys] = useState(() => {
     if (defaultSelectedRowKeys) {
@@ -123,66 +126,101 @@ const Table: React.FC<TableProps> = props => {
       inputRef.current && (inputRef.current.indeterminate = false)
     }
   }, [selectedRowKeys])
+
+  useEffect(() => {
+    if (tableRef.current) {
+      let _table = tableRef.current.cloneNode(false)
+      //@ts-ignore
+      _table.classList.add('r-table-copy')
+      let thead = tableRef.current.childNodes[0]
+      //@ts-ignore
+      let { height } = thead.getBoundingClientRect()
+      tableRef.current.style.marginTop = height.toString() + 'px'
+      _table.appendChild(thead)
+      if (tableWrapperRef.current) {
+        tableWrapperRef.current.appendChild(_table)
+      }
+    }
+  }, [])
   return (
-    <div>
-      <table className="r-table">
-        <thead>
-          <tr>
-            <th>
-              <input
-                type="checkbox"
-                onChange={onSelectAll}
-                ref={inputRef}
-                checked={selectedRowKeys.length === dataSource.length}
-              />
-            </th>
-            {columns.map(item => (
-              <th key={item.field}>
-                <div className="r-table-action">
-                  {item.text}
-                  {item.sorter ? (
-                    <span
-                      onClick={() => handleOrder(item.sorter)}
-                      className="r-table-action-sortable"
-                    >
-                      <Icon
-                        name="triangleupfill"
-                        size="10px"
-                        color={sortOrder === 'ascend' ? '#3863d6' : '#bfbfbf'}
-                      />
-                      <Icon
-                        name="triangledownfill"
-                        size="10px"
-                        color={sortOrder === 'descend' ? '#3863d6' : '#bfbfbf'}
-                      />
-                    </span>
-                  ) : null}
-                </div>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {copyDataSource.map((item, index) => (
-            <tr key={index}>
-              <td>
+    <div className="r-table-wrapper" ref={tableWrapperRef}>
+      <div style={{ height: '300px', overflow: 'auto' }}>
+        <table className="r-table" ref={tableRef}>
+          <thead>
+            <tr>
+              <th style={{ width: '50px' }}>
                 <input
                   type="checkbox"
-                  onChange={e => selectedRowKeysChange(e, item, index)}
-                  checked={
-                    selectedRowKeys &&
-                    //@ts-ignore
-                    selectedRowKeys.includes(item.key)
-                  }
+                  onChange={onSelectAll}
+                  ref={inputRef}
+                  checked={selectedRowKeys.length === dataSource.length}
                 />
-              </td>
-              {Object.keys(item).map(k => (
-                <td key={k}>{item[k]}</td>
+              </th>
+              {columns.map(item => (
+                <th
+                  key={item.field}
+                  style={{
+                    width: (item.width && item.width.toString() + 'px') || '',
+                  }}
+                >
+                  <div className="r-table-action">
+                    {item.text}
+                    {item.sorter ? (
+                      <span
+                        onClick={() => handleOrder(item.sorter)}
+                        className="r-table-action-sortable"
+                      >
+                        <Icon
+                          name="triangleupfill"
+                          size="10px"
+                          color={sortOrder === 'ascend' ? '#3863d6' : '#bfbfbf'}
+                        />
+                        <Icon
+                          name="triangledownfill"
+                          size="10px"
+                          color={
+                            sortOrder === 'descend' ? '#3863d6' : '#bfbfbf'
+                          }
+                        />
+                      </span>
+                    ) : null}
+                  </div>
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {copyDataSource.map((item, index) => (
+              <tr key={index}>
+                <td style={{ width: '50px' }}>
+                  <input
+                    type="checkbox"
+                    onChange={e => selectedRowKeysChange(e, item, index)}
+                    checked={
+                      selectedRowKeys &&
+                      //@ts-ignore
+                      selectedRowKeys.includes(item.key)
+                    }
+                  />
+                </td>
+                {Object.keys(item).map((k, i) => (
+                  <td
+                    style={{
+                      width:
+                        (columns[i].width &&
+                          columns[i].width?.toString() + 'px') ||
+                        '',
+                    }}
+                    key={k}
+                  >
+                    {item[k]}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
