@@ -1,9 +1,11 @@
-import React, { useEffect, useState, ReactText } from 'react'
+import React, { useEffect, useState, ReactText, useRef } from 'react'
+import Icon from '../icon'
 import './table.scss'
 
 interface column {
   text: string
   field: string
+  sorter?: (a: any, b: any) => any
 }
 
 interface selectedRow {
@@ -15,6 +17,7 @@ interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   dataSource: any[]
   columns: column[]
   defaultSelectedRowKeys?: ReactText[]
+  defaultSortOrder?: 'ascend' | 'descend'
   onSelectChange?: (
     selected: boolean,
     selectedRowKeys: ReactText[],
@@ -24,7 +27,20 @@ interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
 }
 
 const Table: React.FC<TableProps> = props => {
-  const { dataSource, columns, defaultSelectedRowKeys, onSelectChange } = props
+  const {
+    dataSource,
+    columns,
+    defaultSelectedRowKeys,
+    onSelectChange,
+    defaultSortOrder,
+  } = props
+  const [copyDataSource, setCopyDataSource] = useState<any[]>(() =>
+    JSON.parse(JSON.stringify(dataSource)),
+  )
+  const [sortOrder, setSortOrder] = useState<string>(() => {
+    return defaultSortOrder ? defaultSortOrder : ''
+  })
+  const inputRef = useRef<HTMLInputElement>(null)
   const [selectedRowKeys, setSelectedRowKeys] = useState(() => {
     if (defaultSelectedRowKeys) {
       return defaultSelectedRowKeys
@@ -40,7 +56,7 @@ const Table: React.FC<TableProps> = props => {
       return []
     }
   })
-  const [isAllSelected, serIsAllSelected] = useState('none')
+
   const selectedRowKeysChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     item: any,
@@ -48,16 +64,13 @@ const Table: React.FC<TableProps> = props => {
   ) => {
     let _selectedRowKeys = [...selectedRowKeys]
     let _selectedRows = [...selectedRows]
-    //@ts-ignore
     if (!selectedRowKeys.includes(item.key)) {
       _selectedRowKeys.push(item.key)
       _selectedRows.push(item)
     } else {
-      console.log(333)
       _selectedRowKeys = _selectedRowKeys.filter(v => v !== item.key)
       _selectedRows = _selectedRows.filter(v => v.key !== item.key)
     }
-    //@ts-ignore
     setSelectedRowKeys(_selectedRowKeys)
     setSelectedRows(_selectedRows)
     onSelectChange &&
@@ -88,7 +101,28 @@ const Table: React.FC<TableProps> = props => {
       onSelectChange && onSelectChange(e.currentTarget.checked, [], [], [])
     }
   }
-  useEffect(() => {}, [selectedRowKeys])
+  const handleOrder = (fn: any) => {
+    let _copy = JSON.parse(JSON.stringify(copyDataSource)).sort(fn)
+    setCopyDataSource(_copy)
+    setSortOrder('ascend')
+    if (sortOrder === 'ascend' || !sortOrder) {
+      setCopyDataSource(_copy)
+      setSortOrder('descend')
+    } else {
+      setCopyDataSource(_copy.reverse())
+      setSortOrder('ascend')
+    }
+  }
+  useEffect(() => {
+    if (
+      selectedRowKeys.length > 0 &&
+      selectedRowKeys.length < dataSource.length
+    ) {
+      inputRef.current && (inputRef.current.indeterminate = true)
+    } else {
+      inputRef.current && (inputRef.current.indeterminate = false)
+    }
+  }, [selectedRowKeys])
   return (
     <div>
       <table className="r-table">
@@ -98,16 +132,38 @@ const Table: React.FC<TableProps> = props => {
               <input
                 type="checkbox"
                 onChange={onSelectAll}
+                ref={inputRef}
                 checked={selectedRowKeys.length === dataSource.length}
               />
             </th>
             {columns.map(item => (
-              <th key={item.field}>{item.text}</th>
+              <th key={item.field}>
+                <div className="r-table-action">
+                  {item.text}
+                  {item.sorter ? (
+                    <span
+                      onClick={() => handleOrder(item.sorter)}
+                      className="r-table-action-sortable"
+                    >
+                      <Icon
+                        name="triangleupfill"
+                        size="10px"
+                        color={sortOrder === 'ascend' ? '#3863d6' : '#bfbfbf'}
+                      />
+                      <Icon
+                        name="triangledownfill"
+                        size="10px"
+                        color={sortOrder === 'descend' ? '#3863d6' : '#bfbfbf'}
+                      />
+                    </span>
+                  ) : null}
+                </div>
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {dataSource.map((item, index) => (
+          {copyDataSource.map((item, index) => (
             <tr key={index}>
               <td>
                 <input

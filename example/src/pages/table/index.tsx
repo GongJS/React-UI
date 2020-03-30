@@ -12,12 +12,16 @@ export default () => {
   const columns = [
     { text: '序号', field: 'key' },
     { text: '姓名', field: 'name' },
-    { text: '分数', field: 'score' },
+    {
+      text: '分数',
+      field: 'score',
+      sorter: (a: any, b: any) => a.score - b.score,
+    },
   ]
   const dataSource = [
     { key: 1, name: '小明', score: 100 },
-    { key: 2, name: '小张', score: 99 },
-    { key: 3, name: '小刚', score: 65 },
+    { key: 2, name: '小张', score: 69 },
+    { key: 3, name: '小刚', score: 95 },
     { key: 4, name: '小李', score: 55 },
   ]
   const defaultSelectedRowKeys = [1]

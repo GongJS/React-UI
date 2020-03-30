@@ -5,6 +5,32 @@ $borderColor: red;
   border-collapse: collapse;
   border-bottom: 1px solid transparent;
 
+  &-action {
+    display: flex;
+    align-items: center;
+
+    span {
+      display: flex;
+      flex-direction: column;
+      margin: 2px;
+      cursor: pointer;
+
+      svg {
+        &:nth-child(1) {
+          position: relative;
+          bottom: -2px;
+        }
+
+        &:nth-child(2) {
+          position: relative;
+          top: -2px;
+        }
+
+      }
+    }
+  }
+
+
   td,
   th {
     border-bottom: 1px solid transparent;
