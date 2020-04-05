@@ -8,10 +8,11 @@
     "/@types/lib/**/*"
   ],
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
+    "start": "npm run style && cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "pub": "yarn build && bash scripts/publish.sh",
     "doc": "cross-env NODE_ENV=production webpack --config webpack.config.doc.js && bash scripts/doc.sh",
+    "style": "npx stylelint **/*.scss --fix",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.js --runInBand",
     "ci": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT=./test-results/jest/results.xml jest --config=jest.config.ci.js"
   },

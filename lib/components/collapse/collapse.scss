@@ -9,10 +9,10 @@ $border-radius: 4px;
   >.r-collapseItem {
     border-bottom: 1px solid #ebeef5;
     > .title {
-      box-sizing: border-box;
-      cursor: pointer;
       display: flex;
+      box-sizing: border-box;
       padding: 10px 20px;
+      cursor: pointer;
       .open {
         outline: none;
         transform: rotate(90deg);
@@ -28,23 +28,23 @@ $border-radius: 4px;
     }
     &:first-child {
       > .title {
-        border-top-left-radius: $border-radius;
         border-top-right-radius: $border-radius;
+        border-top-left-radius: $border-radius;
       }
     }
     &:last-child {
       > .title:last-child {
-        border-bottom-left-radius: $border-radius;
         border-bottom-right-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
       }
     }
      &.disable {
       background: #eee;
     }
     >.content {
-      color: rgba(0, 0, 0, 0.65);
-      font-size: 14px;
       padding: 0px 20px 10px 45px;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.65);
     }
   }
 }

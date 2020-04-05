@@ -1,12 +1,12 @@
 .r-grid-demo1, .r-grid-demo2, .r-grid-demo3 {
-  background: #fff;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
   height: 30px;
-  line-height: 30px;
   margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 30px;
   text-align: center;
+  color: #fff;
+  background: #fff;
   div {
     &:nth-child(odd) {
       background: #f4516c;
@@ -17,25 +17,25 @@
   }
 }
 .r-grid-demo4 {
-  background: #fff;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
   height: 30px;
-  line-height: 30px;
   margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 30px;
   text-align: center;
+  color: #fff;
+  background: #fff;
   .item {
     background: #f4516c;
   }
 }
 .gutter {
-  background: #f4516c;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
   height: 30px;
-  line-height: 30px;
   margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 30px;
   text-align: center;
+  color: #fff;
+  background: #f4516c;
 }

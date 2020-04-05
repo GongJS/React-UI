@@ -4,8 +4,8 @@
 
 .cm-s-neo {
   &.CodeMirror {
-    background: #e9f0f8;
     padding-bottom: 10px;
+    background: #e9f0f8;
   }
 }
 
@@ -13,31 +13,31 @@
   padding-top: 40px;
 
   blockquote {
+    padding: 0 1em;
     border-left: .25em solid #dfe2e5;
     color: #6a737d;
-    padding: 0 1em;
 
     p {
-      margin-bottom: 10px;
       margin-top: 10px;
+      margin-bottom: 10px;
     }
   }
 
 
   h1 {
-    color: #45526B;
-    font-size: 24px;
-    font-weight: 500;
     padding-bottom: 20px;
+    font-weight: 500;
+    font-size: 24px;
+    color: #45526B;
   }
 
   h2,
   h3 {
-    color: #45526B;
-    font-size: 20px;
-    font-weight: 500;
     padding: 20px;
     padding-left: 0px;
+    font-weight: 500;
+    font-size: 20px;
+    color: #45526B;
   }
 
   h3 {
@@ -45,16 +45,16 @@
   }
 
   table {
-    border-collapse: collapse;
-    color: #45526b;
     display: table;
-    margin-bottom: 40px;
-    max-width: 100%;
+    border-collapse: collapse;
     width: 100%;
+    max-width: 100%;
+    margin-bottom: 40px;
+    color: #45526b;
 
     thead {
-      background: #e8f0f9;
       line-height: 50px;
+      background: #e8f0f9;
 
       tr:first-child {
         border-bottom: 1px solid transparent;
@@ -70,8 +70,8 @@
       }
 
       th {
-        font-weight: 500;
         padding: 0.6em 1em;
+        font-weight: 500;
         text-align: left;
       }
     }
@@ -90,8 +90,8 @@
         line-height: 40px;
 
         td {
-          color: #596c8e;
           padding: .6em 1em;
+          color: #596c8e;
         }
       }
     }
@@ -102,29 +102,29 @@
   }
 
   code {
-    background-color: #e4f1ff;
+    padding: 0.15rem 0.5rem;
+    margin: 0;
     border-radius: 4px;
     color: #3683d6;
-    margin: 0;
-    padding: 0.15rem 0.5rem;
+    background-color: #e4f1ff;
   }
 
   p {
-    color: #45526B;
     margin-bottom: 50px;
+    color: #45526B;
   }
 
   pre {
-    background: #f2f4f5;
-    line-height: 30px;
-    margin-bottom: 30px;
     padding: 10px;
+    margin-bottom: 30px;
+    line-height: 30px;
     text-indent: -7px;
+    background: #f2f4f5;
   }
 
   pre code {
-    background: transparent;
     color: #314659;
+    background: transparent;
   }
 
   ol,
@@ -138,8 +138,8 @@
     padding-left: 1.2em;
 
     li {
-      color: #45526B;
       list-style: disc;
+      color: #45526B;
     }
   }
 }

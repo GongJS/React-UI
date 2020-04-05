@@ -1,14 +1,14 @@
 $borderColor: red;
 
 .r-table {
-  border-bottom: 1px solid transparent;
   border-collapse: collapse;
   width: 100%;
+  border-bottom: 1px solid transparent;
 
   td,
   th {
-    border-bottom: 1px solid transparent;
     padding: 8px;
+    border-bottom: 1px solid transparent;
     text-align: left;
   }
 
@@ -16,8 +16,8 @@ $borderColor: red;
     background: #e8f0f9;
 
     tr {
-      color: #45526b;
       font-weight: bold;
+      color: #45526b;
     }
   }
 

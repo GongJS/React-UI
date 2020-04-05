@@ -1,60 +1,60 @@
 .r-loading-container {
-  height: 100%;
   position: relative;
   width: 100%;
+  height: 100%;
 
   .r-nested-loading {
     &.r-loading {
-      background: rgba(230, 231, 255, .3);
-      left: 50%;
       position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
       z-index: 4;
+      top: 50%;
+      left: 50%;
+      background: rgba(230, 231, 255, .3);
+      transform: translate(-50%, -50%);
     }
   }
 
   .r-loading {
-    align-items: center;
     display: flex;
     flex-direction: column;
-    height: 100%;
     justify-content: center;
+    align-items: center;
     width: 100%;
+    height: 100%;
 
     &-rotate {
-      animation: loading 1s linear infinite;
-      background-color: transparent;
-      border-radius: 50%;
-      border-right: none;
-      border-top: none;
       display: inline-block;
+      border-top: none;
+      border-radius: 50%;
+      background-color: transparent;
       transform-origin: center center;
+      animation: loading 1s linear infinite;
+      border-right: none;
     }
 
     &-small {
-      height: 1.5em;
       width: 1.5em;
+      height: 1.5em;
     }
 
     &-medium {
-      height: 2.2em;
       width: 2.2em;
+      height: 2.2em;
     }
 
     &-large {
-      height: 3em;
       width: 3em;
+      height: 3em;
     }
 
     &-text {
-      align-items: center;
-      color: #4a90e2;
       display: flex;
       justify-content: center;
-      margin-top: 5px;
-      padding: 0.5em 0;
+      align-items: center;
       width: 100%;
+      padding: 0.5em 0;
+      margin-top: 5px;
+      color: #4a90e2;
     }
 
     &-container {

@@ -10,20 +10,20 @@ $input-height: 32px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
 .r-cascader {
-  display: inline-flex;
   position: relative;
+  display: inline-flex;
   > .trigger {
+    position: relative;
+    display: inline-flex;
     align-items: center;
+    min-width: 10em;
+    height: $input-height;
+    padding: 0 1em;
     border: 1px solid $border-color;
     border-radius: $border-radius;
+    font-size: 14px;
     color: #596c8e;
     cursor: pointer;
-    display: inline-flex;
-    font-size: 14px;
-    height: $input-height;
-    min-width: 10em;
-    padding: 0 1em;
-    position: relative;
     &:hover {
       border-color: 1px solid $border-color-hover;
     }
@@ -35,8 +35,8 @@ $input-height: 32px;
     }
     .icon {
       position: absolute;
-      right: 5px;
       top: 28%;
+      right: 5px;
       &.open {
         outline: none;
         transform: rotate(-90deg);
@@ -51,60 +51,60 @@ $input-height: 32px;
       }
     }
     .clear {
+      position: absolute;
+      z-index: 10;
+      top: 50%;
+      right: 5px;
+      display: flex;
+      justify-content: center;
       align-items: center;
-      background-color: rgba(31, 45, 61, 0.1);
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      margin: 0;
       border: none;
       border-radius: 50%;
-      color: #fff;
-      cursor: pointer;
-      display: flex;
-      font-size: 12px;
-      height: 18px;
-      justify-content: center;
-      margin: 0;
       outline: none;
-      padding: 0;
-      position: absolute;
-      right: 5px;
+      font-size: 12px;
       text-align: center;
-      top: 50%;
+      color: #fff;
+      background-color: rgba(31, 45, 61, 0.1);
       transform: translateY(-50%);
       transition: 0.3s;
-      width: 18px;
-      z-index: 10;
+      cursor: pointer;
       &:hover {
         background-color: rgba(31, 45, 61, 0.41);
       }
     }
   }
   > .popover-wrapper {
-    background: white;
-    display: flex;
-    left: 0;
-    margin-top: 8px;
     position: absolute;
     top: 100%;
+    left: 0;
+    display: flex;
+    margin-top: 8px;
+    background: white;
     @extend .box-shadow;
   }
   .r-cascader-item {
-    align-items: flex-start;
     display: flex;
-    height: 100px;
     justify-content: flex-start;
+    align-items: flex-start;
+    height: 100px;
     .left {
       height: 100%;
       padding: 0;
     }
     .right {
-      border-left: 1px solid $border-color-light;
       height: 100%;
+      border-left: 1px solid $border-color-light;
     }
     .label {
-      align-items: center;
-      color: #314659;
       display: flex;
+      align-items: center;
       padding: 0.3em 1em;
       white-space: nowrap;
+      color: #314659;
       &.disabled {
         color: rgba(0, 0, 0, 0.25);
         cursor: not-allowed;
@@ -113,8 +113,8 @@ $input-height: 32px;
         background-color: #e6f7ff;
       }
       .open {
-        background: #fafafa;
         font-weight: 600;
+        background: #fafafa;
         transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
       }
       .close {

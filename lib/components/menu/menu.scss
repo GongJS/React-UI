@@ -1,42 +1,42 @@
 @import '../../commonCss/index.scss';
 
 .r-menu {
-  box-shadow: 0px 4px 8px -4px rgba(0, 0, 0, 0.1);
-  color: $color;
-  cursor: pointer;
   display: flex;
+  color: $color;
+  box-shadow: 0px 4px 8px -4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
   user-select: none;
 
   &.vertical {
-    box-shadow: none;
     flex-direction: column;
-    min-width: 200px;
     width: 100%;
+    min-width: 200px;
+    box-shadow: none;
   }
 
   .r-menu-item {
-    color: $color;
-    padding: 20px 40px;
     position: relative;
+    padding: 20px 40px;
+    color: $color;
 
     &:not(.vertical) {
       &.active {
         &::after {
-          border-bottom: 2px solid $blue;
-          bottom: 0;
-          content: '';
-          left: 0;
           position: absolute;
+          bottom: 0;
+          left: 0;
           width: 100%;
+          border-bottom: 2px solid $blue;
+          content: '';
         }
       }
     }
 
     &.vertical {
       &.active {
+        color: $blue;
         background: #e6f7ff;
         border-right: 2px solid #3963bc;
-        color: $blue;
 
         li {
           color: #4a90e2;
@@ -47,8 +47,8 @@
 
   .r-sub-menu .r-menu-item:not(.vertical) {
     &.active {
-      background: $grey;
       color: $color;
+      background: $grey;
 
       &::after {
         display: none;
@@ -57,27 +57,27 @@
   }
 
   .r-sub-menu {
-    padding: 10px 20px;
     position: relative;
+    padding: 10px 20px;
 
     &:not(.vertical) {
       &.active {
         color: $blue;
 
         &::after {
-          border-bottom: 2px solid $blue;
-          bottom: 0;
-          content: '';
-          left: 0;
           position: absolute;
+          bottom: 0;
+          left: 0;
           width: 100%;
+          border-bottom: 2px solid $blue;
+          content: '';
         }
       }
     }
 
     &-label {
-      align-items: center;
       display: flex;
+      align-items: center;
       padding: 10px 20px;
 
       &.vertical {
@@ -106,30 +106,30 @@
     }
 
     &-popover {
-      background: white;
-      border-radius: $border-radius;
-      box-shadow: 0 0 3px fade_out(black, 0.8);
-      color: $light-color;
-      font-size: $font-size;
-      left: 0;
-      margin-top: 4px;
-      min-width: 8em;
       position: absolute;
       top: 100%;
+      left: 0;
+      min-width: 8em;
+      margin-top: 4px;
+      border-radius: $border-radius;
+      font-size: $font-size;
       white-space: nowrap;
+      color: $light-color;
+      background: white;
+      box-shadow: 0 0 3px fade_out(black, 0.8);
 
       li {
-        color: rgba(69, 82, 107, .7);
         text-decoration: none;
+        color: rgba(69, 82, 107, .7);
       }
 
       &.vertical {
+        position: static;
+        width: calc(100% + 40px);
+        margin-left: -20px;
         border: none;
         border-radius: 0;
         box-shadow: none;
-        margin-left: -20px;
-        position: static;
-        width: calc(100% + 40px);
       }
     }
   }
@@ -149,9 +149,9 @@
     }
 
     .r-sub-menu-popover {
+      top: 0;
       left: 100%;
       margin-left: 8px;
-      top: 0;
 
       &.vertical {
         margin-left: -20px;
@@ -163,8 +163,8 @@
     }
 
     .r-sub-menu-label {
-      align-items: center;
       display: flex;
+      align-items: center;
     }
 
     .r-sub-menu-icon {

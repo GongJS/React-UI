@@ -79,13 +79,13 @@ mark,
 audio,
 video,
 input {
+  padding: 0;
+  margin: 0;
   border: 0;
+  font-weight: normal;
+  font-size: 100%;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
     Microsoft YaHei, SimSun, sans-serif;
-  font-size: 100%;
-  font-weight: normal;
-  margin: 0;
-  padding: 0;
   vertical-align: baseline;
 }
 
@@ -105,8 +105,8 @@ section {
 html,
 body,
 #app {
-  height: 100%;
   width: 100%;
+  height: 100%;
 }
 
 blockquote:before,
@@ -132,10 +132,10 @@ button {
 /* custom */
 
 a {
-  -webkit-backface-visibility: hidden;
-  color: #7e8c8d;
-  cursor: pointer;
   text-decoration: none;
+  color: #7e8c8d;
+  -webkit-backface-visibility: hidden;
+  cursor: pointer;
 }
 
 li {
@@ -144,8 +144,8 @@ li {
 
 img {
   display: block;
-  height: auto;
   width: 100%;
+  height: auto;
 }
 
 body {
@@ -169,18 +169,18 @@ a:active {
 a,
 a:focus,
 a:hover {
+  text-decoration: none;
   color: inherit;
   cursor: pointer;
-  text-decoration: none;
 }
 
 .clearfix {
   &:after {
     clear: both;
-    content: ' ';
     display: block;
-    font-size: 0;
     height: 0;
     visibility: hidden;
+    font-size: 0;
+    content: ' ';
   }
 }

@@ -31,14 +31,14 @@ $font-size: 14px;
 }
 
 @mixin setColor($button-bg, $button-plain-color, $button-action-color) {
-  background: $button-bg;
   border: 1px solid $button-bg;
   color: #fff;
+  background: $button-bg;
 
   &.plain {
-    background: #fff;
     border: 1px solid $button-plain-color;
     color: $button-plain-color;
+    background: #fff;
 
     svg {
       fill: $button-plain-color;
@@ -46,9 +46,9 @@ $font-size: 14px;
 
     &:hover:not(.disabled),
     &:focus:not(.disabled) {
-      background: $button-bg;
       border: 1px solid $button-bg;
       color: #fff;
+      background: $button-bg;
 
       svg {
         fill: #fff;
@@ -58,9 +58,9 @@ $font-size: 14px;
 
   &:hover:not(.disabled),
   &:focus:not(.disabled) {
-    background: $button-action-color;
     border: 1px solid $button-action-color;
     color: #fff;
+    background: $button-action-color;
 
     svg {
       fill: #fff;
@@ -70,20 +70,20 @@ $font-size: 14px;
 
 .r-button,
 .r-button--default {
-  align-items: center;
-  background: #fff;
-  border: 1px solid $border-color;
-  border-radius: $border-radius;
-  box-sizing: border-box;
-  color: $button-color;
-  cursor: pointer;
   display: inline-flex;
-  font-family: PingFang SC;
-  font-size: $font-size;
   justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
   min-width: $button-height;
   padding: 5px 16px;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  font-size: $font-size;
+  font-family: PingFang SC;
   vertical-align: middle;
+  color: $button-color;
+  background: #fff;
+  cursor: pointer;
 
   &:focus,
   &:hover {
@@ -93,8 +93,8 @@ $font-size: 14px;
   &:focus:not(.disabled),
   &:hover:not(.disabled) {
     border: 1px solid $button-primary-plain-color;
-    color: $button-primary-plain-color;
     outline: none;
+    color: $button-primary-plain-color;
   }
 
   >.r-button-content {
@@ -102,8 +102,8 @@ $font-size: 14px;
   }
 
   >.icon {
-    margin-right: 0.4em;
     order: 1;
+    margin-right: 0.4em;
   }
 
   &.icon-right {
@@ -112,9 +112,9 @@ $font-size: 14px;
     }
 
     >.icon {
-      margin-left: 0.4em;
-      margin-right: 0;
       order: 2;
+      margin-right: 0;
+      margin-left: 0.4em;
     }
   }
 
@@ -122,19 +122,19 @@ $font-size: 14px;
     padding: 0;
 
     >.icon {
-      margin-left: 0;
       margin-right: 0;
+      margin-left: 0;
     }
   }
 
   &.circle {
-    border-radius: 50%;
     padding: 10px;
+    border-radius: 50%;
   }
 
   &.disabled {
-    cursor: not-allowed;
     opacity: 0.5;
+    cursor: not-allowed;
   }
 
   .loading {
@@ -168,26 +168,26 @@ $font-size: 14px;
 }
 
 .ripple {
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
 }
 
 /*button 水波纹点击效果*/
 .ripple:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
   background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
   background-position: 50%;
   background-repeat: no-repeat;
-  content: "";
-  display: block;
-  height: 100%;
-  left: 0;
   opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  top: 0;
   transform: scale(10, 10);
   transition: transform 0.5s, opacity 1s;
-  width: 100%;
+  content: "";
+  pointer-events: none;
 }
 
 .ripple:active:after {
