@@ -1,15 +1,15 @@
 .common-header {
-  width: 100%;
-  height: 64px;
-  margin-bottom: 64px;
+  align-items: center;
+  background: white;
   box-shadow: 0 2px 8px #f0f1f2;
-  padding: 0 20px;
   box-sizing: border-box;
   display: flex;
-  align-items: center;
+  height: 64px;
   justify-content: space-between;
+  margin-bottom: 64px;
+  padding: 0 20px;
   position: fixed;
-  background: white;
+  width: 100%;
   z-index: 1000;
 
   &-title {
@@ -18,13 +18,13 @@
   }
 
   .logo-pic {
-    width: 120px;
     height: 60px;
     margin: 0 20px;
+    width: 120px;
   }
 
   &-left {
-    display: flex;
     align-items: center;
+    display: flex;
   }
 }

@@ -2,14 +2,14 @@
   padding-top: 120px;
 
   h3 {
-    padding: 20px 50px;
     color: rgba(0, 0, 0, 0.45);
+    color: #45526B;
     font-size: 14px;
+    font-weight: 500;
     line-height: 1.5;
+    padding: 20px 50px;
     -webkit-transition: all .3s;
     transition: all .3s;
-    color: #45526B;
-    font-weight: 500;
   }
 
   ul {
@@ -32,9 +32,9 @@
     }
 
     .active {
-      color: #4a90e2;
       background-color: #e6f7ff;
       border-right: 2px solid #3963bc;
+      color: #4a90e2;
       margin-right: -1px;
     }
   }

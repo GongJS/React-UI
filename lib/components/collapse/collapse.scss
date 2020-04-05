@@ -9,21 +9,21 @@ $border-radius: 4px;
   >.r-collapseItem {
     border-bottom: 1px solid #ebeef5;
     > .title {
-      padding: 10px 20px;
       box-sizing: border-box;
-      display: flex;
       cursor: pointer;
+      display: flex;
+      padding: 10px 20px;
       .open {
         outline: none;
+        transform: rotate(90deg);
         transition: 0.3s;
         transition-property: all;
-        transform: rotate(90deg);
       }
       .close {
         outline: none;
+        transform: rotate(0deg);
         transition: 0.3s;
         transition-property: all;
-        transform: rotate(0deg);
       }
     }
     &:first-child {
@@ -42,9 +42,9 @@ $border-radius: 4px;
       background: #eee;
     }
     >.content {
-      padding: 0px 20px 10px 45px;
-      font-size: 14px;
       color: rgba(0, 0, 0, 0.65);
+      font-size: 14px;
+      padding: 0px 20px 10px 45px;
     }
   }
 }

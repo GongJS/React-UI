@@ -1,4 +1,5 @@
 const path = require('path')
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 const {
   CheckerPlugin
 } = require('awesome-typescript-loader')
@@ -50,5 +51,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [new CheckerPlugin(), new CleanWebpackPlugin()],
+  plugins: [new CheckerPlugin(), new CleanWebpackPlugin(), new StyleLintPlugin({fix: true})],
 }

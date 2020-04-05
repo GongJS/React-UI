@@ -8,46 +8,46 @@ $border-radius: 4px;
   .r-button--success,
   .r-button--danger,
   .r-button--info {
+    border-left: 1px solid white;
     border-radius: 0;
     border-right: 1px solid white;
-    border-left: 1px solid white;
 
     &:not(:first-child) {
       margin-left: -1px;
     }
 
     &:first-child {
-      border-top-left-radius: $border-radius;
       border-bottom-left-radius: $border-radius;
       border-left: none;
+      border-top-left-radius: $border-radius;
     }
 
     &:last-child {
-      border-top-right-radius: $border-radius;
       border-bottom-right-radius: $border-radius;
       border-right: none;
+      border-top-right-radius: $border-radius;
     }
 
     &:hover:not(:first-child):not(:last-child),
     &:focus:not(:first-child):not(:last-child) {
+      border-left: 1px solid white;
+      border-right: 1px solid white;
       position: relative;
       z-index: 1;
-      border-right: 1px solid white;
-      border-left: 1px solid white;
     }
 
     &:hover:first-child,
     &:focus:first {
+      border-right: 1px solid white;
       position: relative;
       z-index: 1;
-      border-right: 1px solid white;
     }
 
     &:hover:last-child,
     &:focus:last-child {
+      border-left: 1px solid white;
       position: relative;
       z-index: 1;
-      border-left: 1px solid white;
     }
   }
 }

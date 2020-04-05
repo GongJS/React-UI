@@ -2,27 +2,27 @@ $border-color: #333;
 $border-radius: 4px;
 
 .r-popover-hover-top {
-  padding-top: 20px;
-  margin-top: -10px;
   display: inline-flex;
+  margin-top: -10px;
+  padding-top: 20px;
 }
 
 .r-popover-hover-bottom {
-  padding-bottom: 10px;
-  margin-bottom: -10px;
   display: inline-flex;
+  margin-bottom: -10px;
+  padding-bottom: 10px;
 }
 
 .r-popover-hover-left {
-  padding-left: 10px;
-  margin-left: -10px;
   display: inline-flex;
+  margin-left: -10px;
+  padding-left: 10px;
 }
 
 .r-popover-hover-right {
-  padding-right: 10px;
-  margin-right: -10px;
   display: inline-flex;
+  margin-right: -10px;
+  padding-right: 10px;
 }
 
 .r-popover-click-top,
@@ -34,31 +34,31 @@ $border-radius: 4px;
 
 .r-popover {
   display: inline-block;
-  vertical-align: top;
   position: relative;
+  vertical-align: top;
 }
 
 .r-popover-content-wrapper {
-  position: absolute;
+  background: white;
   border-radius: $border-radius;
   box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.07);
   filter: drop-shadow(3px 0px 7px rgba(0, 0, 0, 0.17));
-  background: white;
+  position: absolute;
   word-break: break-all;
 
   &::before,
   &::after {
+    border: 10px solid transparent;
     content: '';
     display: block;
-    border: 10px solid transparent;
-    width: 0;
     height: 0;
     position: absolute;
+    width: 0;
   }
 
   &.position-top {
-    transform: translateY(-100%);
     margin-top: -10px;
+    transform: translateY(-100%);
 
     &::before,
     &::after {
@@ -71,8 +71,8 @@ $border-radius: 4px;
     }
 
     &::after {
-      border-top-color: white;
       border-bottom: none;
+      border-top-color: white;
       top: calc(100% - 1px);
     }
   }
@@ -92,20 +92,20 @@ $border-radius: 4px;
     }
 
     &::after {
-      border-top: none;
       border-bottom-color: white;
+      border-top: none;
       bottom: calc(100% - 1px);
     }
   }
 
   &.position-left {
-    transform: translateX(-100%);
     margin-left: -10px;
+    transform: translateX(-100%);
 
     &::before,
     &::after {
-      transform: translateY(-50%);
       top: 50%;
+      transform: translateY(-50%);
     }
 
     &::before {
@@ -125,8 +125,8 @@ $border-radius: 4px;
 
     &::before,
     &::after {
-      transform: translateY(-50%);
       top: 50%;
+      transform: translateY(-50%);
     }
 
     &::before {
@@ -135,8 +135,8 @@ $border-radius: 4px;
     }
 
     &::after {
-      border-right-color: white;
       border-left: none;
+      border-right-color: white;
       right: calc(100% - 1px);
     }
   }

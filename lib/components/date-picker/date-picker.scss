@@ -3,18 +3,18 @@
   width: 280px;
 
   &-head {
+    align-items: center;
+    border-bottom: 1px solid #dedede;
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 10px;
-    cursor: pointer;
-    border-bottom: 1px solid #dedede;
 
     &-introduce {
-      width: 90px;
+      align-items: center;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      width: 90px;
 
       span {
         font-weight: bold;
@@ -27,26 +27,26 @@
   }
 
   &-panels {
-    height: 250px;
     display: flex;
     flex-direction: column;
+    height: 250px;
     justify-content: space-between;
     padding: 5px 0px;
 
     &-year,
     &-day {
+      align-items: center;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      text-align: center;
       padding: 20px;
+      text-align: center;
 
       span {
+        cursor: pointer;
         display: inline-block;
-        width: 50px;
         height: 20px;
         line-height: 20px;
-        cursor: pointer;
+        width: 50px;
 
         &.selected {
           background: #3863d6;
@@ -64,8 +64,8 @@
 
       &.head {
         span {
-          cursor: not-allowed;
           background: none;
+          cursor: not-allowed;
         }
       }
 
@@ -83,9 +83,9 @@
         }
 
         &.not-current {
+          background: none;
           color: rgba(0, 0, 0, .25);
           cursor: not-allowed;
-          background: none;
         }
 
         &.is-today {
@@ -95,13 +95,13 @@
     }
 
     &-day-footer {
-      display: flex;
-      justify-content: center;
       align-items: center;
+      border-top: 1px solid #dedede;
       color: #3683d6;
       cursor: pointer;
+      display: flex;
+      justify-content: center;
       padding-top: 5px;
-      border-top: 1px solid #dedede;
 
       &:hover {
         font-weight: bold;

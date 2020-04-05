@@ -20,30 +20,30 @@
   }
 }
 .r-message {
-  margin-top: 30px;
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 30px;
   min-width: 100px;
   .r-message-container {
-    max-width: 50vw;
-    font-size: 1.2vw;
-    box-sizing: border-box;
-    border-radius: 4px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #ebeef5;
-    padding: 15px 15px 15px 20px;
-    overflow: hidden;
-    display: flex;
     align-items: center;
-    margin-top:15px;
     animation: slide-up 0.3s forwards;
+    border-color: #ebeef5;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-sizing: border-box;
+    display: flex;
+    font-size: 1.2vw;
+    margin-top:15px;
+    max-width: 50vw;
+    overflow: hidden;
+    padding: 15px 15px 15px 20px;
     > .content {
+      align-items: center;
+      display: flex;
       margin-left: 20px;
       width: 100%;
-      display: flex;
-      align-items: center;
     }
 
     &.r-message-success {
@@ -71,8 +71,8 @@
 @media screen and (max-width: 576px) {
   .r-message {
     >.r-message-container {
-      max-width: 80vw;
       font-size: 2vw;
+      max-width: 80vw;
       >.content {
         margin-left: 10px;
       }

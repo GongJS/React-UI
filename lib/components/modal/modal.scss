@@ -10,43 +10,43 @@ $mian-color: #3963bc;
   }
 }
 .r-modal {
-  position: fixed;
-  z-index: 101;
-  top: 50%;
   left: 50%;
+  position: fixed;
+  top: 50%;
   transform: translate(-50%, -50%);
+  z-index: 101;
   &-container {
+    animation: slide-up 0.5s;
     background: #fff;
     border-radius: 4px;
     min-width: 30vw;
-    animation: slide-up 0.5s;
     >.r-modal-header {
-      font-size: 22px;
+      align-items: center;
       color: $mian-color;
       display: flex;
+      font-size: 22px;
       justify-content: space-between;
-      align-items: center;
       > .close {
         cursor: pointer;
       }
     }
     >.r-modal-main {
-      padding: 0px 32px 9px 70px;
       min-height: 5vh;
+      padding: 0px 32px 9px 70px;
     }
     >.r-modal-footer {
+      align-items: center;
       display: flex;
       justify-content: flex-end;
-      align-items: center;
     }
   }
   &-mask {
-    position: fixed;
-    z-index: 99;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     background: fade-out($color: black, $amount: 0.5);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 99;
   }
 }

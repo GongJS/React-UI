@@ -1,15 +1,15 @@
 $borderColor: red;
 
 .r-table {
-  width: 100%;
-  border-collapse: collapse;
   border-bottom: 1px solid transparent;
+  border-collapse: collapse;
+  width: 100%;
 
   td,
   th {
     border-bottom: 1px solid transparent;
-    text-align: left;
     padding: 8px;
+    text-align: left;
   }
 
   thead {

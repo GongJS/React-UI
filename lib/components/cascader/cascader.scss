@@ -10,20 +10,20 @@ $input-height: 32px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
 .r-cascader {
-  position: relative;
   display: inline-flex;
+  position: relative;
   > .trigger {
-    position: relative;
-    height: $input-height;
-    display: inline-flex;
     align-items: center;
-    padding: 0 1em;
-    min-width: 10em;
     border: 1px solid $border-color;
     border-radius: $border-radius;
     color: #596c8e;
-    font-size: 14px;
     cursor: pointer;
+    display: inline-flex;
+    font-size: 14px;
+    height: $input-height;
+    min-width: 10em;
+    padding: 0 1em;
+    position: relative;
     &:hover {
       border-color: 1px solid $border-color-hover;
     }
@@ -39,72 +39,72 @@ $input-height: 32px;
       top: 28%;
       &.open {
         outline: none;
+        transform: rotate(-90deg);
         transition: 0.3s;
         transition-property: all;
-        transform: rotate(-90deg);
       }
       &.close {
         outline: none;
+        transform: rotate(90deg);
         transition: 0.3s;
         transition-property: all;
-        transform: rotate(90deg);
       }
     }
     .clear {
+      align-items: center;
+      background-color: rgba(31, 45, 61, 0.1);
       border: none;
+      border-radius: 50%;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      font-size: 12px;
+      height: 18px;
+      justify-content: center;
+      margin: 0;
       outline: none;
       padding: 0;
-      margin: 0;
-      height: 18px;
-      width: 18px;
-      cursor: pointer;
-      transition: 0.3s;
-      border-radius: 50%;
-      background-color: rgba(31, 45, 61, 0.1);
-      color: #fff;
       position: absolute;
-      top: 50%;
-      z-index: 10;
-      transform: translateY(-50%);
-      text-align: center;
-      font-size: 12px;
       right: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: 0.3s;
+      width: 18px;
+      z-index: 10;
       &:hover {
         background-color: rgba(31, 45, 61, 0.41);
       }
     }
   }
   > .popover-wrapper {
-    position: absolute;
-    top: 100%;
-    left: 0;
     background: white;
     display: flex;
+    left: 0;
     margin-top: 8px;
+    position: absolute;
+    top: 100%;
     @extend .box-shadow;
   }
   .r-cascader-item {
-    display: flex;
     align-items: flex-start;
-    justify-content: flex-start;
+    display: flex;
     height: 100px;
+    justify-content: flex-start;
     .left {
       height: 100%;
       padding: 0;
     }
     .right {
-      height: 100%;
       border-left: 1px solid $border-color-light;
+      height: 100%;
     }
     .label {
-      white-space: nowrap;
-      padding: 0.3em 1em;
-      display: flex;
       align-items: center;
       color: #314659;
+      display: flex;
+      padding: 0.3em 1em;
+      white-space: nowrap;
       &.disabled {
         color: rgba(0, 0, 0, 0.25);
         cursor: not-allowed;
@@ -113,8 +113,8 @@ $input-height: 32px;
         background-color: #e6f7ff;
       }
       .open {
-        font-weight: 600;
         background: #fafafa;
+        font-weight: 600;
         transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
       }
       .close {

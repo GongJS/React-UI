@@ -1,49 +1,49 @@
 .r-code-card {
   border: 1px solid #dee2e6;
-  padding: 20px;
-  padding-bottom: 30px;
+  box-shadow: 2px 2px 30px #c7ccd7;
   margin: 30px 0;
   max-width: 1000px;
-  box-shadow: 2px 2px 30px #c7ccd7;
+  padding: 20px;
+  padding-bottom: 30px;
   >.content {
     padding: 10px 30px;
   }
   >.title {
-    position: relative;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    height: 1px;
     background: #d3dce6;
+    height: 1px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    position: relative;
     span {
+      background: #fff;
+      color: #45526B;
+      font-weight: bold;
+      padding-left: 10px;
+      padding-right: 10px;
       position: absolute;
       top: 50%;
       transform: translate(50px, -50%);
-      background: #fff;
-      padding-left: 10px;
-      padding-right: 10px;
-      color: #45526B;
-      font-weight: bold;
     }
   }
   .sub-title {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
     color: #596c8e;
+    display: flex;
+    justify-content: space-between;
     .icon {
       cursor: pointer;
       margin-left: 10px;
       &.open {
         outline: none;
+        transform: rotate(-90deg);
         transition: 0.3s;
         transition-property: all;
-        transform: rotate(-90deg);
       }
       &.close {
         outline: none;
+        transform: rotate(90deg);
         transition: 0.3s;
         transition-property: all;
-        transform: rotate(90deg);
       }
     }
   }

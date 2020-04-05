@@ -11,18 +11,18 @@ a {
   flex-direction: row;
 
   &-right {
-    padding: 100px;
     margin-left: 280px;
+    padding: 100px;
   }
 }
 
 .c-navleft {
-  min-width: 280px;
-  box-sizing: border-box;
   border-right: 1px solid #eaecef;
+  box-sizing: border-box;
   height: 100vh;
-  position: fixed;
+  min-width: 280px;
   overflow: scroll;
+  position: fixed;
 }
 
 .prism-code {
