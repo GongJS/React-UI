@@ -46,6 +46,7 @@ const CollapseItem: React.FC<CollapseItemProps> = props => {
     if (!disabled && defaultSelectedKeys!.indexOf(uniqueKey!) > -1) {
       handleSelectedKey!(uniqueKey!)
     }
+    // eslint-disable-next-line
   }, [])
 
   return (
@@ -71,7 +72,7 @@ const CollapseItem: React.FC<CollapseItemProps> = props => {
         timeout={300}
         unmountOnExit
         onEnter={(el: HTMLDivElement) => {
-          let childCurrent: HTMLDivElement | null = childRef.current
+          const childCurrent: HTMLDivElement | null = childRef.current
           if (childCurrent) {
             const { top, bottom } = childCurrent.getBoundingClientRect()
             height = bottom - top + 'px'

@@ -81,7 +81,8 @@ const Collapse: React.FC<CollapseProps> = props => {
 
   useEffect(() => {
     onChange && onChange(expandKeys, event)
-  }, [expandKeys, setExpandKeys])
+    //@ts-ignore
+  }, [expandKeys, setExpandKeys, onChange, event])
 
   return (
     <div className={combineClass('r-collapse', className)} {...restProps}>

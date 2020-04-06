@@ -1,7 +1,7 @@
 import React from 'react';
 import { combineClass, prefixClass } from '../../helpers/utils';;
 
-interface HeaderProps extends React.HTMLAttributes<HTMLElement> {}
+type HeaderProps = React.HTMLAttributes<HTMLElement>
 
 const Header: React.FunctionComponent<HeaderProps> = ({
   className,

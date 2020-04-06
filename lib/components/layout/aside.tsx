@@ -1,7 +1,7 @@
 import React from 'react';
 import { combineClass, prefixClass } from '../../helpers/utils';
 
-interface AsideProps extends React.HTMLAttributes<HTMLElement> { }
+type AsideProps = React.HTMLAttributes<HTMLElement>
 
 const Aside: React.FunctionComponent<AsideProps> = ({
   className,

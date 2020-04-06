@@ -1,7 +1,7 @@
 import React from 'react';
 import { combineClass, prefixClass } from '../../helpers/utils';
 
-interface ContentProps extends React.HTMLAttributes<HTMLElement> {}
+type ContentProps = React.HTMLAttributes<HTMLElement>
 
 const Content: React.FunctionComponent<ContentProps> = ({
   className,

@@ -12,7 +12,7 @@ const Sticky: React.FC<StickyProps> = props => {
   const container = React.createRef<HTMLDivElement>()
   const [top, setTop] = useState(0)
   const handleScroll = () => {
-    let stickyCurrent: HTMLDivElement | null = stickyWrapper.current
+    const stickyCurrent: HTMLDivElement | null = stickyWrapper.current
     if (stickyCurrent) {
       if (window.scrollY > top - distance!) {
         const {

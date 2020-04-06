@@ -44,7 +44,7 @@ const CascaderItem: React.FC<CascaderItemProps> = props => {
 
   // 子选项
   const rightItems = () => {
-    let currentSelected = selectedItems[level]
+    const currentSelected = selectedItems[level]
     if (currentSelected && currentSelected.children) {
       return currentSelected.children
     } else {

@@ -1,24 +1,24 @@
-import React, { useEffect, useState, ReactText } from 'react'
+import React, { useState, ReactText } from 'react'
 import './table.scss'
 
-interface column {
+interface Column {
   text: string
   field: string
 }
 
-interface selectedRow {
+interface SelectedRow {
   selected: boolean
   row: any
   index: number
 }
 interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   dataSource: any[]
-  columns: column[]
+  columns: Column[]
   defaultSelectedRowKeys?: ReactText[]
   onSelectChange?: (
     selected: boolean,
     selectedRowKeys: ReactText[],
-    selectedRows: selectedRow[],
+    selectedRows: SelectedRow[],
     record: any,
   ) => any
 }
@@ -70,8 +70,8 @@ const Table: React.FC<TableProps> = props => {
   }
   const onSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.checked) {
-      let keys: ReactText[] = []
-      let rows: any = []
+      const keys: ReactText[] = []
+      const rows: any = []
       dataSource.forEach(v => {
         keys.push(v.key)
         if (!selectedRowKeys.includes(v.key)) {
@@ -88,7 +88,6 @@ const Table: React.FC<TableProps> = props => {
       onSelectChange && onSelectChange(e.currentTarget.checked, [], [], [])
     }
   }
-  useEffect(() => {}, [selectedRowKeys])
   return (
     <div>
       <table className="r-table">

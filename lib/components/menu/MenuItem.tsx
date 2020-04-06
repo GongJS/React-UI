@@ -41,7 +41,7 @@ const MenuItem: React.FC<MenuItemProps> = props => {
     ) {
       setActive(true)
     }
-  })
+  }, [menuItem, currentTarget, selectedKey, uniqueKey])
 
   return (
     <div

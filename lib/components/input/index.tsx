@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { HTMLAttributes } from 'enzyme'
 import Icon from '../icon'
 import { combineClass } from '../../helpers/utils'
@@ -93,7 +93,7 @@ const Input: React.FC<InputProps> = props => {
     `${readonly ? 'readonly' : ''}`,
   )
 
-  const changeValue = (value?: string) => {
+  const changeValue =useCallback ((value?: string) => {
     if (value !== undefined) {
       return value
     }
@@ -101,14 +101,14 @@ const Input: React.FC<InputProps> = props => {
       return defaultValue
     }
     return ''
-  }
+  },[defaultValue])
 
-  const derivedValue = useMemo(() => changeValue(value), [value])
+  const derivedValue = useMemo(() => changeValue(value), [changeValue,value])
 
   useEffect(() => {
     value && offFocus && setClearVisible(true)
     !value && setClearVisible(false)
-  })
+  }, [value, offFocus])
 
   return (
     <div className={wrapperClassList} style={wrapperStyle}>

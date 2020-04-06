@@ -24,7 +24,7 @@ interface ChildProps extends MenuProps {
   hideChildSubMenu?: (key: string) => any
 }
 let subMenuEle: Element[]
-let isOutClick: boolean = true
+let isOutClick = true
 
 const Menu: React.FC<MenuProps> = props => {
   const {
@@ -90,6 +90,7 @@ const Menu: React.FC<MenuProps> = props => {
     if (defaultExpandKeys) {
       setExpandKeys(defaultExpandKeys)
     }
+    // eslint-disable-next-line
   }, [])
 
   const getUniqueKeyFromChild = (
@@ -109,7 +110,7 @@ const Menu: React.FC<MenuProps> = props => {
 
   const hideChildSubMenu = (key: string) => {
     let shouldHide = false
-    let filterClickSubMenuKey = expandKeys.filter(
+    const filterClickSubMenuKey = expandKeys.filter(
       item => item !== clickSubMenuKey,
     )
     for (let i = 0; i < filterClickSubMenuKey.length; i++) {
