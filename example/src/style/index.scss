@@ -9,6 +9,7 @@ a {
 .main-content {
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 
   &-right {
     padding: 100px;

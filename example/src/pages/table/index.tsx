@@ -2,6 +2,7 @@ import React, { Fragment, useState, ReactText } from 'react'
 import ReactMarkdown from 'react-markdown'
 import CodeCard from '../../components/code-card'
 import Table from '@components/table'
+import Button from '@components//button'
 
 interface selectedRow {
   selected: boolean
@@ -9,20 +10,37 @@ interface selectedRow {
   index: number
 }
 export default () => {
+  const del = (record: any) => {
+    data = data.filter((v) => v.key !== record.key)
+    setDataSource(data)
+  }
   const columns = [
-    { text: '序号', field: 'key', width: 80 },
-    { text: '姓名', field: 'name', width: 80 },
+    { text: '序号', field: 'key', width: 100, fixed: 'left' },
+    { text: '姓名', field: 'name', width: 100, fixed: 'left' },
     {
       text: '分数',
       field: 'score',
       width: 80,
       sorter: (a: any, b: any) => a.score - b.score,
     },
-    { text: '年龄', field: 'age', width: 80 },
-    { text: '性别', field: 'sex' },
-    { text: '地址', field: 'address', width: 200 },
+    { text: '年龄', field: 'age', width: 100, fixed: 'right' },
+    { text: '性别', field: 'sex', width: 100 },
+    { text: '地址', field: 'address' },
+    {
+      text: '操作',
+      field: 'action',
+      fixed: 'right',
+      width: 100,
+      render: (record: any) => {
+        return (
+          <Button type="danger" onClick={() => del(record)}>
+            删除
+          </Button>
+        )
+      },
+    },
   ]
-  const dataSource = [
+  let data = [
     {
       key: 1,
       name: '小明',
@@ -144,6 +162,7 @@ export default () => {
       address: '杭州市西湖区',
     },
   ]
+  const [dataSource, setDataSource] = useState(data)
   const defaultSelectedRowKeys = [1]
   const onSelectChange = (
     selected: boolean,
@@ -161,12 +180,82 @@ export default () => {
         className="md"
       />
       <CodeCard
-        title="基本用法"
-        summary="最基本的用法,展示数据。"
-        code={` 
-      <DatePicker />`}
+        title="用法"
+        summary="表头固定、列固定、数据选择、数据排序、数据删除。"
+        code={`
+        interface selectedRow {
+          selected: boolean
+          row: any
+          index: number
+        }
+        export default () => {
+          const del = (record: any) => {
+            data = data.filter((v) => v.key !== record.key)
+            setDataSource(data)
+          }
+          const columns = [
+            { text: '序号', field: 'key', width: 100, fixed: 'left' },
+            { text: '姓名', field: 'name', width: 100, fixed: 'left' },
+            {
+              text: '分数',
+              field: 'score',
+              width: 80,
+              sorter: (a: any, b: any) => a.score - b.score,
+            },
+            { text: '年龄', field: 'age', width: 100, fixed: 'right' },
+            { text: '性别', field: 'sex', width: 100 },
+            { text: '地址', field: 'address' },
+            {
+              text: '操作',
+              field: 'action',
+              fixed: 'right',
+              width: 100,
+              render: (record: any) => {
+                return (
+                  <Button type="danger" onClick={() => del(record)}>
+                    删除
+                  </Button>
+                )
+              },
+            },
+          ]
+          let data = [
+            {
+              key: 1,
+              name: '小明',
+              score: 100,
+              age: 34,
+              sex: '男',
+              address: '杭州市西湖区',
+            },
+            {
+              key: 2,
+              name: '小张',
+              score: 69,
+              age: 24,
+              sex: '男',
+              address: '杭州市西湖区',
+            },
+            {
+              key: 3,
+              name: '小刚',
+              score: 95,
+              age: 14,
+              sex: '男',
+              address: '杭州市西湖区',
+            },
+            ...
+          ]
+          <Table
+            scroll={{ x: 1000, y: 300 }}
+            dataSource={dataSource}
+            columns={columns}
+            defaultSelectedRowKeys={defaultSelectedRowKeys}
+            onSelectChange={onSelectChange}
+          />`}
       >
         <Table
+          scroll={{ x: 1000, y: 300 }}
           dataSource={dataSource}
           columns={columns}
           defaultSelectedRowKeys={defaultSelectedRowKeys}

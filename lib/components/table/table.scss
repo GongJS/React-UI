@@ -1,5 +1,15 @@
 $borderColor: red;
 
+@mixin cell-after {
+  position: absolute;
+  top: 0;
+  bottom: -1px;
+  width: 30px;
+  transition: box-shadow 0.3s;
+  content: '';
+  pointer-events: none;
+}
+
 .r-table-wrapper {
   position: relative;
 }
@@ -9,16 +19,10 @@ $borderColor: red;
   border-collapse: collapse;
   border-bottom: 1px solid transparent;
 
-  &-copy {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
-
   &-action {
     display: flex;
     align-items: center;
+    background: #e8f0f9;
 
     span {
       display: flex;
@@ -36,36 +40,69 @@ $borderColor: red;
           position: relative;
           top: -2px;
         }
-
       }
     }
   }
 
+  &-cell-left-shadow {
+    &::after {
+      box-shadow: inset 10px 0 8px -8px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &-cell-right-shadow {
+    &::after {
+      box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &-cell-left-last {
+    &::after {
+      right: 0;
+      transform: translateX(100%);
+      @include cell-after()
+    }
+  }
+
+  &-cell-right-first {
+    &::after {
+      left: 0;
+      transform: translateX(-100%);
+      @include cell-after()
+    }
+  }
 
   td,
   th {
     border-bottom: 1px solid transparent;
     text-align: left;
     padding: 8px;
+    box-sizing: border-box;
   }
 
   thead {
-    background: #e8f0f9;
-
     tr {
       color: #45526b;
       font-weight: bold;
+
+      th {
+        background: #e8f0f9;
+      }
     }
   }
 
   tbody {
     >tr {
       &:nth-child(odd) {
-        background: white;
+        td {
+          background: white;
+        }
       }
 
       &:nth-child(even) {
-        background: #f8f9fa;
+        td {
+          background: #f8f9fa;
+        }
       }
 
       td {
