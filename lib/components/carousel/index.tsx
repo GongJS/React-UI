@@ -24,7 +24,7 @@ const Carousel: React.FC<CarouselProps> = props => {
 
   let dotsEle: NodeListOf<HTMLElement>
   let panelsEle: NodeListOf<HTMLElement>
-  let endFlag: boolean = true
+  let endFlag = true
   let timer: number
   let direction: string
   const id = uniqueId(4)
@@ -33,11 +33,11 @@ const Carousel: React.FC<CarouselProps> = props => {
   // 点击小点点切换
   const handleDotsClick = (event: any) => {
     event.stopPropagation()
-    let index = Array.from(dotsEle).indexOf(event.target)
+    const index = Array.from(dotsEle).indexOf(event.target)
     if (index === -1) {
       return
     }
-    let lastIndex = getActiveIndex()
+    const lastIndex = getActiveIndex()
     setActiveDot(index)
     play(index, lastIndex)
   }
@@ -76,7 +76,7 @@ const Carousel: React.FC<CarouselProps> = props => {
 
   // 获取当前轮播页索引
   const getActiveIndex = () => {
-    let ele: HTMLElement | null = document.querySelector(
+    const ele: HTMLElement | null = document.querySelector(
       `.r-carousel-${id} .dots .active`,
     )
     if (ele) {
@@ -123,13 +123,15 @@ const Carousel: React.FC<CarouselProps> = props => {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line
     dotsEle = document.querySelectorAll(`.r-carousel-${id} .dots span`)
+    // eslint-disable-next-line
     panelsEle = document.querySelectorAll(`.r-carousel-${id} .panels div`)
     if (autoplay) {
       startAutoPlay()
     }
     return () => clearInterval(timer)
-  })
+  }, [])
 
   useLayoutEffect(() => {
     const ref = panelsRef

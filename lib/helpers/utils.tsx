@@ -1,14 +1,14 @@
 const uniqueId = (n: number) => {
-  let A_Z = "";
+  let upperCase = '';
   for (let i = 65; i < 91; i++) {
-    A_Z += String.fromCharCode(i) + ",";
+    upperCase += String.fromCharCode(i) + ',';
   }
-  const A_Z_Arr = A_Z.split(',')
+  const upperCaseArr = upperCase.split(',');
   const letterArr = []
   for (let i = 0; i < n; i++) {
-    let val = Math.floor(Math.random() * 26);
+    const val = Math.floor(Math.random() * 26);
     if (letterArr.includes(val.toString()) === false) {
-      letterArr.push(A_Z_Arr[val])
+      letterArr.push(upperCaseArr[val])
     } else {
       i--;
     }
@@ -27,7 +27,7 @@ const prefixClass = (prefix: string) => {
 };
 const checkClient = () => {
   const userAgentInfo = navigator.userAgent;
-  const Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+  const Agents = ['Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod'];
   let isPc = true;
   for (let v = 0; v < Agents.length; v++) {
       if (userAgentInfo.indexOf(Agents[v]) > 0) {

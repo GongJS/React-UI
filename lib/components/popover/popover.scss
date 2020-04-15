@@ -2,27 +2,27 @@ $border-color: #333;
 $border-radius: 4px;
 
 .r-popover-hover-top {
+  display: inline-flex;
   padding-top: 20px;
   margin-top: -10px;
-  display: inline-flex;
 }
 
 .r-popover-hover-bottom {
+  display: inline-flex;
   padding-bottom: 10px;
   margin-bottom: -10px;
-  display: inline-flex;
 }
 
 .r-popover-hover-left {
+  display: inline-flex;
   padding-left: 10px;
   margin-left: -10px;
-  display: inline-flex;
 }
 
 .r-popover-hover-right {
+  display: inline-flex;
   padding-right: 10px;
   margin-right: -10px;
-  display: inline-flex;
 }
 
 .r-popover-click-top,
@@ -33,32 +33,32 @@ $border-radius: 4px;
 }
 
 .r-popover {
+  position: relative;
   display: inline-block;
   vertical-align: top;
-  position: relative;
 }
 
 .r-popover-content-wrapper {
   position: absolute;
   border-radius: $border-radius;
-  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.07);
-  filter: drop-shadow(3px 0px 7px rgba(0, 0, 0, 0.17));
-  background: white;
   word-break: break-all;
+  background: white;
+  filter: drop-shadow(3px 0px 7px rgba(0, 0, 0, 0.17));
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.07);
 
   &::before,
   &::after {
-    content: '';
+    position: absolute;
     display: block;
-    border: 10px solid transparent;
     width: 0;
     height: 0;
-    position: absolute;
+    border: 10px solid transparent;
+    content: '';
   }
 
   &.position-top {
-    transform: translateY(-100%);
     margin-top: -10px;
+    transform: translateY(-100%);
 
     &::before,
     &::after {
@@ -66,14 +66,14 @@ $border-radius: 4px;
     }
 
     &::before {
-      border-bottom: none;
       top: 100%;
+      border-bottom: none;
     }
 
     &::after {
+      top: calc(100% - 1px);
       border-top-color: white;
       border-bottom: none;
-      top: calc(100% - 1px);
     }
   }
 
@@ -87,36 +87,36 @@ $border-radius: 4px;
     }
 
     &::before {
-      border-top: none;
       bottom: 100%;
+      border-top: none;
     }
 
     &::after {
+      bottom: calc(100% - 1px);
       border-top: none;
       border-bottom-color: white;
-      bottom: calc(100% - 1px);
     }
   }
 
   &.position-left {
-    transform: translateX(-100%);
     margin-left: -10px;
+    transform: translateX(-100%);
 
     &::before,
     &::after {
-      transform: translateY(-50%);
       top: 50%;
+      transform: translateY(-50%);
     }
 
     &::before {
-      border-right: none;
       left: 100%;
+      border-right: none;
     }
 
     &::after {
+      left: calc(100% - 1px);
       border-left-color: white;
       border-right: none;
-      left: calc(100% - 1px);
     }
   }
 
@@ -125,19 +125,19 @@ $border-radius: 4px;
 
     &::before,
     &::after {
-      transform: translateY(-50%);
       top: 50%;
+      transform: translateY(-50%);
     }
 
     &::before {
-      border-left: none;
       right: 100%;
+      border-left: none;
     }
 
     &::after {
+      right: calc(100% - 1px);
       border-right-color: white;
       border-left: none;
-      right: calc(100% - 1px);
     }
   }
 }

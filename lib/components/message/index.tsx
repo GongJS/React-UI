@@ -20,8 +20,7 @@ function removeMessage(messageInstance: JSX.Element, div: Element) {
 }
 
 function creatWrapper() {
-  let wrapper
-  wrapper = document.createElement('div')
+  const wrapper = document.createElement('div')
   wrapper.className = 'r-message'
   document.body.appendChild(wrapper)
   return wrapper
@@ -89,7 +88,7 @@ const setAttributes = (
   options: MessageProps | string,
   type: 'info' | 'success' | 'warning' | 'error',
 ) => {
-  let strOptions = {} as MessageProps
+  const strOptions = {} as MessageProps
   if (options instanceof Object) {
     options.type = type
     options.duration ? null : (options.duration = 3)

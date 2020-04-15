@@ -1,11 +1,11 @@
 // slide动画
 const slide = (fromNode: HTMLElement, toNode: HTMLElement, onFinsh: () => any, direction: string) => {
 
-  let width = parseInt(getComputedStyle(fromNode).width!)
-  let offsetX = width
+  const width = parseInt(getComputedStyle(fromNode).width!)
+  const offsetX = width
   let offset1 = 0
   let offset2 = 0
-  let step = 25
+  const step = 25
   fromNode.style.zIndex = '10'
   toNode.style.zIndex = '10'
   direction === 'left' ? toNode.style.left = width + 'px' : toNode.style.left = (-width + 'px')
@@ -43,7 +43,7 @@ const slide = (fromNode: HTMLElement, toNode: HTMLElement, onFinsh: () => any, d
 const fade = (fromNode: HTMLElement, toNode: HTMLElement, onFinsh: () => any) => {
   let opacityOffset1 = 1
   let opacityOffset2 = 0
-  let step = 0.04
+  const step = 0.04
   fromNode.style.zIndex = '10'
   toNode.style.zIndex = '9'
   function fromNodeAnimation() {

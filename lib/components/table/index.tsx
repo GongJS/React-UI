@@ -3,7 +3,7 @@ import { combineClass } from '../../helpers/utils'
 import Icon from '../icon'
 import './table.scss'
 
-interface column {
+interface Column {
   text: string
   field: string
   sorter?: (a: any, b: any) => any
@@ -16,7 +16,7 @@ interface column {
   render?: (record: any) => any
 }
 
-interface selectedRow {
+interface SelectedRow {
   selected: boolean
   row: any
   index: number
@@ -24,7 +24,7 @@ interface selectedRow {
 
 interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   dataSource: any[]
-  columns: column[]
+  columns: Column[]
   defaultSelectedRowKeys?: ReactText[]
   defaultSortOrder?: 'ascend' | 'descend'
   scroll?: {
@@ -34,7 +34,7 @@ interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   onSelectChange?: (
     selected: boolean,
     selectedRowKeys: ReactText[],
-    selectedRows: selectedRow[],
+    selectedRows: SelectedRow[],
     record: any,
   ) => any
 }

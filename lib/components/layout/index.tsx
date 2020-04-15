@@ -7,7 +7,7 @@ import Content from './Content'
 import Footer from './Footer'
 import './layout.scss'
 
-interface LayoutProps extends React.HTMLAttributes<HTMLElement> {}
+type LayoutProps = React.HTMLAttributes<HTMLElement>
 
 const Layout: React.FunctionComponent<LayoutProps> = props => {
   const { className, children, ...restProps } = props

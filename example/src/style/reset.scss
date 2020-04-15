@@ -79,13 +79,13 @@ mark,
 audio,
 video,
 input {
-  margin: 0;
   padding: 0;
+  margin: 0;
   border: 0;
+  font-weight: normal;
   font-size: 100%;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
     Microsoft YaHei, SimSun, sans-serif;
-  font-weight: normal;
   vertical-align: baseline;
 }
 
@@ -132,9 +132,9 @@ button {
 /* custom */
 
 a {
+  text-decoration: none;
   color: #7e8c8d;
   -webkit-backface-visibility: hidden;
-  text-decoration: none;
   cursor: pointer;
 }
 
@@ -149,9 +149,9 @@ img {
 }
 
 body {
-  line-height: 1;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  line-height: 1;
   text-rendering: optimizeLegibility;
 }
 
@@ -169,18 +169,18 @@ a:active {
 a,
 a:focus,
 a:hover {
-  cursor: pointer;
-  color: inherit;
   text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .clearfix {
   &:after {
-    visibility: hidden;
+    clear: both;
     display: block;
+    height: 0;
+    visibility: hidden;
     font-size: 0;
     content: ' ';
-    clear: both;
-    height: 0;
   }
 }

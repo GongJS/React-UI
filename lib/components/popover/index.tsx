@@ -42,8 +42,8 @@ const Popover: React.FC<PopoverProps> = (props, ref) => {
   const [visible, setVisible] = useState(false)
 
   const addPopoverListeners = () => {
-    let borRef: HTMLDivElement | null = borderRef.current
-    let popRef: HTMLDivElement | null = popoverRef.current
+    const borRef: HTMLDivElement | null = borderRef.current
+    const popRef: HTMLDivElement | null = popoverRef.current
     if (borRef && popRef) {
       if (trigger === 'click') {
         popRef.addEventListener('click', onClick)
@@ -55,8 +55,8 @@ const Popover: React.FC<PopoverProps> = (props, ref) => {
   }
 
   const removePopoverListeners = () => {
-    let borRef: HTMLDivElement | null = borderRef.current
-    let popRef: HTMLDivElement | null = popoverRef.current
+    const borRef: HTMLDivElement | null = borderRef.current
+    const popRef: HTMLDivElement | null = popoverRef.current
     if (borRef && popRef) {
       if (trigger === 'click') {
         popRef.removeEventListener('click', onClick)
@@ -68,9 +68,9 @@ const Popover: React.FC<PopoverProps> = (props, ref) => {
   }
 
   const setPosition = () => {
-    let triRef = triggerRef.current
-    let offsetWidth = triRef && triRef.getBoundingClientRect().width
-    let conRef = contentRef.current
+    const triRef = triggerRef.current
+    const offsetWidth = triRef && triRef.getBoundingClientRect().width
+    const conRef = contentRef.current
     if (triRef && conRef) {
       const {
         height: triHeight,
@@ -82,7 +82,7 @@ const Popover: React.FC<PopoverProps> = (props, ref) => {
         height: conHeight,
         width: conWidth,
       } = conRef.getBoundingClientRect()
-      let positions = {
+      const positions = {
         top: {
           top: triTop + window.scrollY,
           left: triLeft + window.scrollX - 0.5 * conWidth + offsetWidth! / 2,
@@ -106,8 +106,8 @@ const Popover: React.FC<PopoverProps> = (props, ref) => {
   }
 
   const onClickDocument = (e: any) => {
-    let poRef = popoverRef.current
-    let conRef = contentRef.current
+    const poRef = popoverRef.current
+    const conRef = contentRef.current
     if (poRef && conRef) {
       if (poRef === e.target || poRef.contains(e.target)) {
         return
@@ -128,7 +128,7 @@ const Popover: React.FC<PopoverProps> = (props, ref) => {
   }
 
   const onClick = (e: any) => {
-    let ref: HTMLDivElement | null = triggerRef.current
+    const ref: HTMLDivElement | null = triggerRef.current
     if (ref) {
       if (ref.contains(e.target)) {
         visible ? close() : open()
@@ -160,6 +160,7 @@ const Popover: React.FC<PopoverProps> = (props, ref) => {
     return () => {
       removePopoverListeners()
     }
+    // eslint-disable-next-line
   }, [visible])
 
   const popoverContent = (

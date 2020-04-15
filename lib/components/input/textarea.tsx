@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { combineClass, uniqueId } from '../../helpers/utils';;
 
 interface Size {
@@ -42,7 +42,7 @@ const Textarea: React.FunctionComponent<TextareaProps> = ({
       }
     }
   }
-  const changeValue = (value?: string) => {
+  const changeValue =useCallback((value?: string) => {
     if (value !== undefined) {
       return value;
     }
@@ -50,9 +50,9 @@ const Textarea: React.FunctionComponent<TextareaProps> = ({
       return defaultValue;
     }
     return ''
-  }
+  }, [defaultValue])
 
-  const derivedName = useMemo(() => changeValue(value), [value])
+  const derivedName = useMemo(() => changeValue(value), [changeValue,value])
   return (
     <textarea
       id={id}

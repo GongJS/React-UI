@@ -14,15 +14,15 @@ $input-height: 32px;
   display: inline-flex;
   > .trigger {
     position: relative;
-    height: $input-height;
     display: inline-flex;
     align-items: center;
-    padding: 0 1em;
     min-width: 10em;
+    height: $input-height;
+    padding: 0 1em;
     border: 1px solid $border-color;
     border-radius: $border-radius;
-    color: #596c8e;
     font-size: 14px;
+    color: #596c8e;
     cursor: pointer;
     &:hover {
       border-color: 1px solid $border-color-hover;
@@ -35,43 +35,43 @@ $input-height: 32px;
     }
     .icon {
       position: absolute;
-      right: 5px;
       top: 28%;
+      right: 5px;
       &.open {
         outline: none;
+        transform: rotate(-90deg);
         transition: 0.3s;
         transition-property: all;
-        transform: rotate(-90deg);
       }
       &.close {
         outline: none;
+        transform: rotate(90deg);
         transition: 0.3s;
         transition-property: all;
-        transform: rotate(90deg);
       }
     }
     .clear {
-      border: none;
-      outline: none;
-      padding: 0;
-      margin: 0;
-      height: 18px;
-      width: 18px;
-      cursor: pointer;
-      transition: 0.3s;
-      border-radius: 50%;
-      background-color: rgba(31, 45, 61, 0.1);
-      color: #fff;
       position: absolute;
-      top: 50%;
       z-index: 10;
-      transform: translateY(-50%);
-      text-align: center;
-      font-size: 12px;
+      top: 50%;
       right: 5px;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      margin: 0;
+      border: none;
+      border-radius: 50%;
+      outline: none;
+      font-size: 12px;
+      text-align: center;
+      color: #fff;
+      background-color: rgba(31, 45, 61, 0.1);
+      transform: translateY(-50%);
+      transition: 0.3s;
+      cursor: pointer;
       &:hover {
         background-color: rgba(31, 45, 61, 0.41);
       }
@@ -81,15 +81,15 @@ $input-height: 32px;
     position: absolute;
     top: 100%;
     left: 0;
-    background: white;
     display: flex;
     margin-top: 8px;
+    background: white;
     @extend .box-shadow;
   }
   .r-cascader-item {
     display: flex;
-    align-items: flex-start;
     justify-content: flex-start;
+    align-items: flex-start;
     height: 100px;
     .left {
       height: 100%;
@@ -100,10 +100,10 @@ $input-height: 32px;
       border-left: 1px solid $border-color-light;
     }
     .label {
-      white-space: nowrap;
-      padding: 0.3em 1em;
       display: flex;
       align-items: center;
+      padding: 0.3em 1em;
+      white-space: nowrap;
       color: #314659;
       &.disabled {
         color: rgba(0, 0, 0, 0.25);

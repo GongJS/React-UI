@@ -2,8 +2,8 @@
 @import "./mixin.scss";
 
 a {
-  color: #000;
   text-decoration: none;
+  color: #000;
 }
 
 .main-content {
@@ -18,12 +18,12 @@ a {
 }
 
 .c-navleft {
-  min-width: 280px;
-  box-sizing: border-box;
-  border-right: 1px solid #eaecef;
-  height: 100vh;
   position: fixed;
+  box-sizing: border-box;
+  min-width: 280px;
+  height: 100vh;
   overflow: scroll;
+  border-right: 1px solid #eaecef;
 }
 
 .prism-code {

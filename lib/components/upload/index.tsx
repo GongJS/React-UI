@@ -90,8 +90,8 @@ const Upload: React.RefForwardingComponent<UploadHandles, UploadProps> = (
     uid: string,
     status: 'success' | 'error',
   ) => {
-    let file = fileListRef.current!.filter(f => f.uid === uid)[0]
-    let index = fileListRef.current!.indexOf(file)
+    const file = fileListRef.current!.filter(f => f.uid === uid)[0]
+    const index = fileListRef.current!.indexOf(file)
     if (status === 'success') {
       file.status = 'success'
       file.url = JSON.parse(xhr.response).url
@@ -104,7 +104,7 @@ const Upload: React.RefForwardingComponent<UploadHandles, UploadProps> = (
       file.width = 500
       file.height = 500
     }
-    let fileListCopy = [...fileListRef.current!]
+    const fileListCopy = [...fileListRef.current!]
     fileListCopy.splice(index, 1, file)
     onFileChange(fileListCopy)
   }

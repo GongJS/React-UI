@@ -23,7 +23,7 @@ interface ModalProps {
   maskStyle?: React.CSSProperties
   style?: React.CSSProperties
 }
-interface options extends ModalProps {
+interface Options extends ModalProps {
   content: React.ReactNode
 }
 
@@ -76,6 +76,7 @@ const Modal: React.FC<ModalProps> = props => {
       <div
         className={pre('mask')}
         style={maskStyle}
+        // eslint-disable-next-line
         onClick={maskClosable ? handleOnCancel : () => {}}
       />
       <div className={combineClass(pre(), className)} style={style}>
@@ -123,7 +124,7 @@ const Modal: React.FC<ModalProps> = props => {
 }
 
 const setAttributes = (
-  options: options,
+  options: Options,
   type: 'info' | 'success' | 'error' | 'warning',
 ) => {
   const {
@@ -179,7 +180,7 @@ const setAttributes = (
   ReactDom.render(component, div)
 }
 
-const modalConfirm = (options: options) => {
+const modalConfirm = (options: Options) => {
   const { onCancel, onOk, content } = options
   const onClose = () => {
     ReactDom.render(React.cloneElement(component, { visible: false }), div)
@@ -196,19 +197,19 @@ const modalConfirm = (options: options) => {
   ReactDom.render(component, div)
 }
 
-const modalInfo = (options: options) => {
+const modalInfo = (options: Options) => {
   setAttributes(options, 'info')
 }
 
-const modalSuccess = (options: options) => {
+const modalSuccess = (options: Options) => {
   setAttributes(options, 'success')
 }
 
-const modalWarning = (options: options) => {
+const modalWarning = (options: Options) => {
   setAttributes(options, 'warning')
 }
 
-const modalError = (options: options) => {
+const modalError = (options: Options) => {
   setAttributes(options, 'error')
 }
 

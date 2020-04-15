@@ -35,11 +35,11 @@ const DatePicker: React.FC<DatePickerProps> = props => {
   })
 
   const visibleDays = () => {
-    let date = new Date(display.year, display.month, 1)
-    let first = firstDayOfMonth(date)
-    let n = first.getDay()
-    let array: Date[] = []
-    let x = first.getTime() - (n === 0 ? 6 : n - 1) * 3600 * 24 * 1000
+    const date = new Date(display.year, display.month, 1)
+    const first = firstDayOfMonth(date)
+    const n = first.getDay()
+    const array: Date[] = []
+    const x = first.getTime() - (n === 0 ? 6 : n - 1) * 3600 * 24 * 1000
     for (let i = 0; i < 42; i++) {
       array.push(new Date(x + i * 3600 * 24 * 1000))
     }
@@ -51,26 +51,26 @@ const DatePicker: React.FC<DatePickerProps> = props => {
   }
 
   const isCurrentMonth = (date: Date, n?: number) => {
-    let [year1, month1] = getYearMonthDate(date)
+    const [year1, month1] = getYearMonthDate(date)
     return year1 === display.year && month1 === display.month
   }
 
   const isToday = (date: Date) => {
-    let [y, m, d] = getYearMonthDate(date)
-    let [y2, m2, d2] = getYearMonthDate(new Date())
+    const [y, m, d] = getYearMonthDate(date)
+    const [y2, m2, d2] = getYearMonthDate(new Date())
     return y === y2 && m === m2 && d === d2
   }
   const isSelected = (date: Date) => {
-    let [y2, m2, d2] = getYearMonthDate(date)
+    const [y2, m2, d2] = getYearMonthDate(date)
     if (value) {
-      let [y, m, d] = getYearMonthDate(value)
+      const [y, m, d] = getYearMonthDate(value)
       return y === y2 && m === m2 && d === d2
     }
     if (defaultValue) {
-      let [y, m, d] = getYearMonthDate(date)
+      const [y, m, d] = getYearMonthDate(date)
       return y === y2 && m === m2 && d === d2
     }
-    let [y, m, d] = getYearMonthDate(new Date())
+    const [y, m, d] = getYearMonthDate(new Date())
     return y === y2 && m === m2 && d === d2
   }
   const handleClickPreYear = () => {

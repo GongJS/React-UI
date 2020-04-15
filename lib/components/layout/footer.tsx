@@ -1,7 +1,7 @@
 import React from 'react';
 import { combineClass, prefixClass } from '../../helpers/utils';
 
-interface FooterProps extends React.HTMLAttributes<HTMLElement> {}
+type FooterProps = React.HTMLAttributes<HTMLElement>
 
 const Footer: React.FunctionComponent<FooterProps> = ({
   className,

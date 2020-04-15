@@ -9,33 +9,33 @@ $border-radius: 4px;
   >.r-collapseItem {
     border-bottom: 1px solid #ebeef5;
     > .title {
-      padding: 10px 20px;
-      box-sizing: border-box;
       display: flex;
+      box-sizing: border-box;
+      padding: 10px 20px;
       cursor: pointer;
       .open {
         outline: none;
+        transform: rotate(90deg);
         transition: 0.3s;
         transition-property: all;
-        transform: rotate(90deg);
       }
       .close {
         outline: none;
+        transform: rotate(0deg);
         transition: 0.3s;
         transition-property: all;
-        transform: rotate(0deg);
       }
     }
     &:first-child {
       > .title {
-        border-top-left-radius: $border-radius;
         border-top-right-radius: $border-radius;
+        border-top-left-radius: $border-radius;
       }
     }
     &:last-child {
       > .title:last-child {
-        border-bottom-left-radius: $border-radius;
         border-bottom-right-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
       }
     }
      &.disable {

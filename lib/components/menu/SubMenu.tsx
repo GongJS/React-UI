@@ -14,7 +14,7 @@ interface SubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   handleExpandKeys?: (key: string) => any
   hideChildSubMenu?: (key: string) => any
 }
-interface ChildProps extends SubMenuProps {}
+type ChildProps = SubMenuProps
 
 const SubMenu: React.FC<SubMenuProps> = props => {
   const {
@@ -55,6 +55,7 @@ const SubMenu: React.FC<SubMenuProps> = props => {
     }
     setActive(false)
     hideChildSubMenu!(uniqueKey!)
+    // eslint-disable-next-line
   }, [currentTarget])
 
   const getUniqueKeyFromChild = (
@@ -117,7 +118,7 @@ const SubMenu: React.FC<SubMenuProps> = props => {
         timeout={300}
         unmountOnExit
         onEnter={(el: HTMLDivElement) => {
-          let childCurrent: HTMLDivElement | null = childRef.current
+          const childCurrent: HTMLDivElement | null = childRef.current
           if (childCurrent) {
             const { top, bottom } = childCurrent.getBoundingClientRect()
             height = bottom - top + 'px'

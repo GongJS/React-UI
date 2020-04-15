@@ -3,14 +3,14 @@ import { combineClass, checkClient } from '../../helpers/utils'
 import Icon from '../icon'
 import './slide.scss'
 
-interface img {
+interface Img {
   url?: string
   width: number
   height: number
 }
 
 interface SlideProps {
-  list?: img[]
+  list?: Img[]
   visible?: boolean
   defaultIndex?: string
   onClose?: () => any
@@ -31,7 +31,7 @@ const Slide: React.FC<SlideProps> = props => {
   let _offsetEndY: number
   let oneTouch = false // 是否触摸
   let joinDbClickScale: boolean // 是否双击
-  let joinPinchScale: boolean = false // 是否双指操作状态
+  let joinPinchScale = false // 是否双指操作状态
   let pinchStart: TouchList // 双指状态第一组的两个点
   let pinchScaleEnd: number // 最后一次缩放的值
   let pinchScale: number // 缩放比例
@@ -51,7 +51,7 @@ const Slide: React.FC<SlideProps> = props => {
     if (outerRef.current) {
       const lis = outerRef.current.getElementsByTagName('li')
       const len = lis.length
-      let cidx: number = idx as number
+      const cidx: number = idx as number
       for (let i = 0; i < len; i++) {
         lis[i].style.width = window.innerWidth + 'px'
         lis[i].style.webkitTransform =
@@ -61,7 +61,7 @@ const Slide: React.FC<SlideProps> = props => {
   }
   // 根据勾股定理得到缩放比例
   const getDistance = (p1: Touch, p2: Touch): any => {
-    var x = p2.pageX - p1.pageX,
+    const x = p2.pageX - p1.pageX,
       y = p2.pageY - p1.pageY
     return Math.sqrt(x * x + y * y).toFixed(2)
   }
@@ -142,7 +142,7 @@ const Slide: React.FC<SlideProps> = props => {
       _offsetX = (_offsetEndX || 0) + e.targetTouches[0].pageX - startX
       _offsetY = (_offsetEndY || 0) + e.targetTouches[0].pageY - startY
       // 拖动时，保持图片缩放不变，只位移
-      var _scale = joinPinchScale ? pinchScale : scaleMax
+      const _scale = joinPinchScale ? pinchScale : scaleMax
       // 首先将动画暂停
       target.style.webkitTransition = 'none'
       target.style.webkitTransform =
@@ -166,7 +166,7 @@ const Slide: React.FC<SlideProps> = props => {
       // 起始索引
       let i = idx - 1
       // 结束索引
-      let m = i + 3
+      const m = i + 3
       // 最小化改变DOM属性
       for (i; i < m; i++) {
         lis[i] && (lis[i].style.webkitTransition = 'transform 0.2s ease-out')
@@ -239,8 +239,8 @@ const Slide: React.FC<SlideProps> = props => {
         joinPinchScale = false
         pinchScale = 1
       } else {
-        let originX = d.offsetX
-        let originY = d.offsetY
+        const originX = d.offsetX
+        const originY = d.offsetY
         target.style.webkitTransition = '-webkit-transform .2s ease-in-out'
         target.style.webkitTransform =
           'scale3d(' + scaleMax + ',' + scaleMax + ',1)'
@@ -297,6 +297,7 @@ const Slide: React.FC<SlideProps> = props => {
 
   useLayoutEffect(() => {
     setRadio(window.innerHeight / window.innerWidth)
+    // eslint-disable-next-line
     scaleW = window.innerWidth + 10
     init()
   })
@@ -317,6 +318,7 @@ const Slide: React.FC<SlideProps> = props => {
         outerRef.current.removeEventListener('touchstart', startHandler)
         outerRef.current.removeEventListener('touchmove', moveHandler)
         outerRef.current.removeEventListener('touchend', endHandler)
+        // eslint-disable-next-line
         outerRef.current.removeEventListener('click', clkHandler)
       }
     }

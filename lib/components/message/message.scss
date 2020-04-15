@@ -1,4 +1,4 @@
-@import "../../commonCss//index.scss";
+@import "../../common-css//index.scss";
 @keyframes slide-up {
   0% {
     opacity: 0;
@@ -20,51 +20,51 @@
   }
 }
 .r-message {
+  min-width: 100px;
   margin-top: 30px;
+  margin-right: auto;
   margin-bottom: 20px;
   margin-left: auto;
-  margin-right: auto;
-  min-width: 100px;
   .r-message-container {
-    max-width: 50vw;
-    font-size: 1.2vw;
+    display: flex;
+    align-items: center;
     box-sizing: border-box;
-    border-radius: 4px;
+    max-width: 50vw;
+    padding: 15px 15px 15px 20px;
+    margin-top:15px;
     border-width: 1px;
     border-style: solid;
     border-color: #ebeef5;
-    padding: 15px 15px 15px 20px;
+    border-radius: 4px;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    margin-top:15px;
+    font-size: 1.2vw;
     animation: slide-up 0.3s forwards;
     > .content {
-      margin-left: 20px;
-      width: 100%;
       display: flex;
       align-items: center;
+      width: 100%;
+      margin-left: 20px;
     }
 
     &.r-message-success {
-      background-color: #e6f9f4;
       border-color: #ccf3e9;
       color: $--color-success;
+      background-color: #e6f9f4;
     }
     &.r-message-info {
-      background-color: #ecf1ff;
       border-color: #97b8ff;
       color: $--color-primary;
+      background-color: #ecf1ff;
     }
     &.r-message-warning {
-      background-color: #fffaf1;
       border-color: #fff5e3;
       color: $--color-warning;
+      background-color: #fffaf1;
     }
     &.r-message-error {
-      background-color: #feeef0;
       border-color: #fddce2;
       color: $--color-danger;
+      background-color: #feeef0;
     }
   }
 }

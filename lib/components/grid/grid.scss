@@ -1,22 +1,22 @@
 @mixin widthChange($span) {
     $prefix: #{$span}-col-span-;
 
+    $prefix: #{$span}-col-offset-;
+
+    &.#{$span}-col-span-0 {
+        display: none;
+    }
+
     @for $n from 1 through 24 {
         &.#{$prefix}#{$n} {
             width: ($n/24)*100%;
         }
     }
 
-    $prefix: #{$span}-col-offset-;
-
     @for $n from 1 through 24 {
         &.#{$prefix}#{$n} {
             margin-left: ($n/24)*100%;
         }
-    }
-
-    &.#{$span}-col-span-0 {
-        display: none;
     }
 }
 
@@ -29,41 +29,41 @@
     box-sizing: border-box;
     $prefix: col-span-;
 
+    $prefix: col-offset-;
+
+    &.col-span-0 {
+        display: none;
+    }
+
     @for $n from 1 through 24 {
         &.#{$prefix}#{$n} {
             width: ($n/24)*100%;
         }
     }
 
-    $prefix: col-offset-;
-
     @for $n from 1 through 24 {
         &.#{$prefix}#{$n} {
             margin-left: ($n/24)*100%;
         }
-    }
-
-    &.col-span-0 {
-        display: none;
     }
 }
 
 // sm
 @media (min-width:577px) {
     @include widthChange(sm)
-}
+;}
 
 // md
 @media (min-width: 769px) {
     @include widthChange(md)
-}
+;}
 
 // lg
 @media (min-width: 993px) {
     @include widthChange(lg)
-}
+;}
 
 // xl
 @media (min-width: 1201px) {
     @include widthChange(xl)
-}
+;}
