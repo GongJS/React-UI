@@ -74,11 +74,11 @@ $borderColor: red;
 
   td,
   th {
+    box-sizing: border-box;
+    padding: 8px;
     padding: 8px;
     border-bottom: 1px solid transparent;
     text-align: left;
-    padding: 8px;
-    box-sizing: border-box;
   }
 
   thead {

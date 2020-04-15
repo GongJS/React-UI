@@ -57,8 +57,8 @@ const Table: React.SFC<TableProps> = (props) => {
   const [showLeftShadow, setShowLeftShadow] = useState(false)
   const [showRightShadow, setShowRightShadow] = useState(true)
 
-  const [copyColumns, setCopyColumns] = useState<column[]>(() => {
-    let _colums = JSON.parse(JSON.stringify(columns))
+  const [copyColumns, setCopyColumns] = useState<Column[]>(() => {
+    const _colums = JSON.parse(JSON.stringify(columns))
     columns.forEach((v, i) => {
       if (v.sorter) {
         _colums[i].sorter = v.sorter
@@ -117,8 +117,8 @@ const Table: React.SFC<TableProps> = (props) => {
 
   const onSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.checked) {
-      let keys: ReactText[] = []
-      let rows: any = []
+      const keys: ReactText[] = []
+      const rows: any = []
       copyDataSource.forEach((v) => {
         keys.push(v.key)
         if (!selectedRowKeys.includes(v.key)) {
@@ -137,7 +137,7 @@ const Table: React.SFC<TableProps> = (props) => {
   }
 
   const handleOrder = (fn: any) => {
-    let _copy = JSON.parse(JSON.stringify(copyDataSource)).sort(fn)
+    const _copy = JSON.parse(JSON.stringify(copyDataSource)).sort(fn)
     setCopyDataSource(_copy)
     setSortOrder('ascend')
     if (sortOrder === 'ascend' || !sortOrder) {
@@ -158,17 +158,17 @@ const Table: React.SFC<TableProps> = (props) => {
     } else {
       inputRef.current && (inputRef.current.indeterminate = false)
     }
-  }, [selectedRowKeys])
+  }, [selectedRowKeys, copyDataSource.length])
 
   // 左右列固定 表头
   useEffect(() => {
-    let left: column[] = []
-    let center: column[] = []
-    let right: column[] = []
+    const left: Column[] = []
+    const center: Column[] = []
+    const right: Column[] = []
     let offsetLeft = 50
     let offsetRight = 0
-    let _fixedLeftIndex: number[] = []
-    let _fixedRightIndex: number[] = []
+    const _fixedLeftIndex: number[] = []
+    const _fixedRightIndex: number[] = []
     copyColumns.forEach((v, i) => {
       if (v.fixed === 'left') {
         left.push(v)
@@ -201,16 +201,17 @@ const Table: React.SFC<TableProps> = (props) => {
     left.length >= 1 && (left[left.length - 1].isFixedLeftLast = true)
     right.length >= 1 && (right[right.length - 1].isFixedRightFirst = true)
     setCopyColumns([...left, ...center, ...right.reverse()])
+    //@ts-ignore
   }, [])
 
   // 左右列固定 表数据
   useEffect(() => {
-    let left: any[] = []
-    let center: any[] = []
-    let right: any[] = []
+    const left: any[] = []
+    const center: any[] = []
+    const right: any[] = []
     let data: any[] = JSON.parse(JSON.stringify(dataSource))
     data = data.map((item) => {
-      let temp = {}
+      const temp = {}
       Object.entries(item).forEach((v, i) => {
         if (fixedLeftIndex.current.includes(i)) {
           left.push(v)
@@ -239,10 +240,10 @@ const Table: React.SFC<TableProps> = (props) => {
 
   // 监听左右滚动，控制间隔阴影的显示
   const onScrollEvent = () => {
-    let tableContainerWidth = Math.round(
+    const tableContainerWidth = Math.round(
       tableContainerRef.current?.getBoundingClientRect().width || 0,
     )
-    let scrollOffsetLeft = tableContainerRef.current?.scrollLeft
+    const scrollOffsetLeft = tableContainerRef.current?.scrollLeft
     if (scrollOffsetLeft === 0) {
       setShowLeftShadow(false)
       return
@@ -255,7 +256,7 @@ const Table: React.SFC<TableProps> = (props) => {
     setShowRightShadow(true)
   }
 
-  const getCommonStyle = (item: column) => {
+  const getCommonStyle = (item: Column) => {
     return {
       width: (item.width && item.width.toString() + 'px') || '',
       position: 'sticky',
@@ -266,7 +267,7 @@ const Table: React.SFC<TableProps> = (props) => {
     }
   }
 
-  const getThStyle = (item: column) => {
+  const getThStyle = (item: Column) => {
     return {
       ...getCommonStyle(item),
       zIndex: item.fixed ? 10 : 5,
@@ -274,7 +275,7 @@ const Table: React.SFC<TableProps> = (props) => {
     } as React.CSSProperties
   }
 
-  const getTdStyle = (item: column) => {
+  const getTdStyle = (item: Column) => {
     return {
       ...getCommonStyle(item),
       zIndex: item.fixed ? 2 : 1,
