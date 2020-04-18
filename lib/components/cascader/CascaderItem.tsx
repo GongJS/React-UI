@@ -15,6 +15,7 @@ interface CascaderItemProps {
   level: number
   selectedItems: Option[]
   handleChangeValue: (option: Option, level: number) => any
+  closeCascader:() => any
   itemClassName?: string
   itemStyle?: React.CSSProperties
 }
@@ -25,6 +26,7 @@ const CascaderItem: React.FC<CascaderItemProps> = props => {
     selectedItems,
     level,
     handleChangeValue,
+    closeCascader,
     itemClassName,
     itemStyle,
     ...restProps
@@ -39,6 +41,9 @@ const CascaderItem: React.FC<CascaderItemProps> = props => {
     if (!currentOption || option.value !== currentOption.value) {
       setCurrentOption(option)
       handleChangeValue(option, level)
+    }
+    if (!option.children) {
+      closeCascader()
     }
   }
 
@@ -102,6 +107,7 @@ const CascaderItem: React.FC<CascaderItemProps> = props => {
             selectedItems={selectedItems}
             level={level + 1}
             handleChangeValue={handleChangeValue}
+            closeCascader={closeCascader}
             itemClassName={itemClassName}
             itemStyle={itemStyle}
           />

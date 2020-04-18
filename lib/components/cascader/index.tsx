@@ -54,7 +54,7 @@ const Cascader: React.FC<CascaderProps> = props => {
   }
 
   // 处理点击cascader区域以外的click事件
-  const outDivClickHandler = (e: any) => {
+  const outDivClickHandler = (e: MouseEvent) => {
     const ref: HTMLDivElement | null = cascaderRef.current
     if (ref) {
       if (!ref.contains(e.target as Node) && ref !== e.target) {
@@ -73,7 +73,6 @@ const Cascader: React.FC<CascaderProps> = props => {
   return (
     <div
       className="r-cascader"
-      onClick={outDivClickHandler}
       ref={cascaderRef}
       {...restProps}
     >
@@ -108,6 +107,7 @@ const Cascader: React.FC<CascaderProps> = props => {
             options={options}
             level={0}
             selectedItems={selectedItems}
+            closeCascader={() => {setPopoverVisible(false)}}
             handleChangeValue={handleChangeValue}
           />
         </div>
@@ -116,6 +116,5 @@ const Cascader: React.FC<CascaderProps> = props => {
   )
 }
 
-Cascader.defaultProps = {}
 Cascader.displayName = 'Cascader'
 export default Cascader

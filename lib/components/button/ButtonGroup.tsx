@@ -8,7 +8,7 @@ interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactElement[]
 }
 
-const ButtonGroup: React.FC<ButtonGroupProps> = ({
+const ButtonGroup: React.SFC<ButtonGroupProps> = ({
   className,
   children,
   ...restProps

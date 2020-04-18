@@ -3,8 +3,8 @@ import Icon from '../icon'
 import { combineClass } from '../../helpers/utils'
 import './button.scss'
 
-interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
-  type?:
+interface Props extends React.HTMLAttributes<HTMLElement> {
+  type:
     | 'primary'
     | 'success'
     | 'reverse'
@@ -12,15 +12,17 @@ interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
     | 'default'
     | 'plain'
     | undefined
-  htmlType?: 'button' | 'submit' | 'reset'
-  plain?: boolean
-  circle?: boolean
-  disabled?: boolean
-  ripple?: boolean
-  icon?: string
-  loading?: boolean
-  iconPosition?: string
+  htmlType: 'button' | 'submit' | 'reset'
+  plain: boolean
+  circle: boolean
+  disabled: boolean
+  ripple: boolean
+  icon: string
+  loading: boolean
+  iconPosition: string
 }
+
+type ButtonProps = Partial<Props>
 
 const Button: React.FC<ButtonProps> = props => {
   const {

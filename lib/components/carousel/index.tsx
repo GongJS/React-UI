@@ -4,12 +4,14 @@ import Icon from '../icon'
 import { slide, fade } from './animation'
 import './carousel.scss'
 
-interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: 'fade' | 'slide'
   autoplay?: boolean
   interval?: number
   height?: string
 }
+
+type CarouselProps = Partial<Props>
 
 const Carousel: React.FC<CarouselProps> = props => {
   const {
@@ -82,7 +84,7 @@ const Carousel: React.FC<CarouselProps> = props => {
     if (ele) {
       return Array.from(dotsEle).indexOf(ele)
     } else {
-      throw Error('没有找到<span class="active"></span>')
+      throw Error('没有找到<span class="active"/>')
     }
   }
 
@@ -109,23 +111,21 @@ const Carousel: React.FC<CarouselProps> = props => {
       return
     }
     endFlag = false
-    const onFinsh = () => {
+    const onFinish = () => {
       panelsEle.forEach(panel => (panel.style.zIndex = '0'))
       panelsEle[toIndex].style.zIndex = '10'
       endFlag = true
     }
     if (type === 'slide') {
-      slide(panelsEle[fromIndex], panelsEle[toIndex], onFinsh, direction)
+      slide(panelsEle[fromIndex], panelsEle[toIndex], onFinish, direction)
     }
     if (type === 'fade') {
-      fade(panelsEle[fromIndex], panelsEle[toIndex], onFinsh)
+      fade(panelsEle[fromIndex], panelsEle[toIndex], onFinish)
     }
   }
 
   useEffect(() => {
-    // eslint-disable-next-line
     dotsEle = document.querySelectorAll(`.r-carousel-${id} .dots span`)
-    // eslint-disable-next-line
     panelsEle = document.querySelectorAll(`.r-carousel-${id} .panels div`)
     if (autoplay) {
       startAutoPlay()
@@ -135,7 +135,7 @@ const Carousel: React.FC<CarouselProps> = props => {
 
   useLayoutEffect(() => {
     const ref = panelsRef
-    if (ref && ref.current && height) {
+    if (ref.current && height) {
       ref.current.style.height = height
     }
   })
@@ -157,9 +157,7 @@ const Carousel: React.FC<CarouselProps> = props => {
       <div className="action">
         <div className="dots" onClick={e => handleDotsClick(e)}>
           {React.Children.map(children, (child, index) => (
-            <span
-              className={combineClass(`${index === 0 ? 'active' : ''}`)}
-            ></span>
+            <span className={combineClass(`${index === 0 ? 'active' : ''}`)}/>
           ))}
         </div>
       </div>
@@ -167,10 +165,10 @@ const Carousel: React.FC<CarouselProps> = props => {
   )
 }
 
-Carousel.displayName = 'Carousel'
 Carousel.defaultProps = {
   type: 'fade',
   autoplay: true,
   interval: 3000,
 }
+Carousel.displayName = 'Carousel'
 export default Carousel
