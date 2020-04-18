@@ -1,33 +1,33 @@
-import React, { Fragment, useEffect } from 'react'
-import ReactDom from 'react-dom'
-import Button from '../button'
-import Icon from '../icon'
-import { combineClass, prefixClass } from '../../helpers/utils'
-import './modal.scss'
+import React, {Fragment, useEffect} from 'react';
+import ReactDom from 'react-dom';
+import Button from '../button';
+import Icon from '../icon';
+import {combineClass, prefixClass} from '../../helpers/utils';
+import './modal.scss';
 
-interface ModalProps {
-  visible?: boolean
-  title?: React.ReactNode
-  maskClosable?: boolean
-  cancelText?: string
-  okText?: string
-  onOk?: React.MouseEventHandler
-  onCancel?: React.MouseEventHandler
-  footer?: React.ReactNode | null
-  header?: React.ReactNode | null
-  content?: React.ReactNode
-  type?: 'info' | 'success' | 'error' | 'warning'
-  afterClose?: () => any
-  onClose?: () => any
-  className?: string
-  maskStyle?: React.CSSProperties
-  style?: React.CSSProperties
-}
-interface Options extends ModalProps {
+interface Props {
+  visible: boolean
+  title: React.ReactNode
+  maskClosable: boolean
+  cancelText: string
+  okText: string
+  onOk: React.MouseEventHandler
+  onCancel: React.MouseEventHandler
+  footer: React.ReactNode | null
+  header: React.ReactNode | null
   content: React.ReactNode
+  type: 'info' | 'success' | 'error' | 'warning'
+  afterClose: () => any
+  onClose: () => any
+  className: string
+  maskStyle: React.CSSProperties
+  style: React.CSSProperties
 }
 
-const pre = prefixClass('r-modal')
+type ModalProps = Partial<Props>
+type Options = ModalProps & { content: React.ReactNode }
+
+const pre = prefixClass('r-modal');
 const Modal: React.FC<ModalProps> = props => {
   const {
     visible,
@@ -46,30 +46,30 @@ const Modal: React.FC<ModalProps> = props => {
     style,
     maskStyle,
     children,
-  } = props
+  } = props;
 
   const handleOnOk = (e: React.MouseEvent) => {
-    onClose && onClose()
-    onOk && onOk(e)
-  }
+    onClose && onClose();
+    onOk && onOk(e);
+  };
 
   const handleOnCancel = (e: React.MouseEvent) => {
-    onClose && onClose()
-    onCancel && onCancel(e)
-  }
+    onClose && onClose();
+    onCancel && onCancel(e);
+  };
 
   useEffect(() => {
     return () => {
-      afterClose && afterClose()
-    }
-  })
+      afterClose && afterClose();
+    };
+  });
 
   const typeIcon = {
-    info: <Icon color="#3963bc" name="infofill" />,
-    success: <Icon color="#00c292" name="roundcheckfill" />,
-    warning: <Icon color="#ffcb71" name="warnfill" />,
-    error: <Icon color="#f4516c" name="roundclosefill" />,
-  }
+    info: <Icon color="#3963bc" name="infofill"/>,
+    success: <Icon color="#00c292" name="roundcheckfill"/>,
+    warning: <Icon color="#ffcb71" name="warnfill"/>,
+    error: <Icon color="#f4516c" name="roundclosefill"/>,
+  };
 
   const container = visible ? (
     <Fragment>
@@ -83,12 +83,12 @@ const Modal: React.FC<ModalProps> = props => {
         <div className={pre('container')}>
           <header
             className={pre('header')}
-            style={{ padding: header === null ? '8px' : '32px' }}
+            style={{padding: header === null ? '8px' : '32px'}}
           >
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{display: 'flex', alignItems: 'center'}}>
               {header !== null ? typeIcon[type ? type : 'info'] : null}{' '}
               {header !== null ? (
-                <span style={{ marginLeft: '10px' }}>{title}</span>
+                <span style={{marginLeft: '10px'}}>{title}</span>
               ) : null}
             </div>
             <span className="close" onClick={handleOnCancel}>
@@ -97,13 +97,13 @@ const Modal: React.FC<ModalProps> = props => {
           </header>
           <main
             className={pre('main')}
-            style={{ padding: header === null ? '16px' : '0px 32px 9px 70px' }}
+            style={{padding: header === null ? '16px' : '0px 32px 9px 70px'}}
           >
             {children}
           </main>
           <footer
             className={pre('footer')}
-            style={{ padding: header === null ? '8px' : '32px' }}
+            style={{padding: header === null ? '8px' : '32px'}}
           >
             {footer !== null ? (
               <Fragment>
@@ -119,9 +119,9 @@ const Modal: React.FC<ModalProps> = props => {
         </div>
       </div>
     </Fragment>
-  ) : null
-  return ReactDom.createPortal(container, document.body)
-}
+  ) : null;
+  return ReactDom.createPortal(container, document.body);
+};
 
 const setAttributes = (
   options: Options,
@@ -137,24 +137,24 @@ const setAttributes = (
     style,
     maskStyle,
     maskClosable,
-  } = options
+  } = options;
 
   const handleOnOk = (e: React.MouseEvent) => {
-    onClose && onClose()
-    onOk && onOk(e)
-  }
+    onClose && onClose();
+    onOk && onOk(e);
+  };
 
   const footer = (
     <Button type="primary" onClick={handleOnOk}>
       {okText || '知道了'}
     </Button>
-  )
+  );
 
   const onClose = () => {
-    ReactDom.render(React.cloneElement(component, { visible: false }), div)
-    ReactDom.unmountComponentAtNode(div)
-    div.remove()
-  }
+    ReactDom.render(React.cloneElement(component, {visible: false}), div);
+    ReactDom.unmountComponentAtNode(div);
+    div.remove();
+  };
 
   const component = (
     <Modal
@@ -173,45 +173,45 @@ const setAttributes = (
     >
       {content}
     </Modal>
-  )
+  );
 
-  const div = document.createElement('div')
-  document.body.append(div)
-  ReactDom.render(component, div)
-}
+  const div = document.createElement('div');
+  document.body.append(div);
+  ReactDom.render(component, div);
+};
 
 const modalConfirm = (options: Options) => {
-  const { onCancel, onOk, content } = options
+  const {onCancel, onOk, content} = options;
   const onClose = () => {
-    ReactDom.render(React.cloneElement(component, { visible: false }), div)
-    ReactDom.unmountComponentAtNode(div)
-    div.remove()
-  }
+    ReactDom.render(React.cloneElement(component, {visible: false}), div);
+    ReactDom.unmountComponentAtNode(div);
+    div.remove();
+  };
   const component = (
     <Modal visible={true} onClose={onClose} onCancel={onCancel} onOk={onOk}>
       {content}
     </Modal>
-  )
-  const div = document.createElement('div')
-  document.body.append(div)
-  ReactDom.render(component, div)
-}
+  );
+  const div = document.createElement('div');
+  document.body.append(div);
+  ReactDom.render(component, div);
+};
 
 const modalInfo = (options: Options) => {
-  setAttributes(options, 'info')
-}
+  setAttributes(options, 'info');
+};
 
 const modalSuccess = (options: Options) => {
-  setAttributes(options, 'success')
-}
+  setAttributes(options, 'success');
+};
 
 const modalWarning = (options: Options) => {
-  setAttributes(options, 'warning')
-}
+  setAttributes(options, 'warning');
+};
 
 const modalError = (options: Options) => {
-  setAttributes(options, 'error')
-}
+  setAttributes(options, 'error');
+};
 
 Modal.defaultProps = {
   visible: false,
@@ -220,8 +220,8 @@ Modal.defaultProps = {
   okText: '确定',
   type: 'info',
   maskClosable: true,
-}
-Modal.displayName = 'Modal'
+};
+Modal.displayName = 'Modal';
 export {
   Modal,
   modalConfirm,
@@ -229,5 +229,5 @@ export {
   modalSuccess,
   modalWarning,
   modalError,
-}
-export default Modal
+};
+export default Modal;

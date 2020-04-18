@@ -8,12 +8,12 @@ interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
   mode?: 'horizontal' | 'vertical'
   onSelectedChange?: (selectedKey: string | undefined) => any
   onExpandChange?: (expandKeys: string[]) => any
+  expandKeysOnlyOne?: boolean
   children:
     | React.ReactElement[]
-    | React.ReactElement[]
-    | React.ReactElement
     | React.ReactElement
 }
+
 interface ChildProps extends MenuProps {
   uniqueKey: string
   selectedKey: string
@@ -23,6 +23,7 @@ interface ChildProps extends MenuProps {
   handleExpandKeys?: (key: string, type?: string) => any
   hideChildSubMenu?: (key: string) => any
 }
+
 let subMenuEle: Element[]
 let isOutClick = true
 
@@ -34,6 +35,7 @@ const Menu: React.FC<MenuProps> = props => {
     defaultExpandKeys,
     onSelectedChange,
     onExpandChange,
+    expandKeysOnlyOne,
     mode,
     ...restProps
   } = props
@@ -127,25 +129,21 @@ const Menu: React.FC<MenuProps> = props => {
 
   // 处理点击subMenu事件
   const handleExpandKeys = (key: string) => {
-    if (key) {
-      if (
-        childKeys.indexOf(key) > -1 &&
-        childKeys.indexOf(key) !== childIndex
-      ) {
-        setExpandKeys(expandKeys =>
+    if (!key) {
+      setClickSubMenuKey(key)
+      setExpandKeys([])
+    }
+    if (childKeys.indexOf(key) > -1 && childKeys.indexOf(key) !== childIndex) {
+      expandKeysOnlyOne && setExpandKeys(expandKeys =>
           expandKeys.filter(item => childKeys.indexOf(item) === -1),
         )
         childIndex = childKeys.indexOf(key)
       }
-      if (expandKeys.indexOf(key) > -1) {
+    if (expandKeys.indexOf(key) > -1) {
         setExpandKeys(expandKeys => expandKeys.filter(item => item !== key))
         return
-      }
-      setExpandKeys(expandKeys => expandKeys.concat(key))
-      return
     }
-    setClickSubMenuKey(key)
-    setExpandKeys([])
+      setExpandKeys(expandKeys => expandKeys.concat(key))
   }
 
   const renderChildren = (): Array<React.ReactElement<ChildProps>> => {
@@ -185,5 +183,6 @@ const Menu: React.FC<MenuProps> = props => {
 Menu.displayName = 'Menu'
 Menu.defaultProps = {
   mode: 'horizontal',
+  expandKeysOnlyOne:true
 }
 export default Menu

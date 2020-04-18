@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import Icon from '../icon'
-import { combineClass } from '../../helpers/utils'
-import './cascader.scss'
+import React, {useState} from 'react';
+import Icon from '../icon';
+import {combineClass} from '../../helpers/utils';
+import './cascader.scss';
 
 interface Option {
   value: string
@@ -15,7 +15,7 @@ interface CascaderItemProps {
   level: number
   selectedItems: Option[]
   handleChangeValue: (option: Option, level: number) => any
-  closeCascader:() => any
+  closeCascader: () => any
   itemClassName?: string
   itemStyle?: React.CSSProperties
 }
@@ -30,43 +30,43 @@ const CascaderItem: React.FC<CascaderItemProps> = props => {
     itemClassName,
     itemStyle,
     ...restProps
-  } = props
+  } = props;
 
-  const [currentOption, setCurrentOption] = useState<Option>()
+  const [currentOption, setCurrentOption] = useState<Option>();
 
   const handleItemClick = (option: Option) => {
     if (option.disabled) {
-      return
+      return;
     }
     if (!currentOption || option.value !== currentOption.value) {
-      setCurrentOption(option)
-      handleChangeValue(option, level)
+      setCurrentOption(option);
+      handleChangeValue(option, level);
     }
     if (!option.children) {
-      closeCascader()
+      closeCascader();
     }
-  }
+  };
 
   // 子选项
   const rightItems = () => {
-    const currentSelected = selectedItems[level]
+    const currentSelected = selectedItems[level];
     if (currentSelected && currentSelected.children) {
-      return currentSelected.children
+      return currentSelected.children;
     } else {
-      return null
+      return null;
     }
-  }
+  };
 
   // 激活选中项样式
   const setItemActive = (value: string) => {
-    let flag = false
+    let flag = false;
     selectedItems.forEach(element => {
       if (element.value === value) {
-        flag = true
+        flag = true;
       }
-    })
-    return flag
-  }
+    });
+    return flag;
+  };
 
   return (
     <div
@@ -75,30 +75,28 @@ const CascaderItem: React.FC<CascaderItemProps> = props => {
     >
       <div className="left">
         {options &&
-          options.map(item => (
-            <div
-              className={combineClass(
-                'label',
-                `${item.disabled ? 'disabled' : ''}`,
-              )}
-              key={item.value}
-              onClick={() => handleItemClick(item)}
-            >
-              <span
-                className={`${setItemActive(item.value) ? 'open' : 'close'}`}
-              >
+        options.map(item => (
+          <div
+            className={combineClass(
+              'label',
+              `${item.disabled ? 'disabled' : ''}`,
+            )}
+            key={item.value}
+            onClick={() => handleItemClick(item)}
+          >
+              <span className={`${setItemActive(item.value) ? 'open' : 'close'}`} >
                 {item.label}
               </span>
-              {item.children ? (
-                <Icon
-                  name="right"
-                  width="12px"
-                  style={{ marginLeft: '5px' }}
-                  color="#00000073"
-                />
-              ) : null}
-            </div>
-          ))}
+            {item.children ? (
+              <Icon
+                name="right"
+                width="12px"
+                style={{marginLeft: '5px'}}
+                color="#00000073"
+              />
+            ) : null}
+          </div>
+        ))}
       </div>
       <div className="right">
         {rightItems() ? (
@@ -114,8 +112,8 @@ const CascaderItem: React.FC<CascaderItemProps> = props => {
         ) : null}
       </div>
     </div>
-  )
-}
+  );
+};
 
-CascaderItem.displayName = 'CascaderItem'
-export default CascaderItem
+CascaderItem.displayName = 'CascaderItem';
+export default CascaderItem;

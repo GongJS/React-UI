@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react'
-import { HTMLAttributes } from 'enzyme'
-import Icon from '../icon'
-import { combineClass } from '../../helpers/utils'
-import './input.scss'
+import React, {useEffect, useState, useMemo, useCallback} from 'react';
+import {HTMLAttributes} from 'enzyme';
+import Icon from '../icon';
+import {combineClass} from '../../helpers/utils';
+import './input.scss';
 
 interface InputProps extends HTMLAttributes {
   value?: string
@@ -45,37 +45,37 @@ const Input: React.FC<InputProps> = props => {
     wrapperClassName,
     wrapperStyle,
     ...restProps
-  } = props
+  } = props;
 
-  const [clearVisible, setClearVisible] = useState(false)
-  const [offFocus, setOffFocus] = useState(false)
-  const inputRef = React.createRef<HTMLInputElement>()
+  const [clearVisible, setClearVisible] = useState(false);
+  const [offFocus, setOffFocus] = useState(false);
+  const inputRef = React.createRef<HTMLInputElement>();
 
   const handleChange: React.ChangeEventHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    onValueChange && onValueChange(e.currentTarget.value)
-  }
+    onValueChange && onValueChange(e.currentTarget.value);
+  };
 
   const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
-    onValueChange && onValueChange('')
-    clearClick && clearClick()
-    const ref = inputRef.current
+    onValueChange && onValueChange('');
+    clearClick && clearClick();
+    const ref = inputRef.current;
     setTimeout(() => {
-      ref && ref.focus()
-    })
-  }
+      ref && ref.focus();
+    });
+  };
 
   const handleFocus: React.FocusEventHandler = e => {
-    setOffFocus(true)
-    onFocus && onFocus(e)
-  }
+    setOffFocus(true);
+    onFocus && onFocus(e);
+  };
 
   const handleBlur: React.FocusEventHandler = e => {
-    setClearVisible(false)
-    setOffFocus(false)
-    onBlur && onBlur(e)
-  }
+    setClearVisible(false);
+    setOffFocus(false);
+    onBlur && onBlur(e);
+  };
 
   const wrapperClassList = combineClass(
     'r-input-wrapper',
@@ -84,31 +84,31 @@ const Input: React.FC<InputProps> = props => {
     `${addonAfter ? 'r-input--group r-input--group--append' : ''}`,
     `${preIcon ? 'r-input--pre' : ''}`,
     `${sufIcon ? 'r-input--suf' : ''}`,
-  )
+  );
 
   const inputClassList = combineClass(
     className,
     'r-input',
     `${disabled ? 'disabled' : ''}`,
     `${readonly ? 'readonly' : ''}`,
-  )
+  );
 
-  const changeValue =useCallback ((value?: string) => {
+  const changeValue = useCallback((value?: string) => {
     if (value !== undefined) {
-      return value
+      return value;
     }
     if (defaultValue !== undefined) {
-      return defaultValue
+      return defaultValue;
     }
-    return ''
-  },[defaultValue])
+    return '';
+  }, [defaultValue]);
 
-  const derivedValue = useMemo(() => changeValue(value), [changeValue,value])
+  const derivedValue = useMemo(() => changeValue(value), [changeValue, value]);
 
   useEffect(() => {
-    value && offFocus && setClearVisible(true)
-    !value && setClearVisible(false)
-  }, [value, offFocus])
+    value && offFocus && setClearVisible(true);
+    !value && setClearVisible(false);
+  }, [value, offFocus]);
 
   return (
     <div className={wrapperClassList} style={wrapperStyle}>
@@ -135,34 +135,34 @@ const Input: React.FC<InputProps> = props => {
           {addonAfter}
           {clearVisible && clearable && !readonly ? (
             <button onMouseDown={handleClear} className="r-input__clear">
-              <Icon color="#fff" size="14px" name="close" />
+              <Icon color="#fff" size="14px" name="close"/>
             </button>
           ) : null}
         </div>
       ) : null}
       {preIcon ? (
         <span className="r-input__pre">
-          <Icon color="#bac7de" name={preIcon} />
+          <Icon color="#bac7de" name={preIcon}/>
         </span>
       ) : null}
       {sufIcon ? (
         <span className="r-input__suf">
-          <Icon color="#bac7de" name={sufIcon} />
+          <Icon color="#bac7de" name={sufIcon}/>
         </span>
       ) : null}
       {clearVisible && clearable && !addonAfter && !readonly ? (
         <button onMouseDown={handleClear} className="r-input__clear">
-          <Icon color="#fff" size="14px" name="close" />
+          <Icon color="#fff" size="14px" name="close"/>
         </button>
       ) : null}
     </div>
-  )
-}
+  );
+};
 
 Input.defaultProps = {
   disabled: false,
   readOnly: false,
   clearable: false,
-}
-Input.displayName = 'Input'
-export default Input
+};
+Input.displayName = 'Input';
+export default Input;

@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import CodeCard from '../../components/code-card'
 import Input from '@components/input'
-import Textarea from '@components/input/TextArea'
+import Textarea from '@components/input/Textarea'
 
 export default () => {
   const [value1, setValue1] = useState('')

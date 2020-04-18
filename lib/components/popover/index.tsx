@@ -2,26 +2,26 @@ import React, {
   useState,
   useEffect,
   useLayoutEffect,
-  useImperativeHandle,
-} from 'react'
-import ReactDOM from 'react-dom'
-import { combineClass } from '../../helpers/utils'
-import './popover.scss'
+  useImperativeHandle, MouseEventHandler,
+} from 'react';
+import ReactDOM from 'react-dom';
+import {combineClass} from '../../helpers/utils';
+import './popover.scss';
 
-interface PopoverProps extends React.HTMLAttributes<HTMLDivElement> {
-  content: string | React.ReactNode
-  trigger?: 'click' | 'hover'
-  position: 'top' | 'left' | 'right' | 'bottom'
-  defaultVisible?: boolean
-  visible?: boolean
-  popClosable?: boolean
-  onVisibleChange?: (visible: boolean) => any
-  className?: string
-  wrapperClassName?: string
-  wrapperStyle?: React.CSSProperties
-  style?: React.CSSProperties
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  trigger: 'click' | 'hover'
+  defaultVisible: boolean
+  popClosable: boolean
+  onVisibleChange: (visible: boolean) => any
+  className: string
+  wrapperClassName: string
+  wrapperStyle: React.CSSProperties
+  style: React.CSSProperties
 }
 
+type PopoverProps =
+  Partial<Props>
+  & { content: string | React.ReactNode, position: 'top' | 'left' | 'right' | 'bottom' }
 const Popover: React.FC<PopoverProps> = (props, ref) => {
   const {
     content,
@@ -33,55 +33,40 @@ const Popover: React.FC<PopoverProps> = (props, ref) => {
     wrapperClassName,
     wrapperStyle,
     ...restProps
-  } = props
+  } = props;
 
-  const borderRef = React.createRef<HTMLDivElement>()
-  const popoverRef = React.createRef<HTMLDivElement>()
-  const contentRef = React.createRef<HTMLDivElement>()
-  const triggerRef = React.createRef<HTMLDivElement>()
-  const [visible, setVisible] = useState(false)
+  const popoverRef = React.createRef<HTMLDivElement>();
+  const contentRef = React.createRef<HTMLDivElement>();
+  const [visible, setVisible] = useState(false);
 
   const addPopoverListeners = () => {
-    const borRef: HTMLDivElement | null = borderRef.current
-    const popRef: HTMLDivElement | null = popoverRef.current
-    if (borRef && popRef) {
+    const popRef: HTMLDivElement | null = popoverRef.current;
+    if (popRef) {
       if (trigger === 'click') {
-        popRef.addEventListener('click', onClick)
+        popRef.addEventListener('click', onClickPop);
       } else {
-        borRef.addEventListener('mouseenter', open)
-        borRef.addEventListener('mouseleave', close)
+        popRef.addEventListener('mouseenter', open);
+        popRef.addEventListener('mouseleave', close);
       }
     }
-  }
+  };
 
-  const removePopoverListeners = () => {
-    const borRef: HTMLDivElement | null = borderRef.current
-    const popRef: HTMLDivElement | null = popoverRef.current
-    if (borRef && popRef) {
-      if (trigger === 'click') {
-        popRef.removeEventListener('click', onClick)
-      } else {
-        borRef.removeEventListener('mouseenter', open)
-        borRef.removeEventListener('mouseleave', close)
-      }
-    }
-  }
 
   const setPosition = () => {
-    const triRef = triggerRef.current
-    const offsetWidth = triRef && triRef.getBoundingClientRect().width
-    const conRef = contentRef.current
+    const triRef = popoverRef.current;
+    const offsetWidth = triRef && triRef.getBoundingClientRect().width;
+    const conRef = contentRef.current;
     if (triRef && conRef) {
       const {
         height: triHeight,
         width: triWidth,
         top: triTop,
         left: triLeft,
-      } = triRef.getBoundingClientRect()
+      } = triRef.getBoundingClientRect();
       const {
         height: conHeight,
         width: conWidth,
-      } = conRef.getBoundingClientRect()
+      } = conRef.getBoundingClientRect();
       const positions = {
         top: {
           top: triTop + window.scrollY,
@@ -99,69 +84,81 @@ const Popover: React.FC<PopoverProps> = (props, ref) => {
           top: triTop + window.scrollY + (triHeight - conHeight) / 2,
           left: triLeft + window.scrollX + triWidth,
         },
-      }
-      conRef.style.left = positions[position].left + 'px'
-      conRef.style.top = positions[position].top + 'px'
+      };
+      conRef.style.left = positions[position].left + 'px';
+      conRef.style.top = positions[position].top + 'px';
     }
-  }
+  };
 
-  const onClickDocument = (e: any) => {
-    const poRef = popoverRef.current
-    const conRef = contentRef.current
+  const onClickDocument = (e: MouseEvent) => {
+    const poRef = popoverRef.current;
+    const conRef = contentRef.current;
     if (poRef && conRef) {
-      if (poRef === e.target || poRef.contains(e.target)) {
-        return
+      if (poRef === e.target || poRef.contains((e.target) as Node)) {
+        return;
       }
-      if (conRef === e.target || conRef.contains(e.target)) {
-        return
+      if (conRef === e.target || conRef.contains((e.target) as Node)) {
+        return;
       }
-      close()
+      close();
     }
-  }
+  };
 
   const open = () => {
-    setVisible(true)
-  }
+    setVisible(true);
+  };
 
   const close = () => {
-    setVisible(false)
-  }
+    setVisible(false);
+  };
 
-  const onClick = (e: any) => {
-    const ref: HTMLDivElement | null = triggerRef.current
-    if (ref) {
-      if (ref.contains(e.target)) {
-        visible ? close() : open()
-      }
+  const onClickPop: (this: HTMLDivElement, ev: MouseEvent) => any = (e) => {
+    const ref: HTMLDivElement | null = popoverRef.current;
+    if (ref && ref.contains((e.target) as Node)) {
+      visible ? close() : open();
     }
-  }
+  };
   useImperativeHandle(ref, () => ({
     close: () => {
-      close()
+      close();
     },
-  }))
+  }));
   useLayoutEffect(() => {
-    setPosition()
-  })
+    setPosition();
+  });
 
   useEffect(() => {
-    visible
-      ? document.addEventListener('click', onClickDocument)
-      : document.addEventListener('click', onClickDocument)
-    if (trigger === 'hover') {
-      const conRef: HTMLDivElement | null = contentRef.current
-      if (conRef) {
-        conRef.addEventListener('mouseenter', open)
-        conRef.addEventListener('mouseleave', close)
+    if (trigger !== 'click') {
+      const conRef: HTMLDivElement | null = contentRef.current;
+      const popRef: HTMLDivElement | null = popoverRef.current;
+      if (conRef && popRef) {
+        conRef.addEventListener('mouseenter', open);
+        conRef.addEventListener('mouseleave', close);
+        popRef.addEventListener('mouseenter', open);
+      }
+    } else {
+      visible && document.addEventListener('click', onClickDocument);
+    }
+    onVisibleChange && onVisibleChange(visible);
+    addPopoverListeners();
+    return () => {
+      removePopoverListeners();
+    };
+  }, [visible]);
+
+  const removePopoverListeners = () => {
+    const popRef: HTMLDivElement | null = popoverRef.current;
+    const conRef: HTMLDivElement | null = contentRef.current;
+    if (popRef && conRef) {
+      if (trigger === 'click') {
+        popRef.removeEventListener('click', onClickPop);
+      } else {
+        popRef.removeEventListener('mouseenter', open);
+        conRef.removeEventListener('mouseenter', open);
+        conRef.removeEventListener('mouseleave', close);
       }
     }
-    onVisibleChange && onVisibleChange(visible)
-    addPopoverListeners()
-    return () => {
-      removePopoverListeners()
-    }
-    // eslint-disable-next-line
-  }, [visible])
+  };
 
   const popoverContent = (
     <div
@@ -175,12 +172,13 @@ const Popover: React.FC<PopoverProps> = (props, ref) => {
     >
       {content}
     </div>
-  )
+  );
 
   return (
     <div
-      ref={borderRef}
+      ref={popoverRef}
       className={combineClass(
+        'r-popover',
         trigger === 'hover'
           ? `r-popover-hover-${position}`
           : `r-popover-click-${position}`,
@@ -188,13 +186,11 @@ const Popover: React.FC<PopoverProps> = (props, ref) => {
       )}
       style={wrapperStyle}
     >
-      <div className="r-popover" ref={popoverRef}>
-        {visible ? ReactDOM.createPortal(popoverContent, document.body) : null}
-        <div ref={triggerRef}>{children}</div>
-      </div>
+      {visible ? ReactDOM.createPortal(popoverContent, document.body) : null}
+      {children}
     </div>
-  )
-}
+  );
+};
 
-Popover.displayName = 'Popover'
-export default React.forwardRef(Popover)
+Popover.displayName = 'Popover';
+export default React.forwardRef(Popover);

@@ -8,11 +8,8 @@ interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactElement[]
 }
 
-const ButtonGroup: React.SFC<ButtonGroupProps> = ({
-  className,
-  children,
-  ...restProps
-}) => {
+const ButtonGroup: React.SFC<ButtonGroupProps> = props => {
+  const {className,children,...restProps} = props
   children.forEach(item => {
     if (item.type !== Button) {
       console.warn('children只接受Button组件')

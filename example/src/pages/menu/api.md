@@ -6,6 +6,7 @@
 | mode    | 模式 |  horizontal \| vertical   | horizontal | 否 |
 | selectedKey | 当前激活子选项的 key |  string   | -   | - |
 | expandKeys | 当前展开子菜单的 key 数组 |  string[]   | -   | - |
+| expandKeysOnlyOne | 是否只能同时展开一个子菜单|  boolean   | true   | - |
 | defaultSelectedKey | 默认激活子选项的 key |  string   | -   | 否 |
 | defaultExpandKeys  | 默认展开子菜单的 key 数组 |  string[]   | -  | 否 |
 | onSelectedChange   | 激活子选项改变时的回调 | 	(selectedKey: string) => any  | - | 否 |

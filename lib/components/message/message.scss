@@ -1,4 +1,4 @@
-@import "../../common-css//index.scss";
+@import "../../common-css/index.scss";
 @keyframes slide-up {
   0% {
     opacity: 0;
@@ -20,60 +20,62 @@
   }
 }
 .r-message {
-  min-width: 100px;
-  margin-top: 30px;
-  margin-right: auto;
-  margin-bottom: 20px;
-  margin-left: auto;
-  .r-message-container {
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    max-width: 50vw;
-    padding: 15px 15px 15px 20px;
-    margin-top:15px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #ebeef5;
-    border-radius: 4px;
-    overflow: hidden;
-    font-size: 1.2vw;
-    animation: slide-up 0.3s forwards;
-    > .content {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: 'tnum';
+  position: fixed;
+  top: 16px;
+  left: 0;
+  z-index: 1010;
+  width: 100%;
+  pointer-events: none;
+  &-wrapper {
+    padding: 8px;
+    text-align: center;
+  }
+  &-container {
+    display: inline-block;
+    padding: 10px 16px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    pointer-events: all;
+    &-content {
+      width: 100%;
       display: flex;
       align-items: center;
-      width: 100%;
-      margin-left: 20px;
     }
 
     &.r-message-success {
       border-color: #ccf3e9;
       color: $--color-success;
-      background-color: #e6f9f4;
     }
     &.r-message-info {
       border-color: #97b8ff;
       color: $--color-primary;
-      background-color: #ecf1ff;
     }
     &.r-message-warning {
       border-color: #fff5e3;
       color: $--color-warning;
-      background-color: #fffaf1;
     }
     &.r-message-error {
       border-color: #fddce2;
       color: $--color-danger;
-      background-color: #feeef0;
     }
   }
 }
 @media screen and (max-width: 576px) {
   .r-message {
-    >.r-message-container {
+    &-container {
       max-width: 80vw;
       font-size: 2vw;
-      >.content {
+      &-content {
         margin-left: 10px;
       }
     }

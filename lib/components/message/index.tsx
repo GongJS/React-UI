@@ -1,8 +1,8 @@
-import React, { ReactNode, useEffect, useLayoutEffect } from 'react'
-import ReactDOM from 'react-dom'
-import Icon from '../icon'
-import { combineClass } from '../../helpers/utils'
-import './message.scss'
+import React, {ReactNode, useEffect, useLayoutEffect} from 'react';
+import ReactDOM from 'react-dom';
+import Icon from '../icon';
+import {combineClass} from '../../helpers/utils';
+import './message.scss';
 
 interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
   content: string | ReactNode
@@ -14,30 +14,33 @@ interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function removeMessage(messageInstance: JSX.Element, div: Element) {
-  ReactDOM.render(React.cloneElement(messageInstance), div)
-  ReactDOM.unmountComponentAtNode(div)
-  div.remove()
+  ReactDOM.render(React.cloneElement(messageInstance), div);
+  ReactDOM.unmountComponentAtNode(div);
+  div.remove();
 }
 
-function creatWrapper() {
-  const wrapper = document.createElement('div')
-  wrapper.className = 'r-message'
-  document.body.appendChild(wrapper)
-  return wrapper
+function createMessageWrapper() {
+  const wrapperEle = document.getElementsByClassName('r-message')[0];
+  if (wrapperEle) {return wrapperEle;}
+  const wrapper = document.createElement('div');
+  wrapper.className = 'r-message';
+  document.body.appendChild(wrapper);
+  return wrapper;
 }
 
 function createMessage(options: MessageProps) {
-  const { content, type, duration, onClose, top } = options
-  const wrapper = creatWrapper()
+  const {content, type, duration, onClose, top} = options;
+  const wrapper = createMessageWrapper();
   const messageInstance = (
-    <Message content={content} onClose={onClose} type={type} top={top} />
-  )
-  const div = document.createElement('div')
-  wrapper.appendChild(div)
-  ReactDOM.render(messageInstance, div)
+    <Message content={content} onClose={onClose} type={type} top={top}/>
+  );
+  const div = document.createElement('div');
+  div.className = 'r-message-wrapper';
+  wrapper.appendChild(div);
+  ReactDOM.render(messageInstance, div);
   setTimeout(() => {
-    removeMessage(messageInstance, wrapper)
-  }, duration! * 1000)
+    removeMessage(messageInstance, div);
+  }, duration! * 1000);
 }
 
 const Message: React.FC<MessageProps> = props => {
@@ -48,26 +51,26 @@ const Message: React.FC<MessageProps> = props => {
     className,
     onClose,
     ...restProps
-  } = props
+  } = props;
 
-  const wrapper: HTMLDivElement | null = document.querySelector('.r-message')
+  const wrapper: HTMLDivElement | null = document.querySelector('.r-message');
   const IconMap = {
-    info: { color: '#3963bc', icon: 'infofill' },
-    success: { color: '#00c292', icon: 'roundcheckfill' },
-    warning: { color: '#ffcb71', icon: 'warnfill' },
-    error: { color: '#f4516c', icon: 'roundclosefill' },
-  }
+    info: {color: '#3963bc', icon: 'infofill'},
+    success: {color: '#00c292', icon: 'roundcheckfill'},
+    warning: {color: '#ffcb71', icon: 'warnfill'},
+    error: {color: '#f4516c', icon: 'roundclosefill'},
+  };
 
   useLayoutEffect(() => {
-    wrapper && (wrapper.style.top = `${top}px`)
-  })
+    wrapper && (wrapper.style.top = `${top}px`);
+  });
 
   useEffect(() => {
     return () => {
-      onClose && onClose()
-      wrapper && (wrapper.style.top = '30px')
-    }
-  })
+      onClose && onClose();
+      wrapper && (wrapper.style.top = '30px');
+    };
+  });
 
   return (
     <div
@@ -78,43 +81,45 @@ const Message: React.FC<MessageProps> = props => {
       )}
       {...restProps}
     >
-      <Icon color={IconMap[type].color} name={IconMap[type].icon} />
-      <div className="content">{content}</div>
+      <div className="r-message-container-content">
+        <Icon color={IconMap[type].color} name={IconMap[type].icon} style={{marginRight: '10px'}}/>
+        {content}
+      </div>
     </div>
-  )
-}
+  );
+};
 
 const setAttributes = (
   options: MessageProps | string,
   type: 'info' | 'success' | 'warning' | 'error',
 ) => {
-  const strOptions = {} as MessageProps
+  const strOptions = {} as MessageProps;
   if (options instanceof Object) {
-    options.type = type
-    options.duration ? null : (options.duration = 3)
-    createMessage(options)
+    options.type = type;
+    options.duration ? null : (options.duration = 3);
+    createMessage(options);
   } else {
-    strOptions.content = options
-    strOptions.type = type
-    strOptions.duration = 3
-    createMessage(strOptions)
+    strOptions.content = options;
+    strOptions.type = type;
+    strOptions.duration = 3;
+    createMessage(strOptions);
   }
-}
+};
 
 const message = {
   info: (options: MessageProps | string) => {
-    setAttributes(options, 'info')
+    setAttributes(options, 'info');
   },
   success: (options: MessageProps | string) => {
-    setAttributes(options, 'success')
+    setAttributes(options, 'success');
   },
   warning: (options: MessageProps | string) => {
-    setAttributes(options, 'warning')
+    setAttributes(options, 'warning');
   },
   error: (options: MessageProps | string) => {
-    setAttributes(options, 'error')
+    setAttributes(options, 'error');
   },
-}
+};
 
-Message.displayName = 'Message'
-export default message
+Message.displayName = 'Message';
+export default message;

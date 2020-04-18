@@ -1,22 +1,24 @@
-import React, { useEffect } from 'react'
-import { CSSTransition } from 'react-transition-group'
-import Icon from '../icon'
-import { combineClass } from '../../helpers/utils'
-import './collapse.scss'
+import React, {useEffect} from 'react';
+import {CSSTransition} from 'react-transition-group';
+import Icon from '../icon';
+import {combineClass} from '../../helpers/utils';
+import './collapse.scss';
 
-interface CollapseItemProps extends React.HTMLAttributes<HTMLDivElement> {
-  title: string
-  icon?: string
-  disabled?: boolean
-  uniqueKey?: string
-  selectedKey?: string
-  expandKeys?: string[]
-  defaultSelectedKeys?: string[]
-  handleSelectedKey?: (
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  icon: string
+  disabled: boolean
+  uniqueKey: string
+  selectedKey: string
+  expandKeys: string[]
+  defaultSelectedKeys: string[]
+  handleSelectedKey: (
     key: string,
     event?: React.MouseEvent<HTMLElement>,
   ) => any
 }
+
+type CollapseItemProps = Partial<Props> & { title: string }
+
 const CollapseItem: React.FC<CollapseItemProps> = props => {
   const {
     className,
@@ -30,24 +32,23 @@ const CollapseItem: React.FC<CollapseItemProps> = props => {
     defaultSelectedKeys,
     handleSelectedKey,
     ...restProps
-  } = props
+  } = props;
 
-  const childRef = React.createRef<HTMLDivElement>()
-  let height: string
+  const childRef = React.createRef<HTMLDivElement>();
+  let height: string;
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (disabled) {
-      return
+      return;
     }
-    handleSelectedKey!(uniqueKey!, event)
-  }
+    handleSelectedKey!(uniqueKey!, event);
+  };
 
   useEffect(() => {
     if (!disabled && defaultSelectedKeys!.indexOf(uniqueKey!) > -1) {
-      handleSelectedKey!(uniqueKey!)
+      handleSelectedKey!(uniqueKey!);
     }
-    // eslint-disable-next-line
-  }, [])
+  }, []);
 
   return (
     <div
@@ -62,7 +63,7 @@ const CollapseItem: React.FC<CollapseItemProps> = props => {
         <Icon
           name={icon!}
           color="#2f4e8c"
-          style={{ marginRight: '5px' }}
+          style={{marginRight: '5px'}}
           className={expandKeys!.indexOf(uniqueKey!) > -1 ? 'open' : 'close'}
         />
         {title}
@@ -72,28 +73,28 @@ const CollapseItem: React.FC<CollapseItemProps> = props => {
         timeout={300}
         unmountOnExit
         onEnter={(el: HTMLDivElement) => {
-          const childCurrent: HTMLDivElement | null = childRef.current
+          const childCurrent: HTMLDivElement | null = childRef.current;
           if (childCurrent) {
-            const { top, bottom } = childCurrent.getBoundingClientRect()
-            height = bottom - top + 'px'
-            el.style.opacity = '0'
-            el.style.height = '0'
+            const {top, bottom} = childCurrent.getBoundingClientRect();
+            height = bottom - top + 'px';
+            el.style.opacity = '0';
+            el.style.height = '0';
           }
         }}
         onEntering={(el: HTMLDivElement) => {
-          el.style.height = height
-          el.style.opacity = '1'
-          el.style.transition = 'all 0.3s ease'
+          el.style.height = height;
+          el.style.opacity = '1';
+          el.style.transition = 'all 0.3s ease';
         }}
         onExit={(el: HTMLDivElement) => {
-          el.style.height = height
-          el.style.opacity = '1'
+          el.style.height = height;
+          el.style.opacity = '1';
         }}
         onExiting={(el: HTMLDivElement) => {
-          el.style.height = '0'
-          el.style.paddingBottom = '0'
-          el.style.opacity = '0'
-          el.style.transition = 'all 0.3s ease'
+          el.style.height = '0';
+          el.style.paddingBottom = '0';
+          el.style.opacity = '0';
+          el.style.transition = 'all 0.3s ease';
         }}
       >
         <div ref={childRef} className="content">
@@ -101,8 +102,8 @@ const CollapseItem: React.FC<CollapseItemProps> = props => {
         </div>
       </CSSTransition>
     </div>
-  )
-}
+  );
+};
 
-CollapseItem.displayName = 'CollapseItem'
-export default CollapseItem
+CollapseItem.displayName = 'CollapseItem';
+export default CollapseItem;

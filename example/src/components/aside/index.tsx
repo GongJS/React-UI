@@ -10,7 +10,7 @@ export default class CNavLeft extends Component {
   render() {
     return (
       <div className="nav-left">
-        <Menu mode="vertical">{this.initMenuList(menuList)}</Menu>
+        <Menu  defaultExpandKeys={['/components/common','/components/_layout','/components/nav','/components/enter','/components/display','/components/callback']} expandKeysOnlyOne={false} mode="vertical">{this.initMenuList(menuList)}</Menu>
       </div>
     )
   }

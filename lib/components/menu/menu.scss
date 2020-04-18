@@ -16,7 +16,7 @@
 
   .r-menu-item {
     position: relative;
-    padding: 20px 40px;
+    padding: 12px 40px;
     color: $color;
 
     &:not(.vertical) {
@@ -58,7 +58,7 @@
 
   .r-sub-menu {
     position: relative;
-    padding: 10px 20px;
+    padding: 6px 20px;
 
     &:not(.vertical) {
       &.active {
@@ -78,7 +78,7 @@
     &-label {
       display: flex;
       align-items: center;
-      padding: 10px 20px;
+      padding: 0px 20px;
 
       &.vertical {
         &.active {
@@ -145,6 +145,9 @@
     .r-sub-menu-label {
       &.vertical {
         color: $color
+      }
+      &.active {
+        color: $blue;
       }
     }
 

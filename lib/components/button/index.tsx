@@ -1,7 +1,7 @@
-import React from 'react'
-import Icon from '../icon'
-import { combineClass } from '../../helpers/utils'
-import './button.scss'
+import React from 'react';
+import Icon from '../icon';
+import {combineClass} from '../../helpers/utils';
+import './button.scss';
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
   type:
@@ -38,7 +38,7 @@ const Button: React.FC<ButtonProps> = props => {
     className,
     htmlType,
     ...restProps
-  } = props
+  } = props;
 
   const classList = combineClass(
     className,
@@ -49,7 +49,7 @@ const Button: React.FC<ButtonProps> = props => {
     `${circle ? 'circle clearMargin' : ''}`,
     `${disabled ? 'disabled' : ''}`,
     `${ripple && !disabled ? 'ripple' : ''}`,
-  )
+  );
 
   return (
     <button
@@ -59,15 +59,15 @@ const Button: React.FC<ButtonProps> = props => {
       type={htmlType}
     >
       {icon === '' || icon === undefined || loading ? null : (
-        <Icon className="icon" name={icon} />
+        <Icon className="icon" name={icon}/>
       )}
       {loading ? (
-        <Icon className="loading icon" name="loading" color="#fff" />
+        <Icon className="loading icon" name="loading" color="#fff"/>
       ) : null}
       <div className="r-button-content">{children}</div>
     </button>
-  )
-}
+  );
+};
 
 Button.defaultProps = {
   type: 'default',
@@ -78,6 +78,6 @@ Button.defaultProps = {
   ripple: true,
   loading: false,
   iconPosition: 'left',
-}
-Button.displayName = 'Button'
-export default Button
+};
+Button.displayName = 'Button';
+export default Button;

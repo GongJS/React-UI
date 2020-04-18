@@ -1,11 +1,11 @@
-import React from 'react'
-import { combineClass } from '../../helpers/utils'
-import './grid.scss'
+import React from 'react';
+import {combineClass} from '../../helpers/utils';
+import './grid.scss';
 
-interface RowProps extends React.HTMLAttributes<HTMLDivElement> {
-  gutter?: number
-  className?: string
-  style?: React.CSSProperties
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  gutter: number
+  className: string
+  style: React.CSSProperties
 }
 
 interface Option {
@@ -13,32 +13,34 @@ interface Option {
   offset?: number
 }
 
-interface ChildProps {
-  gutter?: number
-  span?: number
-  offset?: number
-  sm?: Option
-  md?: Option
-  lg?: Option
-  xl?: Option
-  className?: string
-  style?: React.CSSProperties
+interface CProps {
+  gutter: number
+  span: number
+  offset: number
+  sm: Option
+  md: Option
+  lg: Option
+  xl: Option
+  className: string
+  style: React.CSSProperties
 }
 
+type RowProps = Partial<Props>
+type ChildProps = Partial<CProps>
+
 const Row: React.FC<RowProps> = props => {
-  const { gutter, className, style, children, ...restProps } = props
+  const {gutter, className, style, children, ...restProps} = props;
 
   const renderChildren = (): Array<React.ReactElement<ChildProps>> => {
-    //@ts-ignore
     return React.Children.map(
       children,
       (child: React.ReactElement<ChildProps>) => {
         return React.cloneElement(child, {
           gutter,
-        })
+        });
       },
-    )
-  }
+    );
+  };
 
   return (
     <div
@@ -52,11 +54,11 @@ const Row: React.FC<RowProps> = props => {
     >
       {renderChildren()}
     </div>
-  )
-}
+  );
+};
 
-Row.displayName = 'Row'
+Row.displayName = 'Row';
 Row.defaultProps = {
   gutter: 0,
-}
-export default Row
+};
+export default Row;

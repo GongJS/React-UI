@@ -31,7 +31,7 @@ export default () => {
         </SubMenu>
       </Menu>`}
       >
-        <Menu style={{ marginBottom: '200px' }}>
+        <Menu style={{ marginBottom: '240px' }}>
           <MenuItem key="item1">Option 1</MenuItem>
           <MenuItem key="item2">Option 2</MenuItem>
           <MenuItem key="item3">Option 3</MenuItem>
@@ -50,7 +50,7 @@ export default () => {
         title="垂直导航"
         summary="垂直的侧边导航菜单。"
         code={` 
-      <Menu mode="vertical" style={{ marginBottom: "200px" }}>
+      <Menu mode="vertical" style={{ marginBottom: "10px" }}>
         <MenuItem key="item1">Option 1</MenuItem>
         <MenuItem key="item2">Option 2</MenuItem>
         <MenuItem key="item3">Option 3</MenuItem>
@@ -68,8 +68,8 @@ export default () => {
         <Menu
           mode="vertical"
           style={{
-            height: '600px',
-            width: '300px',
+            height: '400px',
+            width: '220px',
             borderRight: '1px solid #dedede',
           }}
         >
