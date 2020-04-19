@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { combineClass } from '../../helpers/utils'
-import './sticky.scss'
+import React, {useEffect, useState} from 'react';
+import {combineClass} from '../../helpers/utils';
+import './sticky.scss';
 
 interface StickyProps extends React.HTMLAttributes<HTMLDivElement> {
   distance?: number
 }
 
 const Sticky: React.FC<StickyProps> = props => {
-  const { className, distance, children, ...restProps } = props
-  const stickyWrapper = React.createRef<HTMLDivElement>()
-  const container = React.createRef<HTMLDivElement>()
-  const [top, setTop] = useState(0)
+  const {className, distance, children, ...restProps} = props;
+  const stickyWrapper = React.createRef<HTMLDivElement>();
+  const container = React.createRef<HTMLDivElement>();
+  const [top, setTop] = useState(0);
   const handleScroll = () => {
-    const stickyCurrent: HTMLDivElement | null = stickyWrapper.current
+    const stickyCurrent: HTMLDivElement | null = stickyWrapper.current;
     if (stickyCurrent) {
       if (window.scrollY > top - distance!) {
         const {
@@ -20,36 +20,36 @@ const Sticky: React.FC<StickyProps> = props => {
           bottom,
           left,
           right,
-        } = stickyCurrent.getBoundingClientRect()
-        stickyCurrent.style.width = right - left + 'px'
-        stickyCurrent.style.height = bottom - top + 'px'
+        } = stickyCurrent.getBoundingClientRect();
+        stickyCurrent.style.width = right - left + 'px';
+        stickyCurrent.style.height = bottom - top + 'px';
         container &&
-          container.current &&
-          (container.current.style.height = stickyCurrent.style.height)
-        stickyCurrent.style.left = left + 'px'
-        stickyCurrent.style.top = distance + 'px'
-        stickyCurrent.style.position = 'fixed'
+        container.current &&
+        (container.current.style.height = stickyCurrent.style.height);
+        stickyCurrent.style.left = left + 'px';
+        stickyCurrent.style.top = distance + 'px';
+        stickyCurrent.style.position = 'fixed';
       } else {
-        stickyCurrent.style.position = 'static'
+        stickyCurrent.style.position = 'static';
       }
     }
-  }
+  };
   const init = () => {
-    const stickyCurrent = stickyWrapper.current
+    const stickyCurrent = stickyWrapper.current;
     if (stickyCurrent) {
       if (window.scrollY === 0) {
-        setTop(stickyCurrent.getBoundingClientRect().top)
+        setTop(stickyCurrent.getBoundingClientRect().top);
       } else {
-        window.scrollTo(window.scrollX, 0)
-        setTop(stickyCurrent.getBoundingClientRect().top)
+        window.scrollTo(window.scrollX, 0);
+        setTop(stickyCurrent.getBoundingClientRect().top);
       }
     }
-  }
+  };
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    init()
-    return () => window.removeEventListener('scroll', handleScroll)
-  })
+    window.addEventListener('scroll', handleScroll);
+    init();
+    return () => window.removeEventListener('scroll', handleScroll);
+  });
   return (
     <div className="r-sticky" ref={container}>
       <div
@@ -60,10 +60,10 @@ const Sticky: React.FC<StickyProps> = props => {
         {children}
       </div>
     </div>
-  )
-}
+  );
+};
 Sticky.defaultProps = {
   distance: 0,
-}
-Sticky.displayName = 'Sticky'
-export default Sticky
+};
+Sticky.displayName = 'Sticky';
+export default Sticky;

@@ -126,13 +126,13 @@ export default () => {
       </Row>`}
       >
         <Row className="r-grid-demo3">
-          <Col xl={6} lg={8}>
+          <Col xl={8} lg={12}>
             Col
           </Col>
-          <Col xl={12} lg={8}>
+          <Col xl={8} lg={12}>
             Col
           </Col>
-          <Col xl={6} lg={8}>
+          <Col xl={8} lg={12}>
             Col
           </Col>
         </Row>
@@ -140,21 +140,21 @@ export default () => {
           <Col
             className="item"
             xl={{ span: 5, offset: 1 }}
-            lg={{ span: 6, offset: 2 }}
+            lg={{ span: 8, offset: 0 }}
           >
             Col
           </Col>
           <Col
             className="item"
             xl={{ span: 11, offset: 1 }}
-            lg={{ span: 6, offset: 2 }}
+            lg={{ span: 8, offset: 0 }}
           >
             Col
           </Col>
           <Col
             className="item"
             xl={{ span: 5, offset: 1 }}
-            lg={{ span: 6, offset: 2 }}
+            lg={{ span: 8, offset: 0 }}
           >
             Col
           </Col>
