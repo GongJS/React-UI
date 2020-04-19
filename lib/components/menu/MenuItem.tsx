@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { combineClass } from '../../helpers/utils'
+import React, {useEffect, useState} from 'react';
+import {combineClass} from '../../helpers/utils';
 
 interface MenuItemProps extends React.HTMLAttributes<HTMLDivElement> {
   mode?: string
-  onClick?: () => any
+  onMenuItemClick?: () => any
   uniqueKey?: string
   selectedKey?: string
   currentTarget?: EventTarget & Element
@@ -16,7 +16,7 @@ interface MenuItemProps extends React.HTMLAttributes<HTMLDivElement> {
 const MenuItem: React.FC<MenuItemProps> = props => {
   const {
     mode,
-    onClick,
+    onMenuItemClick,
     hideChildSubMenu,
     className,
     children,
@@ -27,21 +27,21 @@ const MenuItem: React.FC<MenuItemProps> = props => {
     handleExpandKeys,
     expandKeys,
     ...restProps
-  } = props
-  const menuItem = React.createRef<HTMLDivElement>()
-  const [active, setActive] = useState(false)
+  } = props;
+  const menuItem = React.createRef<HTMLDivElement>();
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
-    setActive(false)
+    setActive(false);
     if (
       (menuItem &&
         menuItem.current &&
         menuItem.current.contains(currentTarget!)) ||
       selectedKey === uniqueKey
     ) {
-      setActive(true)
+      setActive(true);
     }
-  }, [menuItem, currentTarget, selectedKey, uniqueKey])
+  }, [menuItem, currentTarget, selectedKey, uniqueKey]);
 
   return (
     <div
@@ -53,15 +53,15 @@ const MenuItem: React.FC<MenuItemProps> = props => {
         className,
       )}
       onClick={e => {
-        onClick && onClick()
-        handleSelectedKey!(e, uniqueKey!)
+        onMenuItemClick && onMenuItemClick();
+        handleSelectedKey!(e, uniqueKey!);
       }}
       {...restProps}
     >
       <li>{children}</li>
     </div>
-  )
-}
+  );
+};
 
-MenuItem.displayName = 'MenuItem'
-export default MenuItem
+MenuItem.displayName = 'MenuItem';
+export default MenuItem;

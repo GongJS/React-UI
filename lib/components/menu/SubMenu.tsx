@@ -108,6 +108,7 @@ const SubMenu: React.FC<SubMenuProps> = props => {
         <span className="r-sub-menu-icon">
           <Icon
             name="right"
+            size={'12px'}
             color={active ? '#4a90e2' : '#45526b'}
             className={expandKeys!.indexOf(uniqueKey!) > -1 ? 'open' : 'close'}
           />

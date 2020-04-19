@@ -103,8 +103,8 @@ const Menu: React.FC<MenuProps> = props => {
   }
 
   const handleSelectedKey = (event: React.MouseEvent, key: string) => {
-    if (childKeys.indexOf(key) > -1) {
-      setExpandKeys([])
+    if (!expandKeysOnlyOne && childKeys.indexOf(key) > -1) {
+     setExpandKeys([])
     }
     setCurrentTarget(event.currentTarget)
     setSelectedKey(key)
@@ -122,7 +122,7 @@ const Menu: React.FC<MenuProps> = props => {
         }
       }
     }
-    if (shouldHide) {
+    if (expandKeysOnlyOne && shouldHide) {
       setExpandKeys(expandKeys => expandKeys.filter(item => item !== key))
     }
   }

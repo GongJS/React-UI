@@ -1,13 +1,13 @@
 @mixin widthChange($span) {
-  $prefix: #{$span}-col-span-;
+  $prefixSpan: #{$span}-col-span-;
   @for $n from 1 through 24 {
-    &.#{$prefix}#{$n} {
+    &.#{$prefixSpan}#{$n} {
       width: ($n/24)*100%;
     }
   }
-  $prefix: #{$span}-col-offset-;
+  $prefixOffset: #{$span}-col-offset-;
   @for $n from 1 through 24 {
-    &.#{$prefix}#{$n} {
+    &.#{$prefixOffset}#{$n} {
       margin-left: ($n/24)*100%;
     }
   }
@@ -23,15 +23,15 @@
 
 .r-col {
   box-sizing: border-box;
-  $prefix: col-span-;
+  $prefixSpan: col-span-;
   @for $n from 1 through 24 {
-    &.#{$prefix}#{$n} {
+    &.#{$prefixSpan}#{$n} {
       width: ($n/24)*100%;
     }
   }
-  $prefix: col-offset-;
+  $prefixOffset: col-offset-;
   @for $n from 1 through 24 {
-    &.#{$prefix}#{$n} {
+    &.#{$prefixOffset}#{$n} {
       margin-left: ($n/24)*100%;
     }
   }

@@ -92,7 +92,7 @@ export default () => {
       >
         <Upload
           ref={uploadRef}
-          action={'https://koa-img.herokuapp.com/upload'}
+          action={'https://infinite-shelf-73753.herokuapp.com/upload'}
           name="post"
           fileList={fileList}
           onFileChange={onFileChange}

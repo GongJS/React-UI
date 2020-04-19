@@ -3,17 +3,21 @@ import Icon from '../icon'
 import { combineClass, uniqueId, checkClient } from '../../helpers/utils'
 import './upload.scss'
 
+interface FLProps {
+  uid: string
+  name: string
+  status: string
+  url: string
+  width: number
+  height: number
+}
+
+type FileListProps = Partial<FLProps>
+
 export interface UploadHandles {
   upload(): void
 }
-interface FileListProps {
-  uid?: string
-  name?: string
-  status?: string
-  url?: string
-  width?: number
-  height?: number
-}
+
 interface UploadProps extends React.HTMLAttributes<HTMLDivElement> {
   name?: string
   multiple?: boolean
@@ -43,7 +47,7 @@ const Upload: React.RefForwardingComponent<UploadHandles, UploadProps> = (
   let input: HTMLInputElement | null = null
   const fileListRef = useRef<FileListProps[]>()
   fileListRef.current = fileList
-  const [visibleAction, setvisibleAction] = useState(false)
+  const [visibleAction, setVisibleAction] = useState(false)
   const [selectIndex, setSelectIndex] = useState<number | null>()
 
   // 触发上传事件
@@ -63,6 +67,7 @@ const Upload: React.RefForwardingComponent<UploadHandles, UploadProps> = (
       startUploadFiles(formData, srcFiles[i].uid)
     }
   }
+
   // 开始上传
   const startUploadFiles = (formData: FormData, uid: string) => {
     const xhr = new XMLHttpRequest()
@@ -110,9 +115,10 @@ const Upload: React.RefForwardingComponent<UploadHandles, UploadProps> = (
   }
 
   // 选中图片回调
-  const handleInputChangeCallback = (e: any) => {
+  const handleInputChangeCallback = (e: Event) => {
     let srcFiles: any = []
     input!.files ? (srcFiles = input!.files) : null
+    console.log(input!.files)
     const copyFileList = JSON.parse(JSON.stringify(fileList))
     for (let i = 0; i < srcFiles.length; i++) {
       const name = srcFiles[i].name
@@ -146,12 +152,12 @@ const Upload: React.RefForwardingComponent<UploadHandles, UploadProps> = (
   }
 
   const handleMouseEnter = (index: number) => {
-    setvisibleAction(true)
+    setVisibleAction(true)
     setSelectIndex(index)
   }
 
   const handleMouseLeave = () => {
-    setvisibleAction(false)
+    setVisibleAction(false)
     setSelectIndex(null)
   }
 
@@ -161,6 +167,7 @@ const Upload: React.RefForwardingComponent<UploadHandles, UploadProps> = (
       handleClickUpload()
     },
   }))
+
   return (
     <div className={combineClass('r-upload', className)} {...restProps}>
       {fileListRef.current.map((file, index) => {
@@ -223,8 +230,8 @@ const Upload: React.RefForwardingComponent<UploadHandles, UploadProps> = (
       })}
       <div
         onClick={handleClickUpload}
-        onMouseEnter={() => setvisibleAction(true)}
-        onMouseLeave={() => setvisibleAction(false)}
+        onMouseEnter={() => setVisibleAction(true)}
+        onMouseLeave={() => setVisibleAction(false)}
       >
         {children}
       </div>
